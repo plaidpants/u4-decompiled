@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="U4_TITLE">
+      <UniqueIdentifier>{110125ca-153b-4dfa-ac82-d6368edfc4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="U4_TITLE_h">
+      <UniqueIdentifier>{2609f8e3-fcb7-4f67-9511-92002990cf1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lzw">
+      <UniqueIdentifier>{2b1e90a8-cc44-4939-a719-353697c8c1d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SRC-TITLE\DATA.C">
+      <Filter>U4_TITLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC-TITLE\TITLE_0.C">
+      <Filter>U4_TITLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC-TITLE\TITLE_1.C">
+      <Filter>U4_TITLE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC-TITLE\TITLE_X.C">
+      <Filter>U4_TITLE</Filter>
+    </ClCompile>
+    <ClCompile Include="lzw.c">
+      <Filter>lzw</Filter>
+    </ClCompile>
+    <ClCompile Include="common.c" />
+    <ClCompile Include="u4title_main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SRC-TITLE\TITLE.H">
+      <Filter>U4_TITLE_h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SRC-TITLE\U4_SCAN.H">
+      <Filter>U4_TITLE_h</Filter>
+    </ClInclude>
+    <ClInclude Include="lzw.h">
+      <Filter>lzw</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h" />
+  </ItemGroup>
+</Project>

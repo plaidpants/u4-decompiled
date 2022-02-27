@@ -636,7 +636,7 @@ unsigned char C_1814() {
 	//TODO
 	CONSOLE("C_1814\"current floppy?\"//TODO\n");
 
-	return 0;
+	return 1;
 }
 C_181D(unsigned a) {
 	//TODO
@@ -647,7 +647,7 @@ C_182F(char *fname) {
 	//TODO
 	CONSOLE("C_182F(\"%s\")//TODO\n", fname);
 
-	return 1;
+	return 0;
 }
 /*anti-piracy function*/
 C_184F() {

@@ -20,6 +20,8 @@ C_C454(bp06, bp04)
 char *bp06;
 char *bp04;
 {
+	// always have either disk inserted
+	return;
 	int bp_02;
 
 	if(!C_182F(bp04)) {

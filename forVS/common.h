@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 //#define U4_ROOT "I:\\OSI\\U4\\ORIGINAL\\"
-#define U4_ROOT "G:/WORKSPACE/UN_U4/ultima_4/"
+#define U4_ROOT "J:\\Unity Projects\\u4-decompiled\\forVS\\Debug\\"
 #define RATIO 2
 
 #define CONSOLE printf
