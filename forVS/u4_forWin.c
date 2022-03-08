@@ -1,4 +1,4 @@
-#include "u4.h"
+#include "J:\u4-decompiled\SRC\U4.H"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -502,6 +502,15 @@ void __cdecl u_delay(int a, int b) {
 	}
 }
 
+__declspec(dllexport) void __cdecl u_delay_inner_loop(int a, int b)
+{
+	t_callback();
+	CMN_pumpmessages();
+	Sleep(2);
+	//cursor
+	Gra_putchar(0x1c + (~a & 3));
+}
+
 __cdecl sound(int s) {
 	//TODO
 	CONSOLE("sound(%d)\n", s);
@@ -636,7 +645,7 @@ unsigned char C_1814() {
 	//TODO
 	CONSOLE("C_1814\"current floppy?\"//TODO\n");
 
-	return 1;
+	return 0;
 }
 C_181D(unsigned a) {
 	//TODO
@@ -647,7 +656,7 @@ C_182F(char *fname) {
 	//TODO
 	CONSOLE("C_182F(\"%s\")//TODO\n", fname);
 
-	return 0;
+	return 1;
 }
 /*anti-piracy function*/
 C_184F() {

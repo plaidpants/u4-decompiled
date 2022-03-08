@@ -4,8 +4,8 @@
 #include <stdio.h>
 
 //#define U4_ROOT "I:\\OSI\\U4\\ORIGINAL\\"
-#define U4_ROOT "J:\\Unity Projects\\u4-decompiled\\forVS\\Debug\\"
-#define RATIO 2
+#define U4_ROOT "J:\\u4-decompiled\\forVS\\Debug\\"
+#define RATIO 1
 
 #define CONSOLE printf
 #define FAKE_RET return 0

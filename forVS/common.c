@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-#include "u4_scan.h"
+#include "J:\u4-decompiled\SRC\U4_SCAN.H"
 
 int CMN_kbhit = 0;
 
