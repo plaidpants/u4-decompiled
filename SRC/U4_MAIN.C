@@ -36,7 +36,28 @@ __declspec(dllexport) void cdecl  main_Party(unsigned char buffer[], int length)
 	}
 }
 
-extern struct tParty /*D_9144*/Party;
+__declspec(dllexport) void cdecl  main_Combat(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(Combat))
+	{
+		memcpy(buffer, &Combat, sizeof(Combat));
+	}
+}
+
+__declspec(dllexport) void cdecl  main_Fighters(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(Fighters))
+	{
+		memcpy(buffer, &Fighters, sizeof(Fighters));
+	}
+}
+__declspec(dllexport) void cdecl  main_D_96F9(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(D_96F9))
+	{
+		memcpy(buffer, &D_96F9, sizeof(D_96F9));
+	}
+}
 
 __declspec(dllexport) void cdecl main_start()
 {
@@ -65,8 +86,7 @@ __declspec(dllexport) void cdecl main_loop()
 	C_9209();
 	if (C_10FD()) {
 		u4_putc(0x10);
-		//u_delay(25, 1);
-		u_delay(3, 1);
+		u_delay(25, 1);
 		si = u_kbhit() ? u_kbread() : KBD_SPACE;
 		if (u4_isupper((unsigned char)si))
 			si = (si & 0xff00) | u4_lower((unsigned char)si);
