@@ -10,15 +10,15 @@
 #include <string.h>
 #include <stdlib.h>
 
-int global_bp_04;
-
 __declspec(dllexport) int cdecl main_CurMode()
 {
 	return CurMode;
 }
 
-//extern struct t_500 D_8742;
-
+__declspec(dllexport) int cdecl main_activeChara()
+{
+	return activeChara;
+}
 
 __declspec(dllexport) void cdecl  main_CurMap(unsigned char buffer[], int length)
 {
@@ -59,8 +59,11 @@ __declspec(dllexport) void cdecl  main_D_96F9(unsigned char buffer[], int length
 	}
 }
 
-__declspec(dllexport) void cdecl main_start()
+__declspec(dllexport) void cdecl /*C_191E*/main_start()
 {
+	register unsigned si = 0;
+	int bp_04;
+
 	low_init();
 	C_C51C();
 	if (Party._loc >= 0x11 && Party._loc <= 0x18) {
@@ -74,13 +77,8 @@ __declspec(dllexport) void cdecl main_start()
 		Party._loc = 0;
 	}
 	u_kbflush();
-	global_bp_04 = 0;
-}
-
-__declspec(dllexport) void cdecl main_loop()
-{
-	register unsigned si = 0;
-
+	bp_04 = 0;
+	for(;;) {
 	setjmp(D_9458);
 	t_callback();
 	C_9209();
@@ -91,6 +89,7 @@ __declspec(dllexport) void cdecl main_loop()
 		if (u4_isupper((unsigned char)si))
 			si = (si & 0xff00) | u4_lower((unsigned char)si);
 		switch (si) {
+		case KBD_ESC: return;
 		case KBD_SPACE: w_Pass(); break;
 		case 0x487e:
 		case KBD_UP: CMDDIR_Up(); break;
@@ -127,7 +126,7 @@ __declspec(dllexport) void cdecl main_loop()
 		case KBD_Y: CMD_Yell(); break;
 		case KBD_Z: CMD_Ztats(); break;
 		case KBD_CTRL_S:
-			if (global_bp_04 == KBD_ALT_Z) {
+					if(bp_04 == KBD_ALT_Z) {
 				C_1C21();
 				break;
 			}
@@ -146,15 +145,8 @@ __declspec(dllexport) void cdecl main_loop()
 		t_callback();
 		D_07F8 = 1;
 	}
-	global_bp_04 = si;
+		bp_04 = si;
 }
-
-void cdecl /*C_191E*/main()
-{
-	main_start();
-	for(;;) {
-		main_loop();
-	}
 }
 
 #define VK_SPACE          0x20

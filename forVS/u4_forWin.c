@@ -489,26 +489,17 @@ void __cdecl u_delay(int a, int b) {
 	CONSOLE("u_delay(%d, %d)\n", a, b);
 	if(a == 0)
 		a = 1000;
-	a *= 50;
+	a *= 2; //5
 	while(a) {
 		a --;
 		t_callback();
 		CMN_pumpmessages();
-		Sleep(2);
+		Sleep(300); //150
 		if(b && u_kbhit())
 			break;
 		//cursor
 		Gra_putchar(0x1c + (~a & 3));
 	}
-}
-
-__declspec(dllexport) void __cdecl u_delay_inner_loop(int a, int b)
-{
-	t_callback();
-	CMN_pumpmessages();
-	Sleep(2);
-	//cursor
-	Gra_putchar(0x1c + (~a & 3));
 }
 
 __cdecl sound(int s) {
