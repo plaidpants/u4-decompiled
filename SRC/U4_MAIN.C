@@ -20,6 +20,11 @@ __declspec(dllexport) int cdecl main_activeChara()
 	return activeChara;
 }
 
+__declspec(dllexport) int cdecl main_WindDir()
+{
+	return WindDir;
+}
+
 __declspec(dllexport) void cdecl  main_CurMap(unsigned char buffer[], int length)
 {
 	if (length >= sizeof(D_8742))
