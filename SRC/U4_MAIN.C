@@ -25,6 +25,16 @@ __declspec(dllexport) int cdecl main_WindDir()
 	return WindDir;
 }
 
+__declspec(dllexport) void cdecl main_ActiveChar(unsigned char buffer[], int length)
+{
+	if (length >= 3)
+	{
+		buffer[0] = activeChara;
+		buffer[1] = activeCharaX; // activeCharaX = -1 means inactive
+		buffer[2] = activeCharaY;
+	}
+}
+
 __declspec(dllexport) void cdecl  main_CurMap(unsigned char buffer[], int length)
 {
 	if (length >= sizeof(D_8742))
@@ -64,7 +74,117 @@ __declspec(dllexport) void cdecl  main_D_96F9(unsigned char buffer[], int length
 	}
 }
 
-__declspec(dllexport) void cdecl /*C_191E*/main_start()
+// remember the last 10 hits, in a circular buffer
+#define MAX_HITS 10
+char hit_list_buffer[3 * MAX_HITS + 2]; // extra bytes to make sure we don't overrun the buffer
+hit_list_size = 0;
+current_hit_list = 0;
+
+void add_to_hit_list()
+{
+	if (hit_tile)
+	{
+		printf("Hit Tile %d (%d, %d)\n", hit_tile, hit_x, hit_y);
+		hit_list_buffer[current_hit_list++] = hit_tile;
+		hit_list_buffer[current_hit_list++] = hit_x;
+		hit_list_buffer[current_hit_list++] = hit_y;
+		if (current_hit_list > 3 * MAX_HITS - 1)
+		{
+			current_hit_list = 0;
+		}
+		hit_list_size++;
+		if (hit_list_size > MAX_HITS)
+		{
+			hit_list_size = MAX_HITS;
+		}
+	}
+}
+
+void Hit_Dump()
+{
+	printf("Hit list size %d\n", hit_list_size);
+
+	// we have not filled the hit list
+	if (hit_list_size < MAX_HITS - 1)
+	{
+		for (int i = 0; i < hit_list_size; i++)
+		{
+			int tile = hit_list_buffer[i * 3 + 0];
+			int x = hit_list_buffer[i * 3 + 1];
+			int y = hit_list_buffer[i * 3 + 2];
+			printf("Hit Tile %d (%d, %d)\n", tile, x, y);
+		}
+	}
+	// the hit list is full dump from the wrap
+	else
+	{
+		for (int i = 0; i < hit_list_size; i++)
+		{
+			int tile = hit_list_buffer[current_hit_list++];
+			int x = hit_list_buffer[current_hit_list++];
+			int y = hit_list_buffer[current_hit_list++];
+			printf("Hit Tile %d (%d, %d)\n", tile, x, y);
+
+			// wrap
+			if (current_hit_list > 3 * MAX_HITS - 1)
+			{
+				current_hit_list = 0;
+			}
+		}
+	}
+
+	// empty the hit list
+	hit_list_size = 0;
+	current_hit_list = 0;
+	printf("Hit list cleared\n");
+}
+
+__declspec(dllexport) void cdecl  main_Hit(unsigned char buffer[], int length)
+{
+	int buffer_index = 0;
+
+	if (length >= 4)
+	{
+		buffer[buffer_index++] = hit_list_size;
+
+		printf("Hit list size %d\n", hit_list_size);
+
+		// we have not filled the hit list
+		if (hit_list_size < MAX_HITS - 1)
+		{
+			for (int i = 0; i < hit_list_size; i++)
+			{
+				buffer[buffer_index++] = hit_list_buffer[i * 3 + 0];
+				buffer[buffer_index++] = hit_list_buffer[i * 3 + 1];
+				buffer[buffer_index++] = hit_list_buffer[i * 3 + 2];
+			}
+		}
+		// the hit list is full dump from the wrap
+		else
+		{
+			for (int i = 0; i < hit_list_size; i++)
+			{
+				buffer[buffer_index++] = hit_list_buffer[current_hit_list++];
+				buffer[buffer_index++] = hit_list_buffer[current_hit_list++];
+				buffer[buffer_index++] = hit_list_buffer[current_hit_list++];
+
+				// wrap
+				if (current_hit_list > 3 * MAX_HITS - 1)
+				{
+					current_hit_list = 0;
+				}
+			}
+		}
+
+		// empty the hit list
+		hit_list_size = 0;
+		current_hit_list = 0;
+		printf("Hit list cleared\n");
+	}
+}
+
+//__declspec(dllexport) void cdecl /*C_191E*/main_start()
+__declspec(dllexport) void cdecl /*C_191E*/main()
 {
 	register unsigned si = 0;
 	int bp_04;
@@ -107,7 +227,7 @@ __declspec(dllexport) void cdecl /*C_191E*/main_start()
 		case KBD_A: CMD_Attack(); break;
 		case KBD_B: CMD_Board(); break;
 		case KBD_C: CMD_Cast(); break;
-		case KBD_D: CMD_Descend(); break;
+		case KBD_D: CMD_Descend(); Hit_Dump();  break;
 		case KBD_E: CMD_Enter(); break;
 		case KBD_F: CMD_Fire(); break;
 		case KBD_G: CMD_Get(); break;

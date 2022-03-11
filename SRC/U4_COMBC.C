@@ -52,7 +52,7 @@ unsigned char bp04;
 			return bp04 >> 1;
 		return (bp04 >> 2) + 4;
 	}
-	return (bp04&0x0f) + 0x24;
+	return ((bp04 & 0x1e) >> 1) + 0x24;
 }
 
 char *D_2512[] = {

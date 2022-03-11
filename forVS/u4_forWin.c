@@ -20,6 +20,8 @@ struct tPSP far *far_psp;
 
 unsigned cursor_rate;
 
+#define CONSOLE()
+
 /*load gr driver*/
 C_20C1(char *fname) {
 	CONSOLE("C_20C1\"load gr driver\"(\"%s\")\n", fname);
@@ -494,7 +496,7 @@ void __cdecl u_delay(int a, int b) {
 		a --;
 		t_callback();
 		CMN_pumpmessages();
-		Sleep(300); //150
+		Sleep(200); //150
 		if(b && u_kbhit())
 			break;
 		//cursor

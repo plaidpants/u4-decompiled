@@ -58,7 +58,7 @@ C_61D1();*/
 
 /*C_5A6B*/COM_main()
 {
-	register unsigned si;
+	register unsigned si = 0; // ADDED
 	unsigned bp_04;
 
 	u_kbflush();
@@ -250,6 +250,7 @@ int /*bp04*/_range;
 	bp_02 = u4_sign(Combat._charaX[activeChara] - hit_x);
 	bp_04 = u4_sign(Combat._charaY[activeChara] - hit_y);
 	hit_tile = TIL_4D;
+	add_to_hit_list();
 	while(_range) {
 		COM_CheckHitable(bp_02, bp_04);
 		C_3C54();
@@ -261,12 +262,15 @@ int /*bp04*/_range;
 /*C_5F9D*/w_missed(_range)
 int /*bp04*/_range;
 {
-	if(_range == 0)
+	if (_range == 0)
 		sound(4);
 	hit_tile = 0;
 	u4_puts(/*D_2042*/"Missed!\n");
-	if(Party.chara[activeChara]._weapon == 9 && hit_x < 11 && hit_y < 11 && Combat_MAP(hit_y, hit_x) >= TIL_03)
+	if (Party.chara[activeChara]._weapon == 9 && hit_x < 11 && hit_y < 11 && Combat_MAP(hit_y, hit_x) >= TIL_03)
+	{
 		Combat_MAP(hit_y, hit_x) = TIL_46;
+		add_to_hit_list();
+	}
 	C_3C54();
 	DrawBlow(_range);
 }
@@ -286,6 +290,7 @@ int /*bp04*/_range;
 		return;
 	}
 	hit_tile = (loc_C->_weapon == 14)?TIL_4E:TIL_4F;
+	add_to_hit_list();
 	/*dexterity test*/
 	if(loc_C->_dex < 40 && U4_RND1(0xff) > loc_C->_dex + 0x80) {
 		w_missed(_range);
@@ -335,6 +340,7 @@ int _dir_y;
 	}
 	/*-- --*/
 	hit_tile = (loc_A->_weapon != 14)?TIL_4D:TIL_4E;
+	add_to_hit_list();
 	sound(4);
 	for(; loc_D; loc_D--) {
 		if(!COM_CheckHitable(_dir_x, _dir_y)) {
@@ -374,6 +380,7 @@ C_61D1()
 		}
 		if(COM_CheckHitable(loc_A, loc_B)) {
 			hit_tile = TIL_4D;
+			add_to_hit_list();
 			C_3C54();
 			hit_tile = 0;
 			sound(4);

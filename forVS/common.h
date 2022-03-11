@@ -4,10 +4,12 @@
 #include <stdio.h>
 
 //#define U4_ROOT "I:\\OSI\\U4\\ORIGINAL\\"
-#define U4_ROOT "J:\\u4-decompiled\\forVS\\Debug\\"
-#define RATIO 1
+#define U4_ROOT "L:\\GOGLibrary\\Ultima 4 - Quest of the Avatar\\"
 
-#define CONSOLE printf
+#define RATIO 2
+
+//#define CONSOLE printf
+#define CONSOLE()
 #define FAKE_RET return 0
 
 #define DO_SWAP(a,b,temp) { (temp) = (a); (a) = (b); (b) = (temp); }
