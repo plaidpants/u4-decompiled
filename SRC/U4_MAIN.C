@@ -10,6 +10,11 @@
 #include <string.h>
 #include <stdlib.h>
 
+__declspec(dllexport) int cdecl main_tile_cur()
+{
+	return tile_cur;
+}
+
 __declspec(dllexport) int cdecl main_CurMode()
 {
 	return CurMode;
