@@ -353,7 +353,21 @@ __cdecl Gra_line(int x0, int y0, int x1, int y1, int color) {
 
 	FAKE_RET;
 }
-Gra_CR() {
+
+// Need to split this function as there are some places we want to add text to the buffer when
+// we do a CR and some places we do not so the resulting text passed up to Unity is clean and without
+// excessive line breaks.
+Gra_CR()
+{
+	if ((txt_Y == 23) && (txt_X >= 24))
+	{
+		//printf("\n");
+		add_char_to_text_buffer('\n');
+	}
+	Gra_CR2();
+}
+
+Gra_CR2() {
 	RECT rect;
 
 	//CONSOLE("Gra_CR\n");

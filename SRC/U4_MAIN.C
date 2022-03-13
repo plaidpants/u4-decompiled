@@ -30,6 +30,16 @@ __declspec(dllexport) int cdecl main_WindDir()
 	return WindDir;
 }
 
+__declspec(dllexport) int cdecl main_D_96F8()
+{
+	return D_96F8;
+}
+
+__declspec(dllexport) int cdecl main_D_946C()
+{
+	return D_946C;
+}
+
 __declspec(dllexport) void cdecl main_ActiveChar(unsigned char buffer[], int length)
 {
 	if (length >= 3)
@@ -105,6 +115,105 @@ void add_to_hit_list()
 	}
 }
 
+#define MAX_TEXT 500
+char text_buffer[MAX_TEXT];
+int current_text_buffer_pointer;
+int current_text_buffer_size;
+
+void add_char_to_text_buffer(char ch)
+{
+	//printf("%c", ch);
+	text_buffer[current_text_buffer_pointer++] = ch;
+	if (current_text_buffer_pointer > MAX_TEXT - 1)
+	{
+		current_text_buffer_pointer = 0;
+	}
+	current_text_buffer_size++;
+	if (current_text_buffer_size > MAX_TEXT)
+	{
+		current_text_buffer_size = MAX_TEXT;
+	}
+}
+
+__declspec(dllexport) int cdecl  main_Text(unsigned char buffer[], int length)
+{
+	int buffer_index = 0;
+	int ret = 0;
+
+	if (length >= current_text_buffer_size)
+	{
+		ret = current_text_buffer_size;
+
+		//printf("Text buffer size %d\n", current_text_buffer_size);
+
+		// we have not filled the text buffer
+		if (current_text_buffer_size < MAX_TEXT - 1)
+		{
+			for (int i = 0; i < current_text_buffer_size; i++)
+			{
+				buffer[buffer_index++] = text_buffer[i];
+			}
+		}
+		// the text buffer is full dump from the wrap
+		else
+		{
+			for (int i = 0; i < current_text_buffer_size; i++)
+			{
+				buffer[buffer_index++] = text_buffer[current_text_buffer_pointer++];
+
+				// wrap
+				if (current_text_buffer_pointer > MAX_TEXT - 1)
+				{
+					current_text_buffer_pointer = 0;
+				}
+			}
+		}
+
+		// empty the text buffer
+		current_text_buffer_size = 0;
+		current_text_buffer_pointer = 0;
+		//printf("text buffer cleared\n");
+	}
+
+	return ret;
+}
+
+void Text_Dump()
+{
+	int buffer_index = 0;
+	int ret = 0;
+
+	printf("Text buffer size %d\n", current_text_buffer_size);
+
+	// we have not filled the text buffer
+	if (current_text_buffer_size < MAX_TEXT - 1)
+	{
+		for (int i = 0; i < current_text_buffer_size; i++)
+		{
+			printf("%c", text_buffer[i]);
+		}
+	}
+	// the text buffer is full dump from the wrap
+	else
+	{
+		for (int i = 0; i < current_text_buffer_size; i++)
+		{
+			printf("%c", text_buffer[current_text_buffer_pointer++]);
+
+			// wrap
+			if (current_text_buffer_pointer > MAX_TEXT - 1)
+			{
+				current_text_buffer_pointer = 0;
+			}
+		}
+	}
+
+	// empty the text buffer
+	current_text_buffer_size = 0;
+	current_text_buffer_pointer = 0;
+	printf("text buffer cleared\n");
+}
+
 void Hit_Dump()
 {
 	printf("Hit list size %d\n", hit_list_size);
@@ -152,7 +261,7 @@ __declspec(dllexport) void cdecl  main_Hit(unsigned char buffer[], int length)
 	{
 		buffer[buffer_index++] = hit_list_size;
 
-		printf("Hit list size %d\n", hit_list_size);
+		//printf("Hit list size %d\n", hit_list_size);
 
 		// we have not filled the hit list
 		if (hit_list_size < MAX_HITS - 1)
@@ -184,7 +293,7 @@ __declspec(dllexport) void cdecl  main_Hit(unsigned char buffer[], int length)
 		// empty the hit list
 		hit_list_size = 0;
 		current_hit_list = 0;
-		printf("Hit list cleared\n");
+		//printf("Hit list cleared\n");
 	}
 }
 
@@ -232,7 +341,7 @@ __declspec(dllexport) void cdecl /*C_191E*/main()
 		case KBD_A: CMD_Attack(); break;
 		case KBD_B: CMD_Board(); break;
 		case KBD_C: CMD_Cast(); break;
-		case KBD_D: CMD_Descend(); Hit_Dump();  break;
+		case KBD_D: CMD_Descend();  break;
 		case KBD_E: CMD_Enter(); break;
 		case KBD_F: CMD_Fire(); break;
 		case KBD_G: CMD_Get(); break;

@@ -144,35 +144,58 @@ register char *txt;
 	register int /*di*/i;
 	int /*bp_02*/loc_A;
 	int /*bp_04*/loc_B;
-	
+
 	loc_A = loc_B = 0;
 	i = 0;
-	while(txt[i]) {
-		if(loc_B-- == 0) {
+	while (txt[i]) {
+		if (loc_B-- == 0) {
 			char /*bp_08*/loc_C;
-			for(loc_B = 0; loc_C = txt[i + loc_B]; loc_B ++) {
-				if(loc_C == '\n' || loc_C == ' ')
+			for (loc_B = 0; loc_C = txt[i + loc_B]; loc_B++) {
+				if (loc_C == '\n' || loc_C == ' ')
 					break;
 			}
-			if(loc_B + txt_X > 40 && txt_X != 24) {
-				if(loc_A++ == 12) {
+			if (loc_B + txt_X > 40 && txt_X != 24) {
+				if (loc_A++ == 12) {
 					u_kbflush();
-					if(txt_X == 39)
-						while(!u_kbhit());
+					if (txt_X == 39)
+						while (!u_kbhit());
 					u_kbread();
 					loc_A = 0;
 				}
-				Gra_CR();
+				Gra_CR2(); // don't collect line break due to text wrapping
 			}
 		}
-		if(txt[i] == '\n' && loc_A++ == 12) {
+		if (txt[i] == '\n' && loc_A++ == 12) {
 			u_kbflush();
-			if(txt_X == 39)
-				while(!u_kbhit());
+			if (txt_X == 39)
+				while (!u_kbhit());
 			u_kbread();
 			loc_A = 0;
 		}
 		u4_putc(txt[i]);
+		// only print the scrolling console text
+		if ((txt_Y == 23) && (txt_X >= 24))
+		{
+			if (txt[i] != '\n')
+			{
+				//printf("%c", txt[i]);
+				add_char_to_text_buffer(txt[i]);
+			}
+			else if (txt[i] == '\n' && txt[i+1] == 0) 
+			{
+				//printf("\n");
+				add_char_to_text_buffer('\n');
+			}
+			else if ((txt[i] == '\n') && ((i != 0) && (i != 1) && (i != 2))) // remove leading newlines
+			{
+				if ((i > 1) && (txt[i - 1] != '\n')) // remove multiple newlines
+				{
+					//printf(" ");
+					add_char_to_text_buffer(' ');
+				}
+			}
+		}
+
 		i++;
 	}
 	return i;
@@ -211,7 +234,7 @@ unsigned char bp04;
 			}
 		break;
 		case '\n':
-			Gra_CR();
+			Gra_CR2(); // don't record line breaks in strings
 		break;
 		case ' ':
 			if(txt_X <= 39) {
@@ -224,6 +247,12 @@ unsigned char bp04;
 				Gra_CR();
 			Gra_putchar(bp04);
 			txt_X ++;
+	}
+	if (bp04 == 0x10) // prompt character
+	{
+		//printf("> ");
+		add_char_to_text_buffer('>');
+		add_char_to_text_buffer(' ');
 	}
 }
 
@@ -627,6 +656,8 @@ unsigned bp04;
 				} else {
 					si[loc_A] = loc_B;
 					u4_putc(loc_B);
+					//printf("%c", loc_B);
+					add_char_to_text_buffer(loc_B);
 					loc_A ++;
 				}
 			break;
