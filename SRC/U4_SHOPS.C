@@ -341,7 +341,9 @@ C_CD80()
 		u4_puts(/*D_472D*/"We have:\n");
 		for(loc_B = 0; loc_B < 4; loc_B ++) {
 			u4_putc(D_46BA[D_9142][loc_B] + 'A');
+			add_char_to_text_buffer(D_46BA[D_9142][loc_B] + 'A');
 			u4_putc('-');
+			add_char_to_text_buffer('-');
 			u4_puts(D_1E98[37 + D_46BA[D_9142][loc_B]]);
 			u4_putc('s');
 			Gra_CR();
@@ -580,7 +582,9 @@ C_D1D0()
 		for(loc_B = 0; loc_B < 4; loc_B ++) {
 			if(D_4BC4[D_9142][loc_B]) {
 				u4_putc(D_4BC4[D_9142][loc_B] + 'A');
+				add_char_to_text_buffer(D_4BC4[D_9142][loc_B] + 'A');
 				u4_putc(' ');
+				add_char_to_text_buffer(' ');
 				u4_puts(D_1E98[53 + D_4BC4[D_9142][loc_B]]);
 				Gra_CR();
 			}
@@ -961,9 +965,9 @@ unsigned char D_567A[] = {30,60,90, 0};
 	u4_puts(/*D_5514*/"The Innkeeper says: Welcome to ");
 	D_9142 = D_5484[Party._loc - 1] - 1;
 	u4_puts(D_54AC[D_9142]);
-	u4_puts(/*D_5534*/"\n\nI am ");
+	u4_puts(/*D_5534*/".\n\n I am ");
 	u4_puts(D_54BA[D_9142]);
-	u4_puts(/*D_553C*/".\n\nAre you in need of lodging?\x12\x12\b");
+	u4_puts(/*D_553C*/".\n\n Are you in need of lodging?\x12\x12\b");
 	bp_04 = AskY_N();
 	if(bp_04 == 'Y') {
 		Gra_CR();

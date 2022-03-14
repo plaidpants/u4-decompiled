@@ -88,12 +88,12 @@ unsigned char bp06;
 unsigned char bp04;
 {
 	register int i;
-	for(i = bp08; i >= 0; i--) {
-		if(
+	for (i = bp08; i >= 0; i--) {
+		if (
 			D_8742._npc._tile[i] != 0 &&
 			D_8742._npc._x[i] == bp06 &&
 			D_8742._npc._y[i] == bp04
-		) break;
+			) break;
 	}
 	return i;
 }
@@ -102,14 +102,14 @@ C_0A8B(bp06, bp04)
 unsigned char bp06;
 unsigned char bp04;
 {
-	return C_0A58((Party._loc == 0)?7:31, bp06, bp04);
+	return C_0A58((Party._loc == 0) ? 7 : 31, bp06, bp04);
 }
 
 /*C_0AB1*/SafeModulo(bp06, bp04)
 int bp06;
 int bp04;
 {
-	if(bp04 == 0)
+	if (bp04 == 0)
 		return 0;
 	return bp06 % bp04;
 }
@@ -117,7 +117,7 @@ int bp04;
 /*get character sprite id ?*/
 C_0ACF(bp04)
 {
-	if(Party.chara[bp04]._stat == 'S')
+	if (Party.chara[bp04]._stat == 'S')
 		return TIL_38;
 	return (Party.chara[bp04]._class << 1) + TIL_20;
 }
@@ -130,16 +130,16 @@ C_0ACF(bp04)
 C_0AFE(bp04)
 unsigned char bp04;
 {
-	if(bp04 < TIL_80 ||
+	if (bp04 < TIL_80 ||
 		bp04 == TIL_8A || bp04 == TIL_90 ||
 		bp04 == TIL_94 || bp04 == TIL_98 ||
 		bp04 == TIL_B4 || bp04 == TIL_CC
-	) return 1;
+		) return 1;
 	return 0;
 }
 
 /*C_0B38*/u4_puts(txt/*si/bp04*/)
-register char *txt;
+register char* txt;
 {
 	register int /*di*/i;
 	int /*bp_02*/loc_A;
@@ -178,10 +178,22 @@ register char *txt;
 		{
 			if (txt[i] != '\n')
 			{
-				//printf("%c", txt[i]);
-				add_char_to_text_buffer(txt[i]);
+				if (txt[i] == '\x12') // remove these
+				{
+
+				}
+				else if (txt[i] == '\b') // replace breaks with spaces
+				{
+					//printf(" ");
+					add_char_to_text_buffer(' ');
+				}
+				else
+				{
+					//printf("%c", txt[i]);
+					add_char_to_text_buffer(txt[i]);
+				}
 			}
-			else if (txt[i] == '\n' && txt[i+1] == 0) 
+			else if (txt[i] == '\n' && txt[i+1] == 0)
 			{
 				//printf("\n");
 				add_char_to_text_buffer('\n');
@@ -208,18 +220,38 @@ char bp04;
 {
 	if(bp0a < 0) {
 		u4_putc('-');
+		if ((txt_Y == 23) && (txt_X >= 24))
+		{
+			//printf("-");
+			add_char_to_text_buffer('-');
+		}
 		u4_putl(-bp0a, bp06 - 1, bp04);
 	}
 	if(bp0a < 10) {
 		if(bp06 > 1) {
 			u4_putc(bp04);
+			if ((txt_Y == 23) && (txt_X >= 24))
+			{
+				//printf("%c", bp04);
+				add_char_to_text_buffer(bp04);
+			}
 			u4_putl(bp0a, bp06 - 1, bp04);
 		} else {
 			u4_putc(bp0a + '0');
+			if ((txt_Y == 23) && (txt_X >= 24))
+			{
+				//printf("%c", bp0a + '0');
+				add_char_to_text_buffer(bp0a + '0');
+			}
 		}
 	} else {
 		u4_putl(bp0a / 10, bp06 - 1, bp04);
 		u4_putc((bp0a % 10) + '0');
+		if ((txt_Y == 23) && (txt_X >= 24))
+		{
+			//printf("%c", (bp0a % 10) + '0');
+			add_char_to_text_buffer((bp0a % 10) + '0');
+		}
 	}
 }
 
