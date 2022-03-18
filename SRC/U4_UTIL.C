@@ -282,9 +282,8 @@ unsigned char bp04;
 	}
 	if (bp04 == 0x10) // prompt character
 	{
-		//printf("> ");
-		add_char_to_text_buffer('>');
-		add_char_to_text_buffer(' ');
+		//printf(">");
+		add_char_to_text_buffer(0x10);
 	}
 }
 

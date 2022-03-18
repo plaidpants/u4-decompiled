@@ -120,7 +120,7 @@ char text_buffer[MAX_TEXT];
 int current_text_buffer_pointer;
 int current_text_buffer_size;
 
-void add_char_to_text_buffer(char ch)
+void add_char_to_text_buffer(char * ch)
 {
 	//printf("%c", ch);
 	text_buffer[current_text_buffer_pointer++] = ch;
@@ -212,6 +212,157 @@ void Text_Dump()
 	current_text_buffer_size = 0;
 	current_text_buffer_pointer = 0;
 	printf("text buffer cleared\n");
+}
+
+#define MAX_TEXT 500
+#define MAX_NPC_TEXT 10
+char npc_text_buffer[10][MAX_TEXT];
+int current_npc_text_buffer_pointer = 0;
+int current_npc_text_buffer_size = 0;
+
+void npc_string_copy(char * dst, char * src)
+{
+	int index = 0;
+	for (int i = 0; i < strnlen(src, MAX_TEXT - 1); i++)
+	{
+		if (src[i] != '\n')
+		{
+			if (src[i] == '\x12') // remove these
+			{
+				continue;
+			}
+			else if (src[i] == '\b') // replace breaks with spaces
+			{
+				dst[index++] = ' ';
+				continue;
+			}
+			else
+			{
+				dst[index++] = src[i];
+			}
+		}
+		else if (src[i] == '\n' && src[i + 1] == 0)
+		{
+			dst[index++] = '\n';
+		}
+		else if ((src[i] == '\n') && ((i != 0) && (i != 1) && (i != 2))) // remove leading newlines
+		{
+			if ((i > 1) && (src[i - 1] != '\n')) // remove multiple newlines
+			{
+				dst[index++] = ' ';
+			}
+		}
+	}
+
+	// terminate the string if we cut out some characters
+	dst[index] = 0;
+}
+
+
+void add_npc_talk(char npc_index, char * ch)
+{
+	npc_text_buffer[current_npc_text_buffer_pointer][0] = npc_index;
+
+	npc_string_copy(&npc_text_buffer[current_npc_text_buffer_pointer][1], ch);
+
+	printf(&npc_text_buffer[current_npc_text_buffer_pointer][1]);
+
+	current_npc_text_buffer_pointer++;
+	if (current_npc_text_buffer_pointer > MAX_NPC_TEXT - 1)
+	{
+		current_npc_text_buffer_pointer = 0;
+	}
+	current_npc_text_buffer_size++;
+	if (current_npc_text_buffer_size > MAX_NPC_TEXT)
+	{
+		current_npc_text_buffer_size = MAX_NPC_TEXT;
+	}
+}
+
+void NPC_Text_Dump()
+{
+	int buffer_index = 0;
+	int ret = 0;
+
+	printf("\nnpc Text buffer size %d\n", current_npc_text_buffer_size);
+
+	// we have not filled the text buffer
+	if (current_npc_text_buffer_size < MAX_NPC_TEXT - 1)
+	{
+		for (int i = 0; i < current_npc_text_buffer_size; i++)
+		{
+			//printf(&npc_text_buffer[i][1]);
+			printf("npc index %d says : %s\n", npc_text_buffer[i][0], &npc_text_buffer[i][1]);
+		}
+	}
+	// the text buffer is full dump from the wrap
+	else
+	{
+		for (int i = 0; i < current_npc_text_buffer_size; i++)
+		{
+			//printf(&npc_text_buffer[current_npc_text_buffer_pointer][1]);
+			printf("npc index %d says : %s\n", npc_text_buffer[current_npc_text_buffer_pointer][0], &npc_text_buffer[current_npc_text_buffer_pointer][1]);
+			current_npc_text_buffer_pointer++;
+
+			// wrap
+			if (current_npc_text_buffer_pointer > MAX_NPC_TEXT - 1)
+			{
+				current_npc_text_buffer_pointer = 0;
+			}
+		}
+	}
+
+	// empty the text buffer
+	current_npc_text_buffer_size = 0;
+	current_npc_text_buffer_pointer = 0;
+	printf("\nnpc text buffer cleared\n");
+}
+
+__declspec(dllexport) int cdecl  main_NPC_Text(unsigned char buffer[], int length)
+{
+	int ret = 0;
+
+	if (length < sizeof(npc_text_buffer))
+		return;
+
+	if (buffer == 0)
+		return;
+
+	ret = current_npc_text_buffer_size;
+
+	// we have not filled the text buffer
+	if (current_npc_text_buffer_size < MAX_NPC_TEXT - 1)
+	{
+		for (int i = 0; i < current_npc_text_buffer_size; i++)
+		{
+			//printf(&npc_text_buffer[i][1]);
+			memcpy(&buffer[i * 500], npc_text_buffer[i], MAX_TEXT);
+			//printf("npc index %d says : %s\n", npc_text_buffer[i][0], &npc_text_buffer[i][1]);
+		}
+	}
+	// the text buffer is full dump from the wrap
+	else
+	{
+		for (int i = 0; i < current_npc_text_buffer_size; i++)
+		{
+			//printf(&npc_text_buffer[current_npc_text_buffer_pointer][1]);
+			//printf("npc index %d says : %s\n", npc_text_buffer[current_npc_text_buffer_pointer][0], &npc_text_buffer[current_npc_text_buffer_pointer][1]);
+			memcpy(&buffer[i * MAX_TEXT], npc_text_buffer[current_npc_text_buffer_pointer], MAX_TEXT);
+			current_npc_text_buffer_pointer++;
+
+			// wrap
+			if (current_npc_text_buffer_pointer > MAX_NPC_TEXT - 1)
+			{
+				current_npc_text_buffer_pointer = 0;
+			}
+		}
+	}
+	
+	// empty the text buffer
+	current_npc_text_buffer_size = 0;
+	current_npc_text_buffer_pointer = 0;
+
+	return ret;
 }
 
 void Hit_Dump()

@@ -66,6 +66,33 @@ char *D_7028[24] = {
 	/*D_6F6C*/"\nHe says:\nThe Eight\nVirtues of the\nAvatar are:\nHonesty,\nCompassion,\nValor,\nJustice,\nSacrifice,\nHonor,\nSpirituality,\nand Humility!\n"
 };
 
+char* D_7028_modified[24] = {
+	/*D_6457*/"My name is Lord British, Sovereign of all Britannia!\n",
+	/*D_6499*/"Thou see the King with the Royal Sceptre.\n",
+	/*D_64C9*/"I rule all Britannia, and shall do my best to help thee!\n",
+	/*D_650F*/"Many truths can be learned at the Lycaeum.  It lies on the northwestern shore of Verity Isle!\n",
+	/*D_6577*/"Look for the meaning of Love at Empath Abbey. The Abbey sits on the western edge of the Deep Forest!\n",
+	/*D_65E6*/"Serpent's Castle on the Isle of Deeds is where Courage should be sought!\n",
+	/*D_663B*/"The fair towne of Moonglow on Verity Isle is where the virtue of Honesty thrives!\n",
+	/*D_6698*/"The bards in the towne of Britain are well versed in the virtue of Compassion!\n",
+	/*D_66F3*/"Many valiant fighters come from Jhelom nin the Valarian Isles!\n",
+	/*D_673D*/"In the city of Yew, in the Deep Forest, Justice is served!\n",
+	/*D_6785*/"Minoc, towne of self-sacrifice, lies on the eastern shores of Lost Hope Bay!\n",
+	/*D_67DD*/"The Paladins who strive for Honor are oft seen in Trinsic, north of the Cape of Heroes!\n",
+	/*D_6840*/"In Skara Brae the Spiritual path is taught. Find it on an isle near Spiritwood!\n",
+	/*D_689B*/"Humility is the foundation of Virtue! The ruins of proud Magincia are a testimony unto the Virtue of Humility! Find the Ruins of Magincia far off the shores of Britannia, on a small isle in the vast Ocean!\n",
+	/*D_6978*/"\n\n\nOf the eight\ncombinations of\nTruth, Love and\nCourage, that\nwhich contains\nneither Truth,\nLove nor Courage\nis Pride.\n\nPride being not\na Virtue must be\nshunned in favor\nof Humility, the\nVirtue which is\nthe antithesis\nof Pride!\n",
+	/*D_6A66*/"\n\n\n\n\n\nTo be an Avatar\nis to be the\nembodiment of\nthe Eight\nVirtues.\n\n\nIt is to live a\nlife constantly\nand forever in\nthe Quest to\nbetter thyself\nand the world in\nwhich we live.\n",
+	/*D_6B2B*/"\n\n\nThe Quest of\nthe Avatar is\nto know and\nbecome the\nembodiment of\nthe Eight\nVirtues of\nGoodness!\nIt is known that\nall who take on\nthis Quest must\nprove themselves\nby conquering\nthe Abyss and\nViewing the\nCodex of\nUltimate Wisdom!\n",
+	/*D_6C25*/"\n\n\n\n\n\n\nEven though the\nGreat Evil Lords\nhave been routed\nevil yet remains\nin Britannia.\n\n\n\n\n\nIf but one soul\ncould complete\nthe Quest of the\nAvatar, our\npeople would\nhave a new hope,\na new goal for\nlife.\n\nThere would be a\nshining example\nthat there is\nmore to life\nthan the endless\nstruggle for\npossessions\nand gold!\n",
+	/*D_6D6C*/"The Ankh is the\nsymbol of one\nwho strives for\nVirtue.  Keep it\nwith thee at all\ntimes for by\nthis mark thou\nshalt be known!\n",
+	/*D_6DF2*/"\n\n\n\n\n\nThe Great\nStygian Abyss\nis the darkest\npocket of evil\nremaining in\nBritannia!\n\n\n\n\n\n\n\nIt is said that\nin the deepest\nrecesses of the\nAbyss is the\nChamber of the\nCodex!\n\n\nIt is also said\nthat only one of\nhighest Virtue\nmay enter this\nChamber, one\nsuch as an\nAvatar!!!\n",
+	/*D_6F0C*/"\n\n\n\n\n\nMondain is dead!\n",
+	/*D_6F2D*/"\n\n\n\n\n\nMinax is dead!\n",
+	/*D_6F4C*/"\n\n\n\n\n\nExodus is dead!\n",
+	/*D_6F6C*/"\nThe Eight\nVirtues of the\nAvatar are:\nHonesty,\nCompassion,\nValor,\nJustice,\nSacrifice,\nHonor,\nSpirituality,\nand Humility!\n"
+};
+
 /*10 seconds delay*/
 C_E1FC() {
 	u_kbflush();
@@ -78,18 +105,27 @@ C_E1FC() {
 C_E21E() {
 	u4_puts(/*D_7058*/"He says: ");
 	if(Party._moves < 1000) {
+		add_npc_talk(0xff, "To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n");
 		u4_puts(/*D_7062*/"To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n"); C_E1FC();
+		add_npc_talk(0xff, "\nTake great care in these thy first travels in Britannia.\n");
 		u4_puts(/*D_70D8*/"\nTake great care in these thy first travels in Britannia.\n"); C_E1FC();
+		add_npc_talk(0xff, "\nUntil thou dost well know thyself, travel not far from the safety of the townes!\n");
 		u4_puts(/*D_7113*/"\nUntil thou dost well know thyself, travel not far from the safety of the townes!\n");
 	} else
 	if(Party.f_1d8 == 1) {
+		add_npc_talk(0xff, "Travel not the open lands alone. There are many worthy people in the diverse townes whom it would be wise to ask to Join thee!\n");
 		u4_puts(/*D_7166*/"Travel not the open lands alone. There are many worthy people in the diverse townes whom it would be wise to ask to Join thee!\n"); C_E1FC();
+		add_npc_talk(0xff, "\nBuild thy party unto eight travellers, for only a true leader can win the Quest!\n");
 		u4_puts(/*D_71E6*/"\nBuild thy party unto eight travellers, for only a true leader can win the Quest!\n");
 	} else
 	if(Party.mRunes == 0) {
+		add_npc_talk(0xff, "Learn ye the paths of virtue. Seek to gain entry unto the eight shrines!\n");
 		u4_puts(/*D_7239*/"Learn ye the paths of virtue. Seek to gain entry unto the eight shrines!\n"); C_E1FC();
+		add_npc_talk(0xff, "\nFind ye the Runes, needed for entry into each shrine, and learn each chant or \"Mantra\" used to focus thy meditations.\n");
 		u4_puts(/*D_7283*/"\nFind ye the Runes, needed for entry into each shrine, and learn each chant or \"Mantra\" used to focus thy meditations.\n"); C_E1FC();
+		add_npc_talk(0xff, "\nWithin the Shrines thou shalt learn of the deeds which show thy inner virtue or vice!\n");
 		u4_puts(/*D_72FB*/"\nWithin the Shrines thou shalt learn of the deeds which show thy inner virtue or vice!\n"); C_E1FC();
+		add_npc_talk(0xff, "\nChoose thy path wisely for all thy deeds of good and evil are remembered and can return to hinder thee!\n");
 		u4_puts(/*D_7353*/"\nChoose thy path wisely for all thy deeds of good and evil are remembered and can return to hinder thee!\n");
 	} else
 	if(
@@ -98,12 +134,17 @@ C_E21E() {
 		Party._sacri & Party._honor &
 		Party._spiri & Party._humil
 	) {
+		add_npc_talk(0xff, "Visit the Seer Hawkwind often and use his wisdom to help thee prove thy virtue.\n");
 		u4_puts(/*D_73BD*/"Visit the Seer Hawkwind often and use his wisdom to help thee prove thy virtue.\n"); C_E1FC();
+		add_npc_talk(0xff, "\nWhen thou art ready, Hawkwind will advise thee to seek the Elevation unto partial Avatarhood in a virtue.\n");
 		u4_puts(/*D_740E*/"\nWhen thou art ready, Hawkwind will advise thee to seek the Elevation unto partial Avatarhood in a virtue.\n"); C_E1FC();
+		add_npc_talk(0xff, "\nSeek ye to become a partial Avatar in all eight virtues, for only then shalt thou be ready to seek the codex!\n");
 		u4_puts(/*D_747A*/"\nSeek ye to become a partial Avatar in all eight virtues, for only then shalt thou be ready to seek the codex!\n");
 	} else
 	if(Party.mStones == 0) {
+		add_npc_talk(0xff, "Go ye now into the depths of the dungeons. Therein recover the 8 colored stones from the altar pedestals in the halls of the dungeons.\n");
 		u4_puts(/*D_74EA*/"Go ye now into the depths of the dungeons. Therein recover the 8 colored stones from the altar pedestals in the halls of the dungeons.\n"); C_E1FC();
+		add_npc_talk(0xff, "\nFind the uses of these stones for they can help thee in the Abyss!\n");
 		u4_puts(/*D_7572*/"\nFind the uses of these stones for they can help thee in the Abyss!\n");
 	} else
 	if(
@@ -112,17 +153,24 @@ C_E21E() {
 		Party._sacri | Party._honor |
 		Party._spiri | Party._humil
 	) {
+		add_npc_talk(0xff, "Thou art doing very well indeed on the path to Avatarhood! Strive ye to achieve the Elevation in all eight virtues!\n");
 		u4_puts(/*D_75B7*/"Thou art doing very well indeed on the path to Avatarhood! Strive ye to achieve the Elevation in all eight virtues!\n");
 	} else
 	if(!((Party.mItems >> 4) & (Party.mItems >> 3) & (Party.mItems >> 2) & 1)) {
+		add_npc_talk(0xff, "Find ye the Bell, Book and Candle!  With these three things, one may enter the Great Stygian Abyss!\n");
 		u4_puts(/*D_762C*/"Find ye the Bell, Book and Candle!  With these three things, one may enter the Great Stygian Abyss!\n");
 	} else
 	if(!((Party.mItems >> 5) & (Party.mItems >> 6) & (Party.mItems >> 7) & 1)) {
+		add_npc_talk(0xff, "Before thou dost enter the Abyss thou shalt need the Key of Three Parts, and the Word of Passage.\n");
 		u4_puts(/*D_7691*/"Before thou dost enter the Abyss thou shalt need the Key of Three Parts, and the Word of Passage.\n"); C_E1FC();
+		add_npc_talk(0xff, "\nThen might thou enter the Chamber of the Codex of Ultimate Wisdom!\n");
 		u4_puts(/*D_76F4*/"\nThen might thou enter the Chamber of the Codex of Ultimate Wisdom!\n");
 	} else {
+		add_npc_talk(0xff, "Thou dost now seem ready to make the final journey into the dark Abyss! Go only with a party of eight!\n");
 		u4_puts(/*D_7739*/"Thou dost now seem ready to make the final journey into the dark Abyss! Go only with a party of eight!\n"); C_E1FC();
+		add_npc_talk(0xff, "\nGood Luck, and may the powers of good watch over thee on this thy most perilous endeavor!\n");
 		u4_puts(/*D_77A1*/"\nGood Luck, and may the powers of good watch over thee on this thy most perilous endeavor!\n"); C_E1FC();
+		add_npc_talk(0xff, "\nThe hearts and souls of all Britannia go with thee now. Take care, my friend.\n");
 		u4_puts(/*D_77FD*/"\nThe hearts and souls of all Britannia go with thee now. Take care, my friend.\n");
 	}
 }
@@ -179,11 +227,14 @@ C_E442() {
 	char bp_02;
 
 	u4_puts(/*D_784D*/"\n\n\n\n\n\nHe says: I am well, thank ye.\n\nHe asks: Art thou well?\x12\x12\b");
+	add_npc_talk(0xff, "\nI am well, thank ye. Art thou well?\n");
 	bp_02 = AskY_N();
 	if(bp_02 == 'Y') {
 		u4_puts(/*D_788D*/"\nHe says: That is good.\n");
+		add_npc_talk(0xff, "\nThat is good.\n");
 	} else if(bp_02 =='N') {
 		u4_puts(/*D_78A6*/"\nHe says: Let me heal thy wounds!\n");
+		add_npc_talk(0xff, "\nLet me heal thy wounds!\n");
 		/*heal party*/
 		sound(10, 10);
 		Gra_09(); sound(9, 0xc0); Gra_09();
@@ -213,14 +264,18 @@ C_E4C3() {
 			C_E498(&(Party.chara[loc_B]._int));
 			Gra_CR();
 			u4_puts(Party.chara[loc_B]._name);
+			add_npc_talk(0xff, Party.chara[loc_B]._name);
 			u4_puts(/*D_78C9*/"\nThou art now Level ");
-			u4_putl(loc_C / 100, 1, '0');
+			add_npc_talk(0xff, "\nThou art now Level ");
+			u4_putl(loc_C / 100, 1, '0'); // TODO need a separate number adder for add_npc_talk
 			Gra_CR();
+			add_npc_talk(0xff, "\n");
 			Gra_09(); sound(9, 0xc0); Gra_09();
 			dspl_Stats();
 		}
 	}
 	u4_puts(/*D_78DE*/"What would thou ask of me?\n");
+	add_npc_talk(0xff, "What would thou ask of me?\n");
 }
 
 /*conversation with Lord british*/
@@ -233,20 +288,29 @@ C_E59B()
 		/*-- first time --*/
 		Party.f_1e4 = 1;
 		u4_puts(/*D_78FA*/"\n\n\nLord British rises and says: At long last!\n");
+		add_npc_talk(0xff, "At long last!\n");
 		u4_puts(Party.chara[0]._name);
+		add_npc_talk(0xff, Party.chara[0]._name);
 		u4_putc(',');
+		add_npc_talk(0xff, ",");
 		u4_puts(/*D_7929*/" thou hast come!  We have waited such a long, long time...\n\n");
+		add_npc_talk(0xff, " thou hast come!  We have waited such a long, long time...\n");
 		C_E1FC();
+		add_npc_talk(0xff, "A new age is upon Britannia. The great evil Lords are gone but our people lack direction and purpose in their lives...\n\
+A champion of virtue is called for. Thou may be this champion, but only time shall tell. I will aid thee any way that I can!\n");
 		u4_puts(/*D_7966*/"\n\nLord British sits and says: A new age is upon Britannia. The great evil Lords are gone but our people lack direction and purpose in their lives...\n\n\n\
-A champion of virtue is called for. Thou may be this champion, but only time shall tell.  I will aid thee any way that I can!\n");
+A champion of virtue is called for. Thou may be this champion, but only time shall tell. I will aid thee any way that I can!\n");
 		u4_puts(/*D_7A7C*/"How may I help thee?\n");
+		add_npc_talk(0xff, "How may I help thee?\n");
 	} else {
 		/*-- second time and after --*/
 		if(Party.chara[0]._stat == 'D') {
 			/*resurection*/
 			Party.chara[0]._stat = 'G';
 			u4_puts(Party.chara[0]._name);
+			add_npc_talk(0xff, Party.chara[0]._name);
 			u4_puts(/*D_7A92*/", Thou shalt live again!\n");
+			add_npc_talk(0xff, ", Thou shalt live again!\n");
 			/*heal party*/
 			sound(10, 20);
 			Gra_09(); sound(9, 0xc0); Gra_09();
@@ -254,15 +318,22 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 			dspl_Stats();
 		}
 		u4_puts(/*D_7AAC*/"\n\n\nLord British says:  Welcome ");
+		add_npc_talk(0xff, "Welcome ");
 		u4_puts(Party.chara[0]._name);
+		add_npc_talk(0xff, Party.chara[0]._name);
 		if(Party.f_1d8 >= 3) {
 			u4_puts(/*D_7ACC*/" and thy worthy Adventurers!\n");
+			add_npc_talk(0xff, " and thy worthy Adventurers!");
 		} else if(Party.f_1d8 == 2) {
 			u4_puts(/*D_7AEA*/" and thee also ");
+			add_npc_talk(0xff, " and thee also ");
 			u4_puts(Party.chara[1]._name);
+			add_npc_talk(0xff, Party.chara[1]._name);
 			u4_puts(/*D_7AFA*/"!\n");
+			add_npc_talk(0xff, "\n");
 		} else {
 			Gra_CR();
+			add_npc_talk(0xff, "\n");
 		}
 		C_E4C3();
 	}
@@ -280,13 +351,22 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 			case 2: C_E442(); break;
 			case 1: C_E21E(); break;
 			case -1: u4_puts(/*D_7AFD*/"\nHe says: I cannot help thee with that.\n"); break;
-			default: C_E3D2(D_7028[bp_02-3]);
+				add_npc_talk(0xff, "I cannot help thee with that.\n");
+			default: add_npc_talk(0xff, D_7028[bp_02 - 3]); 
+				C_E3D2(D_7028[bp_02-3]);
+				
 		}
 		u4_puts(/*D_7B26*/"\nWhat else?\n");
+		add_npc_talk(0xff, "What else?\n");
 	}
 
 	u4_puts(/*D_7B33*/"Lord British says: Fare thee well my friend");
-	if(Party.f_1d8 > 1)
+	add_npc_talk(0xff, "Fare thee well my friend");
+	if (Party.f_1d8 > 1)
+	{
 		u4_putc('s');
+		add_npc_talk(0xff, "s");
+	}
 	u4_puts(/*D_7B5F*/"!\n");
+	add_npc_talk(0xff, "!\n");
 }
