@@ -249,7 +249,7 @@ int bp04;
 }
 
 /*animate 3D sprites?*/
-C_ADEF()
+void C_ADEF()
 {
 	if(Party.f_1dc == 0) {
 		Gra_10();
@@ -526,7 +526,7 @@ C_B47A()
 }
 
 /*render 3d*/
-C_B4DF()
+void C_B4DF()
 {
 	int bp_04, bp_02;
 
@@ -580,7 +580,7 @@ C_B61C()
 }
 
 /*render 3d if necessary*/
-C_B677()
+void C_B677()
 {
 	unsigned char bp_02;
 

@@ -272,9 +272,9 @@ C_3A80()
 		Party._trammel = D_1665 >> 5;
 		Party._felucca = D_1666 >> 5;
 		if((D_1665 & 0x1f) == 0) {
-			D_9141 = C_3A4F() + 0x40;
+			D_9141 = C_3A4F() + 0x40; // moongate tile
 		} else if((D_1665 & 0x1f) == 0x1e){
-			D_9141 = (C_3A4F() ^ 3) + 0x40;
+			D_9141 = (C_3A4F() ^ 3) + 0x40; // moongate tile
 		}
 	}
 	bp_02 = txt_X;
