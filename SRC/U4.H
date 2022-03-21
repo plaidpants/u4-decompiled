@@ -316,9 +316,9 @@ extern C_9414();
 extern C_95AA();
 extern C_9F7B();
 extern /*C_A6F3*/CMD_Talk();
-extern C_ADEF();
+extern void C_ADEF();
 extern C_AE41();
-extern C_B677();
+extern void C_B677();
 extern C_B9B2();
 extern C_B9EF(unsigned);
 extern C_C403();
@@ -338,7 +338,7 @@ struct tPSP {
 extern struct tPSP far *far_psp;/*D_0078*/
 
 extern unsigned /*D_0672*/cursor_rate;
-extern char cdecl /*D_06A6*/SoundFlag;
+extern char /*cdecl*/ /*D_06A6*/SoundFlag;
 extern unsigned D_07F8;
 extern unsigned /*D_07FA*/*pKarmas[];
 extern int /*D_080A*/activeCharaX;
