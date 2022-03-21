@@ -134,8 +134,14 @@ int bp04;/*# of tries*/
 
 	bp_02 = D_8742._npc._x[bp0a];
 	bp_04 = D_8742._npc._y[bp0a];
+
+	if ((bp08 + bp_02 < 0) || (bp08 + bp_02 > 31) || (bp06 + bp_04 < 0) || (bp06 + bp_04 > 31))
+	{
+		printf("attempt to move npc %d outside the current map (%d,%d) move delta (%d,%d)\n", bp0a, bp_02, bp_04, bp08, bp06);
+		return;
+	}
 	if(U4_RND1(1) && bp08) {
-		if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02]))
+		if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02])) // TODO: this NPC move has no protection if the  current NPC position is 0 and the random move is -1 when accessing the map tile
 			C_4FF8(bp0a, bp08+bp_02, bp_04);
 		return;
 	}
@@ -144,7 +150,7 @@ int bp04;/*# of tries*/
 			C_4FF8(bp0a, bp_02, bp06+bp_04);
 		return;
 	}
-	if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02])) {
+	if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02])) { // TODO: this NPC move has no protection if the  current NPC position is 0 and the random move is -1 when accessing the map tile
 		C_4FF8(bp0a, bp08+bp_02, bp_04);
 		return;
 	}
