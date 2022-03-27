@@ -8,8 +8,8 @@
 
 #define RATIO 2
 
-//#define CONSOLE printf
-#define CONSOLE()
+#define CONSOLE printf
+//#define CONSOLE()
 #define FAKE_RET return 0
 
 #define DO_SWAP(a,b,temp) { (temp) = (a); (a) = (b); (b) = (temp); }

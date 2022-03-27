@@ -20,7 +20,8 @@ struct tPSP far *far_psp;
 
 unsigned cursor_rate;
 
-#define CONSOLE()
+#define CONSOLE printf
+//#define CONSOLE()
 
 /*load gr driver*/
 C_20C1(char *fname) {
@@ -540,7 +541,8 @@ int __cdecl dopen(char *fname, int mode) {
 		default:
 			CONSOLE("TODO\n");
 	}
-	ret = _open(path, _O_RDONLY|_O_BINARY);
+	//ret = _open(path, _O_RDONLY | _O_BINARY);
+	ret = _open(path, _O_RDWR | _O_BINARY); // Not sure why writing is disallowed. Fixed to allow writing.
 	if(ret <= 0) {
 		CONSOLE("<err>\n");
 	}
@@ -573,10 +575,12 @@ int __cdecl dwrite(int f, void *b, int sz) {
 
 //	CONSOLE("dwrite(%d,0x%08x,0x%08x)\n", f, b, sz);
 	//-- --
+	/* Not sure why the file reference being larger in 2 should result in the write not happening. Comment out for now so saves will work.
 	if(f > 2) {
 		CONSOLE("dwrite(%d,0x%08x,0x%08x)\n", f, b, sz);
 		return sz;
 	}
+	*/
 	//-- --
 	ret = _write(f, b, sz);
 
