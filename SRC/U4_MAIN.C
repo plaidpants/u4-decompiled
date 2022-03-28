@@ -50,6 +50,21 @@ __declspec(dllexport) int cdecl main_D_95A5_y()
 	return D_95A5.y;
 }
 
+__declspec(dllexport) int cdecl main_D_9445()
+{
+	return D_9445;
+}
+
+__declspec(dllexport) int cdecl main_D_9448()
+{
+	return D_9448;
+}
+
+__declspec(dllexport) int cdecl main_D_9141()
+{
+	return D_9141;
+}
+
 __declspec(dllexport) void cdecl main_ActiveChar(unsigned char buffer[], int length)
 {
 	if (length >= 3)
