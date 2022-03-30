@@ -63,6 +63,7 @@ C_A163()
 	Gra_CR();
 	u_kbread();
 	u4_puts(D_8CCE[7]);
+	u4_puts("\n");
 	add_npc_talk(D_8CE6, D_8CCE[7]);
 	u4_puts(/*D_2A62*/"\n\nYou say: ");
 	do {

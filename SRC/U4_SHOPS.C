@@ -71,15 +71,23 @@ static unsigned D_913E;/*# of drinks in pub*/
 
 	if(!isCharaConscious(0)) {
 		u4_puts(/*D_3CD9*/"The Seer says: I will speak only with ");
+		add_npc_talk(0xfe, "I will speak only with ");
 		u4_puts(Party.chara[0]._name);
+		add_npc_talk(0xfe, Party.chara[0]._name);
 		u4_puts(/*D_3D00*/".\nReturn when ");
+		add_npc_talk(0xfe, ".\nReturn when ");
 		u4_puts(Party.chara[0]._name);
+		add_npc_talk(0xfe, Party.chara[0]._name);
 		u4_puts(/*D_3D0F*/" is revived!\n");
+		add_npc_talk(0xfe, " is revived!\n");
 		return;
 	}
 	u4_puts(/*D_3D1D*/"\n\nWelcome, ");
+	add_npc_talk(0xfe, "Welcome, ");
 	u4_puts(Party.chara[0]._name);
-	u4_puts(/*D_3D29*/"\nI am Hawkwind, Seer of Souls. I see that which is within thee and drives thee to deeds of good or evil...\n");
+	add_npc_talk(0xfe, Party.chara[0]._name);
+	u4_puts(/*D_3D29*/". \nI am Hawkwind, Seer of Souls. I see that which is within thee and drives thee to deeds of good or evil...\n");
+	add_npc_talk(0xfe, ". \nI am Hawkwind, Seer of Souls. I see that which is within thee and drives thee to deeds of good or evil...\n");
 	u_kbflush();
 	u_kbread();
 	bp_14[0] = 0;
@@ -88,6 +96,9 @@ static unsigned D_913E;/*# of drinks in pub*/
 			/*D_3D95*/"\nFor what path dost thou seek enlightenment?\n":
 			/*D_3DC3*/"\nHawkwind asks: What other path seeks clarity?\n"
 		);
+		add_npc_talk(0xfe, bp_14[0] == 0 ?
+			/*D_3D95*/"\nFor what path dost thou seek enlightenment?\n" :
+			/*D_3DC3*/"\nWhat other path seeks clarity?\n");
 		u4_gets(bp_14, 15);
 		if(
 			bp_14[0] == 0 ||
@@ -100,11 +111,13 @@ static unsigned D_913E;/*# of drinks in pub*/
 		}
 		if(bp_04 == -1) {
 			u4_puts(/*D_3DFC*/"\nHe says: That is not a subject for enlightenment.\n");
+			add_npc_talk(0xfe, "\nThat is not a subject for enlightenment.\n");
 			continue;
 		}
 		Gra_CR();
 		if(*(pKarmas[bp_04]) == 0) {
 			u4_puts(/*D_3E30*/"He says:\nThou hast become a partial Avatar in that attribute. Thou need not my insights.\n");
+			add_npc_talk(0xfe, "Thou hast become a partial Avatar in that attribute. Thou need not my insights.\n");
 			continue;
 		}
 		if(*(pKarmas[bp_04]) < 20) {
@@ -120,14 +133,17 @@ static unsigned D_913E;/*# of drinks in pub*/
 		}
 		Gra_CR();
 		u4_puts(D_3F0C[bp_02][bp_04]);
+		add_npc_talk(0xfe, D_3F0C[bp_02][bp_04]);
 		Gra_CR();
 		if(bp_02 == 4) {
 			u4_puts(/*D_3E8A*/"\nGo to the Shrine and meditate for three Cycles!\n");
+			add_npc_talk(0xfe, "\nGo to the Shrine and meditate for three Cycles!\n");
 			u_kbflush();
 			u_kbread();
 		}
 	}
 	u4_puts(/*D_3EBC*/"\nHawkwind says: Fare thee well and may thou complete the Quest of the Avatar!\n");
+	add_npc_talk(0xfe, "Fare thee well and may thou complete the Quest of the Avatar!\n");
 	if(Party._moves / 100 != Party.f_1ea) {
 		karma_inc(&(Party._spiri), 3);
 		Party.f_1ea = Party._moves / 100;
@@ -168,15 +184,21 @@ unsigned char D_4190[][6] = {
 
 	D_9142 = D_4170[Party._loc - 1] - 1;
 	u4_puts(/*D_3FAE*/"A blind woman turns to you and says: Welcome to ");
+	add_npc_talk(0xfd, "Welcome to ");
 	u4_puts(D_4180[D_9142]);
+	add_npc_talk(0xfd, D_4180[D_9142]);
 	Gra_13();
 	C_4BC7();
-	u4_puts(/*D_3FDF*/"\n\nI am ");
+	u4_puts(/*D_3FDF*/". \n\nI am ");
+	add_npc_talk(0xfd, ". \n\nI am ");
 	u4_puts(D_4188[D_9142]);
-	u4_puts(/*D_3FE7*/"\nAre you in need of Reagents?\x12\x12\b");
+	add_npc_talk(0xfd, D_4188[D_9142]);
+	u4_puts(/*D_3FE7*/". \nAre you in need of Reagents?\x12\x12\b");
+	add_npc_talk(0xfd, ". \nAre you in need of Reagents?\n");
 	loc_C = AskY_N();
 	if(loc_C == 'Y') {
 		u4_puts(/*D_4008*/"Very well,\n");
+		add_npc_talk(0xfd, "Very well,\n");
 		do {
 			u4_puts(/*D_4014*/"I have\n\
 A-Sulfurous Ash\n\
@@ -186,20 +208,36 @@ D-Spider Silk\n\
 E-Blood Moss\n\
 F-Black Pearl\n"
 			);
+			add_npc_talk(0xfd, "I have \
+Sulfurous Ash, \
+Ginseng, \
+Garlic, \
+Spider Silk, \
+Blood Moss, \
+Black Pearls.\n");
 			loc_B = AskLetter(/*D_4068*/"Your Interest:\x12\x12\b", 'A', 'F');
+			add_npc_talk(0xfd, "Your Interest:");
 			loc_B -= 'A';
 			if(loc_B < 0)
 				break;
 			u4_puts(/*D_407A*/"\nVery well, we sell ");
+			add_npc_talk(0xfd, "\nVery well, we sell ");
 			u4_puts(D_1E98[93 + loc_B]);
+			add_npc_talk(0xfd, D_1E98[93 + loc_B]);
 			u4_puts(/*D_408F*/" for ");
+			add_npc_talk(0xfd, " for ");
 			u4_putl(D_4190[D_9142][loc_B], 1, '0');
+			// TODO need putl npc talk
 			u4_puts(/*D_4095*/"gp. How many would you like?\x12\x12\x12\b\b");
+			add_npc_talk(0xfd, "gold pieces. How many would you like?");
 			loc_A = AskInt(2);
 			if(loc_A > 0) {
 				u4_puts(/*D_40B7*/"\nVery good, that will be ");
+				add_npc_talk(0xfd, "\nVery good, that will be ");
 				u4_putl((long)loc_A * D_4190[D_9142][loc_B], 1, '0');
+				// TODO need putl npc talk
 				u4_puts(/*D_40D1*/"gp. You pay:\x12\x12\x12\x12\b\b\b");
+				add_npc_talk(0xfd, "gold pieces.");
 				loc_D = AskInt(3);
 				if(loc_D <= 0) {
 					if(loc_D < 0)
@@ -214,6 +252,7 @@ F-Black Pearl\n"
 					}
 					if(loc_D > Party._gold) {
 						u4_puts(/*D_40E5*/"It seems you have not the gold!\n");
+						add_npc_talk(0xfd, "It seems you have not the gold!\n");
 					} else {
 						karma_inc(&(Party._hones), 2);
 						karma_inc(&(Party._justi), 2);
@@ -224,12 +263,15 @@ F-Black Pearl\n"
 							Party._reagents[loc_B] = 99;
 						C_4BC7();
 						u4_puts(/*D_4106*/"\nVery good.\n");
+						add_npc_talk(0xfd, "\nVery good.\n");
 					}
 				}
 			} else {
-				u4_puts(/*D_4113*/"\nI see, then\n");
+				u4_puts(/*D_4113*/"\nI see, then\n"); 
+				add_npc_talk(0xfd, "\nI see, then\n");
 			}
 			u4_puts(/*D_4121*/"Anything else?\x12\x12\b");
+			add_npc_talk(0xfd, "Anything else?");
 			loc_C = AskY_N();
 		} while(loc_C == 'Y');
 	}
@@ -239,6 +281,7 @@ F-Black Pearl\n"
 	Gra_CR();
 	u4_puts(D_4188[D_9142]);
 	u4_puts(/*D_4133*/" says: Perhaps another time then.... and slowly turns away.\n");
+	add_npc_talk(0xfd, "Perhaps another time then.\n");
 }
 
 /*----------------------------------------*/
