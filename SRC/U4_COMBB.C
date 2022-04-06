@@ -113,21 +113,24 @@ unsigned char bp04;
 	if(CurMode == MOD_COM_ROOM) {
 		/*-- dungeon room --*/
 		if(D_96EE != 0) {
-			if(bp06 == D_96EE)
+			if(bp06 == (unsigned char)D_96EE) // BUGFIX
 				goto C_7A0C;
 			w_SameExit();
 			return;
 		} else if(D_96F4 != 0) {
-			if(bp04 == D_96F4)
+			if(bp04 == (unsigned char)D_96F4) // BUGFIX
 				goto C_7A0C;
 			w_SameExit();
 			return;
 		} else if(bp06 > 10) {
-			D_96EE = bp06;
+			D_96EE = (char)bp06; // BUGFIX
 		} else {
-			D_96F4 = bp04;
+			D_96F4 = (char)bp04; // BUGFIX
 		}
+
+		printf(" exit dungeon room %uc %uc %uc %uc ", bp06, bp04, D_96EE, D_96F4);
 	}
+
 C_7A0C:
 	C_7962();
 }

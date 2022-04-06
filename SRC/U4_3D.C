@@ -162,7 +162,7 @@ unsigned char bp04;
 				case 3: cursor_rate = 10; break;
 			}
 		return TIL_48;
-		case 0xb0: return TIL_4A;
+		case 0xb0: return TIL_4A;  // altar
 	}
 	return -1;
 }
@@ -233,7 +233,7 @@ int bp04;
 		D_8CFA = U4_RND1(3);
 	}
 	if(C_ABE5(bp06)) {
-		C_AC23(TIL_90 + ((bp06 & 0xf) << 2) - 4 + D_8CFA);
+		C_AC23(TIL_90 + ((bp06 & 0xf) << 2) - 4 + D_8CFA); // 90 is the 4 tile monster the rate
 		return 0;
 	}
 	if((bp_02 = C_AB08(bp06)) > 0) {

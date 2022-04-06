@@ -135,7 +135,7 @@ C_03A1:
 				C_31F4();/*last phase of game*/
 				return;
 			}
-			D_8742._map.x8x8x8[Party._z][Party._y][Party._x] = 0x20;
+			D_8742._map.x8x8x8[Party._z][Party._y][Party._x] = 0x20; // changes to dungeon ladder down tile
 			u4_puts(/*D_025C*/"\nThe altar changes before thyne eyes!\n");
 		} else {
 			C_01E1();
