@@ -519,10 +519,10 @@ void __cdecl u_delay(int a, int b) {
 	}
 }
 
-__cdecl sound(int s) {
+__cdecl sound(unsigned char s, unsigned char length) {
 	//TODO
-	CONSOLE("sound(%d)\n", s);
-
+	CONSOLE("sound(%d, %d)\n", s, length);
+	add_to_sound_list(s, length);
 	FAKE_RET;
 }
 

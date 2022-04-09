@@ -473,6 +473,107 @@ __declspec(dllexport) void cdecl  main_Hit(unsigned char buffer[], int length)
 	}
 }
 
+// remember the last 10 sounds, in a circular buffer
+#define MAX_SOUNDS 10
+unsigned char sound_list_buffer[2 * MAX_SOUNDS + 2]; // extra bytes to make sure we don't overrun the buffer
+sound_list_size = 0;
+current_sound_list = 0;
+
+void add_to_sound_list(unsigned char sound, unsigned char length)
+{
+	printf("sound #%d Length %d\n", sound, length);
+	sound_list_buffer[current_sound_list++] = sound;
+	sound_list_buffer[current_sound_list++] = length;
+	if (current_sound_list > 2 * MAX_SOUNDS - 1)
+	{
+		current_sound_list = 0;
+	}
+	sound_list_size++;
+	if (sound_list_size > MAX_SOUNDS)
+	{
+		sound_list_size = MAX_SOUNDS;
+	}
+}
+
+void Sound_Dump()
+{
+	printf("Sound list size %d\n", sound_list_size);
+
+	// we have not filled the sound list
+	if (sound_list_size < MAX_SOUNDS - 1)
+	{
+		for (int i = 0; i < sound_list_size; i++)
+		{
+			int sound = sound_list_buffer[i * 2 + 0];
+			int length = sound_list_buffer[i * 2 + 1];
+			printf("Sound #%d Length %d\n", sound, length);
+		}
+	}
+	// the sound list is full dump from the wrap
+	else
+	{
+		for (int i = 0; i < sound_list_size; i++)
+		{
+			int sound = sound_list_buffer[current_sound_list++];
+			int length = sound_list_buffer[current_sound_list++];
+			printf("Sound #%d Length %d\n", sound, length);
+
+			// wrap
+			if (current_sound_list > 2 * MAX_SOUNDS - 1)
+			{
+				current_sound_list = 0;
+			}
+		}
+	}
+
+	// empty the sound list
+	sound_list_size = 0;
+	current_sound_list = 0;
+	printf("Sound list cleared\n");
+}
+
+__declspec(dllexport) void cdecl  main_Sound(unsigned char buffer[], int length)
+{
+	int buffer_index = 0;
+
+	if (length >= 4)
+	{
+		buffer[buffer_index++] = sound_list_size;
+
+		//printf("Sound list size %d\n", sound_list_size);
+
+		// we have not filled the sound list
+		if (sound_list_size < MAX_SOUNDS - 1)
+		{
+			for (int i = 0; i < sound_list_size; i++)
+			{
+				buffer[buffer_index++] = sound_list_buffer[i * 2 + 0];
+				buffer[buffer_index++] = sound_list_buffer[i * 2 + 1];
+			}
+		}
+		// the sound list is full dump from the wrap
+		else
+		{
+			for (int i = 0; i < sound_list_size; i++)
+			{
+				buffer[buffer_index++] = sound_list_buffer[current_sound_list++];
+				buffer[buffer_index++] = sound_list_buffer[current_sound_list++];
+
+				// wrap
+				if (current_sound_list > 2 * MAX_SOUNDS - 1)
+				{
+					current_sound_list = 0;
+				}
+			}
+		}
+
+		// empty the sound list
+		sound_list_size = 0;
+		current_sound_list = 0;
+		//printf("Sound list cleared\n");
+	}
+}
+
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
 __declspec(dllexport) void cdecl /*C_191E*/main()
 {
