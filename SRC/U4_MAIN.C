@@ -65,6 +65,25 @@ __declspec(dllexport) int cdecl main_D_9141()
 	return D_9141;
 }
 
+extern unsigned D_17FA;/*current opened door's x*/
+extern unsigned D_17FC;/*current opened door's y*/
+extern unsigned D_17FE;/*current opened door's delay*/
+
+__declspec(dllexport) int cdecl main_D_17FA()
+{
+	return D_17FA;
+}
+
+__declspec(dllexport) int cdecl main_D_17FC()
+{
+	return D_17FC;
+}
+
+__declspec(dllexport) int cdecl main_D_17FE()
+{
+	return D_17FE;
+}
+
 __declspec(dllexport) void cdecl main_ActiveChar(unsigned char buffer[], int length)
 {
 	if (length >= 3)
