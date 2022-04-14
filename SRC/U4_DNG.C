@@ -14,6 +14,8 @@ C_89DB();
 C_8A1F();
 C_87E2();*/
 
+extern int QUIT;
+
 /*C_84D2*/DNG_main()
 {
 	register unsigned si;
@@ -23,6 +25,10 @@ C_87E2();*/
 	u_kbflush();
 	bp_04 = 0;
 	do {
+		if (QUIT)
+		{
+			return;
+		}
 		C_9209();
 		u4_putc(0x10);
 		t_callback();
@@ -32,6 +38,7 @@ C_87E2();*/
 			if(u4_isupper((unsigned char)si))
 				si = (si & 0xff00) | u4_lower((unsigned char)si);
 			switch(si) {
+				case KBD_ESC: QUIT = 1;  return;
 				case KBD_SPACE: w_Pass(); break;
 				case KBD_UP:
 				case 0x487e: C_891E(); break;

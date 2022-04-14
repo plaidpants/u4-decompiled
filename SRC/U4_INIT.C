@@ -113,7 +113,7 @@ C_C51C()
 			C_20C1(/*D_306E*/"TANDY.DRV");
 		break;
 		case -1:
-			Console(/*D_3078*/"I can't find a color graphics card.\r\n");
+			//Console(/*D_3078*/"I can't find a color graphics card.\r\n");
 			exit(2);
 		break;
 	}
@@ -165,7 +165,7 @@ C_C51C()
 	if(Load(/*D_3140*/"MONSTERS.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
 		exit(3);
 	if((File_MAP = dopen(/*D_314D*/"WORLD.MAP", 0)) == -1) {
-		Console(/*D_3157*/"Can't open map file\r\n");
+		//Console(/*D_3157*/"Can't open map file\r\n");
 		exit(3);
 	}
 	File_TLK = 0;

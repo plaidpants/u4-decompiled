@@ -65,6 +65,11 @@ __declspec(dllexport) int cdecl main_D_9141()
 	return D_9141;
 }
 
+__declspec(dllexport) int cdecl main_SoundFlag()
+{
+	return SoundFlag;
+}
+
 extern unsigned D_17FA;/*current opened door's x*/
 extern unsigned D_17FC;/*current opened door's y*/
 extern unsigned D_17FE;/*current opened door's delay*/
@@ -143,7 +148,7 @@ void add_to_hit_list()
 {
 	if (hit_tile)
 	{
-		printf("Hit Tile %d (%d, %d)\n", hit_tile, hit_x, hit_y);
+		//printf("Hit Tile %d (%d, %d)\n", hit_tile, hit_x, hit_y);
 		hit_list_buffer[current_hit_list++] = hit_tile;
 		hit_list_buffer[current_hit_list++] = hit_x;
 		hit_list_buffer[current_hit_list++] = hit_y;
@@ -164,7 +169,7 @@ char text_buffer[MAX_TEXT];
 int current_text_buffer_pointer;
 int current_text_buffer_size;
 
-void add_char_to_text_buffer(char * ch)
+void add_char_to_text_buffer(char ch)
 {
 	//printf("%c", ch);
 	text_buffer[current_text_buffer_pointer++] = ch;
@@ -227,7 +232,7 @@ void Text_Dump()
 	int buffer_index = 0;
 	int ret = 0;
 
-	printf("Text buffer size %d\n", current_text_buffer_size);
+	//printf("Text buffer size %d\n", current_text_buffer_size);
 
 	// we have not filled the text buffer
 	if (current_text_buffer_size < MAX_TEXT - 1)
@@ -328,7 +333,7 @@ void NPC_Text_Dump()
 	int buffer_index = 0;
 	int ret = 0;
 
-	printf("\nnpc Text buffer size %d\n", current_npc_text_buffer_size);
+	//printf("\nnpc Text buffer size %d\n", current_npc_text_buffer_size);
 
 	// we have not filled the text buffer
 	if (current_npc_text_buffer_size < MAX_NPC_TEXT - 1)
@@ -336,7 +341,7 @@ void NPC_Text_Dump()
 		for (int i = 0; i < current_npc_text_buffer_size; i++)
 		{
 			//printf(&npc_text_buffer[i][1]);
-			printf("npc index %d says : %s\n", npc_text_buffer[i][0], &npc_text_buffer[i][1]);
+			//printf("npc index %d says : %s\n", npc_text_buffer[i][0], &npc_text_buffer[i][1]);
 		}
 	}
 	// the text buffer is full dump from the wrap
@@ -345,7 +350,7 @@ void NPC_Text_Dump()
 		for (int i = 0; i < current_npc_text_buffer_size; i++)
 		{
 			//printf(&npc_text_buffer[current_npc_text_buffer_pointer][1]);
-			printf("npc index %d says : %s\n", npc_text_buffer[current_npc_text_buffer_pointer][0], &npc_text_buffer[current_npc_text_buffer_pointer][1]);
+			//printf("npc index %d says : %s\n", npc_text_buffer[current_npc_text_buffer_pointer][0], &npc_text_buffer[current_npc_text_buffer_pointer][1]);
 			current_npc_text_buffer_pointer++;
 
 			// wrap
@@ -359,7 +364,7 @@ void NPC_Text_Dump()
 	// empty the text buffer
 	current_npc_text_buffer_size = 0;
 	current_npc_text_buffer_pointer = 0;
-	printf("\nnpc text buffer cleared\n");
+	//printf("\nnpc text buffer cleared\n");
 }
 
 __declspec(dllexport) int cdecl  main_NPC_Text(unsigned char buffer[], int length)
@@ -411,7 +416,7 @@ __declspec(dllexport) int cdecl  main_NPC_Text(unsigned char buffer[], int lengt
 
 void Hit_Dump()
 {
-	printf("Hit list size %d\n", hit_list_size);
+	//printf("Hit list size %d\n", hit_list_size);
 
 	// we have not filled the hit list
 	if (hit_list_size < MAX_HITS - 1)
@@ -421,7 +426,7 @@ void Hit_Dump()
 			int tile = hit_list_buffer[i * 3 + 0];
 			int x = hit_list_buffer[i * 3 + 1];
 			int y = hit_list_buffer[i * 3 + 2];
-			printf("Hit Tile %d (%d, %d)\n", tile, x, y);
+			//printf("Hit Tile %d (%d, %d)\n", tile, x, y);
 		}
 	}
 	// the hit list is full dump from the wrap
@@ -432,7 +437,7 @@ void Hit_Dump()
 			int tile = hit_list_buffer[current_hit_list++];
 			int x = hit_list_buffer[current_hit_list++];
 			int y = hit_list_buffer[current_hit_list++];
-			printf("Hit Tile %d (%d, %d)\n", tile, x, y);
+			//printf("Hit Tile %d (%d, %d)\n", tile, x, y);
 
 			// wrap
 			if (current_hit_list > 3 * MAX_HITS - 1)
@@ -445,7 +450,7 @@ void Hit_Dump()
 	// empty the hit list
 	hit_list_size = 0;
 	current_hit_list = 0;
-	printf("Hit list cleared\n");
+	//printf("Hit list cleared\n");
 }
 
 __declspec(dllexport) void cdecl  main_Hit(unsigned char buffer[], int length)
@@ -500,7 +505,7 @@ current_sound_list = 0;
 
 void add_to_sound_list(unsigned char sound, unsigned char length)
 {
-	printf("sound #%d Length %d\n", sound, length);
+	//printf("sound #%d Length %d\n", sound, length);
 	sound_list_buffer[current_sound_list++] = sound;
 	sound_list_buffer[current_sound_list++] = length;
 	if (current_sound_list > 2 * MAX_SOUNDS - 1)
@@ -516,7 +521,7 @@ void add_to_sound_list(unsigned char sound, unsigned char length)
 
 void Sound_Dump()
 {
-	printf("Sound list size %d\n", sound_list_size);
+	//printf("Sound list size %d\n", sound_list_size);
 
 	// we have not filled the sound list
 	if (sound_list_size < MAX_SOUNDS - 1)
@@ -525,7 +530,7 @@ void Sound_Dump()
 		{
 			int sound = sound_list_buffer[i * 2 + 0];
 			int length = sound_list_buffer[i * 2 + 1];
-			printf("Sound #%d Length %d\n", sound, length);
+			//printf("Sound #%d Length %d\n", sound, length);
 		}
 	}
 	// the sound list is full dump from the wrap
@@ -535,7 +540,7 @@ void Sound_Dump()
 		{
 			int sound = sound_list_buffer[current_sound_list++];
 			int length = sound_list_buffer[current_sound_list++];
-			printf("Sound #%d Length %d\n", sound, length);
+			//printf("Sound #%d Length %d\n", sound, length);
 
 			// wrap
 			if (current_sound_list > 2 * MAX_SOUNDS - 1)
@@ -548,7 +553,7 @@ void Sound_Dump()
 	// empty the sound list
 	sound_list_size = 0;
 	current_sound_list = 0;
-	printf("Sound list cleared\n");
+	//printf("Sound list cleared\n");
 }
 
 __declspec(dllexport) void cdecl  main_Sound(unsigned char buffer[], int length)
@@ -593,8 +598,10 @@ __declspec(dllexport) void cdecl  main_Sound(unsigned char buffer[], int length)
 	}
 }
 
+int QUIT = 0;
+
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
-__declspec(dllexport) void cdecl /*C_191E*/main()
+__declspec(dllexport) void cdecl /*C_191E*/ main()
 {
 	register unsigned si = 0;
 	int bp_04;
@@ -614,6 +621,10 @@ __declspec(dllexport) void cdecl /*C_191E*/main()
 	u_kbflush();
 	bp_04 = 0;
 	for(;;) {
+		if (QUIT)
+		{
+			return;
+		}
 	setjmp(D_9458);
 	t_callback();
 	C_9209();
@@ -624,7 +635,7 @@ __declspec(dllexport) void cdecl /*C_191E*/main()
 		if (u4_isupper((unsigned char)si))
 			si = (si & 0xff00) | u4_lower((unsigned char)si);
 		switch (si) {
-		case KBD_ESC: return;
+		case KBD_ESC: QUIT = 1;  return;
 		case KBD_SPACE: w_Pass(); break;
 		case 0x487e:
 		case KBD_UP: CMDDIR_Up(); break;

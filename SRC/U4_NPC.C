@@ -137,7 +137,7 @@ int bp04;/*# of tries*/
 
 	if ((bp08 + bp_02 < 0) || (bp08 + bp_02 > 31) || (bp06 + bp_04 < 0) || (bp06 + bp_04 > 31))
 	{
-		printf("attempt to move npc %d outside the current map (%d,%d) move delta (%d,%d)\n", bp0a, bp_02, bp_04, bp08, bp06);
+		//printf("attempt to move npc %d outside the current map (%d,%d) move delta (%d,%d)\n", bp0a, bp_02, bp_04, bp08, bp06);
 		return;
 	}
 	if(U4_RND1(1) && bp08) {

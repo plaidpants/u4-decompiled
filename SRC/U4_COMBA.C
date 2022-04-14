@@ -56,6 +56,8 @@ C_5A5F:
 /*C_5D14();
 C_61D1();*/
 
+extern int QUIT;
+
 /*C_5A6B*/COM_main()
 {
 	register unsigned si = 0; // ADDED
@@ -65,6 +67,10 @@ C_61D1();*/
 	bp_04 = 0;
 	D_96EE = D_96F4 = 0;
 	do {
+		if (QUIT)
+		{
+			return;
+		}
 		for(activeChara = 0; /*C_5A88:*/activeChara < Party.f_1d8 && !IsCombatEnded(); activeChara++) {
 /*C_5A9E*/
 			if(Fighters._chtile[activeChara] && isCharaConscious(activeChara)) {
@@ -84,6 +90,7 @@ C_61D1();*/
 				if(u4_isupper((unsigned char)si))
 					si = (si & 0xff00) | u4_lower((unsigned char)si);
 				switch(si) {
+					case KBD_ESC: QUIT = 1;  return;
 					case KBD_SPACE: w_Pass(); break;
 					case 0x487e:
 					case KBD_UP: C_7B89(); break;

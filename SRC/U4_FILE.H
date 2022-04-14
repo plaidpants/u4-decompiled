@@ -10,7 +10,9 @@
 #define far
 #endif
 
+#ifdef ENABLE_WINDOWS
 extern /*C_0812*/Console(char *);
+#endif
 extern /*C_0855*/Load(char *, unsigned, void far *);
 extern /*C_08D1*/Save(char *, unsigned, void far *);
 

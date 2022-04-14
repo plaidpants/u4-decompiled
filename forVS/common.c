@@ -6,6 +6,7 @@
 
 int CMN_kbhit = 0;
 
+#ifdef ENABLE_WINDOWS
 static HWND CMN_hwnd = 0;
 /*static */HDC currentHDC = 0;
 static unsigned char *pShapesWIN = 0;
@@ -319,4 +320,6 @@ int CMN_endScene() {
 
 	return 1;
 }
+#endif
+
 //----------------------------------------

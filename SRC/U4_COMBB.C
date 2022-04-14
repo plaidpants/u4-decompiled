@@ -128,7 +128,7 @@ unsigned char bp04;
 			D_96F4 = (char)bp04; // BUGFIX
 		}
 
-		printf(" exit dungeon room %uc %uc %uc %uc ", bp06, bp04, D_96EE, D_96F4);
+		//printf(" exit dungeon room %uc %uc %uc %uc ", bp06, bp04, D_96EE, D_96F4);
 	}
 
 C_7A0C:

@@ -6,10 +6,13 @@
 #include <io.h>
 #include <fcntl.h>
 
+#ifdef ENABLE_WINDOWS
 #include <windows.h>
+#endif
 
 #include "common.h"
 
+#ifdef ENABLE_WINDOWS
 unsigned speed_info;
 unsigned equip_flags;
 void far *patch_tandy;
@@ -20,8 +23,8 @@ struct tPSP far *far_psp;
 
 unsigned cursor_rate;
 
-#define CONSOLE printf
-//#define CONSOLE()
+//#define CONSOLE printf
+#define CONSOLE()
 
 /*load gr driver*/
 C_20C1(char *fname) {
@@ -682,3 +685,364 @@ C_18A2() {
 
 	FAKE_RET;
 }
+
+#else // #ifdef ENABLE_WINDOWS
+
+struct tPSP the_psp;
+
+unsigned cursor_rate;
+unsigned equip_flags; // TODO see if I can remove this windows thing
+struct tPSP far* far_psp; // TODO see if I can remove this windows thing
+void far* patch_tandy; // TODO see if I can remove this windows thing
+
+struct t_500 D_8742;
+char cdecl SoundFlag;
+unsigned speed_info;
+
+unsigned char C_1814() // current floppy
+{
+	return 0;
+}
+
+C_181D(unsigned a) 
+{
+	FAKE_RET;
+}
+
+C_182F(char* fname)  // verify some file
+{
+	return 1;
+}
+
+C_184F() // anti-piracy function
+{
+	return 0;
+}
+
+C_18A2() 
+{
+	FAKE_RET;
+}
+
+C_20C1(char* fname) //load graphics driver
+{
+	FAKE_RET;
+}
+
+
+C_213B() // draw game screen frame
+{
+	FAKE_RET;
+}
+
+void* __cdecl dalloc(int n) 
+{
+	void* ret;
+
+	ret = malloc(n);
+
+	return ret;
+}
+
+int __cdecl dclose(int f) 
+{
+	int ret;
+
+	ret = _close(f);
+
+	return ret;
+}
+
+__cdecl dfree(void* p) 
+{
+	free(p);
+	FAKE_RET;
+}
+
+int __cdecl dlseek(int f, unsigned long ofs) 
+{
+	int ret;
+
+	ret = _lseek(f, ofs, SEEK_SET);
+
+	return ret;
+}
+
+int __cdecl dopen(char* fname, int mode) 
+{
+	int ret;
+	static char path[256]; // TODO is this big enough
+
+	strcpy(path, U4_ROOT);
+	strcat(path, fname);
+	ret = _open(path, _O_RDWR | _O_BINARY);
+
+	return ret;
+}
+
+int __cdecl dread(int fd, void* buffer, int count) 
+{
+	int ret;
+
+	ret = read(fd, buffer, count);
+	if (ret != count) 
+	{
+		// error
+	}
+
+	return ret;
+}
+
+int __cdecl dwrite(int f, void* b, int sz) 
+{
+	int ret;
+
+	ret = _write(f, b, sz);
+
+	return ret;
+}
+
+__cdecl Gra_00(int char_Y, int char_X) // highlight cursor
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_01(int tile, int trow, int srow, int scol, int exp) // render sprite(2)
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_02(int width, int height, int tile, int srow, int scol) // render sprite(2)
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_03() // shake related(1)
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_04() // shake related(2)
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_05(int height, int width, unsigned char* pC, int d)
+{
+	FAKE_RET;
+}
+
+Gra_09() // XOR SCREEN
+{
+	FAKE_RET;
+}
+
+Gra_10() // clear map zone
+{
+	FAKE_RET;
+}
+
+Gra_11(int a) // highlight char's status
+{
+	FAKE_RET;
+}
+
+Gra_13() // clear status zone
+{
+	FAKE_RET;
+}
+__cdecl Gra_16() 
+{
+	FAKE_RET;
+}
+__cdecl Gra_17()
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_18(int x0, int x1, int y0, int y1, int y0p, int y1p, int col0, int col1) // draw a "3D" wall
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_19() // clear food/gold zone
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_init(void** ppShp, void** ppChar, void (*pExit)(int)) 
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_clrscr() // Gra_clrscr
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_dot(int y, int x, int col) 
+{
+	FAKE_RET;
+}
+__cdecl Gra_dot_OR() 
+{
+	FAKE_RET;
+}
+__cdecl Gra_dot_XOR(int y, int x, int c) 
+{
+	FAKE_RET;
+}
+__cdecl Gra_line(int x0, int y0, int x1, int y1, int color) 
+{
+	FAKE_RET;
+}
+
+__cdecl Gra_animSpit() 
+{
+	FAKE_RET;
+}
+
+Gra_animFlow(unsigned tile) 
+{
+	FAKE_RET;
+}
+
+static char random() 
+{ 
+	return (char)(rand() & 0xff); 
+}
+
+Gra_animFlag() 
+{
+	FAKE_RET;
+}
+
+Gra_putchar(char c) 
+{
+	//CMN_putchar(c, txt_X * 8, txt_Y * 8);
+	FAKE_RET;
+}
+
+sizzleShapes() 
+{
+	FAKE_RET;
+}
+
+sizzleCharset() 
+{
+	FAKE_RET;
+}
+
+extern void add_char_to_text_buffer(char ch);
+
+Gra_CR()
+{
+	if ((txt_Y == 23) && (txt_X >= 24))
+	{
+		add_char_to_text_buffer('\n');
+	}
+	Gra_CR2();
+
+	FAKE_RET;
+}
+
+Gra_CR2() 
+{
+	txt_Y = 23;
+	txt_X = 24;
+
+	FAKE_RET;
+}
+
+low_init() 
+{
+	far_psp = &the_psp;
+	the_psp._80[0] =
+	the_psp._80[2] =
+	the_psp._80[4] = 0;
+
+	FAKE_RET;
+}
+
+low_clean() 
+{
+	FAKE_RET;
+}
+
+low_gra() 
+{
+	return 1;
+}
+
+__cdecl sound(unsigned char s, unsigned char length) 
+{
+	add_to_sound_list(s, length); 
+	FAKE_RET;
+}
+
+void __cdecl u_delay(int a, int b) 
+{
+	if (a == 0)
+		a = 1000;
+	a *= 2; //5
+	while (a) 
+	{
+		a--;
+		t_callback();
+		//CMN_pumpmessages();
+		Sleep(200); //150
+		if (b && u_kbhit())
+			break;
+		//cursor
+		Gra_putchar(0x1c + (~a & 3));
+	}
+}
+
+void __cdecl u_kbflush() 
+{
+	CMN_kbhit = 0;
+}
+
+/*
+char getcharAlt() 
+{
+	char buff[2];
+	int l = read(stdin, buff, 1);
+	if (l > 0) return buff[0];
+	return (EOF);
+}
+*/
+
+
+int __cdecl u_kbhit() 
+{
+	char ch;
+
+	Party.f_000++;
+
+	return CMN_kbhit != 0;
+}
+
+
+int __cdecl u_kbread() 
+{
+	int ret;
+
+	while (u_kbhit() == 0)
+		Sleep(200);
+	ret = CMN_kbhit;
+	CMN_kbhit = 0;
+
+	return ret;
+}
+
+unsigned char u_rand_a() 
+{
+	return rand();
+}
+
+unsigned char u_rand_b() 
+{
+	return rand();
+}
+#endif // #ifdef ENABLE_WINDOWS

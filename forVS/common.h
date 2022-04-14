@@ -8,14 +8,15 @@
 
 #define RATIO 2
 
-#define CONSOLE printf
-//#define CONSOLE()
+//#define CONSOLE printf
+#define CONSOLE()
 #define FAKE_RET return 0
 
 #define DO_SWAP(a,b,temp) { (temp) = (a); (a) = (b); (b) = (temp); }
 
 extern int CMN_kbhit;
 
+#ifdef ENABLE_WINDOWS
 extern COLORREF U4_PALETTE[];
 extern HBRUSH U4_BRUSH[];
 extern HPEN U4_PEN[];
@@ -33,5 +34,6 @@ extern void CMN_putpixel(int x, int y, int col);
 extern void CMN_xorpixel(int x, int y, int col);
 extern void CMN_puttile(unsigned char c, int x, int y);
 extern void CMN_putchar(char c, int x, int y);
+#endif // #ifdef ENABLE_WINDOWS
 
 #endif
