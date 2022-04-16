@@ -12,6 +12,8 @@
 
 #include "common.h"
 
+extern const char* getDataPath();
+
 #ifdef ENABLE_WINDOWS
 unsigned speed_info;
 unsigned equip_flags;
@@ -35,9 +37,14 @@ C_20C1(char *fname) {
 /*draw game screen frame*/
 C_213B() {
 	int fd;
+	static char path[256];
 
 	CONSOLE("C_213B \"draw game screen frame\"\n");
-	fd = _open(U4_ROOT "START.PIC", _O_RDONLY|_O_BINARY);
+
+	strcpy(path, getDataPath());
+	strcat(path, "START.PIC");
+//	fd = _open(U4_ROOT"START.PIC", _O_RDONLY | _O_BINARY);
+	fd = _open(path, _O_RDONLY | _O_BINARY);
 	if(fd) {
 #pragma pack(1)
 		struct tHeader {//size 0x11
@@ -531,12 +538,14 @@ __cdecl sound(unsigned char s, unsigned char length) {
 
 //----------------------------------------
 
+
 int __cdecl dopen(char *fname, int mode) {
 	int ret;
 	static char path[256];
 
 	CONSOLE("dopen(\"%s\", %d)\n", fname, mode);
-	strcpy(path, U4_ROOT);
+	//printf(U4_ROOT);
+	strcpy(path, getDataPath());
 	strcat(path, fname);
 	switch(mode) {
 		case 0: break;//Read
@@ -773,7 +782,7 @@ int __cdecl dopen(char* fname, int mode)
 	int ret;
 	static char path[256]; // TODO is this big enough
 
-	strcpy(path, U4_ROOT);
+	strcpy(path, getDataPath());
 	strcat(path, fname);
 	ret = _open(path, _O_RDWR | _O_BINARY);
 

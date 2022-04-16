@@ -408,7 +408,8 @@ C_0EB1()
 	}
 	if(File_DNG) {
 		dclose(File_DNG);
-		File_TLK = 0;/*bug??*/
+		//File_TLK = 0;/*bug??*/
+		File_DNG = 0;
 	}
 	if(Party._loc == 0) {
 		if(Save("OUTMONST.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
@@ -416,7 +417,7 @@ C_0EB1()
 	}
 	if(Load("LCB_2.ULT", sizeof(struct t_500), &D_8742) == -1)
 		exit(3);
-	File_TLK = dopen("LCB.TLK", 0);
+	//File_TLK = dopen("LCB.TLK", 0);
 	CurMode = MOD_BUILDING;
 	Party._loc = 0x01;
 	Party.f_1dc = 0;

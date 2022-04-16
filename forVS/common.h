@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 //#define U4_ROOT "I:\\OSI\\U4\\ORIGINAL\\"
-#define U4_ROOT "L:\\GOGLibrary\\Ultima 4 - Quest of the Avatar\\"
 
 #define RATIO 2
 

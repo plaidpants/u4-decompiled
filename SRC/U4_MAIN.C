@@ -598,6 +598,29 @@ __declspec(dllexport) void cdecl  main_Sound(unsigned char buffer[], int length)
 	}
 }
 
+static char U4_ROOT[256];
+
+const char* getDataPath()
+{
+	return &U4_ROOT[0];
+}
+
+__declspec(dllexport) void cdecl main_SetDataPath(unsigned char path[], int length)
+{
+
+	// is the path too big for our buffer + null terminator?
+	if (length > 255)
+	{
+		// just bail
+		return;
+	}
+
+	// save the path from the controlling application
+	strncpy(U4_ROOT, path, length);
+
+	U4_ROOT[length] = 0; // make sure it's null terminated
+}
+
 int QUIT = 0;
 
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
@@ -612,7 +635,7 @@ __declspec(dllexport) void cdecl /*C_191E*/ main()
 		CurMode = MOD_DUNGEON;
 		if (Load("DNGMAP.SAV", sizeof(tMap8x8x8), &(D_8742._map)) == -1)
 			exit(3);
-		File_DNG = dopen(D_0894[Party._loc - 0x11], 0);
+		//File_DNG = dopen(D_0894[Party._loc - 0x11], 0);
 		if (setjmp(D_9458) == 0)
 			DNG_main();
 	} else {

@@ -23,6 +23,9 @@ unsigned bp04;
 		D_933A[D_08D0][D_08CE] = 0;
 	}
 	if(D_933A[bp06][bp04] == 0) {
+		if ((File_MAP = dopen(/*D_314D*/"WORLD.MAP", 0)) == -1) {
+			exit(3);
+		}
 		if(dlseek(File_MAP, (bp06 * 8 + bp04) * sizeof(tMap32x32)) == -1)
 			exit(1);
 		D_933A[bp06][bp04] = (tMap32x32 far *)dalloc(sizeof(tMap32x32));
@@ -31,6 +34,9 @@ unsigned bp04;
 		bp_02 = dread(File_MAP, D_933A[bp06][bp04], sizeof(tMap32x32));
 		if(bp_02 != sizeof(tMap32x32))
 			exit(3);
+
+		dclose(File_MAP);
+		File_MAP = 0;
 	}
 	D_08CE = bp04;
 	D_08D0 = bp06;

@@ -275,14 +275,20 @@ char *bp04;
 		*(bp_02--) = 0;
 }
 
+extern char* D_1738[];
+
 /*talk to citizen*/
 C_A4B4(bp04)
 int bp04;
 {
 	int bp_02, bp_04;
-
+	File_TLK = dopen(D_1738[Party._loc - 1], 0);
 	dlseek(File_TLK, (D_8742._npc._tlkidx[bp04] - 1) * 0x120);
-	dread(File_TLK, D_95CE, 0x120);
+	dread(File_TLK, D_95CE, 0x120);	
+	if (File_TLK) {
+		dclose(File_TLK);
+		File_TLK = 0;
+	}
 	bp_04 = Party.f_1d8;
 	D_9452 = D_8742._npc._tile[bp04];
 	C_A443(D_95CE+3);

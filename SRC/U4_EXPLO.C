@@ -38,7 +38,7 @@ unsigned bp04;
 		exit(3);
 	if(Load(D_0824[bp04 - 0x01], sizeof(struct t_500), &D_8742) == -1)
 		exit(3);
-	File_TLK = dopen(D_1738[Party._loc - 1], 0);
+	//File_TLK = dopen(D_1738[Party._loc - 1], 0);
 	CurMode = MOD_BUILDING;
 }
 
@@ -49,7 +49,7 @@ C_3E94()
 
 	if(Load(D_0894[Party._loc - 0x11], sizeof(tMap8x8x8), &(D_8742._map)) == -1)
 		exit(3);
-	File_DNG = dopen(D_0894[Party._loc - 0x11], 0);
+	//File_DNG = dopen(D_0894[Party._loc - 0x11], 0);
 	for(si = 0x1f; si >= 0; si --)
 		D_8742._npc._tile[si] = 0;
 }

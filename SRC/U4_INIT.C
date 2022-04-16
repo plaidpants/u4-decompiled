@@ -164,10 +164,12 @@ C_C51C()
 	}
 	if(Load(/*D_3140*/"MONSTERS.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
 		exit(3);
+#if 0 // we will open and close this as needed instead of leaving it open
 	if((File_MAP = dopen(/*D_314D*/"WORLD.MAP", 0)) == -1) {
 		//Console(/*D_3157*/"Can't open map file\r\n");
 		exit(3);
 	}
+#endif
 	File_TLK = 0;
 	D_9445 = D_0814[Party._trammel];
 	D_9448 = D_081C[Party._felucca];

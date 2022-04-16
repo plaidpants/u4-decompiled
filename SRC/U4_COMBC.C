@@ -263,11 +263,14 @@ C_7FFD()
 	} loc_A;
 	register int loc_B, loc_C;
 
+	File_DNG = dopen(D_0894[Party._loc - 0x11], 0);
 	dlseek(File_DNG, sizeof(tMap8x8x8) + (Party._loc == 0x18?
 		((Party._z >> 1) * 0x1000) + ((tile_cur & 0xf) * 0x100):
 		((tile_cur & 0xf) * 0x100)
 	));
 	dread(File_DNG, &loc_A, 0x100);
+	dclose(File_DNG);
+	File_DNG = 0;
 	D_95CC = MOD_DUNGEON;
 	CurMode = MOD_COM_ROOM;
 	memcpy(D_95B2, loc_A._000, 16);
