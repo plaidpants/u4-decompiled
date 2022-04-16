@@ -316,9 +316,9 @@ extern C_9414();
 extern C_95AA();
 extern C_9F7B();
 extern /*C_A6F3*/CMD_Talk();
-extern void C_ADEF();
+extern C_ADEF();
 extern C_AE41();
-extern void C_B677();
+extern C_B677();
 extern C_B9B2();
 extern C_B9EF(unsigned);
 extern C_C403();
@@ -338,9 +338,9 @@ struct tPSP {
 extern struct tPSP far *far_psp;/*D_0078*/
 
 extern unsigned /*D_0672*/cursor_rate;
-extern char /*cdecl*/ /*D_06A6*/SoundFlag;
+extern char cdecl /*D_06A6*/SoundFlag;
 extern unsigned D_07F8;
-extern unsigned /*D_07FA*/*pKarmas[];
+extern U16 /*D_07FA*/*pKarmas[];
 extern int /*D_080A*/activeCharaX;
 extern char D_080C[], D_0810[];
 extern char D_0814[], D_081C[];/*moongates positions*/
@@ -422,10 +422,10 @@ extern int D_95C8;
 extern unsigned char /*D_95CA*/tile_back;
 extern int D_95CC;
 extern unsigned char D_95CE[];/*current .tlk data*/
-extern char D_96EE;
+extern char D_96EE;/*room exit x[dungeon]*/
 extern int /*D_96F0*/File_MAP;
 extern unsigned /*D_96F2*/WindDir;
-extern char D_96F4;
+extern char D_96F4;/*room exit y[dungeon]*/
 extern int /*D_96F6*/File_TLK;
 extern unsigned char D_96F8;
 extern unsigned char D_96F9[11*11];

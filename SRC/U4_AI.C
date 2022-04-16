@@ -151,7 +151,7 @@ int bp04;
 }
 
 /*monster projectile?*/
-void C_978C(bp0a, bp08, bp06, bp04)
+C_978C(bp0a, bp08, bp06, bp04)
 unsigned char bp0a;/*type*/
 int bp08;/*monster id*/
 int bp06;
@@ -383,7 +383,7 @@ int bp04;
 }
 
 /*move enemies during fight*/
-void C_9CBC(bp08, bp06, bp04)
+C_9CBC(bp08, bp06, bp04)
 int bp08;/*monster id*/
 int bp06;/*chara id*/
 int bp04;

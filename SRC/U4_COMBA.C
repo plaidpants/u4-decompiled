@@ -201,11 +201,11 @@ unsigned char _damage;
 	} else {
 		int loc_D, loc_C, loc_B, loc_A;
 
-		loc_B = loc_A = D_23D2[C_7C25(Fighters._tile[_npcId])] / 2;
-		loc_B >>= 1;
-		loc_C = loc_B + loc_A;
+		loc_B = loc_A = D_23D2[C_7C25(Fighters._tile[_npcId])] / 2;/*50% HP*/
+		loc_B >>= 1;/*25% HP*/
+		loc_C = loc_B + loc_A;/*75% HP*/
 		loc_D = Fighters._HP[_npcId];
-		if(loc_D < 0x18) {
+		if(loc_D < 24) {
 			u4_puts(/*D_2009*/"Fleeing!\n");
 		} else if(loc_D < loc_B) {
 			u4_puts(/*D_2013*/"Critical!\n");
@@ -349,6 +349,12 @@ int _dir_y;
 	hit_tile = (loc_A->_weapon != 14)?TIL_4D:TIL_4E;
 	add_to_hit_list();
 	sound(4);
+	/*note:when using flaming oil with range '0'
+	 this loop is never entered, and so loc_B stays
+	 uninitialized. This may lead to unexpected behavior
+	 on the original version, or exception on modern
+	 systems.
+	*/
 	for(; loc_D; loc_D--) {
 		if(!COM_CheckHitable(_dir_x, _dir_y)) {
 			w_missed(loc_C);

@@ -544,7 +544,7 @@ int __cdecl dopen(char *fname, int mode) {
 	static char path[256];
 
 	CONSOLE("dopen(\"%s\", %d)\n", fname, mode);
-	//printf(U4_ROOT);
+	//strcpy(path, U4_ROOT);
 	strcpy(path, getDataPath());
 	strcat(path, fname);
 	switch(mode) {
@@ -928,7 +928,6 @@ Gra_animFlag()
 
 Gra_putchar(char c) 
 {
-	//CMN_putchar(c, txt_X * 8, txt_Y * 8);
 	FAKE_RET;
 }
 
@@ -1012,17 +1011,6 @@ void __cdecl u_kbflush()
 	CMN_kbhit = 0;
 }
 
-/*
-char getcharAlt() 
-{
-	char buff[2];
-	int l = read(stdin, buff, 1);
-	if (l > 0) return buff[0];
-	return (EOF);
-}
-*/
-
-
 int __cdecl u_kbhit() 
 {
 	char ch;
@@ -1031,7 +1019,6 @@ int __cdecl u_kbhit()
 
 	return CMN_kbhit != 0;
 }
-
 
 int __cdecl u_kbread() 
 {

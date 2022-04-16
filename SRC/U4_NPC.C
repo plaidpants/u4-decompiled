@@ -92,6 +92,7 @@ unsigned char bp04;
 	D_8742._npc._y[si] = bp04;
 }
 
+/*NPC attempts move[MOD_OUTDOORS]*/
 C_5062(bp0a, bp08, bp06, bp04)
 int bp0a;
 int bp08;
@@ -124,6 +125,7 @@ int bp04;
 		C_5062(bp0a, u4_sign((char)u_rand_a()), u4_sign((char)u_rand_a()), bp04 - 1);
 }
 
+/*NPC attempts move[MOD_BUILDING]*/
 C_51A7(bp0a, bp08, bp06, bp04)
 int bp0a;
 int bp08;
@@ -134,6 +136,15 @@ int bp04;/*# of tries*/
 
 	bp_02 = D_8742._npc._x[bp0a];
 	bp_04 = D_8742._npc._y[bp0a];
+	/*D_8742._map.x32x32 is accessed without any out-of-bounds control.
+Fortunately, there is some control in C_4E94 so any faultly-accessed
+value will be discarded anyway.
+Though, there seem to be a problem with 64-bit builds.
+An exception is raised when (bp08+bp_02) or (bp06+bp_04) are negative.
+Masking the sums should fix the problem:
+	D_8742._map.x32x32[bp_04][(bp08+bp_02)&0x1f]
+	D_8742._map.x32x32[(bp06+bp_04)&0x1f][bp_02]
+(issue raised by @plaidpants)*/
 
 	if ((bp08 + bp_02 < 0) || (bp08 + bp_02 > 31) || (bp06 + bp_04 < 0) || (bp06 + bp_04 > 31))
 	{
@@ -141,7 +152,7 @@ int bp04;/*# of tries*/
 		return;
 	}
 	if(U4_RND1(1) && bp08) {
-		if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02])) // TODO: this NPC move has no protection if the  current NPC position is 0 and the random move is -1 when accessing the map tile
+		if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02]))
 			C_4FF8(bp0a, bp08+bp_02, bp_04);
 		return;
 	}
@@ -150,7 +161,7 @@ int bp04;/*# of tries*/
 			C_4FF8(bp0a, bp_02, bp06+bp_04);
 		return;
 	}
-	if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02])) { // TODO: this NPC move has no protection if the  current NPC position is 0 and the random move is -1 when accessing the map tile
+	if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02])) {
 		C_4FF8(bp0a, bp08+bp_02, bp_04);
 		return;
 	}
@@ -158,7 +169,7 @@ int bp04;/*# of tries*/
 		C_51A7(bp0a, u4_sign((char)u_rand_a()), u4_sign((char)u_rand_a()), bp04 - 1);
 }
 
-/*move town NPC*/
+/*move NPCs[MOD_BUILDING]*/
 C_5293()
 {
 	int bp_02, bp_04;
@@ -362,7 +373,7 @@ int bp04;
 	;
 }
 
-/*move outside NPC*/
+/*move NPCs[MOD_OUTDOORS]*/
 C_5712()
 {
 	int loc_A, loc_B, loc_C, loc_D;
@@ -407,7 +418,6 @@ C_5712()
 			C_5062(loc_F, u4_sign((char)u_rand_a()), u4_sign((char)u_rand_a()), 1);
 		else
 			C_5062(loc_F, loc_A, loc_B, 2);
-#undef loc_H
 	} while(--loc_F >= 0);
 }
 

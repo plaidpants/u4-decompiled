@@ -598,7 +598,7 @@ __declspec(dllexport) void cdecl  main_Sound(unsigned char buffer[], int length)
 	}
 }
 
-static char U4_ROOT[256];
+static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
 
 const char* getDataPath()
 {
@@ -607,7 +607,6 @@ const char* getDataPath()
 
 __declspec(dllexport) void cdecl main_SetDataPath(unsigned char path[], int length)
 {
-
 	// is the path too big for our buffer + null terminator?
 	if (length > 255)
 	{
