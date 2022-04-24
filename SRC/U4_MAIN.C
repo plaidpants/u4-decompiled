@@ -89,6 +89,11 @@ __declspec(dllexport) int cdecl main_D_17FE()
 	return D_17FE;
 }
 
+__declspec(dllexport) int cdecl main_spell_sta()
+{
+	return spell_sta;
+}
+
 __declspec(dllexport) void cdecl main_ActiveChar(unsigned char buffer[], int length)
 {
 	if (length >= 3)
@@ -104,6 +109,16 @@ __declspec(dllexport) void cdecl  main_CurMap(unsigned char buffer[], int length
 	if (length >= sizeof(D_8742))
 	{
 		memcpy(buffer, &D_8742, sizeof(D_8742));
+	}
+}
+
+extern char char_highlight[8];
+
+__declspec(dllexport) void cdecl  main_char_highlight(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(char_highlight))
+	{
+		memcpy(buffer, &char_highlight, sizeof(char_highlight));
 	}
 }
 
@@ -497,105 +512,40 @@ __declspec(dllexport) void cdecl  main_Hit(unsigned char buffer[], int length)
 	}
 }
 
-// remember the last 10 sounds, in a circular buffer
-#define MAX_SOUNDS 10
-unsigned char sound_list_buffer[2 * MAX_SOUNDS + 2]; // extra bytes to make sure we don't overrun the buffer
-sound_list_size = 0;
-current_sound_list = 0;
+int current_sound_effect = -1;
+int current_sound_effect_length = 0;
 
-void add_to_sound_list(unsigned char sound, unsigned char length)
+void play_sound_effect(unsigned char sound, unsigned char length)
 {
-	//printf("sound #%d Length %d\n", sound, length);
-	sound_list_buffer[current_sound_list++] = sound;
-	sound_list_buffer[current_sound_list++] = length;
-	if (current_sound_list > 2 * MAX_SOUNDS - 1)
+	int timeout = 100;
+
+	current_sound_effect = sound;
+	current_sound_effect_length  = length;
+
+	// wait for the sound effect to finish playing
+	while (current_sound_effect != -1 && timeout > 0)
 	{
-		current_sound_list = 0;
+		timeout--;
+		Sleep(200);
 	}
-	sound_list_size++;
-	if (sound_list_size > MAX_SOUNDS)
-	{
-		sound_list_size = MAX_SOUNDS;
-	}
+
+	current_sound_effect = -1;
+	current_sound_effect_length = 0;
 }
 
-void Sound_Dump()
+__declspec(dllexport) int cdecl  main_sound_effect()
 {
-	//printf("Sound list size %d\n", sound_list_size);
-
-	// we have not filled the sound list
-	if (sound_list_size < MAX_SOUNDS - 1)
-	{
-		for (int i = 0; i < sound_list_size; i++)
-		{
-			int sound = sound_list_buffer[i * 2 + 0];
-			int length = sound_list_buffer[i * 2 + 1];
-			//printf("Sound #%d Length %d\n", sound, length);
-		}
-	}
-	// the sound list is full dump from the wrap
-	else
-	{
-		for (int i = 0; i < sound_list_size; i++)
-		{
-			int sound = sound_list_buffer[current_sound_list++];
-			int length = sound_list_buffer[current_sound_list++];
-			//printf("Sound #%d Length %d\n", sound, length);
-
-			// wrap
-			if (current_sound_list > 2 * MAX_SOUNDS - 1)
-			{
-				current_sound_list = 0;
-			}
-		}
-	}
-
-	// empty the sound list
-	sound_list_size = 0;
-	current_sound_list = 0;
-	//printf("Sound list cleared\n");
+	return current_sound_effect;
 }
 
-__declspec(dllexport) void cdecl  main_Sound(unsigned char buffer[], int length)
+__declspec(dllexport) int cdecl  main_sound_effect_length()
 {
-	int buffer_index = 0;
+	return current_sound_effect_length;
+}
 
-	if (length >= 4)
-	{
-		buffer[buffer_index++] = sound_list_size;
-
-		//printf("Sound list size %d\n", sound_list_size);
-
-		// we have not filled the sound list
-		if (sound_list_size < MAX_SOUNDS - 1)
-		{
-			for (int i = 0; i < sound_list_size; i++)
-			{
-				buffer[buffer_index++] = sound_list_buffer[i * 2 + 0];
-				buffer[buffer_index++] = sound_list_buffer[i * 2 + 1];
-			}
-		}
-		// the sound list is full dump from the wrap
-		else
-		{
-			for (int i = 0; i < sound_list_size; i++)
-			{
-				buffer[buffer_index++] = sound_list_buffer[current_sound_list++];
-				buffer[buffer_index++] = sound_list_buffer[current_sound_list++];
-
-				// wrap
-				if (current_sound_list > 2 * MAX_SOUNDS - 1)
-				{
-					current_sound_list = 0;
-				}
-			}
-		}
-
-		// empty the sound list
-		sound_list_size = 0;
-		current_sound_list = 0;
-		//printf("Sound list cleared\n");
-	}
+__declspec(dllexport) void cdecl  main_sound_effect_done()
+{
+	current_sound_effect = -1;
 }
 
 static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";

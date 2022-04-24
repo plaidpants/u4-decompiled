@@ -532,7 +532,7 @@ void __cdecl u_delay(int a, int b) {
 __cdecl sound(unsigned char s, unsigned char length) {
 	//TODO
 	CONSOLE("sound(%d, %d)\n", s, length);
-	add_to_sound_list(s, length);
+	play_sound_effect(s, length);
 	FAKE_RET;
 }
 
@@ -851,8 +851,13 @@ Gra_10() // clear map zone
 	FAKE_RET;
 }
 
+// simple arrary to keep track of any highlight characters in the list
+char char_highlight[8] = { 0,0,0,0,0,0,0,0 };
+
 Gra_11(int a) // highlight char's status
 {
+	// flip the highlight as this function replaces an pixel xor function
+	char_highlight[a] = 1 - char_highlight[a];
 	FAKE_RET;
 }
 
@@ -982,9 +987,13 @@ low_gra()
 	return 1;
 }
 
+// sound effect playing is actually synchronous in the game engine, 
+// the sound effect must complete playing before the game continues.
+// this function will pend until it gets a response from Unity that 
+// the sound has completed playing
 __cdecl sound(unsigned char s, unsigned char length) 
 {
-	add_to_sound_list(s, length); 
+	play_sound_effect(s, length);
 	FAKE_RET;
 }
 
