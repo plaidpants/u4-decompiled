@@ -283,11 +283,13 @@ Gra_13() {
 	FAKE_RET;
 }
 __cdecl Gra_16() {
+	// loads a pic
 	//TODO
 	FAKE_RET;
 }
 __cdecl Gra_17() {
 	//TODO
+	// infinity symbol
 	FAKE_RET;
 }
 /*draw a "3D" wall*/
@@ -826,13 +828,22 @@ __cdecl Gra_02(int width, int height, int tile, int srow, int scol) // render sp
 	FAKE_RET;
 }
 
+// each of these two shake functions move the screen up and down
+// we are going to use an accumulator to measure the amount of shake
+// so we can pass this to Unity to perform a camera shake of appropiate
+// magnitude.
+
+int camera_shake_accumulator = 0;
+
 __cdecl Gra_03() // shake related(1)
 {
+	camera_shake_accumulator++;
 	FAKE_RET;
 }
 
 __cdecl Gra_04() // shake related(2)
 {
+	camera_shake_accumulator++;
 	FAKE_RET;
 }
 
@@ -866,14 +877,20 @@ Gra_11(int a) // highlight char's status
 
 Gra_13() // clear status zone
 {
+	for (int i = 0; i < 8; i++)
+	{
+		char_highlight[i] = 0;
+	}
 	FAKE_RET;
 }
 __cdecl Gra_16() 
 {
+	// loads a pic
 	FAKE_RET;
 }
 __cdecl Gra_17()
 {
+	//infinity symbol
 	FAKE_RET;
 }
 

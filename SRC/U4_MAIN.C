@@ -555,6 +555,19 @@ __declspec(dllexport) int cdecl  main_screen_xor_state()
 	return screen_xor_state;
 }
 
+extern int camera_shake_accumulator;
+
+__declspec(dllexport) int cdecl  main_camera_shake_accumulator()
+{
+	int ret = camera_shake_accumulator;
+
+	// reset accumulator to collect more shaking
+	camera_shake_accumulator = 0;
+
+	// return what we have accumulated
+	return ret;
+}
+
 static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
 
 const char* getDataPath()
