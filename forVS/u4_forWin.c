@@ -516,12 +516,12 @@ void __cdecl u_delay(int a, int b) {
 	CONSOLE("u_delay(%d, %d)\n", a, b);
 	if(a == 0)
 		a = 1000;
-	a *= 2; //5
+	a *= 50;
 	while(a) {
 		a --;
 		t_callback();
 		CMN_pumpmessages();
-		Sleep(200); //150
+		Sleep(2);
 		if(b && u_kbhit())
 			break;
 		//cursor
@@ -841,8 +841,11 @@ __cdecl Gra_05(int height, int width, unsigned char* pC, int d)
 	FAKE_RET;
 }
 
+int screen_xor_state = 0;
+
 Gra_09() // XOR SCREEN
 {
+	screen_xor_state = 1 - screen_xor_state;
 	FAKE_RET;
 }
 
@@ -1001,13 +1004,14 @@ void __cdecl u_delay(int a, int b)
 {
 	if (a == 0)
 		a = 1000;
-	a *= 2; //5
+	a *= 20; //50
+	a /= 3;
 	while (a) 
 	{
 		a--;
 		t_callback();
 		//CMN_pumpmessages();
-		Sleep(200); //150
+		Sleep(150); // 2
 		if (b && u_kbhit())
 			break;
 		//cursor
@@ -1034,7 +1038,7 @@ int __cdecl u_kbread()
 	int ret;
 
 	while (u_kbhit() == 0)
-		Sleep(200);
+		Sleep(20);
 	ret = CMN_kbhit;
 	CMN_kbhit = 0;
 

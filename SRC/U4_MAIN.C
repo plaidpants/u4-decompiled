@@ -517,7 +517,7 @@ int current_sound_effect_length = 0;
 
 void play_sound_effect(unsigned char sound, unsigned char length)
 {
-	int timeout = 100;
+	int timeout = 1000;
 
 	current_sound_effect = sound;
 	current_sound_effect_length  = length;
@@ -526,7 +526,7 @@ void play_sound_effect(unsigned char sound, unsigned char length)
 	while (current_sound_effect != -1 && timeout > 0)
 	{
 		timeout--;
-		Sleep(200);
+		Sleep(20);
 	}
 
 	current_sound_effect = -1;
@@ -546,6 +546,13 @@ __declspec(dllexport) int cdecl  main_sound_effect_length()
 __declspec(dllexport) void cdecl  main_sound_effect_done()
 {
 	current_sound_effect = -1;
+}
+
+extern int screen_xor_state;
+
+__declspec(dllexport) int cdecl  main_screen_xor_state()
+{
+	return screen_xor_state;
 }
 
 static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
