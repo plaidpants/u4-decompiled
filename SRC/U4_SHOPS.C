@@ -1112,9 +1112,11 @@ C_D7D6()
 {
 	int bp_02;
 
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(1, 0);
 	Party._x = D_913B;
 	Party._y = D_913C;
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(1, 0);
 	for(bp_02 = Party.f_1d8 - 1; bp_02 >= 0; bp_02 --) {
 		if(isCharaAlive(bp_02))
@@ -1122,6 +1124,7 @@ C_D7D6()
 	}
 	dspl_Stats();
 	Party._tile = TIL_38;
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(5, 0);
 	Party._tile = TIL_1F;
 	for(bp_02 = Party.f_1d8 - 1; bp_02 >= 0; bp_02 --) {
@@ -1422,6 +1425,7 @@ C_DBF5()
 		add_npc_talk(VENDOR_HEALER, "Thou art a great help.  We are in dire need!");
 		Party.chara[0]._HP[0] -= 100;
 		dspl_Stats();
+		set_input_mode(INPUT_MODE_DELAY);
 		u_delay(1, 0);
 	} else if(bp_04 == 'N') {
 		karma_dec(&(Party._sacri), 5);

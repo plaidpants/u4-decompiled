@@ -379,18 +379,24 @@ C_0EB1()
 	}
 	Gra_13();
 	dspl_Stats();
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(5, 0);
 	Gra_10();
 	CurMode = MOD_VISION;
 	u4_puts("\n\n\nAll is Dark...\n");
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(5, 0);
 	u4_puts("\nBut wait...\n");
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(5, 0);
 	u4_puts("Where am I?...\n");
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(5, 0);
 	u4_puts("Am I dead?...\n");
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(5, 0);
 	u4_puts("Afterlife?...\n");
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(5, 0);
 	u4_puts("You hear:\n");
 	txt_X = (12 - (unsigned)strlen(Party.chara[0]._name)) / 2 + 25;

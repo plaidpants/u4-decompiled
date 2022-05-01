@@ -154,6 +154,7 @@ C_C51C()
 		txt_X = 12;
 		u4_puts(/*D_30F0*/"No party formed!");
 		sound(8);
+		set_input_mode(INPUT_MODE_DELAY);
 		u_delay(3, 0);
 		u_kbflush();
 		if(bp_02 == C_1814()) {

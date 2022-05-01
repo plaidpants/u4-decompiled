@@ -95,7 +95,7 @@ char* D_7028_modified[24] = {
 
 /*10 seconds delay*/
 C_E1FC() {
-	u_kbflush();
+	u_kbflush(); 
 	u_delay(10, 1);
 	if(u_kbhit())
 		u_kbread();

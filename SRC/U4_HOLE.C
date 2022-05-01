@@ -53,6 +53,7 @@ C_8A5A()
 	u4_puts(/*D_26E2*/"Resting...\n");
 	D_95CC = CurMode;
 	CurMode = MOD_COM_CAMP;
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(10, 0);
 	if(U4_RND1(7) == 0) {
 		C_8A5A();
