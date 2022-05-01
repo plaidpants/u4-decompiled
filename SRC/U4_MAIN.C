@@ -322,6 +322,31 @@ void npc_string_copy(char * dst, char * src)
 	dst[index] = 0;
 }
 
+void add_npc_talk_long(char npc_index, long number)
+{
+	npc_text_buffer[current_npc_text_buffer_pointer][0] = npc_index;
+	npc_text_buffer[current_npc_text_buffer_pointer][1] = 0;
+
+	snprintf(&npc_text_buffer[current_npc_text_buffer_pointer][1], 10, "%l", number);
+
+	current_npc_text_buffer_pointer++;
+	if (current_npc_text_buffer_pointer > MAX_NPC_TEXT - 1)
+	{
+		current_npc_text_buffer_pointer = 0;
+	}
+	current_npc_text_buffer_size++;
+	if (current_npc_text_buffer_size > MAX_NPC_TEXT)
+	{
+		current_npc_text_buffer_size = MAX_NPC_TEXT;
+	}
+}
+
+int input_mode = 0;
+
+void set_input_mode(int mode)
+{
+	input_mode = mode;
+}
 
 void add_npc_talk(char npc_index, char * ch)
 {
@@ -538,6 +563,11 @@ __declspec(dllexport) int cdecl  main_sound_effect()
 	return current_sound_effect;
 }
 
+__declspec(dllexport) int cdecl  main_input_mode()
+{
+	return input_mode;
+}
+
 __declspec(dllexport) int cdecl  main_sound_effect_length()
 {
 	return current_sound_effect_length;
@@ -566,6 +596,19 @@ __declspec(dllexport) int cdecl  main_camera_shake_accumulator()
 
 	// return what we have accumulated
 	return ret;
+}
+
+extern unsigned char D_1665;/*trammel counter*/
+extern unsigned char D_1666;/*felucca counter*/
+
+__declspec(dllexport) int cdecl  main_D_1665()
+{
+	return D_1665;
+}
+
+__declspec(dllexport) int cdecl  main_D_1666()
+{
+	return D_1666;
 }
 
 static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
@@ -613,6 +656,8 @@ __declspec(dllexport) void cdecl /*C_191E*/ main()
 	u_kbflush();
 	bp_04 = 0;
 	for(;;) {
+		// need to set this here as we pend on the keyboard before we get to the one below
+		set_input_mode(INPUT_MODE_MAIN_INPUT);
 		if (QUIT)
 		{
 			return;
@@ -623,6 +668,7 @@ __declspec(dllexport) void cdecl /*C_191E*/ main()
 	if (C_10FD()) {
 		u4_putc(0x10);
 		u_delay(25, 1);
+		set_input_mode(INPUT_MODE_MAIN_INPUT);
 		si = u_kbhit() ? u_kbread() : KBD_SPACE;
 		if (u4_isupper((unsigned char)si))
 			si = (si & 0xff00) | u4_lower((unsigned char)si);

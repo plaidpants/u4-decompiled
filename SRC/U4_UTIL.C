@@ -157,6 +157,7 @@ register char* txt;
 			if (loc_B + txt_X > 40 && txt_X != 24) {
 				if (loc_A++ == 12) {
 					u_kbflush();
+					set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 					if (txt_X == 39)
 						while (!u_kbhit());
 					u_kbread();
@@ -167,6 +168,7 @@ register char* txt;
 		}
 		if (txt[i] == '\n' && loc_A++ == 12) {
 			u_kbflush();
+			set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 			if (txt_X == 39)
 				while (!u_kbhit());
 			u_kbread();
@@ -589,6 +591,7 @@ register int *di;
 	do {
 		bp_02 = 1;
 		u4_puts(bp08);
+		set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 		bp_04 = u_kbread();
 		switch(bp_04) {
 			case KBD_SPACE: case KBD_ESC: case KBD_BS: case KBD_ENTER:

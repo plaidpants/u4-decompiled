@@ -105,27 +105,27 @@ C_E1FC() {
 C_E21E() {
 	u4_puts(/*D_7058*/"He says: ");
 	if(Party._moves < 1000) {
-		add_npc_talk(0xff, "To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n");
+		add_npc_talk(LORD_BRITISH, "To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n");
 		u4_puts(/*D_7062*/"To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n"); C_E1FC();
-		add_npc_talk(0xff, "\nTake great care in these thy first travels in Britannia.\n");
+		add_npc_talk(LORD_BRITISH, "\nTake great care in these thy first travels in Britannia.\n");
 		u4_puts(/*D_70D8*/"\nTake great care in these thy first travels in Britannia.\n"); C_E1FC();
-		add_npc_talk(0xff, "\nUntil thou dost well know thyself, travel not far from the safety of the townes!\n");
+		add_npc_talk(LORD_BRITISH, "\nUntil thou dost well know thyself, travel not far from the safety of the townes!\n");
 		u4_puts(/*D_7113*/"\nUntil thou dost well know thyself, travel not far from the safety of the townes!\n");
 	} else
 	if(Party.f_1d8 == 1) {
-		add_npc_talk(0xff, "Travel not the open lands alone. There are many worthy people in the diverse townes whom it would be wise to ask to Join thee!\n");
+		add_npc_talk(LORD_BRITISH, "Travel not the open lands alone. There are many worthy people in the diverse townes whom it would be wise to ask to Join thee!\n");
 		u4_puts(/*D_7166*/"Travel not the open lands alone. There are many worthy people in the diverse townes whom it would be wise to ask to Join thee!\n"); C_E1FC();
-		add_npc_talk(0xff, "\nBuild thy party unto eight travellers, for only a true leader can win the Quest!\n");
+		add_npc_talk(LORD_BRITISH, "\nBuild thy party unto eight travellers, for only a true leader can win the Quest!\n");
 		u4_puts(/*D_71E6*/"\nBuild thy party unto eight travellers, for only a true leader can win the Quest!\n");
 	} else
 	if(Party.mRunes == 0) {
-		add_npc_talk(0xff, "Learn ye the paths of virtue. Seek to gain entry unto the eight shrines!\n");
+		add_npc_talk(LORD_BRITISH, "Learn ye the paths of virtue. Seek to gain entry unto the eight shrines!\n");
 		u4_puts(/*D_7239*/"Learn ye the paths of virtue. Seek to gain entry unto the eight shrines!\n"); C_E1FC();
-		add_npc_talk(0xff, "\nFind ye the Runes, needed for entry into each shrine, and learn each chant or \"Mantra\" used to focus thy meditations.\n");
+		add_npc_talk(LORD_BRITISH, "\nFind ye the Runes, needed for entry into each shrine, and learn each chant or \"Mantra\" used to focus thy meditations.\n");
 		u4_puts(/*D_7283*/"\nFind ye the Runes, needed for entry into each shrine, and learn each chant or \"Mantra\" used to focus thy meditations.\n"); C_E1FC();
-		add_npc_talk(0xff, "\nWithin the Shrines thou shalt learn of the deeds which show thy inner virtue or vice!\n");
+		add_npc_talk(LORD_BRITISH, "\nWithin the Shrines thou shalt learn of the deeds which show thy inner virtue or vice!\n");
 		u4_puts(/*D_72FB*/"\nWithin the Shrines thou shalt learn of the deeds which show thy inner virtue or vice!\n"); C_E1FC();
-		add_npc_talk(0xff, "\nChoose thy path wisely for all thy deeds of good and evil are remembered and can return to hinder thee!\n");
+		add_npc_talk(LORD_BRITISH, "\nChoose thy path wisely for all thy deeds of good and evil are remembered and can return to hinder thee!\n");
 		u4_puts(/*D_7353*/"\nChoose thy path wisely for all thy deeds of good and evil are remembered and can return to hinder thee!\n");
 	} else
 	if(
@@ -134,17 +134,17 @@ C_E21E() {
 		Party._sacri & Party._honor &
 		Party._spiri & Party._humil
 	) {
-		add_npc_talk(0xff, "Visit the Seer Hawkwind often and use his wisdom to help thee prove thy virtue.\n");
+		add_npc_talk(LORD_BRITISH, "Visit the Seer Hawkwind often and use his wisdom to help thee prove thy virtue.\n");
 		u4_puts(/*D_73BD*/"Visit the Seer Hawkwind often and use his wisdom to help thee prove thy virtue.\n"); C_E1FC();
-		add_npc_talk(0xff, "\nWhen thou art ready, Hawkwind will advise thee to seek the Elevation unto partial Avatarhood in a virtue.\n");
+		add_npc_talk(LORD_BRITISH, "\nWhen thou art ready, Hawkwind will advise thee to seek the Elevation unto partial Avatarhood in a virtue.\n");
 		u4_puts(/*D_740E*/"\nWhen thou art ready, Hawkwind will advise thee to seek the Elevation unto partial Avatarhood in a virtue.\n"); C_E1FC();
-		add_npc_talk(0xff, "\nSeek ye to become a partial Avatar in all eight virtues, for only then shalt thou be ready to seek the codex!\n");
+		add_npc_talk(LORD_BRITISH, "\nSeek ye to become a partial Avatar in all eight virtues, for only then shalt thou be ready to seek the codex!\n");
 		u4_puts(/*D_747A*/"\nSeek ye to become a partial Avatar in all eight virtues, for only then shalt thou be ready to seek the codex!\n");
 	} else
 	if(Party.mStones == 0) {
-		add_npc_talk(0xff, "Go ye now into the depths of the dungeons. Therein recover the 8 colored stones from the altar pedestals in the halls of the dungeons.\n");
+		add_npc_talk(LORD_BRITISH, "Go ye now into the depths of the dungeons. Therein recover the 8 colored stones from the altar pedestals in the halls of the dungeons.\n");
 		u4_puts(/*D_74EA*/"Go ye now into the depths of the dungeons. Therein recover the 8 colored stones from the altar pedestals in the halls of the dungeons.\n"); C_E1FC();
-		add_npc_talk(0xff, "\nFind the uses of these stones for they can help thee in the Abyss!\n");
+		add_npc_talk(LORD_BRITISH, "\nFind the uses of these stones for they can help thee in the Abyss!\n");
 		u4_puts(/*D_7572*/"\nFind the uses of these stones for they can help thee in the Abyss!\n");
 	} else
 	if(
@@ -153,24 +153,24 @@ C_E21E() {
 		Party._sacri | Party._honor |
 		Party._spiri | Party._humil
 	) {
-		add_npc_talk(0xff, "Thou art doing very well indeed on the path to Avatarhood! Strive ye to achieve the Elevation in all eight virtues!\n");
+		add_npc_talk(LORD_BRITISH, "Thou art doing very well indeed on the path to Avatarhood! Strive ye to achieve the Elevation in all eight virtues!\n");
 		u4_puts(/*D_75B7*/"Thou art doing very well indeed on the path to Avatarhood! Strive ye to achieve the Elevation in all eight virtues!\n");
 	} else
 	if(!((Party.mItems >> 4) & (Party.mItems >> 3) & (Party.mItems >> 2) & 1)) {
-		add_npc_talk(0xff, "Find ye the Bell, Book and Candle!  With these three things, one may enter the Great Stygian Abyss!\n");
+		add_npc_talk(LORD_BRITISH, "Find ye the Bell, Book and Candle!  With these three things, one may enter the Great Stygian Abyss!\n");
 		u4_puts(/*D_762C*/"Find ye the Bell, Book and Candle!  With these three things, one may enter the Great Stygian Abyss!\n");
 	} else
 	if(!((Party.mItems >> 5) & (Party.mItems >> 6) & (Party.mItems >> 7) & 1)) {
-		add_npc_talk(0xff, "Before thou dost enter the Abyss thou shalt need the Key of Three Parts, and the Word of Passage.\n");
+		add_npc_talk(LORD_BRITISH, "Before thou dost enter the Abyss thou shalt need the Key of Three Parts, and the Word of Passage.\n");
 		u4_puts(/*D_7691*/"Before thou dost enter the Abyss thou shalt need the Key of Three Parts, and the Word of Passage.\n"); C_E1FC();
-		add_npc_talk(0xff, "\nThen might thou enter the Chamber of the Codex of Ultimate Wisdom!\n");
+		add_npc_talk(LORD_BRITISH, "\nThen might thou enter the Chamber of the Codex of Ultimate Wisdom!\n");
 		u4_puts(/*D_76F4*/"\nThen might thou enter the Chamber of the Codex of Ultimate Wisdom!\n");
 	} else {
-		add_npc_talk(0xff, "Thou dost now seem ready to make the final journey into the dark Abyss! Go only with a party of eight!\n");
+		add_npc_talk(LORD_BRITISH, "Thou dost now seem ready to make the final journey into the dark Abyss! Go only with a party of eight!\n");
 		u4_puts(/*D_7739*/"Thou dost now seem ready to make the final journey into the dark Abyss! Go only with a party of eight!\n"); C_E1FC();
-		add_npc_talk(0xff, "\nGood Luck, and may the powers of good watch over thee on this thy most perilous endeavor!\n");
+		add_npc_talk(LORD_BRITISH, "\nGood Luck, and may the powers of good watch over thee on this thy most perilous endeavor!\n");
 		u4_puts(/*D_77A1*/"\nGood Luck, and may the powers of good watch over thee on this thy most perilous endeavor!\n"); C_E1FC();
-		add_npc_talk(0xff, "\nThe hearts and souls of all Britannia go with thee now. Take care, my friend.\n");
+		add_npc_talk(LORD_BRITISH, "\nThe hearts and souls of all Britannia go with thee now. Take care, my friend.\n");
 		u4_puts(/*D_77FD*/"\nThe hearts and souls of all Britannia go with thee now. Take care, my friend.\n");
 	}
 }
@@ -227,14 +227,14 @@ C_E442() {
 	char bp_02;
 
 	u4_puts(/*D_784D*/"\n\n\n\n\n\nHe says: I am well, thank ye.\n\nHe asks: Art thou well?\x12\x12\b");
-	add_npc_talk(0xff, "\nI am well, thank ye. Art thou well?\n");
+	add_npc_talk(LORD_BRITISH, "\nI am well, thank ye. Art thou well?\n");
 	bp_02 = AskY_N();
 	if(bp_02 == 'Y') {
 		u4_puts(/*D_788D*/"\nHe says: That is good.\n");
-		add_npc_talk(0xff, "\nThat is good.\n");
+		add_npc_talk(LORD_BRITISH, "\nThat is good.\n");
 	} else if(bp_02 =='N') {
 		u4_puts(/*D_78A6*/"\nHe says: Let me heal thy wounds!\n");
-		add_npc_talk(0xff, "\nLet me heal thy wounds!\n");
+		add_npc_talk(LORD_BRITISH, "\nLet me heal thy wounds!\n");
 		/*heal party*/
 		sound(10, 10);
 		Gra_09(); sound(9, 0xc0); Gra_09();
@@ -264,18 +264,19 @@ C_E4C3() {
 			C_E498(&(Party.chara[loc_B]._int));
 			Gra_CR();
 			u4_puts(Party.chara[loc_B]._name);
-			add_npc_talk(0xff, Party.chara[loc_B]._name);
+			add_npc_talk(LORD_BRITISH, Party.chara[loc_B]._name);
 			u4_puts(/*D_78C9*/"\nThou art now Level ");
-			add_npc_talk(0xff, "\nThou art now Level ");
-			u4_putl(loc_C / 100, 1, '0'); // TODO need a separate number adder for add_npc_talk
+			add_npc_talk(LORD_BRITISH, "\nThou art now Level ");
+			u4_putl(loc_C / 100, 1, '0');
+			add_npc_talk_long(LORD_BRITISH, loc_C / 100);
 			Gra_CR();
-			add_npc_talk(0xff, "\n");
+			add_npc_talk(LORD_BRITISH, "\n");
 			Gra_09(); sound(9, 0xc0); Gra_09();
 			dspl_Stats();
 		}
 	}
 	u4_puts(/*D_78DE*/"What would thou ask of me?\n");
-	add_npc_talk(0xff, "What would thou ask of me?\n");
+	add_npc_talk(LORD_BRITISH, "What would thou ask of me?\n");
 }
 
 /*conversation with Lord british*/
@@ -288,29 +289,29 @@ C_E59B()
 		/*-- first time --*/
 		Party.f_1e4 = 1;
 		u4_puts(/*D_78FA*/"\n\n\nLord British rises and says: At long last!\n");
-		add_npc_talk(0xff, "At long last!\n");
+		add_npc_talk(LORD_BRITISH, "At long last!\n");
 		u4_puts(Party.chara[0]._name);
-		add_npc_talk(0xff, Party.chara[0]._name);
+		add_npc_talk(LORD_BRITISH, Party.chara[0]._name);
 		u4_putc(',');
-		add_npc_talk(0xff, ",");
+		add_npc_talk(LORD_BRITISH, ",");
 		u4_puts(/*D_7929*/" thou hast come!  We have waited such a long, long time...\n\n");
-		add_npc_talk(0xff, " thou hast come!  We have waited such a long, long time...\n");
+		add_npc_talk(LORD_BRITISH, " thou hast come!  We have waited such a long, long time...\n");
 		C_E1FC();
-		add_npc_talk(0xff, "A new age is upon Britannia. The great evil Lords are gone but our people lack direction and purpose in their lives...\n\
+		add_npc_talk(LORD_BRITISH, "A new age is upon Britannia. The great evil Lords are gone but our people lack direction and purpose in their lives...\n\
 A champion of virtue is called for. Thou may be this champion, but only time shall tell. I will aid thee any way that I can!\n");
 		u4_puts(/*D_7966*/"\n\nLord British sits and says: A new age is upon Britannia. The great evil Lords are gone but our people lack direction and purpose in their lives...\n\n\n\
 A champion of virtue is called for. Thou may be this champion, but only time shall tell. I will aid thee any way that I can!\n");
 		u4_puts(/*D_7A7C*/"How may I help thee?\n");
-		add_npc_talk(0xff, "How may I help thee?\n");
+		add_npc_talk(LORD_BRITISH, "How may I help thee?\n");
 	} else {
 		/*-- second time and after --*/
 		if(Party.chara[0]._stat == 'D') {
 			/*resurection*/
 			Party.chara[0]._stat = 'G';
 			u4_puts(Party.chara[0]._name);
-			add_npc_talk(0xff, Party.chara[0]._name);
+			add_npc_talk(LORD_BRITISH, Party.chara[0]._name);
 			u4_puts(/*D_7A92*/", Thou shalt live again!\n");
-			add_npc_talk(0xff, ", Thou shalt live again!\n");
+			add_npc_talk(LORD_BRITISH, ", Thou shalt live again!\n");
 			/*heal party*/
 			sound(10, 20);
 			Gra_09(); sound(9, 0xc0); Gra_09();
@@ -318,27 +319,28 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 			dspl_Stats();
 		}
 		u4_puts(/*D_7AAC*/"\n\n\nLord British says:  Welcome ");
-		add_npc_talk(0xff, "Welcome ");
+		add_npc_talk(LORD_BRITISH, "Welcome ");
 		u4_puts(Party.chara[0]._name);
-		add_npc_talk(0xff, Party.chara[0]._name);
+		add_npc_talk(LORD_BRITISH, Party.chara[0]._name);
 		if(Party.f_1d8 >= 3) {
 			u4_puts(/*D_7ACC*/" and thy worthy Adventurers!\n");
-			add_npc_talk(0xff, " and thy worthy Adventurers!");
+			add_npc_talk(LORD_BRITISH, " and thy worthy Adventurers!");
 		} else if(Party.f_1d8 == 2) {
 			u4_puts(/*D_7AEA*/" and thee also ");
-			add_npc_talk(0xff, " and thee also ");
+			add_npc_talk(LORD_BRITISH, " and thee also ");
 			u4_puts(Party.chara[1]._name);
-			add_npc_talk(0xff, Party.chara[1]._name);
+			add_npc_talk(LORD_BRITISH, Party.chara[1]._name);
 			u4_puts(/*D_7AFA*/"!\n");
-			add_npc_talk(0xff, "\n");
+			add_npc_talk(LORD_BRITISH, "\n");
 		} else {
 			Gra_CR();
-			add_npc_talk(0xff, "\n");
+			add_npc_talk(LORD_BRITISH, "\n");
 		}
 		C_E4C3();
 	}
 
 	for(;;) {
+		set_input_mode(INPUT_MODE_LOAD_BRITISH_WORD);
 		u4_gets(bp_12, 15);
 		Gra_CR();
 		if(bp_12[0] == 0)
@@ -350,23 +352,22 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 		switch(bp_02) {
 			case 2: C_E442(); break;
 			case 1: C_E21E(); break;
-			case -1: u4_puts(/*D_7AFD*/"\nHe says: I cannot help thee with that.\n"); break;
-				add_npc_talk(0xff, "I cannot help thee with that.\n");
-			default: add_npc_talk(0xff, D_7028[bp_02 - 3]); 
+			case -1: u4_puts(/*D_7AFD*/"\nHe says: I cannot help thee with that.\n"); add_npc_talk(LORD_BRITISH, "I cannot help thee with that.\n"); break;
+			default: add_npc_talk(LORD_BRITISH, D_7028[bp_02 - 3]); 
 				C_E3D2(D_7028[bp_02-3]);
-				
 		}
 		u4_puts(/*D_7B26*/"\nWhat else?\n");
-		add_npc_talk(0xff, "What else?\n");
+		add_npc_talk(LORD_BRITISH, "What else?\n");
 	}
 
 	u4_puts(/*D_7B33*/"Lord British says: Fare thee well my friend");
-	add_npc_talk(0xff, "Fare thee well my friend");
+	add_npc_talk(LORD_BRITISH, "Fare thee well my friend");
 	if (Party.f_1d8 > 1)
 	{
 		u4_putc('s');
-		add_npc_talk(0xff, "s");
+		add_npc_talk(LORD_BRITISH, "s");
 	}
 	u4_puts(/*D_7B5F*/"!\n");
-	add_npc_talk(0xff, "!\n");
+	add_npc_talk(LORD_BRITISH, "!\n");
+	add_npc_talk(VENDOR_INVALID, "");
 }

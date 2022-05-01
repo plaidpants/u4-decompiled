@@ -35,8 +35,10 @@ char *bp04;
 		txt_Y ++;
 		txt_X = 11;
 		u4_puts(/*D_3028*/"press drive letter");
+		set_input_mode(INPUT_MODE_DRIVE_LETTER);
 		while(!u_kbhit());
 		do {
+			set_input_mode(INPUT_MODE_DRIVE_LETTER);
 			bp_02 = (unsigned char)u_kbread();
 			u4_toupper(bp_02);
 			if(bp_02 != 'B' || D_9138 != 0) {
@@ -48,6 +50,7 @@ char *bp04;
 			if(C_1814() == bp_02 && C_182F(bp04))
 				return;
 			sound(1);
+			set_input_mode(INPUT_MODE_DRIVE_LETTER);
 			while(!u_kbhit());
 		} while(1);
 	}

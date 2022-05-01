@@ -24,6 +24,7 @@ char *D_0BDA[] = {
 
 C_2F7E()
 {
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(15, 1);
 	if(u_kbhit())
 		u_kbread();
@@ -185,6 +186,7 @@ C_31F4()
 	u4_puts(/*D_11FB*/"\nYou use your Key of Three Parts.\n");
 	u_delay(3, 0);
 	u4_puts(/*D_121E*/"\nA voice rings out:\n");
+	set_input_mode(INPUT_MODE_END_VERAMOCOR_WORD);
 	if(!C_310F(/*D_123D*/"\"What is the Word of Passage?\"", /*D_1233*/"veramocor"))
 		C_3010();
 	if(D_8CCA != 8) {
@@ -207,6 +209,7 @@ C_31F4()
 		u_delay(2, 0);
 		u4_puts(/*D_12C4*/"\n\nThe voice asks:\n\n");
 		u_delay(2, 0);
+		set_input_mode(INPUT_MODE_VIRTUE_WORD);
 		if(!C_310F(D_0BDA[bp_02], (bp_02<=7)?D_1E98[151 + bp_02]:D_161A[bp_02-8])) {
 			u_delay(1, 0);
 			u4_puts(/*D_12D8*/"\nThy quest is not yet complete.\n");
@@ -228,18 +231,21 @@ C_31F4()
 	u4_puts(/*D_1360*/"\nAbove the din, the voice asks:\n\nIf all eight virtues of the Avatar combine into and are derived from the Three Principles of Truth, Love and Courage...");
 	C_2F7E();
 	u4_puts(/*D_13F9*/"\n\nThen what is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n");
+	set_input_mode(INPUT_MODE_END_INFINITY_WORD);
 	u4_gets(bp_12, 15);
 	Gra_CR();
 	if(strnicmp(bp_12, /*D_147B*/"infinity", 16) != 0) {
 		u4_puts(/*D_1484*/"\nThy thoughts are not pure.\nI ask again.\n");
 		u_delay(3, 0);
 		u4_puts(/*D_14AE*/"\n\nWhat is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n");
+		set_input_mode(INPUT_MODE_END_INFINITY_WORD);
 		u4_gets(bp_12, 15);
 		Gra_CR();
 		if(strnicmp(bp_12, /*D_152B*/"infinity", 16) != 0) {
 			u4_puts(/*D_1534*/"\nThy thoughts are not pure.\nI ask again.\n");
 			u_delay(3, 0);
 			u4_puts(/*D_155E*/"\n\nWhat is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n");
+			set_input_mode(INPUT_MODE_END_INFINITY_WORD);
 			u4_gets(bp_12, 15);
 			Gra_CR();
 			if(strnicmp(bp_12, /*D_15DB*/"infinity", 16) != 0) {

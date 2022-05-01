@@ -67,6 +67,7 @@ extern int QUIT;
 	bp_04 = 0;
 	D_96EE = D_96F4 = 0;
 	do {
+		set_input_mode(INPUT_MODE_COMBAT);
 		if (QUIT)
 		{
 			return;
@@ -86,6 +87,7 @@ extern int QUIT;
 				D_95C8 = 2;
 				C_3C54();
 				u_delay(25, 1);
+				set_input_mode(INPUT_MODE_COMBAT);
 				si = u_kbhit()?u_kbread():KBD_SPACE;
 				if(u4_isupper((unsigned char)si))
 					si = (si & 0xff00) | u4_lower((unsigned char)si);

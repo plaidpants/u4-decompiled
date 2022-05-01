@@ -25,6 +25,7 @@ extern int QUIT;
 	u_kbflush();
 	bp_04 = 0;
 	do {
+		set_input_mode(INPUT_MODE_DUNGEON_INPUT);
 		if (QUIT)
 		{
 			return;
@@ -34,6 +35,7 @@ extern int QUIT;
 		t_callback();
 		if(C_10FD()) {
 			u_delay(25, 1);
+			set_input_mode(INPUT_MODE_DUNGEON_INPUT);
 			si = u_kbhit()?u_kbread():KBD_SPACE;
 			if(u4_isupper((unsigned char)si))
 				si = (si & 0xff00) | u4_lower((unsigned char)si);

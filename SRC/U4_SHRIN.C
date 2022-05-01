@@ -100,6 +100,7 @@ C_E755:
 		exit(3);
 	CurMode = MOD_SHRINE;
 	u4_puts(/*D_83C5*/"\nYou enter the ancient shrine and sit before the altar...\nUpon what virtue dost thou meditate?\n");
+	set_input_mode(INPUT_MODE_VIRTUE_WORD);
 	u4_gets(loc_D, 15);
 	Gra_CR();
 	u4_puts(/*D_8425*/"\nFor how many\n");
@@ -125,6 +126,7 @@ C_E755:
 		}
 		u_kbflush();
 		u4_puts(/*D_84C4*/"\nMantra: ");
+		set_input_mode(INPUT_MODE_MANTRA_WORD);
 		u4_gets(loc_D, 15);
 		Gra_CR();
 		if(strnicmp(loc_D, D_8322[loc_A], 0x10)) {
@@ -137,6 +139,7 @@ C_E755:
 		u4_puts(/*D_850A*/"\nThy thoughts are pure. Thou art granted a vision!\n");
 		karma_inc(&(Party._spiri), loc_E * 3);
 		u_kbflush();
+		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 		u_kbread();
 		Gra_CR();
 		u4_puts(D_8332[loc_A][loc_E - 1]);
@@ -148,11 +151,13 @@ C_E755:
 		*(pKarmas[loc_A]) = 0;
 		dspl_Stats();
 		u_kbflush();
+		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 		u_kbread();
 		u4_puts(/*D_8577*/"\n\nThou art granted a vision!\n");
 		C_E6DF(loc_A);
 		u_kbflush();
 	}
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_kbread();
 	Gra_CR();
 	goto C_E755;

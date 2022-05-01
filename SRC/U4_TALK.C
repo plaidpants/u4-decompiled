@@ -61,12 +61,14 @@ C_A163()
 	char bp_04[4];
 
 	Gra_CR();
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_kbread();
 	u4_puts(D_8CCE[7]);
 	u4_puts("\n");
 	add_npc_talk(D_8CE6, D_8CCE[7]);
 	u4_puts(/*D_2A62*/"\n\nYou say: ");
 	do {
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO_WORD);
 		u4_gets(bp_04, 4);
 		Gra_CR();
 		if(bp_04[0] == 0)
@@ -314,6 +316,7 @@ int bp04;
 
 		u4_puts(/*D_2C6D*/"\nYour Interest:\n");
 		add_npc_talk(bp04, "Your Interest?\n");
+		set_input_mode(INPUT_MODE_CITIZEN_WORD);
 		u4_gets(bp_12, 11);
 		Gra_CR();
 		if(bp_12[0] == 0)
@@ -332,6 +335,7 @@ int bp04;
 				u4_puts(D_8CCE[1]);
 				u4_puts(/*D_2C9E*/" turns away!\n\n");
 			}
+			add_npc_talk(VENDOR_INVALID, "");
 			return;
 		}
 		for(si = 0; D_2A90[si]._00[0]; si++) {
@@ -340,8 +344,11 @@ int bp04;
 					Gra_CR();
 					D_8CE6 = bp04;
 					(*(D_2A90[si]._02))();
-					if(Party.f_1d8 != bp_04)
+					if (Party.f_1d8 != bp_04)
+					{
+						add_npc_talk(VENDOR_INVALID, "");
 						return;/*looks like he/she has joined*/
+					}
 				} else {
 					bp_02 = 1;
 				}
@@ -360,6 +367,7 @@ int bp04;
 	} while(bp_02 == 0);
 	u4_puts(/*D_2CCC*/"\nBye.\n");
 	add_npc_talk(bp04, "Bye.\n");
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*shops'y positions by town*/

@@ -71,23 +71,25 @@ static unsigned D_913E;/*# of drinks in pub*/
 
 	if(!isCharaConscious(0)) {
 		u4_puts(/*D_3CD9*/"The Seer says: I will speak only with ");
-		add_npc_talk(0xfe, "I will speak only with ");
+		add_npc_talk(VENDOR_HAWKKWIND, "I will speak only with ");
 		u4_puts(Party.chara[0]._name);
-		add_npc_talk(0xfe, Party.chara[0]._name);
+		add_npc_talk(VENDOR_HAWKKWIND, Party.chara[0]._name);
 		u4_puts(/*D_3D00*/".\nReturn when ");
-		add_npc_talk(0xfe, ".\nReturn when ");
+		add_npc_talk(VENDOR_HAWKKWIND, ".\nReturn when ");
 		u4_puts(Party.chara[0]._name);
-		add_npc_talk(0xfe, Party.chara[0]._name);
+		add_npc_talk(VENDOR_HAWKKWIND, Party.chara[0]._name);
 		u4_puts(/*D_3D0F*/" is revived!\n");
-		add_npc_talk(0xfe, " is revived!\n");
+		add_npc_talk(VENDOR_HAWKKWIND, " is revived!\n");
+		add_npc_talk(VENDOR_INVALID, "");
 		return;
 	}
 	u4_puts(/*D_3D1D*/"\n\nWelcome, ");
-	add_npc_talk(0xfe, "Welcome, ");
+	add_npc_talk(VENDOR_HAWKKWIND, "Welcome, ");
 	u4_puts(Party.chara[0]._name);
-	add_npc_talk(0xfe, Party.chara[0]._name);
+	add_npc_talk(VENDOR_HAWKKWIND, Party.chara[0]._name);
 	u4_puts(/*D_3D29*/". \nI am Hawkwind, Seer of Souls. I see that which is within thee and drives thee to deeds of good or evil...\n");
-	add_npc_talk(0xfe, ". \nI am Hawkwind, Seer of Souls. I see that which is within thee and drives thee to deeds of good or evil...\n");
+	add_npc_talk(VENDOR_HAWKKWIND, ". \nI am Hawkwind, Seer of Souls. I see that which is within thee and drives thee to deeds of good or evil...\n");
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_kbflush();
 	u_kbread();
 	bp_14[0] = 0;
@@ -96,11 +98,12 @@ static unsigned D_913E;/*# of drinks in pub*/
 			/*D_3D95*/"\nFor what path dost thou seek enlightenment?\n":
 			/*D_3DC3*/"\nHawkwind asks: What other path seeks clarity?\n"
 		);
-		add_npc_talk(0xfe, bp_14[0] == 0 ?
+		add_npc_talk(VENDOR_HAWKKWIND, bp_14[0] == 0 ?
 			/*D_3D95*/"\nFor what path dost thou seek enlightenment?\n" :
 			/*D_3DC3*/"\nWhat other path seeks clarity?\n");
+		set_input_mode(INPUT_MODE_HAWKWIND_WORD);
 		u4_gets(bp_14, 15);
-		if(
+		if (
 			bp_14[0] == 0 ||
 			strnicmp(bp_14, /*D_3DF3*/"none", 16) == 0 ||
 			strnicmp(bp_14, /*D_3DF8*/"bye", 16) == 0
@@ -111,13 +114,13 @@ static unsigned D_913E;/*# of drinks in pub*/
 		}
 		if(bp_04 == -1) {
 			u4_puts(/*D_3DFC*/"\nHe says: That is not a subject for enlightenment.\n");
-			add_npc_talk(0xfe, "\nThat is not a subject for enlightenment.\n");
+			add_npc_talk(VENDOR_HAWKKWIND, "\nThat is not a subject for enlightenment.\n");
 			continue;
 		}
 		Gra_CR();
 		if(*(pKarmas[bp_04]) == 0) {
 			u4_puts(/*D_3E30*/"He says:\nThou hast become a partial Avatar in that attribute. Thou need not my insights.\n");
-			add_npc_talk(0xfe, "Thou hast become a partial Avatar in that attribute. Thou need not my insights.\n");
+			add_npc_talk(VENDOR_HAWKKWIND, "Thou hast become a partial Avatar in that attribute. Thou need not my insights.\n");
 			continue;
 		}
 		if(*(pKarmas[bp_04]) < 20) {
@@ -133,21 +136,23 @@ static unsigned D_913E;/*# of drinks in pub*/
 		}
 		Gra_CR();
 		u4_puts(D_3F0C[bp_02][bp_04]);
-		add_npc_talk(0xfe, D_3F0C[bp_02][bp_04]);
+		add_npc_talk(VENDOR_HAWKKWIND, D_3F0C[bp_02][bp_04]);
 		Gra_CR();
 		if(bp_02 == 4) {
 			u4_puts(/*D_3E8A*/"\nGo to the Shrine and meditate for three Cycles!\n");
-			add_npc_talk(0xfe, "\nGo to the Shrine and meditate for three Cycles!\n");
+			add_npc_talk(VENDOR_HAWKKWIND, "\nGo to the Shrine and meditate for three Cycles!\n");
+			set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 			u_kbflush();
 			u_kbread();
 		}
 	}
 	u4_puts(/*D_3EBC*/"\nHawkwind says: Fare thee well and may thou complete the Quest of the Avatar!\n");
-	add_npc_talk(0xfe, "Fare thee well and may thou complete the Quest of the Avatar!\n");
+	add_npc_talk(VENDOR_HAWKKWIND, "Fare thee well and may thou complete the Quest of the Avatar!\n");
 	if(Party._moves / 100 != Party.f_1ea) {
 		karma_inc(&(Party._spiri), 3);
 		Party.f_1ea = Party._moves / 100;
 	}
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -184,21 +189,22 @@ unsigned char D_4190[][6] = {
 
 	D_9142 = D_4170[Party._loc - 1] - 1;
 	u4_puts(/*D_3FAE*/"A blind woman turns to you and says: Welcome to ");
-	add_npc_talk(0xfd, "Welcome to ");
+	add_npc_talk(VENDOR_REAGENT, "Welcome to ");
 	u4_puts(D_4180[D_9142]);
-	add_npc_talk(0xfd, D_4180[D_9142]);
+	add_npc_talk(VENDOR_REAGENT, D_4180[D_9142]);
 	Gra_13();
 	C_4BC7();
 	u4_puts(/*D_3FDF*/". \n\nI am ");
-	add_npc_talk(0xfd, ". \n\nI am ");
+	add_npc_talk(VENDOR_REAGENT, ". I am ");
 	u4_puts(D_4188[D_9142]);
-	add_npc_talk(0xfd, D_4188[D_9142]);
+	add_npc_talk(VENDOR_REAGENT, D_4188[D_9142]);
 	u4_puts(/*D_3FE7*/". \nAre you in need of Reagents?\x12\x12\b");
-	add_npc_talk(0xfd, ". \nAre you in need of Reagents?\n");
+	add_npc_talk(VENDOR_REAGENT, ". \nAre you in need of Reagents?\n");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	loc_C = AskY_N();
 	if(loc_C == 'Y') {
 		u4_puts(/*D_4008*/"Very well,\n");
-		add_npc_talk(0xfd, "Very well,\n");
+		add_npc_talk(VENDOR_REAGENT, "Very well,\n");
 		do {
 			u4_puts(/*D_4014*/"I have\n\
 A-Sulfurous Ash\n\
@@ -208,36 +214,40 @@ D-Spider Silk\n\
 E-Blood Moss\n\
 F-Black Pearl\n"
 			);
-			add_npc_talk(0xfd, "I have \
+			add_npc_talk(VENDOR_REAGENT, "I have \
 Sulfurous Ash, \
 Ginseng, \
 Garlic, \
 Spider Silk, \
-Blood Moss, \
+Blood Moss and \
 Black Pearls.\n");
+			set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_REAGENT);
 			loc_B = AskLetter(/*D_4068*/"Your Interest:\x12\x12\b", 'A', 'F');
-			add_npc_talk(0xfd, "Your Interest:");
+			add_npc_talk(VENDOR_REAGENT, "Your Interest?");
 			loc_B -= 'A';
 			if(loc_B < 0)
 				break;
 			u4_puts(/*D_407A*/"\nVery well, we sell ");
-			add_npc_talk(0xfd, "\nVery well, we sell ");
+			add_npc_talk(VENDOR_REAGENT, "\nVery well, we sell ");
 			u4_puts(D_1E98[93 + loc_B]);
-			add_npc_talk(0xfd, D_1E98[93 + loc_B]);
+			add_npc_talk(VENDOR_REAGENT, D_1E98[93 + loc_B]);
 			u4_puts(/*D_408F*/" for ");
-			add_npc_talk(0xfd, " for ");
+			add_npc_talk(VENDOR_REAGENT, " for ");
 			u4_putl(D_4190[D_9142][loc_B], 1, '0');
+			add_npc_talk_long(VENDOR_REAGENT, D_4190[D_9142][loc_B]);
 			// TODO need putl npc talk
 			u4_puts(/*D_4095*/"gp. How many would you like?\x12\x12\x12\b\b");
-			add_npc_talk(0xfd, "gold pieces. How many would you like?");
+			add_npc_talk(VENDOR_REAGENT, "gold pieces. How many would you like?");
+			set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 			loc_A = AskInt(2);
 			if(loc_A > 0) {
 				u4_puts(/*D_40B7*/"\nVery good, that will be ");
-				add_npc_talk(0xfd, "\nVery good, that will be ");
+				add_npc_talk(VENDOR_REAGENT, "\nVery good, that will be ");
 				u4_putl((long)loc_A * D_4190[D_9142][loc_B], 1, '0');
-				// TODO need putl npc talk
+				add_npc_talk_long(VENDOR_REAGENT, (long)loc_A * D_4190[D_9142][loc_B]);
 				u4_puts(/*D_40D1*/"gp. You pay:\x12\x12\x12\x12\b\b\b");
-				add_npc_talk(0xfd, "gold pieces.");
+				add_npc_talk(VENDOR_REAGENT, "gold pieces.");
+				set_input_mode(INPUT_MODE_NUMBER_INPUT_3_DIGITS);
 				loc_D = AskInt(3);
 				if(loc_D <= 0) {
 					if(loc_D < 0)
@@ -252,7 +262,7 @@ Black Pearls.\n");
 					}
 					if(loc_D > Party._gold) {
 						u4_puts(/*D_40E5*/"It seems you have not the gold!\n");
-						add_npc_talk(0xfd, "It seems you have not the gold!\n");
+						add_npc_talk(VENDOR_REAGENT, "It seems you have not the gold!\n");
 					} else {
 						karma_inc(&(Party._hones), 2);
 						karma_inc(&(Party._justi), 2);
@@ -263,15 +273,16 @@ Black Pearls.\n");
 							Party._reagents[loc_B] = 99;
 						C_4BC7();
 						u4_puts(/*D_4106*/"\nVery good.\n");
-						add_npc_talk(0xfd, "\nVery good.\n");
+						add_npc_talk(VENDOR_REAGENT, "\nVery good.\n");
 					}
 				}
 			} else {
 				u4_puts(/*D_4113*/"\nI see, then\n"); 
-				add_npc_talk(0xfd, "\nI see, then\n");
+				add_npc_talk(VENDOR_REAGENT, "\nI see, then\n");
 			}
 			u4_puts(/*D_4121*/"Anything else?\x12\x12\b");
-			add_npc_talk(0xfd, "Anything else?");
+			add_npc_talk(VENDOR_REAGENT, "Anything else?");
+			set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 			loc_C = AskY_N();
 		} while(loc_C == 'Y');
 	}
@@ -281,7 +292,8 @@ Black Pearls.\n");
 	Gra_CR();
 	u4_puts(D_4188[D_9142]);
 	u4_puts(/*D_4133*/" says: Perhaps another time then.... and slowly turns away.\n");
-	add_npc_talk(0xfd, "Perhaps another time then.\n");
+	add_npc_talk(VENDOR_REAGENT, "Perhaps another time then.\n");
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -361,6 +373,7 @@ int bp04;
 {
 	if(D_46D2[bp06] * bp04 > Party._gold) {
 		u4_puts(/*D_4652*/"I fear you have not the funds, perhaps something else.\n");
+		add_npc_talk(VENDOR_WEAPON, "I fear you have not the funds, perhaps something else.");
 		return;
 	}
 	Party._gold -= D_46D2[bp06] * bp04; dspl_Gold();
@@ -371,6 +384,7 @@ int bp04;
 	Gra_CR();
 	u4_puts(D_46AE[D_9142]);
 	u4_puts(/*D_468A*/" says: A fine choice!\n");
+	add_npc_talk(VENDOR_WEAPON, "A fine choice!");
 }
 
 /*choose item[weapon]*/
@@ -380,21 +394,28 @@ C_CD80()
 
 	Gra_CR();
 	u4_puts(/*D_471E*/"\n\nVery Good!\n\n");
+	add_npc_talk(VENDOR_WEAPON, "Very Good!");
 	do {
 		u4_puts(/*D_472D*/"We have:\n");
+		add_npc_talk(VENDOR_WEAPON, "We have ");
 		for(loc_B = 0; loc_B < 4; loc_B ++) {
 			u4_putc(D_46BA[D_9142][loc_B] + 'A');
 			add_char_to_text_buffer(D_46BA[D_9142][loc_B] + 'A');
 			u4_putc('-');
 			add_char_to_text_buffer('-');
 			u4_puts(D_1E98[37 + D_46BA[D_9142][loc_B]]);
+			add_npc_talk(VENDOR_WEAPON, D_1E98[37 + D_46BA[D_9142][loc_B]]);
 			u4_putc('s');
+			add_char_to_text_buffer('s');
+			add_npc_talk(VENDOR_WEAPON, "s");
 			Gra_CR();
 		}
 
 
 		do {
+			set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_WEAPON);
 			loc_C = AskLetter(/*D_4737*/"Your Interest?\x12\x12\b", 'B', 'O');
+			add_npc_talk(VENDOR_WEAPON, "Your Interest?");
 			loc_C -= 'A';
 			if(loc_C <= 0)
 				break;
@@ -409,15 +430,23 @@ C_CD80()
 			break;
 		if(D_46D2[loc_C] > Party._gold) {
 			u4_puts(/*D_4749*/"You have not the funds for even one!\n");
+			add_npc_talk(VENDOR_WEAPON, "You have not the funds for even one!");
 		} else {
 			Gra_CR();
 			u4_puts(D_4702[loc_C-1]);
+			add_npc_talk(VENDOR_WEAPON, D_4702[loc_C-1]);
 			Gra_CR();
+			add_npc_talk(VENDOR_WEAPON, "\n");
 			u4_puts(/*D_476F*/"How many would you like?\x12\x12\x12\b\b");
+			add_npc_talk(VENDOR_WEAPON, "How many would you like?");
+			set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 			loc_A = AskInt(2);
 			if(loc_A <= 0) {
-				if(loc_A == 0)
+				if (loc_A == 0)
+				{
 					u4_puts(/*D_478D*/"\nToo bad.\n");
+					add_npc_talk(VENDOR_WEAPON, "Too bad.");
+				}
 				else
 					sound(1);
 			} else {
@@ -425,6 +454,8 @@ C_CD80()
 			}
 		}
 		u4_puts(/*D_4798*/"\nAnything else?\x12\x12\b");
+		add_npc_talk(VENDOR_WEAPON, "Anything else?");
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 		loc_C = (char)AskY_N();
 	} while(loc_C == 'Y');
 	Gra_CR();
@@ -439,10 +470,12 @@ C_CEBE()
 	char loc_C;
 
 	u4_puts(/*D_47AB*/"\nExcellent! Which wouldst\n");
+	add_npc_talk(VENDOR_WEAPON, "Excellent! Which wouldst");
 	loc_B = -1;
 	do {
 		txt_Y = 23;
 		txt_X = 24;
+		set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_WEAPON);
 		loc_B = AskLetter(/*D_47C6*/"You sell:\x12\x12\b", 'B', 'P');
 		loc_B -= 'A';
 		Gra_CR();
@@ -450,48 +483,74 @@ C_CEBE()
 			break;
 		if(Party._weapons[loc_B] == 0) {
 			u4_puts(/*D_47D3*/"Thou dost not own that. What else might\n");
+			add_npc_talk(VENDOR_WEAPON, "Thou dost not own that. What else might");
 		} else {
-			if(Party._weapons[loc_B] > 1) {
+			if (Party._weapons[loc_B] > 1) {
 				u4_puts(/*D_47FC*/"How many ");
+				add_npc_talk(VENDOR_WEAPON, "How many ");
 				u4_puts(D_1E98[37 + loc_B]);
+				add_npc_talk(VENDOR_WEAPON, D_1E98[37 + loc_B]);
 				u4_puts(/*D_4806*/"s would you wish to sell?\x12\x12\x12\b\b");
+				add_npc_talk(VENDOR_WEAPON, "s would you wish to sell?");
+				set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 				loc_A = AskInt(2);
-				if(loc_A <= 0) {
-					if(loc_A == 0)
+				if (loc_A <= 0) {
+					if (loc_A == 0)
+					{
 						u4_puts(/*D_4825*/"\nToo bad.\n");
+						add_npc_talk(VENDOR_WEAPON, "Too bad.");
+					}
 					else
 						sound(1);
 					break;
 				}
-				if(Party._weapons[loc_B] < loc_A) {
+				if (Party._weapons[loc_B] < loc_A) {
 					u4_puts(/*D_4830*/"You don't have that many swine!\n");
+					add_npc_talk(VENDOR_WEAPON, "You don't have that many swine!");
 					break;
 				}
 				u4_puts(/*D_4851*/"I will give you ");
+				add_npc_talk(VENDOR_WEAPON, "I will give you ");
 				u4_putl(((long)loc_A * D_46D2[loc_B]) >> 1, 1, '0');
+				add_npc_talk_long(VENDOR_WEAPON, ((long)loc_A * D_46D2[loc_B]) >> 1);
 				u4_puts(/*D_4862*/"gp for ");
-				if(loc_A > 1)
+				add_npc_talk(VENDOR_WEAPON, "gold pieces for ");
+				if (loc_A > 1)
+				{
 					u4_puts(/*D_486A*/"them.");
+					add_npc_talk(VENDOR_WEAPON, "them.");
+				}
 				else
+				{
 					u4_puts(/*D_4870*/"it.");
+					add_npc_talk(VENDOR_WEAPON, "it.");
+				}
 			} else {
 				loc_A = 1;
 				u4_puts(/*D_4874*/"I will give you ");
+				add_npc_talk(VENDOR_WEAPON, "I will give you ");
 				u4_putl((long)D_46D2[loc_B] >> 1, 1, '0');
+				add_npc_talk_long(VENDOR_WEAPON, (long)D_46D2[loc_B] >> 1);
 				u4_puts(/*D_4885*/"gp for that ");
+				add_npc_talk(VENDOR_WEAPON, "gold pieces for that ");
 				u4_puts(D_1E98[37 + loc_B]);
+				add_npc_talk(VENDOR_WEAPON, D_1E98[37 + loc_B]);
 			}
 			u4_puts(/*D_4892*/"\nDeal?\x12\x12\b");
+			add_npc_talk(VENDOR_WEAPON, "Deal?");
+			set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 			loc_C = AskY_N();
 			if(loc_C < 'N')
 				break;
 			if(loc_C == 'N') {
 				u4_puts(/*D_489C*/"Hmmph. What else would\n");
+				add_npc_talk(VENDOR_WEAPON, "Hmmph. What else would");
 			} else {
 				Party._weapons[loc_B] -= loc_A;
 				clamp(Party._gold, (((long)loc_A * D_46D2[loc_B]) >> 1), 9999); dspl_Gold();
 				C_4832();
 				u4_puts(/*D_48B4*/"\nFine! What else?\n");
+				add_npc_talk(VENDOR_WEAPON, "Fine! What else?");
 			}
 		}
 	} while(loc_C == 'Y' || loc_C == 'N');
@@ -506,11 +565,15 @@ C_CEBE()
 	C_4832();
 	D_9142 = D_46F2[Party._loc - 1] - 1;
 	u4_puts(/*D_48C7*/"\n\n\n\nWelcome to ");
+	add_npc_talk(VENDOR_WEAPON, "Welcome to ");
 	u4_puts(D_46A2[D_9142]);
+	add_npc_talk(VENDOR_WEAPON, D_46A2[D_9142]);
 	u4_puts(/*D_48D7*/"\n\n");
 	u4_puts(D_46AE[D_9142]);
 	u4_puts(/*D_48DA*/" says: Welcome friend! Art thou here to Buy or Sell? ");
+	add_npc_talk(VENDOR_WEAPON, "Welcome friend! Art thou here to Buy or Sell?");
 	do {
+		set_input_mode(INPUT_MODE_GENERAL_BUY_SELL);
 		switch(bp_02 = u_kbread()) {
 			case 'B': case 'b': bp_02 = 'b'; break;
 			case 'S': case 's': bp_02 = 's'; break;
@@ -537,6 +600,8 @@ C_CEBE()
 	Gra_CR();
 	u4_puts(D_46AE[D_9142]);
 	u4_puts(/*D_4910*/" says: Fare thee well!\n");
+	add_npc_talk(VENDOR_WEAPON, "Fare thee well!");
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -601,6 +666,7 @@ int bp04;
 {
 	if(D_4BDC[bp06] * bp04 > Party._gold) {
 		u4_puts(/*D_4B63*/"You don't have enough gold.\nMaybe something cheaper?\n");
+		add_npc_talk(VENDOR_ARMOR, "You don't have enough gold.\nMaybe something cheaper?");
 		return;
 	}
 	Party._gold -= D_4BDC[bp06] * bp04; dspl_Gold();
@@ -611,6 +677,7 @@ int bp04;
 	Gra_CR();
 	u4_puts(D_4BB8[D_9142]);
 	u4_puts(/*D_4B99*/" says: Good choice!\n");
+	add_npc_talk(VENDOR_ARMOR, "Good choice!");
 }
 
 /*choose item[armor]*/
@@ -620,8 +687,10 @@ C_D1D0()
 
 
 	u4_puts(/*D_4C08*/"\n\n\nWell then,\n");
+	add_npc_talk(VENDOR_ARMOR, "Well then,");
 	do {
 		u4_puts(/*D_4C17*/"We've got:\n");
+		add_npc_talk(VENDOR_ARMOR, "We've got ");
 		for(loc_B = 0; loc_B < 4; loc_B ++) {
 			if(D_4BC4[D_9142][loc_B]) {
 				u4_putc(D_4BC4[D_9142][loc_B] + 'A');
@@ -629,12 +698,16 @@ C_D1D0()
 				u4_putc(' ');
 				add_char_to_text_buffer(' ');
 				u4_puts(D_1E98[53 + D_4BC4[D_9142][loc_B]]);
+				add_npc_talk(VENDOR_ARMOR, D_1E98[53 + D_4BC4[D_9142][loc_B]]);
+				add_npc_talk(VENDOR_ARMOR, " ");
 				Gra_CR();
 			}
 		}
 		Gra_CR();
 		do {
+			set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_ARMOR);
 			loc_C = AskLetter(/*D_4C23*/"What'll it be?\x12\x12\b", 'B', 'G');
+			add_npc_talk(VENDOR_ARMOR, "What'll it be?");
 			loc_C -= 'A';
 			if(loc_C <= 0)
 				break;
@@ -649,15 +722,19 @@ C_D1D0()
 			break;
 		if(D_4BDC[loc_C] > Party._gold) {
 			u4_puts(/*D_4C35*/"What you try'n to pull? You can't pay!\n");
+			add_npc_talk(VENDOR_ARMOR, "What you try'n to pull? You can't pay!");
 		} else {
 			Gra_CR();
 			u4_puts(D_4BFC[loc_C-1]);
 			Gra_CR();
 			u4_puts(/*D_4C5D*/"How many would you like?\x12\x12\x12\b\b");
+			add_npc_talk(VENDOR_ARMOR, "How many would you like?");
+			set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 			loc_A = AskInt(2);
 			if(loc_A <= 0) {
 
 				u4_puts(/*D_4C7B*/"\nToo bad.\n");
+				add_npc_talk(VENDOR_ARMOR, "Too bad.");
 
 
 			} else {
@@ -665,6 +742,8 @@ C_D1D0()
 			}
 		}
 		u4_puts(/*D_4C86*/"\nAnything else?\x12\x12\b");
+		add_npc_talk(VENDOR_ARMOR, "Anything else?");
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 		loc_C = (char)AskY_N();
 	} while(loc_C == 'Y');
 
@@ -677,10 +756,12 @@ C_D2F8()
 	char loc_C;
 
 	u4_puts(/*D_4C99*/"\nWhat will\n");
+	add_npc_talk(VENDOR_ARMOR, "What will");
 	loc_B = -1;
 	do {
 		txt_Y = 23;
-		txt_X = 24;
+		txt_X = 24; 
+		set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_ARMOR);
 		loc_B = AskLetter(/*D_4CA5*/"You sell:\x12\x12\b", 'B', 'H');
 		loc_B -= 'A';
 		Gra_CR();
@@ -688,48 +769,71 @@ C_D2F8()
 			break;
 		if(Party._armors[loc_B] == 0) {
 			u4_puts(/*D_4CB2*/"Come on, you don't own any.\n");
+			add_npc_talk(VENDOR_ARMOR, "Come on, you don't own any.");
 		} else {
 			if(Party._armors[loc_B] > 1) {
 				u4_puts(/*D_4CCF*/"How many ");
+				add_npc_talk(VENDOR_ARMOR, "How many ");
 				u4_puts(D_1E98[53 + loc_B]);
+				add_npc_talk(VENDOR_ARMOR, D_1E98[53 + loc_B]);
 				u4_puts(/*D_4CD9*/"s would you like to sell?\x12\x12\x12\b\b");
+				add_npc_talk(VENDOR_ARMOR, "s would you like to sell");
+				set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 				loc_A = AskInt(2);
 				if(loc_A <= 0) {
 
 					u4_puts(/*D_4CF8*/"\nToo bad.\n");
+					add_npc_talk(VENDOR_ARMOR, "Too bad.");
 
 
 					break;
 				}
 				if(Party._armors[loc_B] < loc_A) {
 					u4_puts(/*D_4D03*/"You don't have that many swine!\n");
+					add_npc_talk(VENDOR_ARMOR, "You don't have that many swine!");
 					break;
 				}
 				u4_puts(/*D_4D24*/"I'll give ya\n");
+				add_npc_talk(VENDOR_ARMOR, "I'll give ya");
 				u4_putl(((long)loc_A * D_4BDC[loc_B]) >> 1, 1, '0');
+				add_npc_talk_long(VENDOR_ARMOR, ((long)loc_A * D_4BDC[loc_B]) >> 1);
 				u4_puts(/*D_4D32*/"gp for ");
-				if(loc_A > 1)
+				add_npc_talk(VENDOR_ARMOR, "gold pieces for ");
+				if (loc_A > 1)
+				{
 					u4_puts(/*D_4D3A*/"them.");
+					add_npc_talk(VENDOR_ARMOR, "them.");
+				}
 				else
+				{
 					u4_puts(/*D_4D40*/"it.");
+					add_npc_talk(VENDOR_ARMOR, "it.");
+				}
 			} else {
 				loc_A = 1;
 				u4_puts(/*D_4D44*/"I will give you\n");
+				add_npc_talk(VENDOR_ARMOR, "I will give you");
 				u4_putl((long)D_4BDC[loc_B] >> 1, 1, '0');
+				add_npc_talk_long(VENDOR_ARMOR, (long)D_4BDC[loc_B] >> 1);
 				u4_puts(/*D_4D55*/"gp for that ");
+				add_npc_talk(VENDOR_ARMOR, "gold pieces for that ");
 				u4_puts(D_1E98[53 + loc_B]);
 			}
 			u4_puts(/*D_4D62*/"\nDeal?\x12\x12\b");
+			add_npc_talk(VENDOR_ARMOR, "Deal?");
+			set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 			loc_C = AskY_N();
 			if(loc_C < 'N')
 				break;
 			if(loc_C == 'N') {
 				u4_puts(/*D_4D6C*/"Harumph. What else would\n");
+				add_npc_talk(VENDOR_ARMOR, "Harumph. What else would");
 			} else {
 				Party._armors[loc_B] -= loc_A;
 				clamp(Party._gold, (((long)loc_A * D_4BDC[loc_B]) >> 1), 9999); dspl_Gold();
 				C_48F8();
 				u4_puts(/*D_4D86*/"\nFine! What else?\n");
+				add_npc_talk(VENDOR_ARMOR, "Fine! What else?");
 			}
 		}
 	} while(loc_C == 'Y' || loc_C == 'N');
@@ -744,11 +848,15 @@ C_D2F8()
 	C_48F8();
 	D_9142 = D_4BEC[Party._loc - 1] - 1;
 	u4_puts(/*D_4D99*/"\n\n\n\nWelcome to\n");
+	add_npc_talk(VENDOR_ARMOR, "Welcome to ");
 	u4_puts(D_4BAE[D_9142]);
+	add_npc_talk(VENDOR_ARMOR, D_4BAE[D_9142]);
 	u4_puts(/*D_4DA9*/"\n\n");
 	u4_puts(D_4BB8[D_9142]);
 	u4_puts(/*D_4DAC*/" says: Welcome friend! Want to Buy or Sell? ");
+	add_npc_talk(VENDOR_ARMOR, " Welcome friend! Want to Buy or Sell? ");
 	do {
+		set_input_mode(INPUT_MODE_GENERAL_BUY_SELL);
 		switch(bp_02 = u_kbread()) {
 			case 'B': case 'b': bp_02 = 'b'; break;
 			case 'S': case 's': bp_02 = 's'; break;
@@ -775,6 +883,8 @@ C_D2F8()
 	Gra_CR();
 	u4_puts(D_4BB8[D_9142]);
 	u4_puts(/*D_4DD9*/" says: Good Bye.\n\0");/*TODO:0 is for padding*/
+	add_npc_talk(VENDOR_ARMOR, "Good Bye.");
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -785,28 +895,49 @@ C_D2F8()
 	char bp_02;
 
 	u4_puts(/*D_4DEC*/"\nWelcome friend! Can I interest thee in horses?\x12\x12\b");
+	add_npc_talk(VENDOR_HORSE, "Welcome friend! Can I interest thee in horses?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	bp_02 = AskY_N();
-	if(bp_02 != 'Y') {
-		if(bp_02 == 'N')
+	if(bp_02 != 'Y') 
+	{
+		if (bp_02 == 'N')
+		{
+			add_npc_talk(VENDOR_HORSE, "A shame, thou looks like thou could use a good horse!");
 			u4_puts(/*D_4E1F*/"\nA shame, thou looks like thou could use a good horse!\n");
+		}
+		add_npc_talk(VENDOR_HORSE, "A shame, thou looks like thou could use a good horse!");
+		add_npc_talk(VENDOR_INVALID, "");
 		return;
 	}
 	u4_puts(/*D_4E57*/"\nFor only ");
+	add_npc_talk(VENDOR_HORSE, "For only ");
 	u4_putl(Party.f_1d8, 1, '0');
+	add_npc_talk_long(VENDOR_HORSE, Party.f_1d8);
 	u4_puts(/*D_4E62*/"00g.p. Thou can have the best!  Wilt thou buy?\x12\x12\b");
+	add_npc_talk(VENDOR_HORSE, "00 gold pieces. Thou can have the best!  Wilt thou buy?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	bp_02 = AskY_N();
-	if(bp_02 != 'Y') {
-		if(bp_02 == 'N')
+	if(bp_02 != 'Y') 
+	{
+		if (bp_02 == 'N')
+		{
 			u4_puts(/*D_4E94*/"\nA shame, thou looks like thou could use a good horse!\n");
+			add_npc_talk(VENDOR_HORSE, "A shame, thou looks like thou could use a good horse!");
+		}
+		add_npc_talk(VENDOR_INVALID, "");
 		return;
 	}
 	if(100 * Party.f_1d8 > Party._gold) {
 		u4_puts(/*D_4ECC*/"\nIt seems thou hast not gold enough to pay!\n");
+		add_npc_talk(VENDOR_HORSE, "It seems thou hast not gold enough to pay!");
+		add_npc_talk(VENDOR_INVALID, "");
 		return;
 	}
 	Party._gold -= 100 * Party.f_1d8; dspl_Gold();
 	u4_puts(/*D_4EF9*/"\nHere, a better breed thou shalt not find ever!\n");
+	add_npc_talk(VENDOR_HORSE, "Here, a better breed thou shalt not find ever!");
 	Party._tile  = TIL_14;
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -846,12 +977,19 @@ char *D_51BE[] = {
 	Gra_13();
 	C_4987();
 	u4_puts(/*D_5056*/"\n\n\n\nAvast ye mate! Shure ye wishes to buy from ol' ");
+	add_npc_talk(VENDOR_GUILD, "Avast ye mate! Shure ye wishes to buy from ol'");
 	u4_puts(D_51BA[D_9142]);
+	add_npc_talk(VENDOR_GUILD, D_51BA[D_9142]);
 	u4_puts(/*D_508A*/"?\n\n\n");
+	add_npc_talk(VENDOR_GUILD, "?");
 	u4_puts(D_51BA[D_9142]);
-	u4_puts(/*D_508F*/" says: Welcome to ");
+	u4_puts(/*D_508F*/" says: Welcome to "); 
+	add_npc_talk(VENDOR_GUILD, "Welcome to ");
 	u4_puts(D_51B6[D_9142]);
+	add_npc_talk(VENDOR_GUILD, D_51B6[D_9142]);
 	u4_puts(/*D_50A2*/"\nLike to see my goods?\x12\x12\b");
+	add_npc_talk(VENDOR_GUILD, "Like to see my goods?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	while((loc_B = AskY_N()) == 'Y') {
 		Gra_CR();
 		u4_puts(D_51BA[D_9142]);
@@ -859,16 +997,25 @@ char *D_51BE[] = {
 A-Torches\n\
 B-Magic Gems\n\
 C-Magic Keys\n");
+		add_npc_talk(VENDOR_GUILD, "Good Mate! Ya see I gots Torches, Magic Gems, Magic Keys. ");
+		add_npc_talk(VENDOR_GUILD, "Wat'l it be?");
+		set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_GUILD);
 		loc_A = AskLetter(/*D_5102*/"Wat'l it be?\x12\x12\b", 'A', 'D') - 'A';
 		if(loc_A < 0)
 			break;
 		Gra_CR();
 		u4_puts(D_51BE[loc_A]);
+		add_npc_talk(VENDOR_GUILD, D_51BE[loc_A]);
 		u4_puts(/*D_5112*/"\nWill ya buy?\x12\x12\b");
+		add_npc_talk(VENDOR_GUILD, ". Will ya buy?");
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 		loc_B = AskY_N();
 		if(loc_B != 'Y') {
-			if(loc_B == 'N')
+			if (loc_B == 'N')
+			{
 				u4_puts(/*D_5123*/"\nHmmm...Grmbl...\n");
+				add_npc_talk(VENDOR_GUILD, "Hmmm...Grmbl...");
+			}
 			break;
 		}
 		if(Party._gold < D_51A6[loc_A]) {
@@ -876,6 +1023,8 @@ C-Magic Keys\n");
 			C_4649();
 			dspl_Stats();
 			u4_puts(/*D_5135*/"\nWhat? Can't pay! Buzz off swine!\n");
+			add_npc_talk(VENDOR_GUILD, "What? Can't pay! Buzz off swine!");
+			add_npc_talk(VENDOR_INVALID, "");
 			return;
 		}
 		switch(loc_A) {
@@ -889,11 +1038,14 @@ C-Magic Keys\n");
 			*loc_C = 99;
 		Party._gold -= D_51A6[loc_A];
 		u4_puts(/*D_5158*/"\nFine...fine...\n\n");
+		add_npc_talk(VENDOR_GUILD, "Fine...fine...");
 		dspl_Gold();
 		C_4987();
 		Gra_CR();
 		u4_puts(D_51BA[D_9142]);
 		u4_puts(/*D_516A*/" says: See more?\x12\x12\b");
+		add_npc_talk(VENDOR_GUILD, "See more?");
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	}
 	Gra_13();
 	C_4649();
@@ -901,6 +1053,8 @@ C-Magic Keys\n");
 	Gra_CR();
 	u4_puts(D_51BA[D_9142]);
 	u4_puts(/*D_517E*/" says:  See ya matie!\n");
+	add_npc_talk(VENDOR_GUILD, "See ya matie!");
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1003,53 +1157,82 @@ unsigned char D_567A[] = {30,60,90, 0};
 
 	if(Party._tile != TIL_1F) {
 		u4_puts(/*D_54E1*/"The Innkeeper says: Get that horse out of here!!!\n");
+		add_npc_talk(VENDOR_INN, "Get that horse out of here!!!");
+		add_npc_talk(VENDOR_INVALID, "");
 		return;
 	}
 	u4_puts(/*D_5514*/"The Innkeeper says: Welcome to ");
+	add_npc_talk(VENDOR_INN, "Welcome to ");
 	D_9142 = D_5484[Party._loc - 1] - 1;
 	u4_puts(D_54AC[D_9142]);
+	add_npc_talk(VENDOR_INN, D_54AC[D_9142]);
 	u4_puts(/*D_5534*/".\n\n I am ");
+	add_npc_talk(VENDOR_INN, "I am ");
 	u4_puts(D_54BA[D_9142]);
+	add_npc_talk(VENDOR_INN, D_54BA[D_9142]);
 	u4_puts(/*D_553C*/".\n\n Are you in need of lodging?\x12\x12\b");
+	add_npc_talk(VENDOR_INN, "Are you in need of lodging?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	bp_04 = AskY_N();
-	if(bp_04 == 'Y') {
+	if (bp_04 == 'Y') {
 		Gra_CR();
 		u4_puts(D_54C8[D_9142]);
+		add_npc_talk(VENDOR_INN, D_54C8[D_9142]);
 		Gra_CR();
-		if(D_9142 == 3) {
+		if (D_9142 == 3) {
+			add_npc_talk(VENDOR_INN, "1, 2 or 3 beds?");
+			set_input_mode(INPUT_MODE_GENERAL_ASK_NUMBER_OF_BEDS);
 			bp_02 = AskLetter(/*D_555E*/"1, 2 or 3 beds?\x12\x12\b", '1', '3');
 			bp_02 -= '1';
-			if(bp_02 < 0)
+			if (bp_02 < 0)
+			{
+				add_npc_talk(VENDOR_INVALID, "");
 				return;
+			}
 			D_913B = D_5672[bp_02];
 			D_913C = D_5676[bp_02];
 			D_913A = D_567A[bp_02];
-		} else {
+		}
+		else {
 			u4_puts(/*D_5571*/"\nTake it?\x12\x12\b");
+			add_npc_talk(VENDOR_INN, "Take it?");
+			set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 			bp_04 = AskY_N();
-			if(bp_04 != 'Y') {
-				if(bp_04 == 'N')
+			if (bp_04 != 'Y') {
+				if (bp_04 == 'N')
+				{
 					u4_puts(/*D_557E*/"\nYou won't find a better deal in this towne!\n");
+					add_npc_talk(VENDOR_INN, "You won't find a better deal in this towne!");
+				}
+				add_npc_talk(VENDOR_INVALID, "");
 				return;
 			}
 			D_913B = D_5494[D_9142];
 			D_913C = D_549C[D_9142];
 			D_913A = D_54A4[D_9142];
 		}
-		if(D_913A > Party._gold) {
+		if (D_913A > Party._gold) {
 			u4_puts(/*D_55AC*/"\nIf you can't pay, you can't stay! Good Bye.\n");
+			add_npc_talk(VENDOR_INN, "If you can't pay, you can't stay! Good Bye.");
+			add_npc_talk(VENDOR_INVALID, "");
 			return;
 		}
 		Party._gold -= D_913A; dspl_Gold();
 		u4_puts(/*D_55DA*/"\n\nVery good.  Have a pleasant night.\n");
-		if(U4_RND1(3) == 0)
+		add_npc_talk(VENDOR_INN, "Very good.  Have a pleasant night.");
+		if (U4_RND1(3) == 0)
+		{
 			u4_puts(/*D_5600*/"\nOh, and don't mind the strange noises, it's only rats!\n");
+			add_npc_talk(VENDOR_INN, "Oh, and don't mind the strange noises, it's only rats!");
+		}
 		C_D7D6();
-	} else  {
+		} else  {
 		Gra_CR();
 		u4_puts(D_54BA[D_9142]);
 		u4_puts(/*D_5639*/" says: Then you have come to the wrong place! Good Day.\n");
+		add_npc_talk(VENDOR_INN, "Then you have come to the wrong place! Good Day.");
 	}
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1090,9 +1273,14 @@ C_DA05()
 	Gra_CR();
 	u4_puts(D_57AC[D_9142]);
 	u4_puts(/*D_5764*/" asks:\n");
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	si = AskChara(/*D_576C*/"Who is in need?\x12\x12\b");
-	if(si < 0)
+	add_npc_talk(VENDOR_HEALER, "Who is in need?");
+	if (si < 0)
+	{
 		u4_puts(/*D_577F*/"No one?\n");
+		add_npc_talk(VENDOR_HEALER, "No one?");
+	}
 	return si;
 }
 
@@ -1102,13 +1290,18 @@ int bp04;
 	char bp_02;
 
 	u4_puts(/*D_57C0*/"\nWilt thou pay?\x12\x12\b");
+	add_npc_talk(VENDOR_HEALER, "Wilt thou pay?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	bp_02 = AskY_N();
 	if(bp_02 == 'Y') {
 		Party._gold -= bp04; dspl_Gold();
 		return 1;
 	}
-	if(bp_02 == 'N')
+	if (bp_02 == 'N')
+	{
 		u4_puts(/*D_57D3*/"\nThen I cannot aid thee.\n");
+		add_npc_talk(VENDOR_HEALER, "Then I cannot aid thee.");
+	}
 
 	return 0;
 }
@@ -1133,19 +1326,26 @@ C_DAA2()
 		return;
 	if(Party.chara[bp_02]._stat != 'P') {
 		u4_puts(/*D_57ED*/"Thou suffers not from Poison!\n");
+		add_npc_talk(VENDOR_HEALER, "Thou suffers not from Poison!");
 		return;
 	}
 	u4_puts(/*D_580C*/"A curing will cost thee 100gp.\n");
+	add_npc_talk(VENDOR_HEALER, "A curing will cost thee 100 gold pieces.");
 	if(Party._gold < 100) {
 		u4_puts(/*D_582C*/"\nI see by thy purse that thou hast not enough gold.");
+		add_npc_talk(VENDOR_HEALER, "I see by thy purse that thou hast not enough gold.");
+		set_input_mode(INPUT_MODE_DELAY);
 		u_kbflush();
 		u_delay(5, 1);
 		if(u_kbhit())
 			u_kbread();
 		u4_puts(/*D_5860*/"\n\nI will cure thee for free, but give unto others whenever thou may!\n");
+		add_npc_talk(VENDOR_HEALER, "I will cure thee for free, but give unto others whenever thou may!");
 	} else {
-		if(!C_DA3E(100))
+		if (!C_DA3E(100))
+		{
 			return;
+		}
 	}
 	Party.chara[bp_02]._stat = 'G';
 	C_DA79(bp_02);
@@ -1162,11 +1362,14 @@ C_DB29()
 		return;
 	if(Party.chara[bp_02]._HP[0] == Party.chara[bp_02]._HP[1]) {
 		u4_puts(/*D_58A6*/"Thou art already quite healthy!\n");
+		add_npc_talk(VENDOR_HEALER, "Thou art already quite healthy!");
 		return;
 	}
 	u4_puts(/*D_58C7*/"\nA healing will cost thee 200gp.\n");
+	add_npc_talk(VENDOR_HEALER, "A healing will cost thee 200 gold pieces.");
 	if(Party._gold < 200) {
 		u4_puts(/*D_58E9*/"\nI see by thy purse that thou hast not enough gold. I cannot aid thee.\n");
+		add_npc_talk(VENDOR_HEALER, "I see by thy purse that thou hast not enough gold. I cannot aid thee.");
 		return;
 	}
 	if(C_DA3E(200)) {
@@ -1186,11 +1389,14 @@ C_DB93()
 		return;
 	if(Party.chara[bp_02]._stat != 'D') {
 		u4_puts(/*D_5931*/"Thou art not dead fool!\n");
+		add_npc_talk(VENDOR_HEALER, "Thou art not dead fool!");
 		return;
 	}
 	u4_puts(/*D_594A*/"Resurrection will cost thee 300gp.\n");
+	add_npc_talk(VENDOR_HEALER, "Resurrection will cost thee 300 gold pieces.");
 	if(Party._gold < 300) {
 		u4_puts(/*D_596E*/"\nI see by thy purse that thou hast not enough gold. I cannot aid thee.\n");
+		add_npc_talk(VENDOR_HEALER, "I see by thy purse that thou hast not enough gold. I cannot aid thee.");
 		return;
 	}
 	if(C_DA3E(300)) {
@@ -1207,10 +1413,13 @@ C_DBF5()
 	int dummy;
 
 	u4_puts(/*D_59B6*/"Art thou willing to give 100pts of thy blood to aid others?\x12\x12\b");
+	add_npc_talk(VENDOR_HEALER, "Art thou willing to give 100pts of thy blood to aid others?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	bp_04 = AskY_N();
 	if(bp_04 == 'Y') {
 		karma_inc(&(Party._sacri), 5);
 		u4_puts(/*D_59F5*/"Thou art a great help.  We are in dire need!\n");
+		add_npc_talk(VENDOR_HEALER, "Thou art a great help.  We are in dire need!");
 		Party.chara[0]._HP[0] -= 100;
 		dspl_Stats();
 		u_delay(1, 0);
@@ -1228,10 +1437,14 @@ C_DBF5()
 
 	D_9142 = D_5788[Party._loc - 1] - 1;
 	u4_puts(/*D_5A23*/"Welcome unto\n");
+	add_npc_talk(VENDOR_HEALER, "Welcome unto");
 	u4_puts(D_5798[D_9142]);
+	add_npc_talk(VENDOR_HEALER, D_5798[D_9142]);
 	Gra_CR();
 	u4_puts(D_57AC[D_9142]);
 	u4_puts(/*D_5A31*/" says: Peace and Joy be with you friend. Are you in need of help?\x12\x12\b");
+	add_npc_talk(VENDOR_HEALER, "Peace and Joy be with you friend. Are you in need of help?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	while((bp_04 = AskY_N()) == 'Y') {
 		Gra_CR();
 		u4_puts(D_57AC[D_9142]);
@@ -1239,6 +1452,10 @@ C_DBF5()
 A-Curing\n\
 B-Healing\n\
 C-Resurrection\n");
+
+		add_npc_talk(VENDOR_HEALER, "We can perform curing, healing and resurrection.");
+		add_npc_talk(VENDOR_HEALER, "Your need?");
+		set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_HEALER);
 		bp_02 = AskLetter(/*D_5AB0*/"Your need:\x12\x12\b", 'A', 'C');
 		if(bp_02 < 'A')
 			break;
@@ -1250,6 +1467,8 @@ C-Resurrection\n");
 		Gra_CR();
 		u4_puts(D_57AC[D_9142]);
 		u4_puts(/*D_5ABE*/" asks: Do you need more help?\x12\x12\b");
+		add_npc_talk(VENDOR_HEALER, "Do you need more help?");
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	}
 	if(Party.chara[0]._HP[0] >= 400)
 		C_DBF5();
@@ -1257,6 +1476,8 @@ C-Resurrection\n");
 	Gra_CR();
 	u4_puts(D_57AC[D_9142]);
 	u4_puts(/*D_5ADF*/" says: May thy life be guarded by the powers of good.\n");
+	add_npc_talk(VENDOR_HEALER, "May thy life be guarded by the powers of good.");
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1320,10 +1541,16 @@ C_DD24()
 	int bp_02, bp_04;
 
 	u4_puts(/*D_5E68*/"Our specialty is ");
-	u4_puts(D_5F1C[D_9142]);
-	u4_puts(/*D_5E7A*/", which costs ");
+	add_npc_talk(VENDOR_FOOD, "Our specialty is ");
+	u4_puts(D_5F1C[D_9142]); 
+	add_npc_talk(VENDOR_FOOD, D_5F1C[D_9142]);
+	u4_puts(/*D_5E7A*/", which costs "); 
+	add_npc_talk(VENDOR_FOOD, ", which costs ");
 	u4_putl(D_5F28[D_9142], 1, '0');
+	add_npc_talk_long(VENDOR_PUB, D_5F28[D_9142]);
 	u4_puts(/*D_5E89*/"gp.  How many plates would you like?\x12\x12\x12\b\b");
+	add_npc_talk(VENDOR_FOOD, "gold pieces.  How many plates would you like?");
+	set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 	bp_02 = AskInt(2);
 	if(bp_02 <= 0) {
 		if(bp_02 < 0)
@@ -1341,14 +1568,22 @@ C_DD24()
 		} else {
 			if(bp_04 == 0) {
 				u4_puts(/*D_5EB3*/"\nYa cannot afford any!\n");
+				add_npc_talk(VENDOR_FOOD, "Ya cannot afford any!");
 				return 1;
 			}
 			u4_puts(/*D_5ECB*/"\nYa can only afford ");
+			add_npc_talk(VENDOR_FOOD, "Ya can only afford ");
 			u4_putl(bp_04, 1, '0');
+			add_npc_talk_long(VENDOR_FOOD, bp_04);
 			u4_puts(/*D_5EE0*/" plate");
-			if(bp_04 != 1)
-				u4_putc('s'); 
+			add_npc_talk(VENDOR_FOOD, " plate");
+			if (bp_04 != 1)
+			{
+				u4_putc('s');
+				add_npc_talk(VENDOR_FOOD, "s");
+			}
 			u4_putc('.');
+			add_npc_talk(VENDOR_FOOD, ".\n");
 			Gra_CR();
 			break;
 		}
@@ -1370,10 +1605,13 @@ C_DE35()
 		Gra_CR();
 		u4_puts(D_5F10[D_9142]);
 		u4_puts(/*D_5F4E*/" says: Sorry, you seem to have too many.  Bye!\n");
+		add_npc_talk(VENDOR_PUB, "Sorry, you seem to have too many.  Bye!\n");
 		return 1;
 	}
 	D_913E ++;
 	u4_puts(/*D_5F7E*/"\nHere's a mug of our best. That'll be 2gp. You pay?\x12\x12\x12\b\b");
+	add_npc_talk(VENDOR_PUB, "Here's a mug of our best. That'll be 2 gold pieces.\n");
+	set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 	loc_A = AskInt(2);
 	if(loc_A <= 0) {
 		if(loc_A < 0)
@@ -1382,15 +1620,19 @@ C_DE35()
 	}
 	if(loc_A < 2) {
 		u4_puts(/*D_5FB7*/"\nWon't pay, eh. Ya scum, be gone fore ey call the guards!\n");
+		add_npc_talk(VENDOR_PUB, "Won't pay, eh. Ya scum, be gone fore ey call the guards!\n");
 		return 1;
 	}
 	if(Party._gold < loc_A) {
 		u4_puts(/*D_5FF2*/"\nIt seems that you have not the gold. Good Day!\n");
+		add_npc_talk(VENDOR_PUB, "It seems that you have not the gold. Good Day!\n");
 		return 1;
 	}
 	Party._gold -= loc_A; dspl_Gold();
 	if(loc_A >= 3) {
 		u4_puts(/*D_6023*/"\nWhat'd ya like to know friend?\n");
+		add_npc_talk(VENDOR_PUB, "What'd ya like to know friend?\n");
+		set_input_mode(INPUT_MODE_PUB_WORD);
 		u4_gets(loc_D, 15);
 		for(loc_C = 6; loc_C >= 0; loc_C --) {
 			if(strnicmp(loc_D, D_5F34[loc_C], 16) == 0)
@@ -1400,20 +1642,25 @@ C_DE35()
 			loc_C = 3;
 		if(loc_C < D_9142) {
 			u4_puts(/*D_6044*/"\n'fraid I can't help ya there friend!\n");
+			add_npc_talk(VENDOR_PUB, "'fraid I can't help ya there friend!\n");
 		} else {
 			while(D_5EF8[loc_C] > loc_A) {
 				u4_puts(/*D_606B*/"\nThat subject is a bit foggy, perhaps more gold will refresh my memory. You give:\x12\x12\x12\b\b");
+				add_npc_talk(VENDOR_PUB, "That subject is a bit foggy, perhaps more gold will refresh my memory.\n");
+				set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 				loc_E = AskInt(2);
 				if(loc_E <= 0) {
 					if(loc_A < 0)
 						sound(1);
 					else
 						u4_puts(/*D_60C2*/"\nSorry, I could not hep ya mate!\n");
+					add_npc_talk(VENDOR_PUB, "Sorry, I could not hep ya mate!\n");
 					return 1;
 				}
 				if(Party._gold < loc_E) {
 					u4_puts(/*D_60E4*/"\nYer don't have that mate!\n");
 					u4_puts(/*D_6100*/"\nSorry, I could not hep ya mate!\n");
+					add_npc_talk(VENDOR_PUB, "Yer don't have that mate! Sorry, I could not hep ya mate!\n");
 					return 1;
 				}
 				Party._gold -= loc_E; dspl_Gold();
@@ -1424,14 +1671,20 @@ C_DE35()
 				u4_puts(D_5F10[D_9142]);
 				u4_puts(/*D_6122*/" says: ");
 				u4_puts(D_5F42[loc_C]);
+				add_npc_talk(VENDOR_PUB, D_5F42[loc_C]);
 				Gra_CR();
 			}
 		}
 	}
 	u4_puts(/*D_612A*/"\nAnythin' else?\x12\x12\b");
+	add_npc_talk(VENDOR_PUB, "Anythin' else?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	loc_B = AskY_N();
-	if(loc_B != 'Y')
+	if (loc_B != 'Y')
+	{
 		return 1;
+	}
+
 	return 0;
 }
 
@@ -1445,17 +1698,22 @@ C_DE35()
 	Gra_CR();
 	u4_puts(D_5F10[D_9142]);
 	u4_puts(/*D_613D*/" says:\nWelcome to ");
+	add_npc_talk(VENDOR_PUB, "Welcome to ");
 	u4_puts(D_5F04[D_9142]);
+	add_npc_talk(VENDOR_PUB, D_5F04[D_9142]);
 	Gra_CR();
 	do {
 		u4_puts(D_5F10[D_9142]);
 		u4_puts(/*D_6150*/" says: What'll it be, Food er Ale?\x12\x12\b");
+		add_npc_talk(VENDOR_PUB,"What'll it be, Food er Ale?");
 		{
 C_E004:
+			set_input_mode(INPUT_MODE_PUB_FOOD_OR_ALE);
 			bp_02 = u_kbread();
 			u4_toupper(bp_02);
 			if(bp_02 == ' ' || bp_02 == 0x1b || bp_02 == '\r') {
 				Gra_CR();
+				add_npc_talk(VENDOR_INVALID, "");
 				return;
 			}
 			if(bp_02 != 'F' && bp_02 != 'A') {
@@ -1474,9 +1732,13 @@ C_E004:
 		}
 		dspl_Stats();
 		u4_puts(/*D_6176*/"Here ye arr. Somethin' else?\x12\x12\b");
+		add_npc_talk(VENDOR_PUB, "Here ye arr. Somethin' else?");
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 		bp_02 = AskY_N();
 	} while(bp_02 == 'Y');
 	u4_puts(/*D_6196*/"See ya mate!\n");
+	add_npc_talk(VENDOR_PUB, "See ya mate!");
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1510,35 +1772,53 @@ char *D_6390[] = {
 
 	D_9142 = D_636C[Party._loc - 1] - 1;
 	u4_puts(/*D_620D*/"\n\n\n\nWelcome to ");
+	add_npc_talk(VENDOR_FOOD, "Welcome to ");
 	u4_puts(D_6386[D_9142]);
+	add_npc_talk(VENDOR_FOOD, D_6386[D_9142]);
 	u4_puts(/*D_621D*/"\n\n");
 	u4_puts(D_6390[D_9142]);
 	u4_puts(/*D_6220*/" says: Good day, and Welcome friend.\n\nMay I interest you in some rations?\x12\x12\b");
+	add_npc_talk(VENDOR_FOOD, "Good day, and Welcome friend. May I interest you in some rations?");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	bp_04 = AskY_N();
 	if(bp_04 != 'Y') {
-		if(bp_04 == 'N')
+		if (bp_04 == 'N')
+		{
 			u4_puts(/*D_626D*/"Goodbye, Come again!\n");
+			add_npc_talk(VENDOR_FOOD, "Goodbye, Come again!");
+		}
+		add_npc_talk(VENDOR_INVALID, "");
 		return;
 	}
 	u4_puts(/*D_6283*/"We have the best adventure rations, 25 for only ");
+	add_npc_talk(VENDOR_FOOD, "We have the best adventure rations, 25 for only ");
 	u4_putl(D_637C[D_9142], 1, '0');
+	add_npc_talk_long(VENDOR_FOOD, D_637C[D_9142]);
 	u4_puts(/*D_62B4*/"gp.");
+	add_npc_talk(VENDOR_FOOD, "gold pieces.");
 	do {
 		u4_puts(/*D_62B8*/"\nHow many packs of 25 would you like?\x12\x12\x12\x12\b\b\b");
+		add_npc_talk(VENDOR_FOOD, "How many packs of 25 would you like?");
+		set_input_mode(INPUT_MODE_NUMBER_INPUT_3_DIGITS);
 		bp_02 = AskInt(3);
 		if(bp_02 <= 0) {
 			u4_puts(/*D_62E5*/"\nToo bad. Maybe next time.\n");
+			add_npc_talk(VENDOR_FOOD, "Too bad. Maybe next time.");
 			bp_04 = 'N';
 			continue;
 		}
 		if(D_637C[D_9142] * bp_02 > Party._gold) {
 			if(D_637C[D_9142] > Party._gold) {
 				u4_puts(/*D_6301*/"You cannot afford any!\n");
+				add_npc_talk(VENDOR_FOOD, "You cannot afford any!");
 				break;
 			}
 			u4_puts(/*D_6319*/"You can only afford ");
+			add_npc_talk(VENDOR_FOOD, "You can only afford ");
 			u4_putl((long)Party._gold / (long)D_637C[D_9142], 1, '0');
+			add_npc_talk_long(VENDOR_FOOD, (long)Party._gold / (long)D_637C[D_9142]);
 			u4_puts(/*D_632E*/" packs.\n");
+			add_npc_talk(VENDOR_FOOD, " packs.");
 			bp_04 = 'Y';
 			continue;
 		}
@@ -1548,7 +1828,11 @@ char *D_6390[] = {
 		Party._gold -= D_637C[D_9142] * bp_02;
 		dspl_Stats();
 		u4_puts(/*D_6337*/"\nThank you. Anything else?\x12\x12\b");
+		add_npc_talk(VENDOR_FOOD, "Thank you. Anything else?");
+		set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 		bp_04 = AskY_N();
 	} while(bp_04 == 'Y');
 	u4_puts(/*D_6355*/"\nGoodbye. Come again!\n");
+	add_npc_talk(VENDOR_FOOD, "Goodbye. Come again");
+	add_npc_talk(VENDOR_INVALID, "");
 }

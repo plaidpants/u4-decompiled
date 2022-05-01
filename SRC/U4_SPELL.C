@@ -275,6 +275,7 @@ int bp04;
 	int loc_A, loc_C, loc_E;
 
 	u4_puts(/*D_20FE*/"Energy type? ");
+	set_input_mode(INPUT_MODE_ENERGY_TYPE_POISON_FIRE_LIGHTNING_SLEEP);
 	loc_B = (unsigned char)u_kbread();
 /*bad hack:I must force the redefinition of u4_islower
 int order to get the compiler to provide

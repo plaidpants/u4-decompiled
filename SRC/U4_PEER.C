@@ -161,6 +161,7 @@ unsigned bp04;
 	loc_C = 0;
 	u_kbflush();
 /*C_C174*/
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	for(; !u_kbhit(); loc_C++) {
 		if(bp04) {
 			Gra_dot_XOR(MK_COORD(D_959C.y,0), MK_COORD(D_959C.x,loc_C&3), 3);
@@ -231,6 +232,7 @@ C_C23B()
 	txt_Y = 23;
 	txt_X = 24;
 	u_kbflush();
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_kbread();
 	CurMode = loc_E;
 	D_9446 = 1;

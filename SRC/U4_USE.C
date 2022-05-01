@@ -30,6 +30,7 @@ void C_01E1()
 	bp_04 = 0;
 	for(bp_02 = 1; bp_02 <= 4; bp_02++) {
 		u4_putc(bp_02 + 'A' - 1); u4_putc(':');
+		set_input_mode(INPUT_MODE_USE_STONE_COLOR_WORD);
 		u4_gets(bp_12, 11);
 		Gra_CR();
 		for(bp_10 = 7; bp_10 >= 0; bp_10--) {
@@ -105,6 +106,7 @@ C_0311() {
 				u4_puts(/*D_01D6*/"\nAs thou doth approach, a voice rings out: What virtue dost stem from ");
 			u4_puts(D_0284[Party._z]);
 			u4_puts(/*D_021D*/"?\n\n");
+			set_input_mode(INPUT_MODE_VIRTUE_WORD);
 			u4_gets(bp_10, 13);
 			Gra_CR();
 			if(strnicmp(bp_10, D_1E98[151 + Party._z], 14)) {
@@ -114,6 +116,7 @@ C_03A1:
 				return;
 			}
 			u4_puts(/*D_0221*/"\nThe Voice says: Use thy Stone.\n\nColor:\n");
+			set_input_mode(INPUT_MODE_USE_STONE_COLOR_WORD);
 			u4_gets(bp_10, 11);
 			Gra_CR();
 			bp_02 = 7;
@@ -319,6 +322,7 @@ struct {
 	char bp_0e[12];
 
 	u4_puts("Use which item:\n");
+	set_input_mode(INPUT_MODE_USE_WORD);
 	u4_gets(bp_0e, 11);
 	Gra_CR();
 	for(si = 0; D_0434[si]._00[0]; si++) {

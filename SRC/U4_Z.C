@@ -310,6 +310,7 @@ int bp04;
 		Gra_13();
 		C_4649();
 		(*D_19C0[bp04])(bp04);
+		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 		while(!u_kbhit());
 		switch(si = u_kbread()) {
 			case KBD_1:
