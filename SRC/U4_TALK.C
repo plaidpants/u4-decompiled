@@ -233,6 +233,7 @@ char *D_2BB2[] = {
 	}
 	u4_puts(/*D_2BEC*/"How much?\x12\x12\x12\b\b");
 	add_npc_talk(D_8CE6, "How much?\n");
+	set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
 	if((bp_02 = AskInt(2)) > 0) {
 		if(Party._gold < bp_02) {
 			u4_puts(/*D_2BFB*/"Thou hast not that much gold!\n");
@@ -449,6 +450,7 @@ unsigned char bp04;
 		w_DriftOnly();
 		return;
 	}
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_2D6E*/"Dir: ", &loc_B, &loc_D);
 	if(!(loc_B | loc_D))
 		return;

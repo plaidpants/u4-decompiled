@@ -188,6 +188,7 @@ unsigned char _damage;
 {
 	u4_puts(C_1513(Fighters._tile[_npcId]));
 	u4_putc(' ');
+	add_char_to_text_buffer(' ');
 	if(Fighters._tile[_npcId] != TIL_5E && (Fighters._HP[_npcId] -= _damage) < 0) {
 		u4_puts(/*D_1FFA*/"Killed!\n");
 		if(_charaId != -1) {
@@ -333,6 +334,7 @@ int _dir_y;
 	loc_A = &(Party.chara[activeChara]);
 	/*-- For OIL, ask range --*/
 	if(loc_A->_weapon == 9) {
+		set_input_mode(INPUT_MODE_NUMBER_INPUT_1_DIGITS);
 		loc_D = AskLetter(/*D_204B*/"Range:\x12\x12\b", '0', '9');
 		loc_D -= '0';
 		if(loc_D < 0)
@@ -382,6 +384,7 @@ C_61D1()
 	int loc_A, loc_B, loc_D;
 
 	loc_C = &(Party.chara[activeChara]);
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_2060*/"Dir: ", &loc_A, &loc_B);
 	if(!(loc_A | loc_B))
 		return;
@@ -427,6 +430,7 @@ C_61D1()
 		return;
 	}
 
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_206E*/"Attack: ", &loc_A, &loc_B);
 	if(!(loc_A|loc_B))
 		return;

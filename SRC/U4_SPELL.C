@@ -114,6 +114,7 @@ int bp04;
 
 	if(!C_6428())
 		return;
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_20DC*/"Dir: ", &loc_A, &loc_B);
 	if(!(loc_A|loc_B))
 		return;
@@ -149,6 +150,7 @@ int bp04;
 {
 	register int si;
 
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	si = AskChara(/*D_20E2*/"Who:\x12\x12\b");
 	if(si < 0)
 		return;
@@ -172,6 +174,7 @@ int bp04;
 	if(Party._tile >= TIL_14 && Party._tile != TIL_18) {
 		if(!C_6409())
 			return;
+		set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 		AskDir(/*D_20EA*/"Dir: ", &loc_A, &loc_B);
 		if(!(loc_A|loc_B))
 			return;
@@ -203,6 +206,7 @@ int bp04;
 {
 	register int si;
 
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((si = AskChara(/*D_20F0*/"Who:\x12\x12\b")) < 0)
 		return;
 	if(!C_63B4())
@@ -234,6 +238,7 @@ int bp04;
 		w_Failed();
 		return;
 	}
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_20F8*/"Dir: ", &loc_A, &loc_B);
 	if(!(loc_A|loc_B))
 		return;
@@ -294,7 +299,9 @@ the original bytecode*/
 		return;
 	}
 	u4_putc(loc_B);
+	add_char_to_text_buffer(loc_B);
 	Gra_CR();
+	add_char_to_text_buffer('\n');
 	if(CurMode == MOD_DUNGEON) {
 		if(!C_63B4())
 			return;
@@ -305,6 +312,7 @@ the original bytecode*/
 		return;
 	}
 	if(CurMode >= MOD_COMBAT) {
+		set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 		AskDir(/*D_210C*/"Dir: ", &loc_A, &loc_C);
 		if(!(loc_A|loc_C))
 			return;
@@ -334,6 +342,7 @@ the original bytecode*/
 	}
 	if(!C_6409())
 		return;
+	set_input_mode(INPUT_MODE_GENERAL_ASK_PHASE);
 	si = AskLetter(/*D_2112*/"To Phase:\x12\x12\b", '0', '8');
 	if(si < 0 || si == (int)'0')
 		return;
@@ -349,6 +358,7 @@ the original bytecode*/
 {
 	register int si;
 
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((si = AskChara(/*D_211F*/"Who?\x12\x12\b")) < 0)
 		return;
 	if(!C_63B4())
@@ -441,6 +451,7 @@ the original bytecode*/
 		w_Failed();
 		return;
 	}
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	si = AskChara(/*D_2127*/"Who:\x12\x12\b");
 	if(si < 0)
 		return;
@@ -521,6 +532,7 @@ the original bytecode*/
 
 	if(!C_6409())
 		return;
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_212F*/"From Dir: ", &bp_02, &bp_04);
 	if(!(bp_02|bp_04))
 		return;
@@ -643,6 +655,7 @@ pSpell_handler D_216E[] = {
 {
 	u4_puts(/*D_213A*/"Cast Spell!\n");
 	if(CurMode < MOD_COMBAT) {
+		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 		if((activeChara = AskChara(/*D_2147*/"Player:\x12\x12\b")) < 0)
 			return;
 		if(!isCharaConscious(activeChara)) {
@@ -654,6 +667,7 @@ pSpell_handler D_216E[] = {
 	C_4C42();
 	txt_Y = 23;
 	txt_X = 24;
+	set_input_mode(INPUT_MODE_GENERAL_ASK_SPELL);
 	D_8CCC = AskLetter(/*D_2152*/"Spell:\x12\x12\b", 'A', 'Z');
 	Gra_13();
 	C_4649();

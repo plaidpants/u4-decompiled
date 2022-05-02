@@ -46,6 +46,7 @@ C_B795()
 	int bp_02;
 
 	u4_puts(/*D_2E06*/"\nYou find a Magical Ball...\n");
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((bp_02 = AskChara(/*D_2E23*/"Who touches?\x12\x12\b")) < 0)
 		return;
 	if(!isCharaConscious(bp_02)) {
@@ -75,6 +76,7 @@ C_B863()
 	int bp_02;
 
 	u4_puts(/*D_2EAE*/"You find a Fountain.\n");
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((bp_02 = AskChara(/*D_2EC4*/"Who drinks?\x12\x12\b")) < 0)
 		return;
 	if(!isCharaConscious(bp_02)) {

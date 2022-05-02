@@ -1584,11 +1584,14 @@ C_DD24()
 			if (bp_04 != 1)
 			{
 				u4_putc('s');
+				add_char_to_text_buffer('s');
 				add_npc_talk(VENDOR_FOOD, "s");
 			}
 			u4_putc('.');
 			add_npc_talk(VENDOR_FOOD, ".\n");
+			add_char_to_text_buffer('.');
 			Gra_CR();
+			add_char_to_text_buffer('\n');
 			break;
 		}
 	}

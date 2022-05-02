@@ -19,14 +19,22 @@ LOCATE
 	}
 	u4_puts(/*D_2300*/"sextant\n Latitude: ");
 	u4_putc((Party._y >> 4) + 'A');
+	add_char_to_text_buffer((Party._y >> 4) + 'A');
 	u4_putc('\'');
+	add_char_to_text_buffer('\'');
 	u4_putc((Party._y & 0xf) + 'A');
+	add_char_to_text_buffer((Party._y & 0xf) + 'A');
 	u4_puts(/*D_2314*/"\"\nLongitude: ");
 	u4_putc((Party._x >> 4) + 'A');
+	add_char_to_text_buffer((Party._x >> 4) + 'A');
 	u4_putc('\'');
+	add_char_to_text_buffer('\'');
 	u4_putc((Party._x & 0xf) + 'A');
+	add_char_to_text_buffer((Party._x & 0xf) + 'A');
 	u4_putc('"');
+	add_char_to_text_buffer('"');
 	Gra_CR();
+	add_char_to_text_buffer('\n');
 }
 
 /*----------------------------------------
@@ -49,8 +57,11 @@ int bp04;
 	u4_puts(/*D_2322*/"\nA ");
 	u4_puts(D_1E98[77 + (int)Party.chara[bp08]._class]);
 	u4_puts(/*D_2326*/" may NOT use ");
-	if(bp04)
+	if (bp04)
+	{
 		u4_putc('a');
+		add_char_to_text_buffer('a');
+	}
 	Gra_CR();
 	u4_puts(D_1E98[37 + bp06]);
 	Gra_CR();
@@ -67,12 +78,14 @@ int bp04;
 		loc_A = activeChara;
 	} else {
 		u4_puts(/*D_235B*/"Ready a weapon\n");
+		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 		if((loc_A = AskChara(/*D_236B*/"for:\x12\x12\b")) < 0)
 			return;
 	}
 	Gra_13();
 	C_4832();
 	txt_Y = 23; txt_X = 24;
+	set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_WEAPON);
 	loc_B = AskLetter(/*D_2373*/"Weapon:\x12\x12\b", 'A', 'P');
 	Gra_13();
 	C_4649();
@@ -109,11 +122,13 @@ int bp04;
 	int loc_C;
 
 	u4_puts(/*D_237E*/"Wear Armour\n");
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((loc_A = AskChara(/*D_238B*/"for:\x12\x12\b")) < 0)
 		return;
 	Gra_13();
 	C_48F8();
 	txt_Y = 23; txt_X = 24;
+	set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_ARMOR);
 	loc_B = AskLetter(/*D_2393*/"Armour:\x12\x12\b", 'A', 'H');
 	Gra_13();
 	C_4649();

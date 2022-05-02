@@ -54,6 +54,7 @@ struct tChara *bp04;
 	int loc_C, loc_D;
 
 	u4_puts(/*D_2206*/"New Order!\n");
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((loc_C = AskChara(/*D_2212*/"Exchange #\x12\x12\b")) < 0)
 		return;
 	loc_A = &(Party.chara[loc_C]);
@@ -62,6 +63,7 @@ struct tChara *bp04;
 		u4_puts(D_21F4);
 		return;
 	}
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((loc_D = AskChara(/*D_2220*/"    with #\x12\x12\b")) < 0)
 		return;
 	loc_B = &(Party.chara[loc_D]);

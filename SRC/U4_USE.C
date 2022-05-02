@@ -30,6 +30,8 @@ void C_01E1()
 	bp_04 = 0;
 	for(bp_02 = 1; bp_02 <= 4; bp_02++) {
 		u4_putc(bp_02 + 'A' - 1); u4_putc(':');
+		add_char_to_text_buffer(bp_02 + 'A' - 1);
+		add_char_to_text_buffer(':');
 		set_input_mode(INPUT_MODE_USE_STONE_COLOR_WORD);
 		u4_gets(bp_12, 11);
 		Gra_CR();

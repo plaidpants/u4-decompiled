@@ -313,6 +313,7 @@ C_431D()
 		w_NotHere();
 		return;
 	}
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_1807*/"Open: ", &bp_02, &bp_04);
 	if(!(bp_02 | bp_04))
 		return;
@@ -341,6 +342,7 @@ C_431D()
 	int bp_04, bp_02;
 
 	u4_puts(/*D_1818*/"Jimmy lock!\n");
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_1825*/"Dir: ", &bp_02, &bp_04);
 	if(!(bp_02 | bp_04))
 		return;

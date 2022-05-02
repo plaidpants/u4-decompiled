@@ -164,6 +164,7 @@ C_8FB1()
 	int bp_02;
 
 	u4_puts(/*D_2897*/"You see a knob on the Telescope marked A-P\n");
+	set_input_mode(INPUT_MODE_TELESCOPE);
 	if((bp_02 = AskLetter(/*D_28C3*/"You Select:\x12\x12\b", 'A', 'P')) < 0)
 		return;
 	bp_02 -= 'A';

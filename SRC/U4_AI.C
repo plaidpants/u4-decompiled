@@ -179,6 +179,7 @@ int bp04;
 	Gra_CR();
 	u4_puts(Party.chara[si]._name);
 	u4_putc(' ');
+	add_char_to_text_buffer(' ');
 	switch(hit_tile) {
 		case TIL_44:
 			u4_puts(/*D_29D7*/"Poisoned!\n");

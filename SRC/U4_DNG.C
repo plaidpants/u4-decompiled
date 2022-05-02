@@ -251,7 +251,9 @@ C_89DB()
 		if(--Party._z >= 0) {
 			u4_puts(/*D_2689*/"To level ");
 			u4_putc(Party._z + '1');
+			add_char_to_text_buffer(Party._z + '1');
 			Gra_CR();
+			add_char_to_text_buffer('\n');
 		}
 	} else {
 		w_What();
@@ -269,7 +271,9 @@ C_8A1F()
 		Party._z ++;
 		u4_puts(/*D_269C*/"down to level ");
 		u4_putc(Party._z + '1');
+		add_char_to_text_buffer(Party._z + '1');
 		Gra_CR();
+		add_char_to_text_buffer('\n');
 	} else {
 		w_What();
 	}

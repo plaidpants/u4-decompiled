@@ -382,6 +382,7 @@ int bp04;
 	} else {
 		int bp_02;
 
+		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 		bp_02 = AskChara(/*D_19E3*/"Ztats for:\x12\x12\b");
 		if(bp_02 != -1)
 			C_4CC1((bp_02 == -2)?8:bp_02);

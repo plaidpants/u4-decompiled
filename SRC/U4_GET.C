@@ -108,6 +108,7 @@ int bp04;
 		return;
 	}
 	u4_puts(/*D_228C*/"Get Chest!\n");
+	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((si = AskChara(/*D_2298*/"Who opens?\x12\x12\b")) < 0)
 		return;
 	if(!isCharaConscious(si)) {
@@ -152,6 +153,7 @@ char D_22C8[] = "Broadsides Only!\n";
 		return;
 	}
 	u4_puts(/*D_22B8*/"Cannon!\n");
+	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_22C1*/"Dir: ", &loc_C, &loc_D);
 	if(!(loc_C|loc_D))
 		return;

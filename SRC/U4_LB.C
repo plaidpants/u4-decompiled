@@ -96,6 +96,7 @@ char* D_7028_modified[24] = {
 /*10 seconds delay*/
 C_E1FC() {
 	u_kbflush(); 
+	set_input_mode(INPUT_MODE_DELAY);
 	u_delay(10, 1);
 	if(u_kbhit())
 		u_kbread();
@@ -198,6 +199,7 @@ register char *bp04;
 {
 	register int di;
 
+	add_npc_talk(LORD_BRITISH, bp04);
 	di = 0;
 	while(*bp04) {
 		if(*bp04 == '\n') {
@@ -207,6 +209,7 @@ register char *bp04;
 			}
 		}
 		u4_putc(*bp04);
+		add_char_to_text_buffer(*bp04);
 		bp04++;
 	}
 }
@@ -228,6 +231,7 @@ C_E442() {
 
 	u4_puts(/*D_784D*/"\n\n\n\n\n\nHe says: I am well, thank ye.\n\nHe asks: Art thou well?\x12\x12\b");
 	add_npc_talk(LORD_BRITISH, "\nI am well, thank ye. Art thou well?\n");
+	set_input_mode(INPUT_MODE_GENERAL_YES_NO);
 	bp_02 = AskY_N();
 	if(bp_02 == 'Y') {
 		u4_puts(/*D_788D*/"\nHe says: That is good.\n");
@@ -293,6 +297,7 @@ C_E59B()
 		u4_puts(Party.chara[0]._name);
 		add_npc_talk(LORD_BRITISH, Party.chara[0]._name);
 		u4_putc(',');
+		add_char_to_text_buffer(',');
 		add_npc_talk(LORD_BRITISH, ",");
 		u4_puts(/*D_7929*/" thou hast come!  We have waited such a long, long time...\n\n");
 		add_npc_talk(LORD_BRITISH, " thou hast come!  We have waited such a long, long time...\n");
@@ -365,6 +370,7 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 	if (Party.f_1d8 > 1)
 	{
 		u4_putc('s');
+		add_char_to_text_buffer('s');
 		add_npc_talk(LORD_BRITISH, "s");
 	}
 	u4_puts(/*D_7B5F*/"!\n");

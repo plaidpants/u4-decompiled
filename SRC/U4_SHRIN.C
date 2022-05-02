@@ -104,6 +104,7 @@ C_E755:
 	u4_gets(loc_D, 15);
 	Gra_CR();
 	u4_puts(/*D_8425*/"\nFor how many\n");
+	set_input_mode(INPUT_MODE_GENERAL_ASK_NUMBER_OF_BEDS);
 	loc_E = AskLetter(/*D_8434*/"Cycles (0-3)?\x12\x12\b", '0', '3');
 	if(loc_E < 0) {
 		goto C_E755;
@@ -124,12 +125,14 @@ C_E755:
 			set_input_mode(INPUT_MODE_DELAY);
 			u_delay(1, 0);
 			u4_putc('.');
+			add_char_to_text_buffer('.');
 		}
 		u_kbflush();
 		u4_puts(/*D_84C4*/"\nMantra: ");
 		set_input_mode(INPUT_MODE_MANTRA_WORD);
 		u4_gets(loc_D, 15);
 		Gra_CR();
+		add_char_to_text_buffer('\n');
 		if(strnicmp(loc_D, D_8322[loc_A], 0x10)) {
 			u4_puts(/*D_84CE*/"\nThou art not able to focus thy thoughts with that Mantra!\n");
 			karma_dec(&(Party._spiri), 3);

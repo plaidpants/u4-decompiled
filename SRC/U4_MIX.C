@@ -59,6 +59,7 @@ unsigned char D_277E[] = {
 		txt_Y = 23;
 		txt_X = 24;
 		u4_puts(/*D_270C*/"Mix Reagents\n");
+		set_input_mode(INPUT_MODE_GENERAL_ASK_SPELL);
 		if((loc_C = AskLetter(/*D_271A*/"For Spell:\x12\x12\b", 'A', 'Z')) < 0)
 			break;
 		loc_C -= 'A';
@@ -73,6 +74,7 @@ unsigned char D_277E[] = {
 			C_4BC7();
 			txt_Y = 23;
 			txt_X = 24;
+			set_input_mode(INPUT_MODE_GENERAL_ASK_LETTER_REAGENT);
 			if((loc_B = AskLetter(/*D_2728*/"Reagent:\x12\x12\b", 'A', 'H')) == -2) {
 				for(si = 7; si >= 0; si --)
 					Party._reagents[si] = loc_A[si];
