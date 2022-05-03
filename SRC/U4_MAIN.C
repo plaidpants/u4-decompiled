@@ -667,8 +667,8 @@ __declspec(dllexport) void cdecl /*C_191E*/ main()
 	C_9209();
 	if (C_10FD()) {
 		u4_putc(0x10);
-		u_delay(25, 1);
 		set_input_mode(INPUT_MODE_MAIN_INPUT);
+		u_delay(25, 1);
 		si = u_kbhit() ? u_kbread() : KBD_SPACE;
 		if (u4_isupper((unsigned char)si))
 			si = (si & 0xff00) | u4_lower((unsigned char)si);

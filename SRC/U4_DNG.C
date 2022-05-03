@@ -34,8 +34,8 @@ extern int QUIT;
 		u4_putc(0x10);
 		t_callback();
 		if(C_10FD()) {
-			u_delay(25, 1);
 			set_input_mode(INPUT_MODE_DUNGEON_INPUT);
+			u_delay(25, 1);
 			si = u_kbhit()?u_kbread():KBD_SPACE;
 			if(u4_isupper((unsigned char)si))
 				si = (si & 0xff00) | u4_lower((unsigned char)si);
