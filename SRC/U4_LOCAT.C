@@ -25,9 +25,10 @@ LOCATE
 	u4_putc('\'');
 	add_char_to_text_buffer('\'');
 	u4_putc((Party._y & 0xf) + 'A');
-	add_char_to_text_buffer('\n');
 	add_char_to_text_buffer((Party._y & 0xf) + 'A');
-	u4_puts(/*D_2314*/"\"\nLongitude: ");
+	u4_puts(/*D_2314*/"\"");
+	add_char_to_text_buffer('\n');
+	u4_puts(/*D_2314*/"\nLongitude: ");
 	u4_putc((Party._x >> 4) + 'A');
 	add_char_to_text_buffer((Party._x >> 4) + 'A');
 	u4_putc('\'');
