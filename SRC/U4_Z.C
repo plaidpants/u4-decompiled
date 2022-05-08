@@ -58,6 +58,9 @@ int bp04;
 {
 	register struct tChara *si;
 
+	set_zstats_mode(ZSTATS_MODE_CHARACTER_DETAIL);
+	set_zstats_character(bp04);
+
 	si = &(Party.chara[bp04]);
 	txt_Y = 0; C_45D6(si->_name, 0);
 	txt_X = 24;
@@ -86,6 +89,7 @@ C_4832()
 {
 	register int si;
 
+	set_zstats_mode(ZSTATS_MODE_WEAPONS);
 	txt_Y = 0;
 	C_45D6(/*D_18FF*/"Weapons", 0);
 	txt_Y = 1;
@@ -121,6 +125,7 @@ C_48F8()
 {
 	register int si;
 
+	set_zstats_mode(ZSTATS_MODE_ARMOUR);
 	txt_Y = 0;
 	C_45D6(/*D_1917*/"Armour", 0);
 	txt_Y = 1;
@@ -144,6 +149,7 @@ C_48F8()
 
 C_4987()
 {
+	set_zstats_mode(ZSTATS_MODE_EQUIPMENT);
 	txt_Y = 0;
 	C_45D6(/*D_192C*/"Equipment", -1);
 
@@ -171,6 +177,7 @@ C_4A3D()
 {
 	register int si;
 
+	set_zstats_mode(ZSTATS_MODE_ITEMS);
 	txt_Y = 0;
 	C_45D6(/*D_1955*/"Items", 0);
 	txt_Y = 1;
@@ -238,6 +245,7 @@ C_4BC7()
 {
 	register int si;
 
+	set_zstats_mode(ZSTATS_MODE_REAGENTS);
 	txt_Y = 0;
 	C_45D6(/*D_19AD*/"Reagents", 0);
 	txt_Y = 1;
@@ -261,6 +269,7 @@ C_4C42()
 {
 	register int si;
 
+	set_zstats_mode(ZSTATS_MODE_MIXTURES);
 	txt_Y = 0;
 	C_45D6(/*D_19B6*/"Mixtures", 0);
 	txt_Y = 1;
@@ -310,7 +319,10 @@ int bp04;
 		Gra_13();
 		C_4649();
 		(*D_19C0[bp04])(bp04);
+
+		u_delay(25, 1); // ADDED otherwise we will spin in too tight a loop for anyrthing to happen and lock up the game engine
 		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
+
 		while(!u_kbhit());
 		switch(si = u_kbread()) {
 			case KBD_1:

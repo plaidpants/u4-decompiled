@@ -39,7 +39,6 @@ register int si;
 		t_callback();
 		hit_y = hit_x = 5;
 		hit_tile = TIL_8C;
-		add_to_hit_list();
 		C_36C7();
 		Party._x = 0x7f;
 		Party._y = 0x4e;

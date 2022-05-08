@@ -175,7 +175,6 @@ char D_22C8[] = "Broadsides Only!\n";
 	hit_x = loc_C + 5;
 	hit_y = loc_D + 5;
 	hit_tile = TIL_4D;
-	add_to_hit_list();
 	for(loc_E = 1; ; loc_E++) {
 		if(loc_E > 3 || (
 			((loc_A = C_0A58(0x1f, loc_F, loc_B)) != -1) &&
@@ -185,7 +184,7 @@ char D_22C8[] = "Broadsides Only!\n";
 			if(loc_A == -1)
 				return;
 			/*-- HIT SOMETHING --*/
-			hit_tile = TIL_4F; C_36C7(); 	add_to_hit_list(); hit_tile = 0;
+			hit_tile = TIL_4F; C_36C7(); hit_tile = 0;
 			
 			sound(6);
 			if(loc_A < 8 && U4_RND1(3))

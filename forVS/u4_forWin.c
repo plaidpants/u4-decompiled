@@ -14,6 +14,13 @@
 
 extern const char* getDataPath();
 
+
+int camera_shake_accumulator = 0;
+// simple arrary to keep track of any highlight characters in the list
+char char_highlight[8] = { 0,0,0,0,0,0,0,0 };
+
+int screen_xor_state = 0;
+
 #ifdef ENABLE_WINDOWS
 unsigned speed_info;
 unsigned equip_flags;
@@ -833,8 +840,6 @@ __cdecl Gra_02(int width, int height, int tile, int srow, int scol) // render sp
 // so we can pass this to Unity to perform a camera shake of appropiate
 // magnitude.
 
-int camera_shake_accumulator = 0;
-
 __cdecl Gra_03() // shake related(1)
 {
 	camera_shake_accumulator++;
@@ -852,8 +857,6 @@ __cdecl Gra_05(int height, int width, unsigned char* pC, int d)
 	FAKE_RET;
 }
 
-int screen_xor_state = 0;
-
 Gra_09() // XOR SCREEN
 {
 	screen_xor_state = 1 - screen_xor_state;
@@ -864,9 +867,6 @@ Gra_10() // clear map zone
 {
 	FAKE_RET;
 }
-
-// simple arrary to keep track of any highlight characters in the list
-char char_highlight[8] = { 0,0,0,0,0,0,0,0 };
 
 Gra_11(int a) // highlight char's status
 {

@@ -123,7 +123,6 @@ int bp04;
 	hit_tile = bp04;
 	hit_x = Combat._charaX[activeChara];
 	hit_y = Combat._charaY[activeChara];
-	add_to_hit_list();
 	loc_C = -1;
 	do {
 		if(!COM_CheckHitable(loc_A, loc_B))
@@ -496,7 +495,6 @@ the original bytecode*/
 			}
 			hit_x = Combat._npcX[si];
 			hit_y = Combat._npcY[si];
-			add_to_hit_list();
 			C_3C54();
 			sound(6);
 			COM_DoDamage(si, activeChara, 0xff);

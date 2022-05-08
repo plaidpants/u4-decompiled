@@ -296,7 +296,7 @@ unsigned char bp04;
 	register struct tChara *loc_D/*di*/;
 	int loc_B/*bp_04*/;
 	int loc_A/*bp_02*/, loc_E/*bp_0a*/;
-
+	set_zstats_mode(ZSTATS_MODE_CHARACTER_OVERVIEW);
 	Gra_19();
 	loc_E = txt_Y;
 	loc_A = txt_X;

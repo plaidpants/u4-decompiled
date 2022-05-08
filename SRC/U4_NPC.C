@@ -316,10 +316,6 @@ unsigned char bp04;
 			si = &(D_8742._map.x32x32[loc_A - (D_95A5.y*16)][loc_E - (D_95A5.x*16)]);
 			loc_D = *si;
 			*si = bp04;
-			hit_tile = bp04; // ADDED
-			hit_x = loc_A; // ADDED
-			hit_y = loc_E; // ADDED
-			add_to_hit_list();
 			t_callback();
 			*si = loc_D;
 		}
@@ -340,7 +336,6 @@ int bp04;
 	t_callback();
 	hit_y = hit_x = 5;
 	hit_tile = TIL_4F;
-	add_to_hit_list();
 	C_36C7();
 	C_1584();
 	hit_tile = 0;

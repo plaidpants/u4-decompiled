@@ -348,6 +348,20 @@ void set_input_mode(int mode)
 	input_mode = mode;
 }
 
+int zstats_mode = 0;
+
+void set_zstats_mode(int mode)
+{
+	zstats_mode = mode;
+}
+
+int zstats_character = 0;
+
+void set_zstats_character(int character)
+{
+	zstats_character = character;
+}
+
 void add_npc_talk(char npc_index, char * ch)
 {
 	npc_text_buffer[current_npc_text_buffer_pointer][0] = npc_index;
@@ -567,7 +581,14 @@ __declspec(dllexport) int cdecl  main_input_mode()
 {
 	return input_mode;
 }
-
+__declspec(dllexport) int cdecl  main_zstats_mode()
+{
+	return zstats_mode;
+}
+__declspec(dllexport) int cdecl  main_zstats_character()
+{
+	return zstats_character;
+}
 __declspec(dllexport) int cdecl  main_sound_effect_length()
 {
 	return current_sound_effect_length;

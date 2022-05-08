@@ -162,7 +162,6 @@ int bp04;
 	hit_tile = bp0a;
 	hit_x = Combat._npcX[bp08];
 	hit_y = Combat._npcY[bp08];
-	add_to_hit_list();
 	sound(3);
 	si = -1;
 	do {
@@ -171,7 +170,7 @@ int bp04;
 		C_3C54();
 	} while((si = C_9683()) == -1);
 	if(si == -1) {
-		if(hit_tile == TIL_4C)
+		if (hit_tile == TIL_4C)
 			Combat_MAP(hit_y, hit_x) = TIL_4C;
 		hit_tile = 0;
 		return;
@@ -316,7 +315,6 @@ unsigned char _y;
 			hit_tile = TIL_4F;
 			hit_x = _x;
 			hit_y = _y;
-			add_to_hit_list();
 			C_3C54();
 			hit_tile = 0;
 			sound(6);
@@ -357,7 +355,6 @@ int bp04;
 	hit_x = Combat._charaX[bp04];
 	hit_y = Combat._charaY[bp04];
 	hit_tile = TIL_4D;
-	add_to_hit_list();
 	C_3C54();
 	sound(5);
 	hit_tile = 0;

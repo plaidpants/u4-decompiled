@@ -101,6 +101,7 @@ C_36C7()
 	si = D_96F9[hit_y*11 + hit_x];
 	if(hit_tile)
 		D_96F9[hit_y*11 + hit_x] = hit_tile;
+	add_to_hit_list();
 	Gra_05(11, 11, D_96F9, 4  * 80 + 2);
 	if(activeCharaX != -1) {
 		register int di;
