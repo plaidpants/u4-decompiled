@@ -317,7 +317,7 @@ unsigned char bp04;
 		return 1;
 	}
 	t_callback();
-	Gra_09(); sound(9, 0xa0); Gra_09();
+	Gra_09(); sound(9, 0xa0); Gra_09(); // move this here, from below
 	Party._x = D_0814[Party._felucca];
 	Party._y = D_081C[Party._felucca];
 	//Gra_09(); sound(9, 0xa0); Gra_09(); // move the before setting the new player position so we get to see the magic sfx before and after teleporting

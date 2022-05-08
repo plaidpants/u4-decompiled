@@ -88,12 +88,12 @@ unsigned char bp06;
 unsigned char bp04;
 {
 	register int i;
-	for (i = bp08; i >= 0; i--) {
-		if (
+	for(i = bp08; i >= 0; i--) {
+		if(
 			D_8742._npc._tile[i] != 0 &&
 			D_8742._npc._x[i] == bp06 &&
 			D_8742._npc._y[i] == bp04
-			) break;
+		) break;
 	}
 	return i;
 }
@@ -102,14 +102,14 @@ C_0A8B(bp06, bp04)
 unsigned char bp06;
 unsigned char bp04;
 {
-	return C_0A58((Party._loc == 0) ? 7 : 31, bp06, bp04);
+	return C_0A58((Party._loc == 0)?7:31, bp06, bp04);
 }
 
 /*C_0AB1*/SafeModulo(bp06, bp04)
 int bp06;
 int bp04;
 {
-	if (bp04 == 0)
+	if(bp04 == 0)
 		return 0;
 	return bp06 % bp04;
 }
@@ -117,7 +117,7 @@ int bp04;
 /*get character sprite id ?*/
 C_0ACF(bp04)
 {
-	if (Party.chara[bp04]._stat == 'S')
+	if(Party.chara[bp04]._stat == 'S')
 		return TIL_38;
 	return (Party.chara[bp04]._class << 1) + TIL_20;
 }
@@ -130,47 +130,47 @@ C_0ACF(bp04)
 C_0AFE(bp04)
 unsigned char bp04;
 {
-	if (bp04 < TIL_80 ||
+	if(bp04 < TIL_80 ||
 		bp04 == TIL_8A || bp04 == TIL_90 ||
 		bp04 == TIL_94 || bp04 == TIL_98 ||
 		bp04 == TIL_B4 || bp04 == TIL_CC
-		) return 1;
+	) return 1;
 	return 0;
 }
 
 /*C_0B38*/u4_puts(txt/*si/bp04*/)
-register char* txt;
+register char *txt;
 {
 	register int /*di*/i;
 	int /*bp_02*/loc_A;
 	int /*bp_04*/loc_B;
-
+	
 	loc_A = loc_B = 0;
 	i = 0;
-	while (txt[i]) {
-		if (loc_B-- == 0) {
+	while(txt[i]) {
+		if(loc_B-- == 0) {
 			char /*bp_08*/loc_C;
-			for (loc_B = 0; loc_C = txt[i + loc_B]; loc_B++) {
-				if (loc_C == '\n' || loc_C == ' ')
+			for(loc_B = 0; loc_C = txt[i + loc_B]; loc_B ++) {
+				if(loc_C == '\n' || loc_C == ' ')
 					break;
 			}
-			if (loc_B + txt_X > 40 && txt_X != 24) {
-				if (loc_A++ == 12) {
+			if(loc_B + txt_X > 40 && txt_X != 24) {
+				if(loc_A++ == 12) {
 					u_kbflush();
 					set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
-					if (txt_X == 39)
-						while (!u_kbhit());
+					if(txt_X == 39)
+						while(!u_kbhit());
 					u_kbread();
 					loc_A = 0;
 				}
 				Gra_CR2(); // ADDED don't collect line break due to text wrapping
 			}
 		}
-		if (txt[i] == '\n' && loc_A++ == 12) {
+		if(txt[i] == '\n' && loc_A++ == 12) {
 			u_kbflush();
 			set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
-			if (txt_X == 39)
-				while (!u_kbhit());
+			if(txt_X == 39)
+				while(!u_kbhit());
 			u_kbread();
 			loc_A = 0;
 		}
@@ -282,7 +282,8 @@ unsigned char bp04;
 			Gra_putchar(bp04);
 			txt_X ++;
 	}
-	if (bp04 == 0x10) // prompt character
+
+	if ((bp04 == 0x10) && (txt_X == 25) && (txt_Y == 23)) // prompt character
 	{
 		//printf(">");
 		add_char_to_text_buffer(0x10);

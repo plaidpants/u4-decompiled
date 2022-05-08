@@ -170,7 +170,7 @@ int bp04;
 		C_3C54();
 	} while((si = C_9683()) == -1);
 	if(si == -1) {
-		if (hit_tile == TIL_4C)
+		if(hit_tile == TIL_4C)
 			Combat_MAP(hit_y, hit_x) = TIL_4C;
 		hit_tile = 0;
 		return;

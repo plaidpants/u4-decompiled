@@ -60,7 +60,6 @@ int bp04;
 
 	set_zstats_mode(ZSTATS_MODE_CHARACTER_DETAIL);
 	set_zstats_character(bp04);
-
 	si = &(Party.chara[bp04]);
 	txt_Y = 0; C_45D6(si->_name, 0);
 	txt_X = 24;
@@ -319,11 +318,9 @@ int bp04;
 		Gra_13();
 		C_4649();
 		(*D_19C0[bp04])(bp04);
-
 		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
-
 		while(!u_kbhit())
-			Sleep(150); // ADDED otherwise we will spin in too tight a loop for anything to happen and lock up the game engine
+			Sleep(20); // ADDED otherwise we will spin in too tight a loop for anything to happen and lock up the game engine
 		switch(si = u_kbread()) {
 			case KBD_1:
 			case KBD_2:

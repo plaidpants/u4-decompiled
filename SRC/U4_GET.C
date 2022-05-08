@@ -185,7 +185,6 @@ char D_22C8[] = "Broadsides Only!\n";
 				return;
 			/*-- HIT SOMETHING --*/
 			hit_tile = TIL_4F; C_36C7(); hit_tile = 0;
-			
 			sound(6);
 			if(loc_A < 8 && U4_RND1(3))
 				return;
