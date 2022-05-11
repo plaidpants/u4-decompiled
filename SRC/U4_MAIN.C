@@ -654,6 +654,11 @@ __declspec(dllexport) void cdecl main_SetDataPath(unsigned char path[], int leng
 	U4_ROOT[length] = 0; // make sure it's null terminated
 }
 
+__declspec(dllexport) void cdecl  main_set_dir(int direction)
+{
+	Party._dir = direction;
+}
+
 int QUIT = 0;
 
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
