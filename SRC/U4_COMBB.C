@@ -138,6 +138,7 @@ unsigned char bp04;
 	C_7962();
 }
 
+//TODO need to instrument these secret dungeon room tiles
 /*room special tiles*/
 C_7A15(bp06, bp04)
 unsigned char bp06;

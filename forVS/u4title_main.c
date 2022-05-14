@@ -25,6 +25,13 @@ unsigned txt_X;
 void *pTitle;
 unsigned txt_Y;
 
+static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
+
+const char* getDataPath()
+{
+	return &U4_ROOT[0];
+}
+
 //----------------------------------------
 int u_kbhit() {
 	CONSOLE("u_kbhit\n");

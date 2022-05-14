@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-#include "J:\u4-decompiled\SRC\U4_SCAN.H"
+#include "../SRC/U4_SCAN.H"
 
 int CMN_kbhit = 0;
 
@@ -321,5 +321,4 @@ int CMN_endScene() {
 	return 1;
 }
 #endif
-
 //----------------------------------------
