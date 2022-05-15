@@ -1112,11 +1112,11 @@ C_D7D6()
 {
 	int bp_02;
 
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(1, 0);
 	Party._x = D_913B;
 	Party._y = D_913C;
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(1, 0);
 	for(bp_02 = Party.f_1d8 - 1; bp_02 >= 0; bp_02 --) {
 		if(isCharaAlive(bp_02))
@@ -1124,7 +1124,7 @@ C_D7D6()
 	}
 	dspl_Stats();
 	Party._tile = TIL_38;
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(5, 0);
 	Party._tile = TIL_1F;
 	for(bp_02 = Party.f_1d8 - 1; bp_02 >= 0; bp_02 --) {
@@ -1337,7 +1337,7 @@ C_DAA2()
 	if(Party._gold < 100) {
 		u4_puts(/*D_582C*/"\nI see by thy purse that thou hast not enough gold.");
 		add_npc_talk(VENDOR_HEALER, "I see by thy purse that thou hast not enough gold.");
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_CONTINUE);
 		u_kbflush();
 		u_delay(5, 1);
 		if(u_kbhit())
@@ -1425,7 +1425,7 @@ C_DBF5()
 		add_npc_talk(VENDOR_HEALER, "Thou art a great help.  We are in dire need!");
 		Party.chara[0]._HP[0] -= 100;
 		dspl_Stats();
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(1, 0);
 	} else if(bp_04 == 'N') {
 		karma_dec(&(Party._sacri), 5);

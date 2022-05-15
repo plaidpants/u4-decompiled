@@ -96,7 +96,7 @@ char* D_7028_modified[24] = {
 /*10 seconds delay*/
 C_E1FC() {
 	u_kbflush(); 
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_CONTINUE);
 	u_delay(10, 1);
 	if(u_kbhit())
 		u_kbread();

@@ -870,10 +870,12 @@ Gra_09() // XOR SCREEN
 	FAKE_RET;
 }
 
+extern const char* get_current_vision();
+
 Gra_10() // clear map zone
 {
 	// clear the vision if any
-	current_vision[0] = 0;
+	strncpy(get_current_vision(), "", 255);
 
 	FAKE_RET;
 }
@@ -904,8 +906,13 @@ __cdecl Gra_16(char * filename, int unknown1, int* unknown2)
 	// loads a pic
 	FAKE_RET;
 }
+
 __cdecl Gra_17()
 {
+	Gra_10();
+	u_delay(1, 1);
+	strncpy(get_current_vision(), "rune_5.pic", 255);
+
 	// TODO instrument this
 	//infinity symbol
 	FAKE_RET;

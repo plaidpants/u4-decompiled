@@ -122,7 +122,7 @@ C_E755:
 	u4_puts(/*D_84B2*/"Begin Meditation\n");
 	for(loc_B = 0; loc_B < loc_E; loc_B ++) {
 		for(loc_C = 0; loc_C < 0x10; loc_C ++) {
-			set_input_mode(INPUT_MODE_DELAY);
+			set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 			u_delay(1, 0);
 			u4_putc('.');
 			add_char_to_text_buffer('.');

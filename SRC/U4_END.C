@@ -24,6 +24,7 @@ char *D_0BDA[] = {
 
 C_2F7E()
 {
+	set_input_mode(INPUT_MODE_DELAY_CONTINUE);
 	u_delay(15, 1);
 	if(u_kbhit())
 		u_kbread();
@@ -38,7 +39,7 @@ static unsigned D_8CCA;
 C_2F9D(bp04)
 unsigned bp04;
 {
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(5, 0);
 	Gra_CR();
 	Party._x = D_0BF0[bp04];
@@ -68,17 +69,17 @@ C_3010()
 /*Victory !*/
 C_3025()
 {
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(2, 0);
 	shakefx();
 	shakefx();
 	shakefx();
 	shakefx();
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(3, 0);
 	dfree(pShapes);
 	Gra_17();/*infinity symbol*/
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(3, 0);
 	u4_puts(/*D_0C25*/"\n\nThe boundless knowledge of the Codex of Ultimate Wisdom is revealed unto thee.");
 	C_2F7E();
@@ -105,7 +106,11 @@ C_3025()
 	u4_puts(/*D_102D*/"\n\nCONGRATULATIONS!\n   Thou hast\n   completed\n   ULTIMA IV\n  Quest of the\n    AVATAR\n  in ");
 	u4_putl(Party._moves, 0, '0');
 	u4_puts(/*D_1087*/"\n turns! Report\n thy feat unto\nLord British at\nOrigin Systems!");
-	while(1); // TODO need to fix this forever loop
+	while (1)
+	{
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
+		u_delay(2, 0); // TODO need to fix this forever loop
+	}
 }
 
 C_310F(bp06, bp04)
@@ -117,30 +122,33 @@ char *bp04;
 	u4_puts(bp06);
 	Gra_CR();
 	Gra_CR();
+	set_input_mode(INPUT_MODE_END_GAME_WORD);
 	u4_gets(bp_10, 15);
 	Gra_CR();
 	if(strnicmp(bp_10, bp04, 15) != 0) {
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(1, 0);
 		u4_puts(/*D_10C6*/"\nThy thoughts are not pure.\nI ask again.\n");
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(2, 0);
 
 		u4_puts(bp06);
 		Gra_CR();
 		Gra_CR();
+		set_input_mode(INPUT_MODE_END_GAME_WORD);
 		u4_gets(bp_10, 15);
 		Gra_CR();
 		if(strnicmp(bp_10, bp04, 15) != 0) {
-			set_input_mode(INPUT_MODE_DELAY);
+			set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 			u_delay(1, 0);
 			u4_puts(/*D_10F0*/"\nThy thoughts are not pure.\nI ask again.\n");
-			set_input_mode(INPUT_MODE_DELAY);
+			set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 			u_delay(2, 0);
 
 			u4_puts(bp06);
 			Gra_CR();
 			Gra_CR();
+			set_input_mode(INPUT_MODE_END_GAME_WORD);
 			u4_gets(bp_10, 15);
 			Gra_CR();
 			if(strnicmp(bp_10, bp04, 15) != 0)
@@ -180,7 +188,7 @@ C_31F4()
 	dspl_Stats();
 	Gra_10();
 	u4_puts(/*D_116B*/"\n\n\nThere is a sudden darkness, and you find yourself alone in an empty chamber.\n");
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(4, 0);
 	Gra_16((D_943A == 1)?/*D_11BC*/"key7.pic":/*D_11C5*/"key7.ega", 0, 0);
 	if(
@@ -192,15 +200,15 @@ C_31F4()
 		C_2F9D(12);
 	}
 	u4_puts(/*D_11FB*/"\nYou use your Key of Three Parts.\n");
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(3, 0);
 	u4_puts(/*D_121E*/"\nA voice rings out:\n");
-	set_input_mode(INPUT_MODE_END_VERAMOCOR_WORD);
 	if(!C_310F(/*D_123D*/"\"What is the Word of Passage?\"", /*D_1233*/"veramocor"))
 		C_3010();
+#if 1 // Skip end game checks
 	if(D_8CCA != 8) {
 		u4_puts(/*D_125C*/"\nThou hast not proved thy leadership in all eight virtues.\n");
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(8, 0);
 		C_3010();
 	}
@@ -210,21 +218,21 @@ C_31F4()
 			C_3010();
 		}
 	}
+#endif
 	u4_puts(/*D_12AE*/"\nPassage is granted.\n");
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(5, 0);
 	Gra_10();
 	for(bp_02 = 0; bp_02 < 11; bp_02 ++) {
 		char bp_26[20];
 
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(2, 0);
 		u4_puts(/*D_12C4*/"\n\nThe voice asks:\n\n");
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(2, 0);
-		set_input_mode(INPUT_MODE_VIRTUE_WORD);
 		if(!C_310F(D_0BDA[bp_02], (bp_02<=7)?D_1E98[151 + bp_02]:D_161A[bp_02-8])) {
-			set_input_mode(INPUT_MODE_DELAY);
+			set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 			u_delay(1, 0);
 			u4_puts(/*D_12D8*/"\nThy quest is not yet complete.\n");
 			C_2F9D(bp_02);
@@ -233,42 +241,42 @@ C_31F4()
 		strcat(bp_26, (D_943A == 1)?/*D_12F9*/".pic":/*D_12FE*/".ega");
 		Gra_16(bp_26, 0, 0);
 		if(bp_02 == 7) {
-			set_input_mode(INPUT_MODE_DELAY);
+			set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 			u_delay(3, 0);
 			u4_puts(/*D_1303*/"\nThou art well versed in the virtues of the Avatar.\n");
-			set_input_mode(INPUT_MODE_DELAY);
+			set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 			u_delay(5, 0);
 		}
 	}
 	u4_puts(/*D_1338*/"\n\nThe floor rumbles beneath your feet.\n");
 	shakefx();
 	shakefx();
-	set_input_mode(INPUT_MODE_DELAY);
+	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(5, 0);
 	u4_puts(/*D_1360*/"\nAbove the din, the voice asks:\n\nIf all eight virtues of the Avatar combine into and are derived from the Three Principles of Truth, Love and Courage...");
 	C_2F7E();
 	u4_puts(/*D_13F9*/"\n\nThen what is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n");
-	set_input_mode(INPUT_MODE_END_INFINITY_WORD);
+	set_input_mode(INPUT_MODE_END_GAME_WORD);
 	u4_gets(bp_12, 15);
 	Gra_CR();
 	if(strnicmp(bp_12, /*D_147B*/"infinity", 16) != 0) {
 		u4_puts(/*D_1484*/"\nThy thoughts are not pure.\nI ask again.\n");
-		set_input_mode(INPUT_MODE_DELAY);
+		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(3, 0);
 		u4_puts(/*D_14AE*/"\n\nWhat is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n");
-		set_input_mode(INPUT_MODE_END_INFINITY_WORD);
+		set_input_mode(INPUT_MODE_END_GAME_WORD);
 		u4_gets(bp_12, 15);
 		Gra_CR();
 		if(strnicmp(bp_12, /*D_152B*/"infinity", 16) != 0) {
 			u4_puts(/*D_1534*/"\nThy thoughts are not pure.\nI ask again.\n");
-			set_input_mode(INPUT_MODE_DELAY);
+			set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 			u_delay(3, 0);
 			u4_puts(/*D_155E*/"\n\nWhat is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n");
-			set_input_mode(INPUT_MODE_END_INFINITY_WORD);
+			set_input_mode(INPUT_MODE_END_GAME_WORD);
 			u4_gets(bp_12, 15);
 			Gra_CR();
 			if(strnicmp(bp_12, /*D_15DB*/"infinity", 16) != 0) {
-				set_input_mode(INPUT_MODE_DELAY);
+				set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 				u_delay(1, 0);
 				u4_puts(/*D_15E4*/"\nThou dost not know the true nature of the Universe.\n");
 				C_2F9D(11);
