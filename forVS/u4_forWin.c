@@ -289,11 +289,18 @@ Gra_13() {
 
 	FAKE_RET;
 }
-__cdecl Gra_16() {
+
+char current_vision[256] = "";
+
+__cdecl Gra_16(char* filename, int unknown1, int* unknown2)
+{
+	strncpy(current_vision, filename, 255);
+	printf(current_vision);
 	// loads a pic
 	//TODO
 	FAKE_RET;
 }
+
 __cdecl Gra_17() {
 	//TODO
 	// infinity symbol
@@ -865,6 +872,9 @@ Gra_09() // XOR SCREEN
 
 Gra_10() // clear map zone
 {
+	// clear the vision if any
+	current_vision[0] = 0;
+
 	FAKE_RET;
 }
 
@@ -883,13 +893,20 @@ Gra_13() // clear status zone
 	}
 	FAKE_RET;
 }
-__cdecl Gra_16() 
+
+extern const char* get_current_vision();
+
+__cdecl Gra_16(char * filename, int unknown1, int* unknown2)
 {
+	strncpy(get_current_vision(), filename, 255);
+
+	// TODO instrument this
 	// loads a pic
 	FAKE_RET;
 }
 __cdecl Gra_17()
 {
+	// TODO instrument this
 	//infinity symbol
 	FAKE_RET;
 }

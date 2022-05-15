@@ -105,7 +105,7 @@ C_3025()
 	u4_puts(/*D_102D*/"\n\nCONGRATULATIONS!\n   Thou hast\n   completed\n   ULTIMA IV\n  Quest of the\n    AVATAR\n  in ");
 	u4_putl(Party._moves, 0, '0');
 	u4_puts(/*D_1087*/"\n turns! Report\n thy feat unto\nLord British at\nOrigin Systems!");
-	while(1);
+	while(1); // TODO need to fix this forever loop
 }
 
 C_310F(bp06, bp04)

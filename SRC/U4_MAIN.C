@@ -561,12 +561,14 @@ void play_sound_effect(unsigned char sound, unsigned char length)
 	current_sound_effect = sound;
 	current_sound_effect_length  = length;
 
+#ifndef ENABLE_WINDOWS
 	// wait for the sound effect to finish playing
 	while (current_sound_effect != -1 && timeout > 0)
 	{
 		timeout--;
 		Sleep(20);
 	}
+#endif
 
 	current_sound_effect = -1;
 	current_sound_effect_length = 0;
@@ -652,6 +654,29 @@ __declspec(dllexport) void cdecl main_SetDataPath(unsigned char path[], int leng
 	strncpy(U4_ROOT, path, length);
 
 	U4_ROOT[length] = 0; // make sure it's null terminated
+}
+
+
+static char current_vision[256] = "";
+
+const char* get_current_vision()
+{
+	return &current_vision[0];
+}
+
+__declspec(dllexport) void cdecl main_GetVision(unsigned char vision[], int length)
+{
+	// is the vision too big for our buffer + null terminator?
+	if (length < 256)
+	{
+		// just bail
+		return;
+	}
+
+	// return the vision to the controlling application
+	memcpy(vision, get_current_vision(), 255);
+
+	vision[254] = 0; // make sure it's null terminated
 }
 
 __declspec(dllexport) void cdecl  main_set_dir(int direction)
