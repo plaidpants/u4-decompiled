@@ -1,3 +1,4 @@
+#ifndef DISABLE_WINDOWS
 /*
  *  lzw.c - LZW decompression from memory to memory
  *
@@ -409,3 +410,4 @@ unsigned char hashPosFound(int hashCode, unsigned char root, int codeword, lzwDi
         return(0);
     }
 }
+#endif

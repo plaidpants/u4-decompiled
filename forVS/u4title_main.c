@@ -1,4 +1,4 @@
-#include "J:\u4-decompiled\SRC-TITLE\TITLE.H"
+#include "..\SRC-TITLE\TITLE.H"
 
 #include <windows.h>
 #include <stdio.h>
@@ -27,15 +27,16 @@ unsigned txt_Y;
 
 static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
 
-const char* getDataPath()
-{
-	return &U4_ROOT[0];
-}
+extern const char* getDataPath();
+extern void* _fmalloc(int sz);
+extern void t_callback();
+
+
 
 //----------------------------------------
 int u_kbhit() {
 	CONSOLE("u_kbhit\n");
-	CMN_pumpmessages();
+	Sleep(0); //CMN_pumpmessages();
 	t_callback();
 
 	return CMN_kbhit != 0;
@@ -44,7 +45,7 @@ int u_kbread() {
 	int ret;
 
 	while(CMN_kbhit == 0) {
-		CMN_pumpmessages();
+		Sleep(0); //CMN_pumpmessages();
 	}
 	ret = CMN_kbhit;
 	CMN_kbhit = 0;
@@ -61,7 +62,7 @@ u_kbflush() {
 __cdecl u_delay(unsigned a, unsigned b) {
 	while(a) {
 		a --;
-		CMN_pumpmessages();
+		Sleep(0); //CMN_pumpmessages();
 		t_callback();
 		if(b && CMN_kbhit != 0)
 			break;
@@ -92,20 +93,30 @@ Gra_putchar(char c) {
 	}
 	CONSOLE(")\n");
 #endif
+
+#ifdef ENABLE_WINDOWS
 	CMN_beginScene();
 	CMN_putchar(c, txt_X * 8, txt_Y * 8);
 	CMN_endScene();
-
+#endif
 	FAKE_RET;
 }
+
+extern void add_dot(int x, int y, int col);
+
 __cdecl Gra_dot(int y, int x, int col) {
+	add_dot(x, y, col);
+#ifdef ENABLE_WINDOWS
 	CMN_beginScene();
 	CMN_putpixel(x, y, col);
 	CMN_endScene();
+#endif
 
 	FAKE_RET;
 }
 Gra_animFlow(unsigned tile) {
+
+#ifdef ENABLE_WINDOWS
 	int i;
 	unsigned char *p;
 	unsigned short AX,DX;
@@ -122,11 +133,15 @@ Gra_animFlow(unsigned tile) {
 		DO_SWAP(DX, *(unsigned short *)(p + 0x22), temp);
 		p += 4;
 	}
+#endif
 
 	FAKE_RET;
 }
 static char random() { return (char)(rand() & 0xff); }
+
 Gra_animFlag() {
+
+#ifdef ENABLE_WINDOWS
 	unsigned char *p;
 	unsigned short temp;
 	CONSOLE("Gra_animFlag\n");
@@ -149,6 +164,7 @@ Gra_animFlag() {
 	if(random() >= 0) {
 		DO_SWAP(*(unsigned short *)(p + 0x3A0), *(unsigned short *)(p + 0x384), temp);
 	}
+#endif
 
 	FAKE_RET;
 }
@@ -159,6 +175,7 @@ __cdecl Gra_0(
 	unsigned dst_ofs/*bp0c*/, unsigned dst_seg/*bp0e*/,
 	int dst_x_in_byte/*bp10*/
 ) {
+#ifdef ENABLE_WINDOWS
 	int i, j;
 	unsigned char *pSrc;
 
@@ -176,17 +193,28 @@ __cdecl Gra_0(
 		}
 		CMN_endScene();
 	}
+#endif
 
 	FAKE_RET;
 }
 /*clear view zone*/
 Gra_2() {
+#ifdef ENABLE_WINDOWS
 	CONSOLE("Gra_2 \"clear view zone\"\n");
 	CMN_clear(1, 13, 38, 10, 0);
+#endif
 
 	FAKE_RET;
 }
 
+extern void add_screen_copy_frame_to_buffer(int width_in_char/*bp04*/,
+	int height/*bp06*/,
+	int src_x_in_char/*bp08*/,
+	int src_y/*bp0a*/,
+	void* p/*bp0e:bp0c*/,
+	int dst_y/*bp10*/,
+	int random_stuff/*bp12*/,
+	int dst_x_in_char/*bp14*/);
 __cdecl Gra_3(
 	int width_in_char/*bp04*/, int height/*bp06*/,
 	int src_x_in_char/*bp08*/, int src_y/*bp0a*/,
@@ -195,6 +223,9 @@ __cdecl Gra_3(
 	int random_stuff/*bp12*/,
 	int dst_x_in_char/*bp14*/
 ) {
+	add_screen_copy_frame_to_buffer(width_in_char, height, src_x_in_char, src_y, p, dst_y, random_stuff, dst_x_in_char);
+
+#ifdef ENABLE_WINDOWS
 	int i,j;
 	unsigned char *src_0;
 	int width;
@@ -229,7 +260,7 @@ __cdecl Gra_3(
 				};
 				if(word == 0)
 					continue;
-				//TODO noise
+				//TODO random noise sound
 				word &= D_32D0[(random_stuff & 0xff) + (rand() % 7)];
 			}
 
@@ -244,13 +275,16 @@ __cdecl Gra_3(
 		}
 	}
 	CMN_endScene();
+#endif
 
 	FAKE_RET;
 }
 /*clear text zone*/
 Gra_5() {
+#ifdef ENABLE_WINDOWS
 	CONSOLE("Gra_5 \"clear text zone\"\n");
 	CMN_clear(0, 19, 40, 6, 0);
+#endif
 
 	FAKE_RET;
 }
@@ -268,6 +302,7 @@ __cdecl Gra_B(
 	FAKE_RET;
 }
 __cdecl Gra_C(int height, int width, void *p_0, int dst_y, void *dst, int dst_x_in_byte) {
+#ifdef ENABLE_WINDOWS
 	unsigned char *pSrc;
 	unsigned char *dst_0;
 	int i, j;
@@ -291,10 +326,12 @@ __cdecl Gra_C(int height, int width, void *p_0, int dst_y, void *dst, int dst_x_
 			p += 4;
 		}
 	}
+#endif
 
 	FAKE_RET;
 }
 
+#ifdef ENABLE_WINDOWS
 int skip_bytes = 0;
 
 void output_func(unsigned char root, unsigned char *destination, long* position) {
@@ -305,8 +342,12 @@ void output_func(unsigned char root, unsigned char *destination, long* position)
     destination[*position] = root;
     (*position)++;
 }
+#endif
 
 __cdecl Gra_inflate(const char *fname, void *dest) {
+	add_picture(dest, fname);
+
+#ifdef ENABLE_WINDOWS
 	char path[256];
 	int fd;
 
@@ -335,12 +376,15 @@ __cdecl Gra_inflate(const char *fname, void *dest) {
 }
 		free(src);
 	}
+#endif
 
 	FAKE_RET;
 }
 Gra_clrscr() {
+#ifdef ENABLE_WINDOWS
 	CONSOLE("Gra_clrscr\n");
 	CMN_clear(0, 0, 40, 25, 0);
+#endif
 
 	FAKE_RET;
 }
@@ -366,6 +410,7 @@ C_217E(char *a, void *b) {
 }
 //-- --
 sound_1() {
+	play_sound_effect();
 	FAKE_RET;
 }
 low_clean() {
@@ -376,8 +421,9 @@ C_331E() {
 	FAKE_RET;
 }
 Gra_init() {
+#ifdef ENABLE_WINDOWS
 	CMN_createWindow(320 * RATIO, 200 * RATIO, pShapes, pCharset);
-
+#endif
 	FAKE_RET;
 }
 
@@ -414,15 +460,16 @@ C_3299(int num) {
 	FAKE_RET;
 }
 
+extern const char* getDataPath();
 int Load(char *fname, unsigned size, void *buff) {
 	int fd;
 	unsigned ret;
 	static char path[256];
 
 	CONSOLE("Load:\"%s\"\n", fname);
-	strcpy(path, U4_ROOT);
+	strcpy(path, getDataPath());
 	strcat(path, fname);
-	fd = _open(path, _O_RDONLY|_O_BINARY);
+	fd = _open(path, _O_RDWR |_O_BINARY);
 	if(fd <= 0)
 		return -1;
 	ret = _read(fd, buff, size);
@@ -439,7 +486,7 @@ Save(char *fname, unsigned size, void *buff) {
 	static char path[256];
 
 	CONSOLE("Save:\"%s\"\n", fname);
-	strcpy(path, U4_ROOT);
+	strcpy(path, getDataPath());
 	strcat(path, fname);
 	fd = _open(path, _O_WRONLY|_O_BINARY);
 	if(fd <= 0)

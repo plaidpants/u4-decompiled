@@ -1,6 +1,18 @@
 #ifndef __TITLE_H__
 #define __TITLE_H__
 
+
+#define INPUT_MODE_M_OR_F 1
+#define INPUT_MODE_NAME 2
+#define INPUT_MODE_A_OR_B_CHOICE 3
+#define INPUT_MODE_MAIN_MENU 4
+#define INPUT_MODE_GENERAL_CONTINUE 5
+#define INPUT_MODE_GENERAL_NO_CONTINUE 7
+#define INPUT_MODE_DRIVE_LETTER 6
+#define INPUT_MODE_LAUNCH_GAME 8
+
+extern void set_input_mode(int mode);
+
 #ifdef WIN32
 	#define far
 	#pragma pack(1)

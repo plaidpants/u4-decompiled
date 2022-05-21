@@ -1,3 +1,4 @@
+#ifndef DISABLE_WINDOWS
 /*
  *  lzw.h - LZW decompression from memory to memory
  *
@@ -25,3 +26,4 @@ long lzw_get_decompressed_size(unsigned char* compressed_mem, long compressed_si
 long lzw_decompress(unsigned char* compressed_mem, unsigned char* decompressed_mem, long compressed_size);
 
 #endif /* LZW_H */
+#endif

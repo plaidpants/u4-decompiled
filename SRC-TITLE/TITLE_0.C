@@ -7,6 +7,9 @@
 #include "title.h"
 
 #include <malloc.h>
+
+extern void* _fmalloc(int sz);
+
 #include <stdlib.h>
 
 int D_00C0 = 0;
@@ -23,7 +26,7 @@ static unsigned D_3A84;
 
 /*animate the 2 "monsters"*/
 /*callback for u_delay*/
-/*C_019A*/t_callback()
+/*C_019A*/void t_callback()
 {
 	unsigned bp_02;
 
@@ -56,13 +59,16 @@ unsigned char bp04;
 	}
 }
 
+extern int u_kbhit();
+
 C_02A3(bp04)
 long bp04;
 {
 	if(u_kbhit())
 		return;
-	bp04 *= (long)speed_info;
-	while(-- bp04);
+	//bp04 *= (long)speed_info;
+	//while(-- bp04)
+		Sleep(0);
 }
 
 /*handwriting?*/
@@ -78,8 +84,11 @@ unsigned bp04;
 		if(bp04)
 			C_02A3((long)440);
 	}
-	if(bp04)
+	if (bp04)
+	{
+		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 		u_delay(1, 1);
+	}
 }
 
 /*tiles animation ?*/
@@ -159,6 +168,8 @@ C_041A()
 	}
 }
 
+extern int u_kbread();
+
 /*the "view"*/
 C_05A4()
 {
@@ -166,6 +177,7 @@ C_05A4()
 
 	D_3A84 = 1;
 	D_31C0 = 0;
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	while(!u_kbhit()) {
 		C_034D();
 		C_041A();
@@ -181,6 +193,7 @@ C_05A4()
 		D_6E80 = 1;
 	}
 	D_3A84 = 0;
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_kbread();
 }
 
@@ -189,12 +202,13 @@ C_068C()
 {
 	register unsigned loc_A, loc_B;
 	int loc_C;
-
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_delay(1, 1);
 	/*"lord british"*/
 	C_02D1(1);
 	/*"and"*/
 	Gra_3(4, 4, 19, 17, pTitle, 17, -1, 19);
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_delay(1, 1);
 	/*draw line*/
 	for(loc_A = 86; loc_A < 238; loc_A++) {
@@ -206,6 +220,7 @@ C_068C()
 		Gra_3(21, loc_A, 9, 21, pTitle, 30 - loc_A, -1, 9);
 		C_02A3((long)5000);
 	}
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_delay(1, 1);
 	/* */
 	if(!u_kbhit()) {
@@ -214,6 +229,7 @@ C_068C()
 			Gra_3(15, loc_A, 14, 5 - loc_A, pTitle, 33, -1, 14);
 			C_02A3((long)5000);
 		}
+		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 		u_delay(1, 1);
 		/*"Ultima iv"*/
 		for(loc_A = 0; loc_A < 57; loc_A ++) {
@@ -223,6 +239,7 @@ C_068C()
 			if(speed_info > 4)
 				Gra_B(30, 45, 5, 34, pTitle, 34, loc_A, 5);
 		}
+		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 		u_delay(1, 1);
 	} else {
 		Gra_3(30, 45,  5, 34, pTitle, 34, -1,  5);
@@ -293,11 +310,12 @@ register char *si;
 C_0B45()
 {
 	Gra_2();
-	C_0B1E(14,  2, /*D_00EF*/"In another world, in a time to come.");
-	C_0B1E(16, 15, /*D_0114*/"Options:");
-	C_0B1E(17, 11, /*D_011D*/"Return to the view");
-	C_0B1E(18, 11, /*D_0130*/"Journey Onward");
-	C_0B1E(19, 11, /*D_013F*/"Initiate New Game");
+	C_0B1E(13,  2, /*D_00EF*/"In another world, in a time to come.");
+	C_0B1E(15, 15, /*D_0114*/"Options:");
+	C_0B1E(16, 11, /*D_011D*/"Return to the view");
+	C_0B1E(17, 11, /*D_0130*/"Journey Onward");
+	C_0B1E(18, 11, /*D_013F*/"Initiate New Game");
+	C_0B1E(20, 5, /*D_0151*/"VR Conversion by James Surine");
 	C_0B1E(21,  3, /*D_0151*/"Conversion by James Van Artsdalen");
 	C_0B1E(22,  5, /*D_0173*/"\x9 Copyright 1987 Lord British");
 	txt_X = 24;
@@ -348,8 +366,447 @@ C_0BCA()
 	C_0B45();
 }
 
-cdecl /*C_0EAA*/main()
+struct ScreenCopyFrame
 {
+	int width_in_char/*bp04*/;
+	int height/*bp06*/;
+	int src_x_in_char/*bp08*/;
+	int src_y/*bp0a*/;
+	void* p/*bp0e:bp0c*/;
+	int dst_y/*bp10*/;
+	int random_stuff/*bp12*/;
+	int dst_x_in_char/*bp14*/;
+};
+
+#define MAX_SCREEN_COPY_FRAME 10
+struct ScreenCopyFrame screen_copy_frame[MAX_SCREEN_COPY_FRAME];
+int current_screen_copy_frame_pointer;
+int current_screen_copy_frame_size;
+int screen_copy_frame_simple_mutex = 0;
+
+void add_screen_copy_frame_to_buffer(int width_in_char/*bp04*/,
+	int height/*bp06*/,
+	int src_x_in_char/*bp08*/,
+	int src_y/*bp0a*/,
+	void* p/*bp0e:bp0c*/,
+	int dst_y/*bp10*/,
+	int random_stuff/*bp12*/,
+	int dst_x_in_char/*bp14*/)
+{
+	screen_copy_frame[current_screen_copy_frame_pointer].width_in_char = width_in_char;
+	screen_copy_frame[current_screen_copy_frame_pointer].height = height;
+	screen_copy_frame[current_screen_copy_frame_pointer].src_x_in_char = src_x_in_char;
+	screen_copy_frame[current_screen_copy_frame_pointer].src_y = src_y;
+	screen_copy_frame[current_screen_copy_frame_pointer].p = p;
+	screen_copy_frame[current_screen_copy_frame_pointer].dst_y = dst_y;
+	screen_copy_frame[current_screen_copy_frame_pointer].random_stuff = random_stuff;
+	screen_copy_frame[current_screen_copy_frame_pointer].dst_x_in_char = dst_x_in_char;
+
+	current_screen_copy_frame_pointer++;
+	if (current_screen_copy_frame_pointer > MAX_SCREEN_COPY_FRAME - 1)
+	{
+		current_screen_copy_frame_pointer = 0;
+	}
+
+	current_screen_copy_frame_size++;
+	if (current_screen_copy_frame_size > MAX_SCREEN_COPY_FRAME)
+	{
+		current_screen_copy_frame_size = MAX_SCREEN_COPY_FRAME;
+	}
+
+#ifndef ENABLE_WINDOWS
+	// wait until frame is read before continuing
+	screen_copy_frame_simple_mutex = 1;
+
+	while (screen_copy_frame_simple_mutex == 1)
+	{
+		Sleep(0);
+	}
+#endif
+}
+
+__declspec(dllexport) int cdecl  main_screen_copy_frame(int buffer[], int length)
+{
+	// check if anything to return
+	if (screen_copy_frame_simple_mutex == 0)
+	{
+		return 0;
+	}
+
+	// save these here
+	int save_screen_copy_frame_size = current_screen_copy_frame_size;
+	int save_screen_copy_frame_pointer = current_screen_copy_frame_pointer;
+
+	// check if the buffer is big enough
+	if (length < save_screen_copy_frame_size * 8)
+	{
+		// empty the buffer
+		current_screen_copy_frame_size = 0;
+		current_screen_copy_frame_pointer = 0;
+
+		screen_copy_frame_simple_mutex = 0;
+
+		// return nothing
+		return 0;
+	}
+
+	//printf("Text buffer size %d\n", current_text_buffer_size);
+
+	int buffer_index = 0;
+
+	// we have not filled the buffer
+	if (save_screen_copy_frame_size < MAX_SCREEN_COPY_FRAME - 1)
+	{
+		for (int i = 0; i < save_screen_copy_frame_size; i++)
+		{
+			buffer[buffer_index++] = screen_copy_frame[i].width_in_char;
+			buffer[buffer_index++] = screen_copy_frame[i].height;
+			buffer[buffer_index++] = screen_copy_frame[i].src_x_in_char;
+			buffer[buffer_index++] = screen_copy_frame[i].src_y;
+			buffer[buffer_index++] = screen_copy_frame[i].p;
+			buffer[buffer_index++] = screen_copy_frame[i].dst_y;
+			buffer[buffer_index++] = screen_copy_frame[i].random_stuff;
+			buffer[buffer_index++] = screen_copy_frame[i].dst_x_in_char;
+			save_screen_copy_frame_pointer++;
+		}
+	}
+	// the buffer is full dump from the wrap
+	else
+	{
+		for (int i = 0; i < save_screen_copy_frame_size; i++)
+		{
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].width_in_char;
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].height;
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].src_x_in_char;
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].src_y;
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].p;
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].dst_y;
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].random_stuff;
+			buffer[buffer_index++] = screen_copy_frame[save_screen_copy_frame_pointer].dst_x_in_char;
+			save_screen_copy_frame_pointer++;
+
+			// wrap
+			if (save_screen_copy_frame_pointer > MAX_SCREEN_COPY_FRAME - 1)
+			{
+				save_screen_copy_frame_pointer = 0;
+			}
+		}
+	}
+
+	// empty the buffer
+	current_screen_copy_frame_size = 0;
+	current_screen_copy_frame_pointer = 0;
+	//printf("text buffer cleared\n");
+
+	screen_copy_frame_simple_mutex = 0;
+
+	return save_screen_copy_frame_size;
+}
+
+int current_dot_x; 
+int current_dot_y;
+int current_dot_col;
+int dot_simple_mutex = 0;
+
+void add_dot(int x, int y, int col)
+{
+	current_dot_x = x;
+	current_dot_y = y;
+	current_dot_col = col;
+
+#ifndef ENABLE_WINDOWS
+	// wait until dot is read before continuing
+	dot_simple_mutex = 1;
+
+	while (dot_simple_mutex == 1)
+	{
+		Sleep(0);
+	}
+#endif
+}
+
+__declspec(dllexport) int cdecl  main_dot(int buffer[], int length)
+{
+	int buffer_index = 0;
+
+	// check if anything to return
+	if (dot_simple_mutex == 0)
+	{
+		return 0;
+	}
+
+	buffer[buffer_index++] = current_dot_x;
+	buffer[buffer_index++] = current_dot_y;
+	buffer[buffer_index++] = current_dot_col;
+
+	dot_simple_mutex = 0;
+
+	return 1;
+}
+
+#define MAX_TEXT 500
+char text_buffer[MAX_TEXT];
+int current_text_buffer_pointer;
+int current_text_buffer_size;
+
+void add_char_to_text_buffer(char ch)
+{
+	//printf("%c", ch);
+	text_buffer[current_text_buffer_pointer++] = ch;
+	if (current_text_buffer_pointer > MAX_TEXT - 1)
+	{
+		current_text_buffer_pointer = 0;
+	}
+	current_text_buffer_size++;
+	if (current_text_buffer_size > MAX_TEXT)
+	{
+		current_text_buffer_size = MAX_TEXT;
+	}
+}
+
+__declspec(dllexport) int cdecl  main_Text(unsigned char buffer[], int length)
+{
+	int buffer_index = 0;
+	int ret = 0;
+
+	if (length >= current_text_buffer_size)
+	{
+		ret = current_text_buffer_size;
+
+		//printf("Text buffer size %d\n", current_text_buffer_size);
+
+		// we have not filled the text buffer
+		if (current_text_buffer_size < MAX_TEXT - 1)
+		{
+			for (int i = 0; i < current_text_buffer_size; i++)
+			{
+				buffer[buffer_index++] = text_buffer[i];
+			}
+		}
+		// the text buffer is full dump from the wrap
+		else
+		{
+			for (int i = 0; i < current_text_buffer_size; i++)
+			{
+				buffer[buffer_index++] = text_buffer[current_text_buffer_pointer++];
+
+				// wrap
+				if (current_text_buffer_pointer > MAX_TEXT - 1)
+				{
+					current_text_buffer_pointer = 0;
+				}
+			}
+		}
+
+		// empty the text buffer
+		current_text_buffer_size = 0;
+		current_text_buffer_pointer = 0;
+		//printf("text buffer cleared\n");
+	}
+
+	return ret;
+}
+
+int input_mode = 0;
+
+void set_input_mode(int mode)
+{
+	input_mode = mode;
+}
+
+int current_sound_effect = -1;
+
+void play_sound_effect()
+{
+	int timeout = 1000;
+
+	current_sound_effect = 0;
+
+#ifndef ENABLE_WINDOWS
+	// wait for the sound effect to finish playing
+	while (current_sound_effect != -1 && timeout > 0)
+	{
+		timeout--;
+		Sleep(0);
+	}
+#endif
+
+	current_sound_effect = -1;
+}
+
+#define VK_SPACE          0x20
+#define VK_LEFT           0x25
+#define VK_UP             0x26
+#define VK_RIGHT          0x27
+#define VK_DOWN           0x28
+#define VK_ESCAPE         0x1B
+#define VK_RETURN         0x0D
+#define VK_BACK           0x08
+extern int CMN_kbhit;
+
+__declspec(dllexport) void cdecl main_keyboardHit(char wParam)
+{
+	switch (wParam) {
+	case VK_LEFT: CMN_kbhit = KBD_LEFT; break;
+	case VK_RIGHT: CMN_kbhit = KBD_RIGHT; break;
+	case VK_UP: CMN_kbhit = KBD_UP; break;
+	case VK_DOWN: CMN_kbhit = KBD_DOWN; break;
+
+	case VK_RETURN: CMN_kbhit = KBD_ENTER; break;
+	case VK_ESCAPE: CMN_kbhit = KBD_ESC; break;
+	case VK_SPACE: CMN_kbhit = KBD_SPACE; break;
+	case VK_BACK: CMN_kbhit = KBD_BS; break;
+
+	case 'A': CMN_kbhit = KBD_A; break;
+	case 'B': CMN_kbhit = KBD_B; break;
+	case 'C': CMN_kbhit = KBD_C; break;
+	case 'D': CMN_kbhit = KBD_D; break;
+	case 'E': CMN_kbhit = KBD_E; break;
+	case 'F': CMN_kbhit = KBD_F; break;
+	case 'G': CMN_kbhit = KBD_G; break;
+	case 'H': CMN_kbhit = KBD_H; break;
+	case 'I': CMN_kbhit = KBD_I; break;
+	case 'J': CMN_kbhit = KBD_J; break;
+	case 'K': CMN_kbhit = KBD_K; break;
+	case 'L': CMN_kbhit = KBD_L; break;
+	case 'M': CMN_kbhit = KBD_M; break;
+	case 'N': CMN_kbhit = KBD_N; break;
+	case 'O': CMN_kbhit = KBD_O; break;
+	case 'P': CMN_kbhit = KBD_P; break;
+	case 'Q': CMN_kbhit = KBD_Q; break;
+	case 'R': CMN_kbhit = KBD_R; break;
+	case 'S': CMN_kbhit = KBD_S; break;
+	case 'T': CMN_kbhit = KBD_T; break;
+	case 'U': CMN_kbhit = KBD_U; break;
+	case 'V': CMN_kbhit = KBD_V; break;
+	case 'W': CMN_kbhit = KBD_W; break;
+	case 'X': CMN_kbhit = KBD_X; break;
+	case 'Y': CMN_kbhit = KBD_Y; break;
+	case 'Z': CMN_kbhit = KBD_Z; break;
+
+	case '0': CMN_kbhit = KBD_0; break;
+	case '1': CMN_kbhit = KBD_1; break;
+	case '2': CMN_kbhit = KBD_2; break;
+	case '3': CMN_kbhit = KBD_3; break;
+	case '4': CMN_kbhit = KBD_4; break;
+	case '5': CMN_kbhit = KBD_5; break;
+	case '6': CMN_kbhit = KBD_6; break;
+	case '7': CMN_kbhit = KBD_7; break;
+	case '8': CMN_kbhit = KBD_8; break;
+		//case '9': CMN_kbhit = KBD_9; break;
+	}
+}
+
+__declspec(dllexport) int cdecl  main_sound_effect()
+{
+	return current_sound_effect;
+}
+
+__declspec(dllexport) int cdecl  main_input_mode()
+{
+	return input_mode;
+}
+
+__declspec(dllexport) void cdecl  main_sound_effect_done()
+{
+	current_sound_effect = -1;
+}
+
+static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
+
+const char* getDataPath()
+{
+	return &U4_ROOT[0];
+}
+
+__declspec(dllexport) void cdecl main_SetDataPath(unsigned char path[], int length)
+{
+	// is the path too big for our buffer + null terminator?
+	if (length > 255)
+	{
+		// just bail
+		return;
+	}
+
+	// save the path from the controlling application
+	strncpy(U4_ROOT, path, length);
+
+	// make sure it's null terminated
+	U4_ROOT[length] = 0; 
+}
+
+static char current_picture[256] = "";
+void * current_picture_dest;
+
+const char* get_current_picture()
+{
+	return &current_picture[0];
+}
+
+extern const char* get_current_picture();
+extern void* current_picture_dest;
+extern void* get_screen_buffer();
+
+int picture_simple_mutex = 0;
+
+void add_picture(void* dest, char* fname)
+{
+	current_picture_dest = dest;
+	strncpy(get_current_picture(), fname, 254);
+
+#ifndef ENABLE_WINDOWS
+	// wait until dot is read before continuing
+	picture_simple_mutex = 1;
+
+	while (picture_simple_mutex == 1)
+	{
+		Sleep(0);
+	}
+#endif
+}
+
+__declspec(dllexport) int cdecl main_GetPicture(unsigned char picture[], int length)
+{
+	// nothing to get
+	if (picture_simple_mutex == 0)
+	{
+		return 0;
+	}
+
+	// is the vision too big for our buffer + null terminator?
+	if (length < 256)
+	{
+		// reset this for the next one
+		current_picture[0] = 0;
+		current_picture_dest = 0;
+		picture_simple_mutex = 0;
+
+		// just bail
+		return 0;
+	}
+
+	// return the vision to the controlling application
+	memcpy(picture, get_current_picture(), 255);
+
+	picture[254] = 0; // make sure it's null terminated
+
+	// save the return value
+	int ret = current_picture_dest;
+
+	// reset this for the next one
+	current_picture[0] = 0;
+	current_picture_dest = 0;
+	picture_simple_mutex = 0;
+
+	// return the save return value
+	return ret;
+}
+
+int QUIT = 0;
+
+__declspec(dllexport) cdecl /*C_0EAA*/main()
+{
+	set_input_mode(INPUT_MODE_GENERAL_NO_CONTINUE);
 	D_31C0 = 0;
 	low_init();
 
@@ -414,6 +871,7 @@ cdecl /*C_0EAA*/main()
 		int bp_02;
 
 /*C_10E8:*/
+		set_input_mode(INPUT_MODE_MAIN_MENU);
 		bp_02 = u_kbread();
 		if(u4_isupper((unsigned char)bp_02))
 			bp_02 = (bp_02 & 0xff00) | u4_lower((unsigned char)bp_02);
@@ -426,18 +884,25 @@ cdecl /*C_0EAA*/main()
 			break;
 			case KBD_I:/*(I)nitiate*/
 				C_3030();
-				C_0BCA();
+				if (QUIT == 0)
+				{
+					// redraw the title screen if we bail out of the initiate new game
+					C_0BCA();
+				}
 			break;
 			case KBD_J:/*(J)ourney*/
 				_ffree(pAnim);
 				_ffree(pShapes);
 				_ffree(pCharset);
 				low_clean();
-				exit(D_7082?'1':'0');
+				QUIT = 1;
+				//exit(D_7082?'1':'0');
 			break;
 			default:
 				sound_1();
 			break;
 		}
-	} while(1);
+	//} while (1);
+	} while (QUIT == 0);
+	set_input_mode(INPUT_MODE_LAUNCH_GAME);
 }

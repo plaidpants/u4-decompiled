@@ -37,6 +37,7 @@
 #define tmp_karma static_J
 /*====---- ----====*/
 
+extern void* _fmalloc(int sz);
 
 #if 0
 #include "joe.h"
@@ -468,6 +469,8 @@ moment, the spinning subsides, and you\n\
 open your eyes to..."
 };
 
+extern void add_char_to_text_buffer(char ch);
+
 /*C_261D*/u4_puts(bp04)
 char *bp04;
 {
@@ -478,6 +481,7 @@ char *bp04;
 			txt_Y ++;
 			txt_X = 0;
 		} else {
+			add_char_to_text_buffer(*bp04);
 			u4_putc(*bp04);
 		}
 		bp04 ++;
@@ -492,6 +496,7 @@ unsigned bp04;
 	register unsigned di;
 	unsigned bp_04;
 
+	set_input_mode(INPUT_MODE_NAME);
 	di = 0;
 	do {
 		bp_04 = u_kbread();
@@ -541,6 +546,7 @@ char *bp04;
 	txt_X = 0;
 	txt_Y = 19;
 	u4_puts(bp04);
+	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_kbread();
 }
 
@@ -568,6 +574,11 @@ C_27E0()
 		for(bp_04 = 1; bp_04 <= 10000; bp_04 ++);
 	}
 	Gra_3(3, 24, 3, 152, D_6940, 68, -1, 9);
+}
+
+void * get_screen_buffer()
+{
+	return D_6940;
 }
 
 C_2883()
@@ -621,6 +632,7 @@ C_2883()
 				Gra_3(40, 152, 0, 0, D_6940, 0, -1, 0);
 			break;
 		}
+		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 		u_kbflush();
 		u_kbread();
 	}
@@ -724,12 +736,14 @@ C_2C12()
 		C_2B6D(loc_C, 1);
 		u4_puts(STR(0x39 + loc_C));
 		u4_puts(/*D_3094*/".  She says\n\"Consider this:\"");
+		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 		u_kbflush();
 		u_kbread();
 		Gra_5();
 		txt_X = 0;
 		txt_Y = 19;
 		u4_puts(STR(D_30CA[loc_B] + loc_C));
+		set_input_mode(INPUT_MODE_A_OR_B_CHOICE);
 		do {
 			loc_A = u_kbread();
 			if(u4_isupper((unsigned char)loc_A))
@@ -808,6 +822,8 @@ C_2F07(bp06, bp04)/*%%% hacked %%%*/
 char *bp06;
 char *bp04;
 {
+	// always have either disk inserted
+	return;
 	int bp_02;
 
 	Gra_clrscr();
@@ -820,8 +836,10 @@ char *bp04;
 	txt_Y ++;
 	txt_X = 11;
 	u4_puts(/*D_3100*/"press drive letter");
+	set_input_mode(INPUT_MODE_DRIVE_LETTER);
 	while(!u_kbhit());
 	do {
+		set_input_mode(INPUT_MODE_DRIVE_LETTER);
 		bp_02 = u_kbread() & 0xff;
 		u4_toupper(bp_02);
 		if(bp_02 != 'B' || D_7082 != 0) {
@@ -833,6 +851,7 @@ char *bp04;
 		if((C_3290() & 0xff) == bp_02 && C_32AB(bp04))
 			return;
 		sound_1();
+		set_input_mode(INPUT_MODE_DRIVE_LETTER);
 		while(!u_kbhit());
 	} while(1);
 }
@@ -856,6 +875,7 @@ C_2FB8()
 }
 
 extern C_0B1E(int, int, char *);
+extern int QUIT;
 
 C_3030()
 {
@@ -872,6 +892,7 @@ C_3030()
 	}
 	Gra_2();
 	C_0B1E(17, 4, /*D_31A2*/"Art thou Male or Female? ");
+	set_input_mode(INPUT_MODE_M_OR_F);
 	M_or_F = u_kbread() & 0xff;
 	u4_toupper(M_or_F);
 	while(M_or_F != 'M' && M_or_F != 'F') {
@@ -897,5 +918,5 @@ C_3030()
 	/*-- clean & return to dos --*/
 	_ffree(pCharset);
 	low_clean();
-	exit('A' + D_6938 - 1);
+	QUIT = 1; //exit('A' + D_6938 - 1);
 }
