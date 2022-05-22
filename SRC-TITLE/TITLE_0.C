@@ -316,7 +316,7 @@ C_0B45()
 	C_0B1E(17, 11, /*D_0130*/"Journey Onward");
 	C_0B1E(18, 11, /*D_013F*/"Initiate New Game");
 	C_0B1E(20, 5, /*D_0151*/"VR Conversion by James Surine");
-	C_0B1E(21,  3, /*D_0151*/"Conversion by James Van Artsdalen");
+	C_0B1E(21,  3, /*D_0151*/"PC Conversion by James Van Artsdalen");
 	C_0B1E(22,  5, /*D_0173*/"\x9 Copyright 1987 Lord British");
 	txt_X = 24;
 	txt_Y = 16;

@@ -47,401 +47,401 @@ extern void* _fmalloc(int sz);
 
 char *D_2EE6[0x43] = {
 /*0x01*//*D_0424*/
-"Entrusted to deliver an uncounted purse\n\
-of gold, thou dost meet a poor beggar.\n\
-Dost thou A) deliver the gold knowing\n\
-the Trust in thee was well placed, or\n\
-B) show Compassion, giving the beggar a\n\
+"\n\nEntrusted to deliver an uncounted purse \
+of gold, thou dost meet a poor beggar. \
+Dost thou \n\nA) deliver the gold knowing \
+the Trust in thee was well placed, or \
+\n\nB) show Compassion, giving the beggar a \
 coin, knowing it won't be missed?",
 
 /*0x02*//*D_0509*/
-"Thou has been prohibited by thy absent\n\
-Lord from joining thy friends in a close\n\
-pitched battle. Dost thou A) refrain, so\n\
-thou may Honesty claim obedience, or\n\
-B) show Valor, and aid thy comrades,\n\
+"\n\nThou has been prohibited by thy absent \
+Lord from joining thy friends in a close \
+pitched battle. Dost thou \n\nA) refrain, so \
+thou may Honesty claim obedience, or \
+\n\nB) show Valor, and aid thy comrades, \
 knowing thou may deny it later?",
 
 /*0x03*//*D_05EC*/
-"A merchant owes thy friend money, now\n\
-long past due.  Thou dost see the same\n\
-merchant drop a purse of gold. Dost thou\n\
-A) Honestly return the purse intact, or\n\
-B) Justly give thy friend a portion of\n\
+"\n\nA merchant owes thy friend money, now \
+long past due. Thou dost see the same \
+merchant drop a purse of gold. Dost thou \
+\n\nA) Honestly return the purse intact, or \
+\n\nB) Justly give thy friend a portion of \
 the gold first?",
 
 /*0x04*//*D_06C1*/
-"Thee and thy friend are valiant but\n\
-penniless warriors.  Thou both go out to\n\
-slay a mighty dragon.  Thy friend thinks\n\
-he slew it; thee did.  When asked, dost\n\
-thou A) Truthfully claim the gold, or\n\
-B) Allow thy friend the large reward?",
+"\n\nThee and thy friend are valiant but \
+penniless warriors. Thou both go out to \
+slay a mighty dragon. Thy friend thinks \
+he slew it; thee did. When asked, dost \
+thou \n\nA) Truthfully claim the gold, or \
+\n\nB) Allow thy friend the large reward?",
 
 /*0x05*//*D_07AB*/
-"Thou art sworn to protect thy Lord at\n\
-any cost, yet thou know he hath\n\
-committed a crime.  Authorities ask thee\n\
-of the affair.  Dost thou A) break thine\n\
-oath by Honestly speaking, or B) uphold\n\
+"\n\nThou art sworn to protect thy Lord at \
+any cost, yet thou know he hath \
+committed a crime. Authorities ask thee \
+of the affair. Dost thou \n\nA) break thine \
+oath by Honestly speaking, or \n\nB) uphold \
 Honor by silently keeping thine oath?",
 
 /*0x06*//*D_0891*/
-"Thy friend seeks admittance to thy\n\
-Spiritual order. Thou art asked to vouch\n\
-for his purity of Spirit, of which thou\n\
-art unsure.  Dost thou A) Honestly\n\
-express thy doubt, or B) Vouch for him\n\
+"\n\nThy friend seeks admittance to thy \
+Spiritual order. Thou art asked to vouch \
+for his purity of Spirit, of which thou \
+art unsure. Dost thou \n\nA) Honestly \
+express thy doubt, or \n\nB) Vouch for him \
 hoping for his Spiritual improvement?",
 
 /*0x07*//*D_0975*/
-"Thy Lord mistakenly believes he slew a\n\
-dragon.  Thou hast proof that thy lance\n\
-felled the beast.  When asked, dost thou\n\
-A) Honestly claim the kill and the\n\
-prize, or B) Humbly permit thy Lord his\n\
+"\n\nThy Lord mistakenly believes he slew a \
+dragon. Thou hast proof that thy lance \
+felled the beast. When asked, dost thou \
+\n\nA) Honestly claim the kill and the \
+prize, or \n\nB) Humbly permit thy Lord his \
 belief?",
 
 /*0x08*//*D_0A40*/
-"Thou dost manage to disarm thy mortal\n\
-enemy in a duel.  He is at thy mercy.\n\
-Dost thou A) show Compassion by\n\
-permitting him to yield, or B) slay him\n\
+"\n\nThou dost manage to disarm thy mortal \
+enemy in a duel. He is at thy mercy. \
+Dost thou \n\nA) show Compassion by \
+permitting him to yield, or \n\nB) slay him \
 as expected of a Valiant duelist?",
 
 /*0x09*//*D_0AF6*/
-"After 20 years thou hast found the\n\
-slayer of thy best friends.  The villain\n\
-proves to be a man who provides the sole\n\
-support for a young girl.  Dost thou\n\
-A) spare him in Compassion for the girl,\n\
-or B) slay him in the name of Justice?",
+"\n\nAfter 20 years thou hast found the \
+slayer of thy best friends. The villain \
+proves to be a man who provides the sole \
+support for a young girl. Dost thou \
+\n\nA) spare him in Compassion for the girl, \
+or \n\nB) slay him in the name of Justice?",
 
 /*0x0a*//*D_0BE0*/
-"Thee and thy friends have been routed\n\
-and ordered to retreat.  In defiance of\n\
-thy orders, dost thou A) stop in\n\
-Compassion to aid a wounded companion,\n\
-or B) Sacrifice thyself to slow the\n\
+"\n\nThee and thy friends have been routed \
+and ordered to retreat. In defiance of \
+thy orders, dost thou \n\nA) stop in \
+Compassion to aid a wounded companion, \
+or \n\nB) Sacrifice thyself to slow the \
 pursuing enemy, so others may escape?",
 
 /*0x0b*//*D_0CC0*/
-"Thou art sworn to uphold a Lord who\n\
-participates in the forbidden torture of\n\
-prisoners.  Each night their cries of\n\
-pain reach thee.  Dost thou A) show\n\
-Compassion by reporting the deeds, or\n\
-B) Honor thy oath and ignore the deeds?",
+"\n\nThou art sworn to uphold a Lord who \
+participates in the forbidden torture of \
+prisoners. Each night their cries of \
+pain reach thee. Dost thou \n\nA) show \
+Compassion by reporting the deeds, or \
+\n\nB) Honor thy oath and ignore the deeds?",
 
 /*0x0c*//*D_0DA5*/
-"Thou hast been taught to preserve all\n\
-life as sacred. A man lies fatally stung\n\
-by a venomous serpent.  He pleads for a\n\
-merciful death.  Dost thou A) show\n\
-Compassion and end his pain, or B) heed\n\
+"\n\nThou hast been taught to preserve all \
+life as sacred. A man lies fatally stung \
+by a venomous serpent. He pleads for a \
+merciful death. Dost thou \n\nA) show \
+Compassion and end his pain, or \n\nB) heed \
 thy Spiritual beliefs and refuse?",
 
 /*0x0d*//*D_0E89*/
-"As one of the King's Guard, thy Captain\n\
-has asked that one amongst you visit\n\
-a hospital to cheer the children with\n\
-tales of thy valiant deeds.  Dost thou\n\
-A) Show thy Compassion and play the\n\
-braggart, or B) Humbly let another go?",
+"\n\nAs one of the King's Guard, thy Captain \
+has asked that one amongst you visit \
+a hospital to cheer the children with \
+tales of thy valiant deeds. Dost thou \
+\n\nA) Show thy Compassion and play the \
+braggart, or \n\nB) Humbly let another go?",
 
 /*0x0e*//*D_0F6E*/
-"Thou hast been sent to secure a needed\n\
-treaty with a distant Lord.  Thy host is\n\
-agreeable to the proposal but insults\n\
-thy country at dinner.  Dost thou\n\
-A) Valiantly bear the slurs, or\n\
-B) Justly rise and demand an apology?",
+"\n\nThou hast been sent to secure a needed \
+treaty with a distant Lord. Thy host is \
+agreeable to the proposal but insults \
+thy country at dinner. Dost thou \
+\n\nA) Valiantly bear the slurs, or \
+\n\nB) Justly rise and demand an apology?",
 
 /*0x0f*//*D_104C*/
-"A mighty knight accosts thee and demands\n\
-thy food.  Dost thou A) Valiantly refuse\n\
-and engage the knight, or B) Sacrifice\n\
+"\n\nA mighty knight accosts thee and demands \
+thy food. Dost thou \n\nA) Valiantly refuse \
+and engage the knight, or \n\nB) Sacrifice \
 thy food unto the hungry knight?",
 
 /*0x10*//*D_10E6*/
-"During battle thou art ordered to guard\n\
-thy commander's empty tent.  The battle\n\
-goes poorly and thou dost yearn to aid\n\
-thy fellows.  Dost thou A) Valiantly\n\
-enter the battle to aid thy companions,\n\
-or B) Honor thy post as guard?",
+"\n\nDuring battle thou art ordered to guard \
+thy commander's empty tent. The battle \
+goes poorly and thou dost yearn to aid \
+thy fellows. Dost thou \n\nA) Valiantly \
+enter the battle to aid thy companions, \
+or \n\nB) Honor thy post as guard?",
 
 /*0x11*//*D_11C9*/
-"A local bully pushes for a fight.  Dost\n\
-thou A) Valiantly trounce the rogue, or\n\
-B) Decline, knowing in thy Spirit that\n\
+"\n\nA local bully pushes for a fight. Dost \
+thou \n\nA) Valiantly trounce the rogue, or \
+\n\nB) Decline, knowing in thy Spirit that \
 no lasting good will come of it?",
 
 /*0x12*//*D_1261*/
-"Although a teacher of music, thou art\n\
-a skillful wrestler.  Thou hast been\n\
-asked to fight in a local championship.\n\
-Dost thou A) accept the invitation and\n\
-Valiantly fight to win, or B) Humbly\n\
+"\n\nAlthough a teacher of music, thou art \
+a skillful wrestler. Thou hast been \
+asked to fight in a local championship. \
+Dost thou \n\nA) accept the invitation and \
+Valiantly fight to win, or \n\nB) Humbly \
 decline knowing thou art sure to win?",
 
 /*0x13*//*D_1346*/
-"During a pitched battle, thou dost see\n\
-a fellow desert his post, endangering\n\
-many.  As he flees, he is set upon by\n\
-several enemies. Dost thou A) Justly let\n\
-him fight alone, or B) Risk Sacrificing\n\
+"\n\nDuring a pitched battle, thou dost see \
+a fellow desert his post, endangering \
+many. As he flees, he is set upon by \
+several enemies. Dost thou \n\nA) Justly let \
+him fight alone, or \n\nB) Risk Sacrificing \
 thine own life to aid him?",
 
 /*0x14*//*D_1425*/
-"Thou hast sworn to do thy Lord's\n\
-bidding in all.  He covets a piece of\n\
-land and orders the owner removed.  Dost\n\
-thou A) serve Justice refusing to act,\n\
-thus being disgraced, or B) Honor thine\n\
+"\n\nThou hast sworn to do thy Lord's \
+bidding in all. He covets a piece of \
+land and orders the owner removed. Dost \
+thou \n\nA) serve Justice refusing to act, \
+thus being disgraced, or \n\nB) Honor thine \
 oath and unfairly evict the landowner?",
 
 /*0x15*//*D_150B*/
-"Thou dost believe that virtue resides\n\
-in all people.  Thou dost see a rogue\n\
-steal from thy Lord.  Dost thou A) call\n\
-him to Justice, or B) personally try to\n\
-sway him back to the Spiritual path of\n\
+"\n\nThou dost believe that virtue resides \
+in all people. Thou dost see a rogue \
+steal from thy Lord. Dost thou \n\nA) call \
+him to Justice, or \n\nB) personally try to \
+sway him back to the Spiritual path of \
 good?",
 
 /*0x16*//*D_15D4*/
-"Unwitnessed, thou hast slain a great\n\
-dragon in self defense.  A poor warrior\n\
-claims the offered reward.  Dost thou\n\
-A) Justly step forward to claim the\n\
-reward, or B) Humbly go about life,\n\
+"\n\nUnwitnessed, thou hast slain a great \
+dragon in self defense. A poor warrior \
+claims the offered reward. Dost thou \
+\n\nA) Justly step forward to claim the \
+reward, or \n\nB) Humbly go about life, \
 secure in thy self esteem?",
 
 /*0x17*//*D_16AA*/
-"Thou art a bounty hunter sworn to return\n\
-an alleged murder.  After his capture\n\
-thou believest him to be innocent.  Dost\n\
-thou A) Sacrifice thy sizable bounty\n\
-for thy belief, or B) Honor thy oath to\n\
+"\n\nThou art a bounty hunter sworn to return \
+an alleged murder. After his capture \
+thou believest him to be innocent. Dost \
+thou \n\nA) Sacrifice thy sizable bounty \
+for thy belief, or \n\nB) Honor thy oath to \
 return him as thou hast promised?",
 
 /*0x18*//*D_1791*/
-"Thou hast spent thy life in charitable\n\
-and righteous work.  Thine uncle the\n\
-innkeeper lies ill and asks you to take\n\
-over his tavern.  Dost thou A) Sacrifice\n\
-thy life of purity to aid thy kin, or\n\
-B) decline & follow thy Spirit's call?",
+"\n\nThou hast spent thy life in charitable \
+and righteous work. Thine uncle the \
+innkeeper lies ill and asks you to take \
+over his tavern. Dost thou \n\nA) Sacrifice \
+thy life of purity to aid thy kin, or \
+\n\nB) decline & follow thy Spirit's call?",
 
 /*0x19*//*D_187B*/
-"Thou art an elderly, wealthy eccentric.\n\
-Thy end is near. Dost thou A) donate all\n\
-thy wealth to feed hundreds of starving\n\
-children, and receive public adulation,\n\
-or B) Humbly live out thy life, willing\n\
+"\n\nThou art an elderly, wealthy eccentric. \
+Thy end is near. Dost thou \n\nA) donate all \
+thy wealth to feed hundreds of starving \
+children, and receive public adulation, \
+or \n\nB) Humbly live out thy life, willing \
 thy fortune to thy heirs?",
 
 /*0x1a*//*D_195E*/
-"In thy youth thou pledged to marry thy\n\
-sweetheart.  Now thou art on a sacred\n\
-quest in distant lands.  Thy sweetheart\n\
-asks thee to keep thy vow.  Dost thou\n\
-A) Honor thy pledge to wed, or B) follow\n\
+"\n\nIn thy youth thou pledged to marry thy \
+sweetheart. Now thou art on a sacred \
+quest in distant lands. Thy sweetheart \
+asks thee to keep thy vow. Dost thou \
+\n\nA) Honor thy pledge to wed, or \n\nB) follow \
 thy Spiritual crusade?",
 
 /*0x1b*//*D_1A39*/
-"Thou art at a crossroads in thy life.\n\
-Dost thou A) Choose the Honorable life\n\
-of a Paladin, striving for Truth and\n\
-Courage, or B) Choose the Humble life\n\
-of a Shepherd, and a world of simplicity\n\
+"\n\nThou art at a crossroads in thy life. \
+Dost thou \n\nA) Choose the Honorable life \
+of a Paladin, striving for Truth and \
+Courage, or \n\nB) Choose the Humble life \
+of a Shepherd, and a world of simplicity \
 and peace?",
 
 /*0x1c*//*D_1B05*/
-"Thy parents wish thee to become an\n\
-apprentice. Two positions are available.\n\
-Dost thou A) Become an acolyte in the\n\
-Spiritual order, or B) Become an\n\
+"\n\nThy parents wish thee to become an \
+apprentice. Two positions are available. \
+Dost thou \n\nA) Become an acolyte in the \
+Spiritual order, or \n\nB) Become an \
 assistant to a humble village cobbler?",
 
 
 /*0x1d*//*D_1BBF*/
-"  The day is warm, yet there is a\n\
-cooling breeze.  The latest in a series\n\
-of personal crises seems insurmountable.\n\
-You are being pulled apart in all\n\
+"\n\nThe day is warm, yet there is a \
+cooling breeze. The latest in a series \
+of personal crises seems insurmountable. \
+You are being pulled apart in all \
 directions.",
 
 /*0x1e*//*D_1C60*/
-"Yet this afternoon walk in the country-\n\
-side slowly brings relaxation to your\n\
-harried mind.  The soil and strain of\n\
-modern high-tech living begins to wash\n\
-off in layers. That willow tree near the\n\
+"\n\nYet this afternoon walk in the country-\
+side slowly brings relaxation to your \
+harried mind. The soil and strain of \
+modern high-tech living begins to wash \
+off in layers. That willow tree near the \
 stream looks comfortable and inviting.",
 
 /*0x1f*//*D_1D4B*/
-"The buzz of dragonflies and the whisper\n\
-of the willow's swaying branches bring\n\
-a deep peace.  Searching inward for\n\
-tranquility and happiness, you close\n\
+"\n\nThe buzz of dragonflies and the whisper \
+of the willow's swaying branches bring \
+a deep peace. Searching inward for \
+tranquility and happiness, you close \
 your eyes.",
 
 /*0x20*//*D_1DEE*/
-"A high-pitched cascading sound like\n\
-crystal wind-chimes impinges on your\n\
-floating awareness.  As you open your\n\
-eyes, you see a shimmering blueness rise\n\
-from the ground.  The sound seems to be\n\
+"\n\nA high-pitched cascading sound like \
+crystal wind-chimes impinges on your \
+floating awareness. As you open your \
+eyes, you see a shimmering blueness rise \
+from the ground. The sound seems to be \
 emanating from this glowing portal.",
 
 /*0x21*//*D_1ED2*/
-"It is difficult to look at the blueness.\n\
-Light seems to bend and distort around\n\
-it, while the sound waves become so\n\
+"\n\nIt is difficult to look at the blueness. \
+Light seems to bend and distort around \
+it, while the sound waves become so \
 intense, they appear to become visible.",
 
 /*0x22*//*D_1F6E*/
-"The portal hangs there for a moment;\n\
-then, with the rush of an imploding\n\
-vacuum, it sinks into the ground.\n\
-Something remains suspended in mid-air\n\
-for a moment before falling to earth\n\
+"\n\nThe portal hangs there for a moment; \
+then, with the rush of an imploding \
+vacuum, it sinks into the ground. \
+Something remains suspended in mid-air \
+for a moment before falling to earth \
 with a heavy thud.",
 
 /*0x23*//*D_2038*/
-"Somewhat shaken by this vision, you\n\
-rise to your feet to investigate.  A\n\
-crude circle of stones surrounds the\n\
-spot where the portal appeared. There is\n\
+"\n\nSomewhat shaken by this vision, you \
+rise to your feet to investigate. A \
+crude circle of stones surrounds the \
+spot where the portal appeared. There is \
 something glinting in the grass.",
 
 /*0x24*//*D_20F0*/
-"You pick up an amulet shaped like a\n\
-cross with a loop at the top.  It is an\n\
-Ankh, the sacred symbol of life and\n\
-rebirth.  But this could not have made\n\
-the thud, so you look again and find\n\
+"\n\nYou pick up an amulet shaped like a \
+cross with a loop at the top. It is an \
+Ankh, the sacred symbol of life and \
+rebirth. But this could not have made \
+the thud, so you look again and find \
 a large book wrapped in thick cloth!",
 
 /*0x25*//*D_21D1*/
-"With trembling hands you unwrap the\n\
-book.  Behold, the cloth is a map, and\n\
-within lies not one book, but two.  The\n\
-map is of a land strange to you, and the\n\
+"\n\nWith trembling hands you unwrap the \
+book. Behold, the cloth is a map, and \
+within lies not one book, but two. The \
+map is of a land strange to you, and the \
 style speaks of ancient cartography.",
 
 /*0x26*//*D_2292*/
-"The script on the cover of the first\n\
-book is arcane but readable.  The title\n\
-is:\n\
-        The History of Britannia\n\
-               as told by\n\
+"\n\nThe script on the cover of the first \
+book is arcane but readable. The title \
+is: \n\
+        The History of Britannia \n\
+               as told by \n\
             Kyle the Younger",
 
 /*0x27*//*D_233B*/
-"The other book is disturbing to look at.\n\
-Its small cover appears to be fashioned\n\
-out of some sort of leathery hide, but\n\
-from what creature is uncertain.  The\n\
-reddish-black skin radiates an intense\n\
+"\n\nThe other book is disturbing to look at. \
+Its small cover appears to be fashioned \
+out of some sort of leathery hide, but \
+from what creature is uncertain. The \
+reddish-black skin radiates an intense \
 aura suggestive of ancient power.",
 
 /*0x28*//*D_2422*/
-"The tongue of the title is beyond your\n\
-ken.  You dare not open the book and\n\
-disturb whatever sleeps within.  You\n\
-decide to peruse the History.  Settling\n\
-back under the willow tree, you open the\n\
+"\n\nThe tongue of the title is beyond your \
+ken. You dare not open the book and \
+disturb whatever sleeps within. You \
+decide to peruse the History. Settling \
+back under the willow tree, you open the \
 book.",
 
 /*0x29*//*D_24EA*/
-"\n\
-\n\
-    (You read the Book of History)",
+"\n \
+\n \
+\n(You read the Book of History)",
 
 /*0x2a*//*D_250F*/
-"\n\
-\n\
-(No, really! Read the Book of History!)",
+"\n \
+\n \
+\n(No, really! Read the Book of History!)",
 
 /*0x2b*//*D_2539*/
-"Closing the book, you again pick up\n\
-the Ankh.  As you hold it, you begin to\n\
-hear a hauntingly familiar, lute-like\n\
-sound wafting over a nearby hill.  Still\n\
-clutching the strange artifacts, you\n\
+"\n\nClosing the book, you again pick up \
+the Ankh. As you hold it, you begin to \
+hear a hauntingly familiar, lute-like \
+sound wafting over a nearby hill. Still \
+clutching the strange artifacts, you \
 rise unbidden and climb the slope.",
 
 /*0x2c*//*D_261C*/
-"In the valley below you see what appears\n\
-to be a fair.  It seems strange that you\n\
-came that way earlier and noticed\n\
-nothing.  As you mull this over, your\n\
+"\n\nIn the valley below you see what appears \
+to be a fair. It seems strange that you \
+came that way earlier and noticed \
+nothing. As you mull this over, your \
 feet carry you down towards the site.",
 
 /*0x2d*//*D_26DC*/
-"This is no ordinary travelling\n\
-carnival, but a Renaissance Fair.  The\n\
-pennants on the tent tops blow briskly\n\
+"\n\nThis is no ordinary travelling \
+carnival, but a Renaissance Fair. The \
+pennants on the tent tops blow briskly \
 in the late afternoon breeze.",
 
 /*0x2e*//*D_2767*/
-"The ticket taker at the RenFair's gate\n\
-starts to ask you for money, but upon\n\
-spotting your Ankh says, \"Welcome,\n\
-friend.  Enter in peace and find your\n\
+"\n\nThe ticket taker at the Renaissance Fair's gate \
+starts to ask you for money, but upon \
+spotting your Ankh says, \"Welcome, \
+friend. Enter in peace and find your \
 path.\"",
 
 /*0x2f*//*D_2804*/
-"The music continues to pull you\n\
-forward amongst the merchants and\n\
-vendors.  Glimpses of fabulous treasures\n\
-can be seen in some of the shadowy\n\
+"\n\nThe music continues to pull you \
+forward amongst the merchants and \
+vendors. Glimpses of fabulous treasures \
+can be seen in some of the shadowy \
 booths.",
 
 /*0x30*//*D_289A*/
-"These people are very happy.  They seem\n\
-to glow with an inner light.  Some look\n\
-up as you pass and smile, but you cannot\n\
-stop - the music compels you to move\n\
+"\n\nThese people are very happy. They seem \
+to glow with an inner light. Some look \
+up as you pass and smile, but you cannot \
+stop - the music compels you to move \
 onward through the crowd.",
 
 /*0x31*//*D_2952*/
-"Through the gathering dusk you see a\n\
-secluded gypsy wagon sitting off in the\n\
-woods.  The music seems to emanate from\n\
-the wagon.  As you draw near, a woman's\n\
-voice weaves into the music, saying:\n\
+"\n\nThrough the gathering dusk you see a \
+secluded gypsy wagon sitting off in the \
+woods. The music seems to emanate from \
+the wagon. As you draw near, a woman's \
+voice weaves into the music, saying: \
 \"You may approach, O seeker.\"",
 
 /*0x32*//*D_2A32*/
-"You enter to find an old gypsy sitting\n\
-in a small curtained room.  She wears an\n\
-Ankh around her neck. In front of her is\n\
-a round table covered in deep green\n\
-velvet.  The room smells so heavily of\n\
+"\n\nYou enter to find an old gypsy sitting \
+in a small curtained room. She wears an \
+Ankh around her neck. In front of her is \
+a round table covered in deep green \
+velvet. The room smells so heavily of \
 incense that you feel dizzy.",
 
 /*0x33*//*D_2B13*/
-"Seeing the Ankh, the ancient gypsy\n\
-smiles and warns you never to part with\n\
-it.  \"We have been waiting such a long\n\
-time, but at last you have come.  Sit\n\
-here and I shall read the path of your\n\
+"\n\nSeeing the Ankh, the ancient gypsy \
+smiles and warns you never to part with \
+it. \"We have been waiting such a long \
+time, but at last you have come. Sit \
+here and I shall read the path of your \
 future.\"",
 
 /*0x34*//*D_2BDB*/
-"Upon the table she places a curious\n\
-wooden object like an abacus but without\n\
-beads.  In her hands she holds eight\n\
-unusual cards.  \"Let us begin the\n\
+"\n\nUpon the table she places a curious \
+wooden object like an abacus but without \
+beads. In her hands she holds eight \
+unusual cards. \"Let us begin the \
 casting.\"",
 
-/*0x35*//*D_2C79*/"The gypsy places the first two cards\n",
-/*0x36*//*D_2C9F*/"The gypsy places two more of the cards\n",
-/*0x37*//*D_2CC7*/"The gypsy places the last two cards\n",
-/*0x38*//*D_2CEC*/"upon the table.  They are the cards of\n",
+/*0x35*//*D_2C79*/"\n\nThe gypsy places the first two cards ",
+/*0x36*//*D_2C9F*/"\n\nThe gypsy places two more of the cards ",
+/*0x37*//*D_2CC7*/"\n\nThe gypsy places the last two cards ",
+/*0x38*//*D_2CEC*/"upon the table. They are the cards of ",
 
 /*0x39*//*D_2D14*/"Honesty",
 /*0x3a*//*D_2D1C*/"Compassion",
@@ -454,18 +454,18 @@ casting.\"",
 /*0x41*//*D_2D5B*/"",
 
 /*0x42*//*D_2D5C*/
-"With the final choice, the incense\n\
-swells up around you.  The gypsy speaks\n\
-as if from a great distance, her voice\n\
+"\n\nWith the final choice, the incense \
+swells up around you. The gypsy speaks \
+as if from a great distance, her voice \
 growing fainter with each word:\n\
-\"So be it!  Thy path is chosen!\"",
+\"So be it! Thy path is chosen!\"",
 
 /*0x43*//*D_2E0F*/
-"There is a moment of intense, wrenching\n\
-vertigo.  As you open your eyes, a\n\
-voice whispers within your mind, \"Seek\n\
-the counsel of thy sovereign.\"  After a\n\
-moment, the spinning subsides, and you\n\
+"\n\nThere is a moment of intense, wrenching \
+vertigo. As you open your eyes, a \
+voice whispers within your mind, \"Seek \
+the counsel of thy sovereign.\" After a \
+moment, the spinning subsides, and you \
 open your eyes to..."
 };
 
@@ -478,6 +478,7 @@ char *bp04;
 
 	while(bp_02 = *bp04) {
 		if(bp_02 == '\n') {
+			add_char_to_text_buffer(bp_02);
 			txt_Y ++;
 			txt_X = 0;
 		} else {
@@ -737,7 +738,7 @@ C_2C12()
 		u4_puts(/*D_308E*/" and ");
 		C_2B6D(loc_C, 1);
 		u4_puts(STR(0x39 + loc_C));
-		u4_puts(/*D_3094*/".  She says\n\"Consider this:\"");
+		u4_puts(/*D_3094*/". She says \"Consider this:\"");
 		set_input_mode(INPUT_MODE_GENERAL_TEXT_CONTINUE);
 		u_kbflush();
 		u_kbread();
