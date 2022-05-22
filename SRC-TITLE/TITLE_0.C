@@ -86,7 +86,7 @@ unsigned bp04;
 	}
 	if (bp04)
 	{
-		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
+		set_input_mode(INPUT_MODE_GENERAL_NO_CONTINUE);
 		u_delay(1, 1);
 	}
 }
@@ -202,13 +202,13 @@ C_068C()
 {
 	register unsigned loc_A, loc_B;
 	int loc_C;
-	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
+	set_input_mode(INPUT_MODE_GENERAL_NO_CONTINUE);
 	u_delay(1, 1);
 	/*"lord british"*/
 	C_02D1(1);
 	/*"and"*/
 	Gra_3(4, 4, 19, 17, pTitle, 17, -1, 19);
-	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
+	set_input_mode(INPUT_MODE_GENERAL_NO_CONTINUE);
 	u_delay(1, 1);
 	/*draw line*/
 	for(loc_A = 86; loc_A < 238; loc_A++) {
@@ -311,7 +311,7 @@ C_0B45()
 {
 	Gra_2();
 	C_0B1E(13,  2, /*D_00EF*/"In another world, in a time to come.");
-	C_0B1E(15, 15, /*D_0114*/"Options:");
+	C_0B1E(15, 15, /*D_0114*/"Options:@");
 	C_0B1E(16, 11, /*D_011D*/"Return to the view");
 	C_0B1E(17, 11, /*D_0130*/"Journey Onward");
 	C_0B1E(18, 11, /*D_013F*/"Initiate New Game");
@@ -607,14 +607,14 @@ __declspec(dllexport) int cdecl  main_Text(unsigned char buffer[], int length)
 	return ret;
 }
 
-int input_mode = 0;
+static int input_mode = 0;
 
 void set_input_mode(int mode)
 {
 	input_mode = mode;
 }
 
-int current_sound_effect = -1;
+static int current_sound_effect = -1;
 
 void play_sound_effect()
 {
@@ -683,6 +683,33 @@ __declspec(dllexport) void cdecl main_keyboardHit(char wParam)
 	case 'X': CMN_kbhit = KBD_X; break;
 	case 'Y': CMN_kbhit = KBD_Y; break;
 	case 'Z': CMN_kbhit = KBD_Z; break;
+
+	case 'a': CMN_kbhit = KBD_a; break;
+	case 'b': CMN_kbhit = KBD_b; break;
+	case 'c': CMN_kbhit = KBD_c; break;
+	case 'd': CMN_kbhit = KBD_d; break;
+	case 'e': CMN_kbhit = KBD_e; break;
+	case 'f': CMN_kbhit = KBD_f; break;
+	case 'g': CMN_kbhit = KBD_g; break;
+	case 'h': CMN_kbhit = KBD_h; break;
+	case 'i': CMN_kbhit = KBD_i; break;
+	case 'j': CMN_kbhit = KBD_j; break;
+	case 'k': CMN_kbhit = KBD_k; break;
+	case 'l': CMN_kbhit = KBD_l; break;
+	case 'm': CMN_kbhit = KBD_m; break;
+	case 'n': CMN_kbhit = KBD_n; break;
+	case 'o': CMN_kbhit = KBD_o; break;
+	case 'p': CMN_kbhit = KBD_p; break;
+	case 'q': CMN_kbhit = KBD_q; break;
+	case 'r': CMN_kbhit = KBD_r; break;
+	case 's': CMN_kbhit = KBD_s; break;
+	case 't': CMN_kbhit = KBD_t; break;
+	case 'u': CMN_kbhit = KBD_u; break;
+	case 'v': CMN_kbhit = KBD_v; break;
+	case 'w': CMN_kbhit = KBD_w; break;
+	case 'x': CMN_kbhit = KBD_x; break;
+	case 'y': CMN_kbhit = KBD_y; break;
+	case 'z': CMN_kbhit = KBD_z; break;
 
 	case '0': CMN_kbhit = KBD_0; break;
 	case '1': CMN_kbhit = KBD_1; break;
@@ -806,6 +833,9 @@ int QUIT = 0;
 
 __declspec(dllexport) cdecl /*C_0EAA*/main()
 {
+	QUIT = 0;
+	CMN_kbhit = 0;
+
 	set_input_mode(INPUT_MODE_GENERAL_NO_CONTINUE);
 	D_31C0 = 0;
 	low_init();
@@ -878,11 +908,11 @@ __declspec(dllexport) cdecl /*C_0EAA*/main()
 		if((unsigned char)bp_02 > ' ' && ((unsigned char)bp_02 & 0x80) == 0)
 			Gra_putchar((unsigned char)bp_02);
 		switch(bp_02) {
-			case KBD_R:/*(R)eturn*/
+			case KBD_r:/*(R)eturn*/
 				C_05A4();
 				C_0B45();
 			break;
-			case KBD_I:/*(I)nitiate*/
+			case KBD_i:/*(I)nitiate*/
 				C_3030();
 				if (QUIT == 0)
 				{
@@ -890,7 +920,7 @@ __declspec(dllexport) cdecl /*C_0EAA*/main()
 					C_0BCA();
 				}
 			break;
-			case KBD_J:/*(J)ourney*/
+			case KBD_j:/*(J)ourney*/
 				_ffree(pAnim);
 				_ffree(pShapes);
 				_ffree(pCharset);

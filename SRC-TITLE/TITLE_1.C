@@ -506,6 +506,7 @@ unsigned bp04;
 					sound_1();
 				} else {
 					u4_putc(8);
+					add_char_to_text_buffer(8);
 					di--;
 					si[di] = ' ';
 				}
@@ -517,6 +518,7 @@ unsigned bp04;
 				} else {
 					si[di] = bp_04;
 					u4_putc(bp_04);
+					add_char_to_text_buffer(bp_04);
 					di ++;
 				}
 			break;
@@ -546,7 +548,7 @@ char *bp04;
 	txt_X = 0;
 	txt_Y = 19;
 	u4_puts(bp04);
-	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
+	set_input_mode(INPUT_MODE_GENERAL_TEXT_CONTINUE);
 	u_kbread();
 }
 
@@ -632,7 +634,7 @@ C_2883()
 				Gra_3(40, 152, 0, 0, D_6940, 0, -1, 0);
 			break;
 		}
-		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
+		set_input_mode(INPUT_MODE_GENERAL_TEXT_CONTINUE);
 		u_kbflush();
 		u_kbread();
 	}
@@ -736,7 +738,7 @@ C_2C12()
 		C_2B6D(loc_C, 1);
 		u4_puts(STR(0x39 + loc_C));
 		u4_puts(/*D_3094*/".  She says\n\"Consider this:\"");
-		set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
+		set_input_mode(INPUT_MODE_GENERAL_TEXT_CONTINUE);
 		u_kbflush();
 		u_kbread();
 		Gra_5();
@@ -748,8 +750,8 @@ C_2C12()
 			loc_A = u_kbread();
 			if(u4_isupper((unsigned char)loc_A))
 				loc_A += 'a' - 'A';
-		} while(loc_A != KBD_A && loc_A != KBD_B);
-		if(loc_A == KBD_B) {
+		} while(loc_A != KBD_a && loc_A != KBD_b);
+		if(loc_A == KBD_b) {
 			/*swap(loc_B,loc_C);*/
 			loc_A = loc_B; loc_B = loc_C; loc_C = loc_A;
 		}

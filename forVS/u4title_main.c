@@ -36,7 +36,11 @@ extern void t_callback();
 //----------------------------------------
 int u_kbhit() {
 	CONSOLE("u_kbhit\n");
-	Sleep(1); //CMN_pumpmessages();
+#ifdef ENABLE_WINDOWS
+	CMN_pumpmessages();
+#else
+	Sleep(1);
+#endif
 	t_callback();
 
 	return CMN_kbhit != 0;
@@ -45,7 +49,11 @@ int u_kbread() {
 	int ret;
 
 	while(CMN_kbhit == 0) {
-		Sleep(1); //CMN_pumpmessages();
+#ifdef ENABLE_WINDOWS
+		CMN_pumpmessages();
+#else
+		Sleep(1);
+#endif
 	}
 	ret = CMN_kbhit;
 	CMN_kbhit = 0;
@@ -62,7 +70,11 @@ u_kbflush() {
 __cdecl u_delay(unsigned a, unsigned b) {
 	while(a) {
 		a --;
-		Sleep(1); //CMN_pumpmessages();
+#ifdef ENABLE_WINDOWS
+		CMN_pumpmessages();
+#else
+		Sleep(1);
+#endif
 		t_callback();
 		if(b && CMN_kbhit != 0)
 			break;
