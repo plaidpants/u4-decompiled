@@ -829,6 +829,29 @@ __declspec(dllexport) int cdecl main_GetPicture(unsigned char picture[], int len
 	return ret;
 }
 
+__declspec(dllexport) void cdecl  main_D_3683(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(D_3683))
+	{
+		memcpy(buffer, &D_3683, sizeof(D_3683));
+	}
+}
+
+__declspec(dllexport) void cdecl  main_D_3A24(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(D_3A24))
+	{
+		memcpy(buffer, &D_3A24, sizeof(D_3A24));
+	}
+}
+
+__declspec(dllexport) void cdecl  main_D_6976(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(D_6976))
+	{
+		memcpy(buffer, &D_6976, sizeof(D_6976));
+	}
+}
 int QUIT = 0;
 
 __declspec(dllexport) cdecl /*C_0EAA*/main()

@@ -181,15 +181,15 @@ char *D_2BB2[] = {
 
 	if(
 		(unsigned)D_8742._npc._tlkidx[D_8CE6] != 1 ||
-		(Party._loc - 0x05) >= 8 ||
-		(Party._loc - 0x05) == Party.chara[0]._class
+		(unsigned)(Party._loc - 0x05) >= 8 ||
+		(unsigned)(Party._loc - 0x05) == Party.chara[0]._class
 	) {
 		u4_puts(D_8CCE[1]);
 		u4_puts(/*D_2B17*/" says: I cannot join thee.\n");
 		add_npc_talk(D_8CE6, "I cannot join thee.\n");
 		return;
 	}
-	if(*pKarmas[Party._loc - 0x05] < 40 && *pKarmas[Party._loc - 0x05] != 0) {
+	if (*pKarmas[Party._loc - 0x05] < 40 && *pKarmas[Party._loc - 0x05] != 0) {
 		u4_puts(/*D_2B33*/"Thou art not ");
 		u4_puts(D_2BB2[Party._loc - 0x05]);
 		u4_puts(/*D_2B41*/" enough for me to join thee.\n");

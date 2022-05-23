@@ -91,7 +91,7 @@ C_3F4A()
 	Party._x = D_959C.x = 1;
 	C_3E30(Party._loc);
 
-	if((Party._loc - 0x05) < 8) {
+	if((unsigned)(Party._loc - 0x05) < 8) {
 		for(si = Party.f_1d8; --si >= 1; ) {
 			if(Party.chara[si]._class == (Party._loc - 0x05)) {
 				D_8742._npc._tile[31] = D_8742._npc._gtile[31] = D_8742._npc._var[31] = 0;

@@ -102,32 +102,32 @@ extern int QUIT;
 					case KBD_DOWN: C_7BAF(); break;
 					case 0xf400:
 					case KBD_RIGHT: C_7BD5(); break;
-					case KBD_A: C_61D1(); break;/*(A)ttack(combat)*/
-					case KBD_C: CMD_Cast(); break;
-					case KBD_G: C_73B8(); break;/*(G)et chest(combat)*/
-					case KBD_R: CMD_Ready(); break;
-					case KBD_U: CMD_Use(); break;
-					case KBD_V: CMD_Volume(); break;
-					case KBD_Z: CMD_Ztats(); break;
-					case KBD_B:
-					case KBD_D:
-					case KBD_E:
-					case KBD_F:
-					case KBD_H:
-					case KBD_I:
-					case KBD_J:
-					case KBD_K:
-					case KBD_L:
-					case KBD_M:
-					case KBD_N:
-					case KBD_O:
-					case KBD_P:
-					case KBD_Q:
-					case KBD_S:
-					case KBD_T:
-					case KBD_W:
-					case KBD_X:
-					case KBD_Y: w_NotHere(); break;
+					case KBD_a: C_61D1(); break;/*(A)ttack(combat)*/
+					case KBD_c: CMD_Cast(); break;
+					case KBD_g: C_73B8(); break;/*(G)et chest(combat)*/
+					case KBD_r: CMD_Ready(); break;
+					case KBD_u: CMD_Use(); break;
+					case KBD_v: CMD_Volume(); break;
+					case KBD_z: CMD_Ztats(); break;
+					case KBD_b:
+					case KBD_d:
+					case KBD_e:
+					case KBD_f:
+					case KBD_h:
+					case KBD_i:
+					case KBD_j:
+					case KBD_k:
+					case KBD_l:
+					case KBD_m:
+					case KBD_n:
+					case KBD_o:
+					case KBD_p:
+					case KBD_q:
+					case KBD_s:
+					case KBD_t:
+					case KBD_w:
+					case KBD_x:
+					case KBD_y: w_NotHere(); break;
 					case KBD_CTRL_S:
 						if(bp_04 == KBD_ALT_Z) {
 							C_1C21();
