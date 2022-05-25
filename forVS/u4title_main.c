@@ -68,12 +68,15 @@ u_kbflush() {
 }
 
 __cdecl u_delay(unsigned a, unsigned b) {
+	if (a == 0)
+		a = 1000;
+	a *= 50;
 	while(a) {
 		a --;
 #ifdef ENABLE_WINDOWS
 		CMN_pumpmessages();
 #else
-		Sleep(1);
+		Sleep(20);
 #endif
 		t_callback();
 		if(b && CMN_kbhit != 0)

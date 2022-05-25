@@ -507,9 +507,14 @@ sizzleCharset() {
 
 int __cdecl u_kbhit() {
 	CONSOLE("u_kbhit\n");
+#ifdef ENABLE_WINDOWS
 	CMN_pumpmessages();
+#else
+	Sleep(1);
+#endif
 	Party.f_000 ++;
 
+	t_callback();
 	return CMN_kbhit != 0;
 }
 int __cdecl u_kbread() {
@@ -517,8 +522,13 @@ int __cdecl u_kbread() {
 
 	CONSOLE("u_kbread\n");
 //	u_delay(0x8081, 0x8081);
-	while(u_kbhit() == 0)
+	while (CMN_kbhit == 0) {
+#ifdef ENABLE_WINDOWS
 		CMN_pumpmessages();
+#else
+		Sleep(1);
+#endif
+	}
 	ret = CMN_kbhit;
 	CMN_kbhit = 0;
 
@@ -536,7 +546,11 @@ void __cdecl u_delay(int a, int b) {
 	while(a) {
 		a --;
 		t_callback();
+#ifdef ENABLE_WINDOWS
 		CMN_pumpmessages();
+#else
+		Sleep(1);
+#endif
 		Sleep(2);
 		if(b && u_kbhit())
 			break;
