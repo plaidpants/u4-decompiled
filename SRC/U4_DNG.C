@@ -50,32 +50,32 @@ extern int QUIT;
 				case 0x5060: C_895F(); break;
 				case KBD_RIGHT:
 				case 0xf400: C_89BD(); break;
-				case KBD_C: CMD_Cast(); break;
-				case KBD_D: C_8A1F(); break;/*(D)escend [dungeon]*/
-				case KBD_G: CMD_Get(); break;
-				case KBD_H: CMD_HoleUp(); break;
-				case KBD_I: CMD_Ignite(); break;
-				case KBD_K: C_89DB(); break;/*(K)limb [dungeon]*/
-				case KBD_M: CMD_Mix(); break;
-				case KBD_N: CMD_NewOrder(); break;
-				case KBD_P: CMD_Peer(); break;
-				case KBD_Q: CMD_Quit(); break;
-				case KBD_R: CMD_Ready(); break;
-				case KBD_S: C_B9B2(); break;/*(S)earch [dungeon]*/
-				case KBD_U: CMD_Use(); break;
-				case KBD_V: CMD_Volume(); break;
-				case KBD_W: CMD_Wear(); break;
-				case KBD_Z: CMD_Ztats(); break;
-				case KBD_A:
-				case KBD_B: 
-				case KBD_E:
-				case KBD_F:
-				case KBD_J:
-				case KBD_L:
-				case KBD_O:
-				case KBD_T:
-				case KBD_X:
-				case KBD_Y: w_NotHere(); sound(2); break;
+				case KBD_c: CMD_Cast(); break;
+				case KBD_d: C_8A1F(); break;/*(D)escend [dungeon]*/
+				case KBD_g: CMD_Get(); break;
+				case KBD_h: CMD_HoleUp(); break;
+				case KBD_i: CMD_Ignite(); break;
+				case KBD_k: C_89DB(); break;/*(K)limb [dungeon]*/
+				case KBD_m: CMD_Mix(); break;
+				case KBD_n: CMD_NewOrder(); break;
+				case KBD_p: CMD_Peer(); break;
+				case KBD_q: CMD_Quit(); break;
+				case KBD_r: CMD_Ready(); break;
+				case KBD_s: C_B9B2(); break;/*(S)earch [dungeon]*/
+				case KBD_u: CMD_Use(); break;
+				case KBD_v: CMD_Volume(); break;
+				case KBD_w: CMD_Wear(); break;
+				case KBD_z: CMD_Ztats(); break;
+				case KBD_a:
+				case KBD_b: 
+				case KBD_e:
+				case KBD_f:
+				case KBD_j:
+				case KBD_l:
+				case KBD_o:
+				case KBD_t:
+				case KBD_x:
+				case KBD_y: w_NotHere(); sound(2); break;
 				case KBD_CTRL_S:
 					if(bp_04 == KBD_ALT_Z) {
 						C_1C21();
