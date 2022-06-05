@@ -183,13 +183,13 @@ C_05A4()
 		C_041A();
 		D_6E80 = 0;
 		Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
-		for(si = speed_info / 2; si && !u_kbhit(); si --)
-			Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
+		//for(si = speed_info / 2; si && !u_kbhit(); si --)
+		//	Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
 		C_034D();
 		C_041A();
 		Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
-		for(si = speed_info / 2; si && !u_kbhit(); si --)
-			Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
+		//for(si = speed_info / 2; si && !u_kbhit(); si --)
+		//	Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
 		D_6E80 = 1;
 	}
 	D_3A84 = 0;
@@ -286,13 +286,13 @@ C_068C()
 		C_034D();
 		C_041A();
 		Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
-		for(loc_B = speed_info / 2; loc_B && !u_kbhit(); loc_B --)
-			Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
+		//for(loc_B = speed_info / 2; loc_B && !u_kbhit(); loc_B --)
+		//	Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
 		C_034D();
 		C_041A();
 		Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
-		for(loc_B = speed_info / 2; loc_B && !u_kbhit(); loc_B --)
-			Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
+		//for(loc_B = speed_info / 2; loc_B && !u_kbhit(); loc_B --)
+		//	Gra_0(5, 19, D_3A24, 104, 0, 0, 2);
 	}
 }
 
@@ -837,12 +837,33 @@ __declspec(dllexport) void cdecl  main_D_3683(unsigned char buffer[], int length
 	}
 }
 
-__declspec(dllexport) void cdecl  main_D_3A24(unsigned char buffer[], int length)
+static int the_view_mutex = 0;
+
+void set_the_view_mutex()
 {
+	the_view_mutex = 1;
+}
+
+int get_the_view_mutex()
+{
+	return the_view_mutex;
+}
+
+
+__declspec(dllexport) int cdecl  main_D_3A24(unsigned char buffer[], int length)
+{
+	// nothing to get
+	if (the_view_mutex == 0)
+	{
+		return 0;
+	}
+
 	if (length >= sizeof(D_3A24))
 	{
 		memcpy(buffer, &D_3A24, sizeof(D_3A24));
 	}
+
+	the_view_mutex = 0;
 }
 
 __declspec(dllexport) void cdecl  main_D_6976(unsigned char buffer[], int length)

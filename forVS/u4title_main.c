@@ -184,12 +184,24 @@ Gra_animFlag() {
 	FAKE_RET;
 }
 
+extern int get_the_view_mutex();
+extern void set_the_view_mutex();
+
 __cdecl Gra_0(
 	int height/*bp04*/, int width/*bp06*/, unsigned char *pSrc_0/*bp08*/,
 	int dst_y/*bp0a*/,
 	unsigned dst_ofs/*bp0c*/, unsigned dst_seg/*bp0e*/,
 	int dst_x_in_byte/*bp10*/
 ) {
+	set_the_view_mutex();
+
+	while (get_the_view_mutex())
+	{
+		Sleep(1);
+	}
+
+	Sleep(10);
+
 #ifdef ENABLE_WINDOWS
 	int i, j;
 	unsigned char *pSrc;

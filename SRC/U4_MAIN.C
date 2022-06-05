@@ -556,7 +556,7 @@ int current_sound_effect_length = 0;
 
 void play_sound_effect(unsigned char sound, unsigned char length)
 {
-	int timeout = 1000;
+	int timeout = 1000; // whirlpool sound is 4 seconds long, need to wait at least that long
 
 	current_sound_effect = sound;
 	current_sound_effect_length  = length;
