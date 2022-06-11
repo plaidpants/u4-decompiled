@@ -1,4 +1,4 @@
-#include "J:\u4-decompiled\SRC\U4.H"
+#include "..\SRC\U4.H"
 
 unsigned char D_9140;
 unsigned char D_9141;

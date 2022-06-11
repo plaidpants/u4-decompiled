@@ -138,6 +138,22 @@ __declspec(dllexport) void cdecl  main_Combat(unsigned char buffer[], int length
 	}
 }
 
+__declspec(dllexport) void cdecl  main_Set_Combat(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(Combat))
+	{
+		memcpy(&Combat, buffer, sizeof(Combat));
+	}
+}
+
+__declspec(dllexport) void cdecl  main_Set_Fighters(unsigned char buffer[], int length)
+{
+	if (length >= sizeof(Fighters))
+	{
+		memcpy(&Fighters, buffer, sizeof(Fighters));
+	}
+}
+
 __declspec(dllexport) void cdecl  main_Fighters(unsigned char buffer[], int length)
 {
 	if (length >= sizeof(Fighters))
@@ -145,6 +161,7 @@ __declspec(dllexport) void cdecl  main_Fighters(unsigned char buffer[], int leng
 		memcpy(buffer, &Fighters, sizeof(Fighters));
 	}
 }
+
 __declspec(dllexport) void cdecl  main_D_96F9(unsigned char buffer[], int length)
 {
 	if (length >= sizeof(D_96F9))

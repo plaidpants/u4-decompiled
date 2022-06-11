@@ -1,4 +1,4 @@
-#include "J:\u4-decompiled\SRC\U4.H"
+#include "..\SRC\U4.H"
 
 #include <stdio.h>
 #include <stdlib.h>
