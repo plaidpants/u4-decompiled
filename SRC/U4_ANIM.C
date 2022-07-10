@@ -132,9 +132,9 @@ unsigned char bp04;/*pos_y*/
 
 	si = &(D_96F9[bp04*11 + bp06]) - D_96F9;
 	if(bp06 > 10 || bp04 > 10)
-		return;
+		return 0;
 	if(D_96F9[si] != TIL_7E)
-		return;
+		return 0;
 	bp_04 = Combat._map[si];
 	D_96F9[si] = bp_04;
 	/*opaque tiles*/
@@ -144,7 +144,7 @@ unsigned char bp04;/*pos_y*/
 		bp_04 == TIL_7E ||
 		bp_04 == TIL_49 ||
 		bp_04 == TIL_7F
-	) return;
+	) return 0;
 
 	bp06 += bp0a;
 	bp04 += bp08;
@@ -410,7 +410,7 @@ C_3C54()
 {
 	if(CurMode == MOD_VISION) {
 		cursor_rate = 233;
-		return;
+		return 0;
 	}
 	cursor_rate = 0;
 	if(CurMode == MOD_OUTDOORS) {

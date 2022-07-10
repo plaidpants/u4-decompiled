@@ -107,19 +107,19 @@ int bp04;
 	if(loc_A  > 31 || loc_C > 31) {
 		if(bp04 >= 0)
 			C_5062(bp0a, u4_sign((char)u_rand_a()), (char)u4_sign(u_rand_a()), bp04 - 1);
-		return;
+		return 0;
 	}
 	if(U4_RND1(1) && bp08 && C_4E94(bp0a, loc_B + bp08, loc_D, D_8742._map.x32x32[loc_C-bp06][loc_A])) {
 		C_5036(bp0a, loc_B + bp08, loc_D);
-		return;
+		return 0;
 	}
 	if(bp06 && C_4E94(bp0a, loc_B, loc_D + bp06, D_8742._map.x32x32[loc_C][loc_A - bp08])) {
 		C_5036(bp0a, loc_B, loc_D + bp06);
-		return;
+		return 0;
 	}
 	if(C_4E94(bp0a, loc_B + bp08, loc_D, D_8742._map.x32x32[loc_C - bp06][loc_A])) {
 		C_5036(bp0a, loc_B + bp08, loc_D);
-		return;
+		return 0;
 	}
 	if(bp04 >= 0)
 		C_5062(bp0a, u4_sign((char)u_rand_a()), u4_sign((char)u_rand_a()), bp04 - 1);
@@ -149,21 +149,21 @@ Masking the sums should fix the problem:
 	if ((bp08 + bp_02 < 0) || (bp08 + bp_02 > 31) || (bp06 + bp_04 < 0) || (bp06 + bp_04 > 31))
 	{
 		//printf("attempt to move npc %d outside the current map (%d,%d) move delta (%d,%d)\n", bp0a, bp_02, bp_04, bp08, bp06);
-		return;
+		return 0;
 	}
 	if(U4_RND1(1) && bp08) {
 		if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02]))
 			C_4FF8(bp0a, bp08+bp_02, bp_04);
-		return;
+		return 0;
 	}
 	if(bp06) {
 		if(C_4E94(bp0a, bp_02, bp06+bp_04, D_8742._map.x32x32[bp06+bp_04][bp_02]))
 			C_4FF8(bp0a, bp_02, bp06+bp_04);
-		return;
+		return 0;
 	}
 	if(C_4E94(bp0a, bp08+bp_02, bp_04, D_8742._map.x32x32[bp_04][bp08+bp_02])) {
 		C_4FF8(bp0a, bp08+bp_02, bp_04);
-		return;
+		return 0;
 	}
 	if(D_8742._npc._var[bp0a] != 0x80 && bp04 >= 0)
 		C_51A7(bp0a, u4_sign((char)u_rand_a()), u4_sign((char)u_rand_a()), bp04 - 1);
@@ -267,22 +267,22 @@ int bp04;
 	if(D_8742._npc._gtile[si] == TIL_80) {
 		if(bp06 < 0) {
 			C_53AF(si, D_8742._npc._x[si]+bp06, D_8742._npc._y[si]);
-			return;
+			return 0;
 		}
 	} else if(D_8742._npc._gtile[si] == TIL_81) {
 		if(bp04 < 0) {
 			C_53AF(si, D_8742._npc._x[si], D_8742._npc._y[si]+bp04);
-			return;
+			return 0;
 		}
 	} else if(D_8742._npc._gtile[si] == TIL_82) {
 		if(bp06 > 0) {
 			C_53AF(si, D_8742._npc._x[si]+bp06, D_8742._npc._y[si]);
-			return;
+			return 0;
 		}
 	} else {
 		if(bp04 > 0) {
 			C_53AF(si, D_8742._npc._x[si], D_8742._npc._y[si]+bp04);
-			return;
+			return 0;
 		}
 	}
 	C_5443(si);
@@ -299,12 +299,12 @@ unsigned char bp04;
 
 	loc_E = D_8742._npc._x[bp0a] + bp08;
 	loc_A = D_8742._npc._y[bp0a] + bp06;
-	sound(3);
+	sound(3,0);
 	for(loc_C = 1; loc_C <= 3; loc_E += bp08, loc_A += bp06, loc_C++) {
 		if(Party._x == loc_E && Party._y == loc_A)
 			return 1;
 		if((loc_B = C_0A58(31, loc_E, loc_A)) != -1) {
-			sound(6);
+			sound(6,0);
 			if(loc_B >= 8 || U4_RND1(3) == 0) {
 				D_8742._npc._tile[loc_B] = D_8742._npc._gtile[loc_B] = 0;
 			}
@@ -331,7 +331,7 @@ int bp04;
 {
 	if(C_5569(bp0a, bp08, bp06, bp04) == 0) {
 		hit_tile = 0;
-		return;
+		return 0;
 	}
 	t_callback();
 	hit_y = hit_x = 5;
@@ -433,7 +433,7 @@ C_5851()
 	unsigned char loc_C, loc_A;
 
 	if(CurMode != MOD_OUTDOORS || U4_RND1(15))
-		return;
+		return 0;
 	for(si = 3; si >= 0; si--) {
 		if(D_8742._npc._tile[si] != 0)
 			continue;

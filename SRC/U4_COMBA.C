@@ -70,7 +70,7 @@ extern int QUIT;
 		set_input_mode(INPUT_MODE_COMBAT);
 		if (QUIT)
 		{
-			return;
+			return 0;
 		}
 		for(activeChara = 0; /*C_5A88:*/activeChara < Party.f_1d8 && !IsCombatEnded(); activeChara++) {
 /*C_5A9E*/
@@ -92,7 +92,7 @@ extern int QUIT;
 				if(u4_isupper((unsigned char)si))
 					si = (si & 0xff00) | u4_lower((unsigned char)si);
 				switch(si) {
-					case KBD_ESC: QUIT = 1;  return;
+					case KBD_ESC: QUIT = 1;  return 0;
 					case KBD_SPACE: w_Pass(); break;
 					case 0x487e:
 					case KBD_UP: C_7B89(); break;
@@ -135,7 +135,7 @@ extern int QUIT;
 						}
 					default:
 						u4_puts(/*D_1FED*/"Bad command\n");
-						sound(2);
+						sound(2,0);
 						Gra_11(activeChara);
 						activeChara --;
 					continue;
@@ -164,7 +164,7 @@ extern int QUIT;
 C_5D14()
 {
 	if(Fighters._chtile[activeChara] == 0)
-		return;
+		return 0;
 	if(isCharaConscious(activeChara))
 		C_9209();
 	if(!isCharaAlive(activeChara)) {
@@ -172,7 +172,7 @@ C_5D14()
 	} else if(isCharaConscious(activeChara) && spell_sta == 'Q' && U4_RND1(1)) {
 		/*Quickness!*/
 		activeChara --;
-		return;
+		return 0;
 	} else if(Party.chara[activeChara]._stat == 'S' && !U4_RND1(7)) {
 		Party.chara[activeChara]._stat = 'G';
 		D_944A[activeChara] = Fighters._chtile[activeChara] = C_0ACF(activeChara);
@@ -256,7 +256,7 @@ int /*bp04*/_range;
 	int bp_04, bp_02;
 
 	if(Party.chara[activeChara]._weapon != 11 || _range < 2)
-		return;
+		return 0;
 	bp_02 = u4_sign(Combat._charaX[activeChara] - hit_x);
 	bp_04 = u4_sign(Combat._charaY[activeChara] - hit_y);
 	hit_tile = TIL_4D;
@@ -272,7 +272,7 @@ int /*bp04*/_range;
 int /*bp04*/_range;
 {
 	if(_range == 0)
-		sound(4);
+		sound(4,0);
 	hit_tile = 0;
 	u4_puts(/*D_2042*/"Missed!\n");
 	if(Party.chara[activeChara]._weapon == 9 && hit_x < 11 && hit_y < 11 && Combat_MAP(hit_y, hit_x) >= TIL_03)
@@ -293,13 +293,13 @@ int /*bp04*/_range;
 	if(Party._loc == 0x18 && loc_C->_weapon < 11) {
 		/*abyss without good weapons*/
 		w_missed(_range);
-		return;
+		return 0;
 	}
 	hit_tile = (loc_C->_weapon == 14)?TIL_4E:TIL_4F;
 	/*dexterity test*/
 	if(loc_C->_dex < 40 && U4_RND1(0xff) > loc_C->_dex + 0x80) {
 		w_missed(_range);
-		return;
+		return 0;
 	}
 	/*success*/
 	loc_B = &(Combat_MAP(Combat._npcY[_npcId], Combat._npcX[_npcId]));
@@ -310,7 +310,7 @@ int /*bp04*/_range;
 	loc_A += D_2450[loc_C->_weapon];
 	loc_A = SafeModulo(U4_RND1(0xff), u4_min(loc_A, 0xff));
 	C_3C54();
-	sound(6);
+	sound(6,0);
 	hit_tile = 0;
 	COM_DoDamage(_npcId, activeChara, loc_A);
 	DrawBlow(_range);
@@ -333,7 +333,7 @@ int _dir_y;
 		loc_D = AskLetter(/*D_204B*/"Range:\x12\x12\b", '0', '9');
 		loc_D -= '0';
 		if(loc_D < 0)
-			return;
+			return 0;
 	}
 	/*-- if denumbrable weapon, decrement --*/
 	if(loc_A->_weapon == 2 || loc_A->_weapon == 9) {
@@ -346,7 +346,7 @@ int _dir_y;
 	}
 	/*-- --*/
 	hit_tile = (loc_A->_weapon != 14)?TIL_4D:TIL_4E;
-	sound(4);
+	sound(4,0);
 	/*note:when using flaming oil with range '0'
 	 this loop is never entered, and so loc_B stays
 	 uninitialized. This may lead to unexpected behavior
@@ -356,7 +356,7 @@ int _dir_y;
 	for(; loc_D; loc_D--) {
 		if(!COM_CheckHitable(_dir_x, _dir_y)) {
 			w_missed(loc_C);
-			return;
+			return 0;
 		}
 		loc_C ++;
 		C_3C54();
@@ -366,7 +366,7 @@ int _dir_y;
 	hit_tile = 0;
 	if(loc_B == -1) {
 		w_missed(loc_C);
-		return;
+		return 0;
 	}
 	TryDamage(loc_B, loc_C);
 }
@@ -381,7 +381,7 @@ C_61D1()
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_2060*/"Dir: ", &loc_A, &loc_B);
 	if(!(loc_A | loc_B))
-		return;
+		return 0;
 	hit_x = Combat._charaX[activeChara];
 	hit_y = Combat._charaY[activeChara];
 
@@ -394,21 +394,21 @@ C_61D1()
 			hit_tile = TIL_4D;
 			C_3C54();
 			hit_tile = 0;
-			sound(4);
+			sound(4,0);
 
 			if((loc_D = COM_GetFighterId(hit_x, hit_y)) != -1) {
 				TryDamage(loc_D, 1);
-				return;
+				return 0;
 			}
 			if(loc_C->_weapon == 2) {/*dagger?*/
 				C_60F1(loc_A, loc_B);
-				return;
+				return 0;
 			}
 		}
 		w_missed(0);
 	} else {
 		C_60F1(loc_A, loc_B);
-		return;
+		return 0;
 	}
 }
 
@@ -420,13 +420,13 @@ C_61D1()
 	if(CurMode <= MOD_BUILDING && Party.f_1dc != 0) {
 		u4_puts(/*D_2066*/"Attack\n");
 		w_DriftOnly();
-		return;
+		return 0;
 	}
 
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_206E*/"Attack: ", &loc_A, &loc_B);
 	if(!(loc_A|loc_B))
-		return;
+		return 0;
 	if(
 		(loc_C = C_0A8B(Party._x + loc_A, Party._y + loc_B)) == -1 ||
 		D_8742._npc._tile[loc_C] == TIL_8C ||
@@ -434,7 +434,7 @@ C_61D1()
 		D_8742._npc._tile[loc_C] == TIL_8E
 	) {
 		u4_puts(/*D_2077*/"Nothing to Attack!\n");
-		return;
+		return 0;
 	}
 	if(CurMode == MOD_BUILDING) {
 		register int di;

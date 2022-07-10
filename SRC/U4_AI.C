@@ -121,7 +121,7 @@ int bp04;
 
 	Gra_11(bp06);
 	C_3C54();
-	sound(7);
+	sound(7,0);
 	hit_tile = 0;
 	C_3C54();
 	bp_02 = U4_RND4(D_23D2[C_7C25((unsigned char)Fighters._tile[bp04])] >> 2);
@@ -145,7 +145,7 @@ int bp04;
 {
 	Gra_11(bp04);
 	C_3C54();
-	sound(7);
+	sound(7,0);
 	Gra_11(bp04);
 	hit_tile = 0;
 }
@@ -162,7 +162,7 @@ int bp04;
 	hit_tile = bp0a;
 	hit_x = Combat._npcX[bp08];
 	hit_y = Combat._npcY[bp08];
-	sound(3);
+	sound(3,0);
 	si = -1;
 	do {
 		if(COM_CheckHitable(bp06, bp04) == 0)
@@ -173,7 +173,7 @@ int bp04;
 		if(hit_tile == TIL_4C)
 			Combat_MAP(hit_y, hit_x) = TIL_4C;
 		hit_tile = 0;
-		return;
+		return 0;
 	}
 	Gra_CR();
 	u4_puts(Party.chara[si]._name);
@@ -317,7 +317,7 @@ unsigned char _y;
 			hit_y = _y;
 			C_3C54();
 			hit_tile = 0;
-			sound(6);
+			sound(6,0);
 			COM_DoDamage(bp_02, -1, U4_RND1(0x3f));
 			C_3C54();
 			return 1;
@@ -331,7 +331,7 @@ C_9B6B()
 {
 	Party._food = u4_max(Party._food - 2500, 0L);
 	dspl_Stats();
-	sound(8);
+	sound(8,0);
 }
 
 /*steal gold*/
@@ -343,7 +343,7 @@ C_9BA6()
 		si = U4_RND1(0x3f);
 		Party._gold = u4_max(Party._gold - si, 0);
 		dspl_Stats();
-		sound(8);
+		sound(8,0);
 	}
 }
 
@@ -356,7 +356,7 @@ int bp04;
 	hit_y = Combat._charaY[bp04];
 	hit_tile = TIL_4D;
 	C_3C54();
-	sound(5);
+	sound(5,0);
 	hit_tile = 0;
 	if((spell_sta == 'P' && U4_RND1(1)) || D_2460[Party.chara[bp04]._armor] >= u_rand_a()) {
 		C_3C54();
@@ -376,7 +376,7 @@ int bp04;
 		karma_inc(&(Party._compa), 1);
 		karma_inc(&(Party._justi), 1);
 	}
-	sound(8);
+	sound(8,0);
 	Fighters._tile[bp04] = Fighters._HP[bp04] = 0;
 }
 
@@ -406,7 +406,7 @@ int bp04;
 			if(bp_0c != TIL_4E || spell_sta != 'N') {
 				C_978C(bp_0c, bp08, loc_A, loc_C);
 				t_callback();
-				return;
+				return 0;
 			}
 		}
 	}
@@ -425,7 +425,7 @@ C_9D51:
 					}
 				}
 				dspl_Stats();
-				return;
+				return 0;
 			}
 		}
 	}
@@ -435,7 +435,7 @@ C_9D51:
 		loc_C = -loc_C;
 C_9DE5:
 		if((unsigned char)Fighters._tile[bp08] == TIL_AC || (unsigned char)Fighters._tile[bp08] == TIL_B0)
-			return;
+			return 0;
 	} else if(bp04 >= 2) {
 		goto C_9DE5;
 	} else {
@@ -445,15 +445,15 @@ C_9DE5:
 			case TIL_C8: C_9BA6(); break;
 		}
 		C_9BE5(bp08, bp06);/*contact attack?*/
-		return;
+		return 0;
 	}
 	/* */
 	for(loc_B = 2; loc_B > 0; loc_B --) {
 		if(U4_RND1(1) && loc_A != 0) {
 			loc_D = (unsigned char)Combat._npcX[bp08] + loc_A;
 			loc_E = (unsigned char)Combat._npcY[bp08];
-			if(CheckJinx(loc_D, loc_E))
-				return;
+			if (CheckJinx(loc_D, loc_E))
+				return 0;
 			if(C_98E4(loc_D, loc_E, bp08))
 				break;
 		}
@@ -461,7 +461,7 @@ C_9DE5:
 			loc_D = (unsigned char)Combat._npcX[bp08];
 			loc_E = (unsigned char)Combat._npcY[bp08] + loc_C;
 			if(CheckJinx(loc_D, loc_E))
-				return;
+				return 0;
 			if(C_98E4(loc_D, loc_E, bp08))
 				break;
 		}
@@ -469,7 +469,7 @@ C_9DE5:
 			loc_D = (unsigned char)Combat._npcX[bp08] + loc_A;
 			loc_E = (unsigned char)Combat._npcY[bp08];
 			if(CheckJinx(loc_D, loc_E))
-				return;
+				return 0;
 			if(C_98E4(loc_D, loc_E, bp08))
 				break;
 		}
@@ -483,10 +483,10 @@ C_9DE5:
 		Combat._npcY[bp08] = loc_E;
 		if(loc_D >= 11 || loc_E >= 11) {
 			C_9C56(bp08);/*... Flees*/
-			return;
+			return 0;
 		}
 		C_3C54();
-		return;
+		return 0;
 	}
 	if(bp04 < 2)
 		C_9BE5(bp08, bp06);/*contact attack?*/
@@ -542,13 +542,13 @@ C_9F7B()
 					if((unsigned char)Fighters._tile[loc_A] == TIL_E8 || (unsigned char)Fighters._tile[loc_A] >= TIL_F0)
 						break;
 				case TIL_44:
-					sound(6);
+					sound(6,0);
 					COM_DoDamage(loc_A, -1, U4_RND1(0x7f));
 				break;
 				case TIL_47:
 					if(C_636D((unsigned char)Fighters._tile[loc_A]) == 0 && (unsigned char)Fighters._HP[loc_A] >= u_rand_a()) {
 						Fighters._sleeping[loc_A] = 1;
-						sound(6);
+						sound(6,0);
 					}
 				break;
 			}

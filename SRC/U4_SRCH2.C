@@ -17,9 +17,9 @@ int bp06;
 int bp04;
 {
 	Gra_11(bp06);
-	sound(7);
-	sound(7);
-	sound(7);
+	sound(7,0);
+	sound(7,0);
+	sound(7,0);
 	Gra_11(bp06);
 	hitChara(bp06, 100 * bp04);
 }
@@ -48,10 +48,10 @@ C_B795()
 	u4_puts(/*D_2E06*/"\nYou find a Magical Ball...\n");
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((bp_02 = AskChara(/*D_2E23*/"Who touches?\x12\x12\b")) < 0)
-		return;
+		return 0;
 	if(!isCharaConscious(bp_02)) {
 		u4_puts(/*D_2E33*/"\nDisabled!\n");
-		return;
+		return 0;
 	}
 	D_8742._map.x8x8x8[Party._z][Party._y][Party._x] = 0;
 	C_B730(bp_02, D_2E6E[Party._loc - 0x11]);
@@ -78,10 +78,10 @@ C_B863()
 	u4_puts(/*D_2EAE*/"You find a Fountain.\n");
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((bp_02 = AskChara(/*D_2EC4*/"Who drinks?\x12\x12\b")) < 0)
-		return;
+		return 0;
 	if(!isCharaConscious(bp_02)) {
 		u4_puts(/*D_2ED3*/"\nDisabled!\n");
-		return;
+		return 0;
 	}
 	switch(tile_cur & 0xf) {
 		case 0:	u4_puts(D_2E04[0]); break;
@@ -96,7 +96,7 @@ C_B863()
 		case 2:
 			u4_puts(/*D_2EF1*/"\nBleck--Nasty!\n");
 			C_B730(bp_02, 1);
-		return;
+		return 0;
 		case 3:
 			if(Party.chara[bp_02]._stat != 'P') {
 				u4_puts(D_2E04[0]);
@@ -125,7 +125,7 @@ C_B93F()
 		TST_MSK(Party.mStones, Party._loc - 0x11)
 	) {
 		u4_puts(/*D_2F26*/"\nYou find Nothing!\n");
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mStones, Party._loc - 0x11);
 	u4_puts(/*D_2F3A*/"\nYou find the ");

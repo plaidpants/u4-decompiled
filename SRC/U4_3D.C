@@ -253,14 +253,14 @@ C_ADEF()
 {
 	if(Party.f_1dc == 0) {
 		Gra_10();
-		return;
+		return 0;
 	}
 	if(!C_AD6A(tile_cur, 0))
-		return;
+		return 0;
 	if(!C_AD6A(tile_forward, 1))
-		return;
+		return 0;
 	if(!C_AD6A(STA_A, 2))
-		return;
+		return 0;
 	C_AD6A(STA_B, 3);
 }
 
@@ -546,11 +546,11 @@ C_B4DF()
 			case 0x20: C_B0E9(); C_B47A(); break;
 			case 0x50: C_A94A(); C_B47A(); break;
 			case 0x60: C_AA29(); C_B47A(); break;
-			case 0xc0: C_B21D(); C_B35C(); if(STA_E) return; break;
-			case 0xd0: C_B21D(); C_B35C(); return;
-			case 0xa0: C_A7F2(D_8742._map.x8x8x8[Party._z][bp_02][bp_04]); return;
+			case 0xc0: C_B21D(); C_B35C(); if(STA_E) return 0; break;
+			case 0xd0: C_B21D(); C_B35C(); return 0;
+			case 0xa0: C_A7F2(D_8742._map.x8x8x8[Party._z][bp_02][bp_04]); return 0;
 			case 0xe0:
-			case 0xf0: C_B21D(); return;
+			case 0xf0: C_B21D(); return 0;
 		}
 	}
 	STA_E = 4;
@@ -597,17 +597,17 @@ C_B677()
 	) {
 		bp_02 = tile_cur & 0xf0;
 		if(bp_02 == 0xa0 || bp_02 >= 0xd0)
-			return;
+			return 0;
 		if(tile_forward != STA_J)
 			goto C_B729;
 		if((bp_02 = tile_forward & 0xf0) == 0xa0 || bp_02 >= 0xc0)
-			return;
+			return 0;
 		if(STA_A != STA_K)
 			goto C_B729;
 		if((bp_02 = STA_A & 0xf0) == 0xa0 || bp_02 >= 0xc0)
-			return;
+			return 0;
 		if(STA_L == STA_L/*bug?*/)
-			return;
+			return 0;
 	}
 C_B729:
 	C_B61C();

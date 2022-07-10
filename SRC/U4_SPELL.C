@@ -51,7 +51,7 @@ int bp04;
 {
 	u4_puts(/*D_20A6*/"Failed!\n");
 	hit_tile = 0;
-	sound(8);
+	sound(8,0);
 }
 
 /*try "cast"*/
@@ -113,13 +113,13 @@ int bp04;
 	int loc_A, loc_B;
 
 	if(!C_6428())
-		return;
+		return 0;
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_20DC*/"Dir: ", &loc_A, &loc_B);
 	if(!(loc_A|loc_B))
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	hit_tile = bp04;
 	hit_x = Combat._charaX[activeChara];
 	hit_y = Combat._charaY[activeChara];
@@ -131,9 +131,9 @@ int bp04;
 	} while((loc_C = COM_GetFighterId(hit_x, hit_y)) == -1);
 	if(loc_C == -1) {
 		w_Failed();
-		return;
+		return 0;
 	}
-	sound(6);
+	sound(6,0);
 	switch(hit_tile) {
 		case TIL_4D: loc_D = U4_RND3(64) | 16; break;
 		case TIL_4E: loc_D = U4_RND3(224) | 32; break;
@@ -152,12 +152,12 @@ int bp04;
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	si = AskChara(/*D_20E2*/"Who:\x12\x12\b");
 	if(si < 0)
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(Party.chara[si]._stat != 'S') {
 		w_Failed();
-		return;
+		return 0;
 	}
 	Party.chara[si]._stat = 'G';
 	if(CurMode >= MOD_COMBAT) {
@@ -172,13 +172,13 @@ int bp04;
 
 	if(Party._tile >= TIL_14 && Party._tile != TIL_18) {
 		if(!C_6409())
-			return;
+			return 0;
 		set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 		AskDir(/*D_20EA*/"Dir: ", &loc_A, &loc_B);
 		if(!(loc_A|loc_B))
-			return;
+			return 0;
 		if(!C_63B4())
-			return;
+			return 0;
 		if((Party._x & Party._y) < 0xc0) {
 			loc_C = D_959C.x;
 			loc_D = D_959C.y;
@@ -194,7 +194,7 @@ int bp04;
 				Party._x += loc_C - D_959C.x;
 				Party._y += loc_D - D_959C.y;
 				C_26B6();
-				return;
+				return 0;
 			}
 		}
 	}
@@ -207,12 +207,12 @@ int bp04;
 
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((si = AskChara(/*D_20F0*/"Who:\x12\x12\b")) < 0)
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(Party.chara[si]._stat != 'P') {
 		w_Failed();
-		return;
+		return 0;
 	}
 	Party.chara[si]._stat = 'G';
 }
@@ -224,50 +224,50 @@ int bp04;
 
 	if(CurMode == MOD_DUNGEON) {
 		if(!C_63B4())
-			return;
+			return 0;
 		loc_C = &(D_8742._map.x8x8x8[Party._z][DNG_Y_p(Party._y, Party._dir)][DNG_X_p(Party._x, Party._dir)]);
 		if((*loc_C & 0xf0) != 0xa0) {
 			w_Failed();
-			return;
+			return 0;
 		}
 		*loc_C = 0;
-		return;
+		return 0;
 	}
 	if(CurMode <= MOD_BUILDING && Party.f_1dc) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_20F8*/"Dir: ", &loc_A, &loc_B);
 	if(!(loc_A|loc_B))
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(CurMode >= MOD_COMBAT) {
 		if(Combat._charaY[activeChara] + loc_B >= 11 || Combat._charaX[activeChara] + loc_A >= 11) {
 			w_Failed();
-			return;
+			return 0;
 		}
 		loc_C = &(Combat_MAP(Combat._charaY[activeChara]+loc_B, Combat._charaX[activeChara]+loc_A));
 		if(*loc_C < TIL_44 || *loc_C > TIL_47) {
 			w_Failed();
-			return;
+			return 0;
 		}
 		*loc_C = Combat_MAP(Combat._charaY[activeChara], Combat._charaX[activeChara]);
-		return;
+		return 0;
 	}
 	if(CurMode == MOD_OUTDOORS) {
 		loc_C = &(D_8742._map.x32x32[D_959C.y+loc_B][D_959C.x+loc_A]);
 	} else {
 		if(Party._y + loc_B >= 32 || Party._x + loc_A >= 32) {
 			w_Failed();
-			return;
+			return 0;
 		}
 		loc_C = &(D_8742._map.x32x32[Party._y + loc_B][Party._x + loc_A]);
 	}
 	if(*loc_C < TIL_44 || *loc_C > TIL_47) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	*loc_C = tile_cur;
 }
@@ -295,7 +295,7 @@ the original bytecode*/
 	}
 	if(loc_E == -1) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	u4_putc(loc_B);
 	add_char_to_text_buffer(loc_B);
@@ -303,24 +303,24 @@ the original bytecode*/
 	add_char_to_text_buffer('\n');
 	if(CurMode == MOD_DUNGEON) {
 		if(!C_63B4())
-			return;
+			return 0;
 		loc_D = &(D_8742._map.x8x8x8[Party._z][DNG_Y_p(Party._y, Party._dir)][DNG_X_p(Party._x, Party._dir)]);
 		if(*loc_D)
 			w_Failed();
 		*loc_D = (loc_E&3) | 0xa0;
-		return;
+		return 0;
 	}
 	if(CurMode >= MOD_COMBAT) {
 		set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 		AskDir(/*D_210C*/"Dir: ", &loc_A, &loc_C);
 		if(!(loc_A|loc_C))
-			return;
+			return 0;
 		if(!C_63B4())
-			return;
+			return 0;
 		if(Combat._charaY[activeChara] + loc_C < 11 && Combat._charaX[activeChara] + loc_A < 11) {
 			if(C_2999(*(loc_D = &(Combat_MAP(loc_C + Combat._charaY[activeChara], loc_A + Combat._charaX[activeChara]))))) {
 				*loc_D = loc_E;
-				return;
+				return 0;
 			}
 		}
 	}
@@ -337,16 +337,16 @@ the original bytecode*/
 
 	if(Party._tile < TIL_14 || Party._tile == TIL_18) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	if(!C_6409())
-		return;
+		return 0;
 	set_input_mode(INPUT_MODE_GENERAL_ASK_PHASE);
 	si = AskLetter(/*D_2112*/"To Phase:\x12\x12\b", '0', '8');
 	if(si < 0 || si == (int)'0')
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	si -= '1';
 	Party._x = D_0814[si];
 	Party._y = D_081C[si];
@@ -359,12 +359,12 @@ the original bytecode*/
 
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((si = AskChara(/*D_211F*/"Who?\x12\x12\b")) < 0)
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(!isCharaAlive(si)) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	HP_inc(si, U4_RND3(25) + 75);
 }
@@ -377,7 +377,7 @@ the original bytecode*/
 /*C_6A90*/SPL_Jinx()
 {
 	if(!C_63B4())
-		return;
+		return 0;
 	spell_sta = 'J';
 	spell_cnt = 10;
 }
@@ -390,9 +390,9 @@ the original bytecode*/
 /*C_6AB7*/SPL_Light()
 {
 	if(!C_6447())
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	Party.f_1dc += 100;
 	if(CurMode == MOD_DUNGEON)
 		C_AE41();
@@ -406,7 +406,7 @@ the original bytecode*/
 /*C_6AE9*/SPL_Negate()
 {
 	if(!C_63B4())
-		return;
+		return 0;
 	spell_sta = 'N';
 	spell_cnt = 10;
 }
@@ -414,10 +414,10 @@ the original bytecode*/
 /*C_6B02*/SPL_Open()
 {
 	if(!C_63B4())
-		return;
+		return 0;
 	if(CurMode == MOD_OUTDOORS && Party._tile == TIL_18) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	if(CurMode >= MOD_COMBAT) {
 		C_7337();
@@ -429,7 +429,7 @@ the original bytecode*/
 /*C_6B36*/SPL_Protection()
 {
 	if(!C_63B4())
-		return;
+		return 0;
 	spell_sta = 'P';
 	spell_cnt = 10;
 }
@@ -437,7 +437,7 @@ the original bytecode*/
 /*C_6B4F*/SPL_Quickness()
 {
 	if(!C_63B4())
-		return;
+		return 0;
 	spell_sta = 'Q';
 	spell_cnt = 10;
 }
@@ -448,17 +448,17 @@ the original bytecode*/
 
 	if(CurMode >= MOD_COMBAT) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	si = AskChara(/*D_2127*/"Who:\x12\x12\b");
 	if(si < 0)
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(Party.chara[si]._stat != 'D') {
 		w_Failed();
-		return;
+		return 0;
 	}
 	Party.chara[si]._stat = 'G';
 }
@@ -468,9 +468,9 @@ the original bytecode*/
 	register int si;
 
 	if(!C_6428())
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	for(si = 15; si >= 0; si--)
 		if(Fighters._tile[si] && C_636D(Fighters._tile[si]) == 0 && Fighters._tile[si] != TIL_FC && Fighters._HP[si] < u_rand_a())
 			Fighters._sleeping[si] = 1;
@@ -481,9 +481,9 @@ the original bytecode*/
 	register int si;
 
 	if(!C_6428())
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	shakefx();
 	hit_tile = TIL_4F;
 	for(si = 15; si >= 0; si --) {
@@ -496,7 +496,7 @@ the original bytecode*/
 			hit_x = Combat._npcX[si];
 			hit_y = Combat._npcY[si];
 			C_3C54();
-			sound(6);
+			sound(6,0);
 			COM_DoDamage(si, activeChara, 0xff);
 		}
 	}
@@ -508,9 +508,9 @@ the original bytecode*/
 	register int si;
 
 	if(!C_6428())
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	for(si = 15; si >= 0; si--)
 		if(C_636D(Fighters._tile[si]) && U4_RND1(1) && Fighters._HP[si] > 23)
 			Fighters._HP[si] = 23;
@@ -519,7 +519,7 @@ the original bytecode*/
 /*C_6CB2*/SPL_View()
 {
 	if(!C_63B4())
-		return;
+		return 0;
 	C_C403();
 }
 
@@ -529,13 +529,13 @@ the original bytecode*/
 	int bp_02, bp_04;
 
 	if(!C_6409())
-		return;
+		return 0;
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_212F*/"From Dir: ", &bp_02, &bp_04);
 	if(!(bp_02|bp_04))
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(bp_02) {
 		if(bp_02 == 1)
 			WindDir = DIR_E;
@@ -552,9 +552,9 @@ the original bytecode*/
 /*C_6D22*/SPL_X_it()
 {
 	if(!C_6447())
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	Party._z = -1;
 }
 
@@ -564,15 +564,15 @@ the original bytecode*/
 	unsigned char loc_B, loc_C;
 
 	if(!C_6447())
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(Party._loc == 0x18) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	if(--Party._z < 0)
-		return;
+		return 0;
 	for(loc_A = 32; loc_A > 0; loc_A --) {
 		loc_B = U4_RND1(7);
 		loc_C = U4_RND1(7);
@@ -582,7 +582,7 @@ the original bytecode*/
 	if(loc_A == 0) {
 		Party._z ++;
 		w_Failed();
-		return;
+		return 0;
 	}
 	Party._x = loc_B;
 	Party._y = loc_C;
@@ -594,12 +594,12 @@ the original bytecode*/
 	unsigned char loc_B, loc_C;
 
 	if(!C_6447())
-		return;
+		return 0;
 	if(!C_63B4())
-		return;
+		return 0;
 	if(Party._loc  == 0x18 || Party._z == 7) {
 		w_Failed();
-		return;
+		return 0;
 	}
 	Party._z ++;
 	for(loc_A = 32; loc_A > 0; loc_A --) {
@@ -611,7 +611,7 @@ the original bytecode*/
 	if(loc_A == 0) {
 		Party._z --;
 		w_Failed();
-		return;
+		return 0;
 	}
 	Party._x = loc_B;
 	Party._y = loc_C;
@@ -655,10 +655,10 @@ pSpell_handler D_216E[] = {
 	if(CurMode < MOD_COMBAT) {
 		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 		if((activeChara = AskChara(/*D_2147*/"Player:\x12\x12\b")) < 0)
-			return;
+			return 0;
 		if(!isCharaConscious(activeChara)) {
 			w_Disabled();
-			return;
+			return 0;
 		}
 	}
 	Gra_13();
@@ -673,20 +673,20 @@ pSpell_handler D_216E[] = {
 	if(CurMode >= MOD_COMBAT)
 		Gra_11(activeChara);
 	if(D_8CCC < 0)
-		return;
+		return 0;
 	D_8CCC -= 'A';
 	u4_puts(D_1E98[101 + D_8CCC]); u4_puts(/*D_215C*/"!\n");
 	/*-- check mixture --*/
 	if(Party._mixtures[D_8CCC] == 0) {
 		w_NoneLeft();
-		return;
+		return 0;
 	}
 	Party._mixtures[D_8CCC] --;
 	/*-- check m.p --*/
 	if(Party.chara[activeChara]._MP < D_208C[D_8CCC]) {
 		u4_puts(/*D_215F*/"M.P. too low!\n");
 		w_Failed();
-		return;
+		return 0;
 	}
 	/*-- cast spell --*/
 	(*D_216E[D_8CCC])();

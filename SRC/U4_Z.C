@@ -285,7 +285,7 @@ C_4C42()
 				txt_Y = 1;
 				txt_X += 5;
 				if(txt_X >= 39)
-					return;
+					return 0;
 			}
 		}
 	} while(++si < 26);
@@ -333,7 +333,7 @@ int bp04;
 				if((si&0xf) <= Party.f_1d8)
 					bp04 = (si&0xf) - 1;
 				else
-					sound(1);
+					sound(1,0);
 			break;
 			case KBD_RIGHT: case KBD_DOWN:
 				bp04 = (bp04 + 1) % 14;

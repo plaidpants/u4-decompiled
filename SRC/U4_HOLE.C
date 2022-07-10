@@ -32,11 +32,11 @@ C_8A5A()
 	u4_puts(/*D_26C0*/"Hole up & Camp\n");
 	if(CurMode != MOD_DUNGEON && Party._loc != 0) {
 		w_NotHere();
-		return;
+		return 0;
 	}
 	if(Party._tile != TIL_1F) {
 		w_OnlyOnFoot();
-		return;
+		return 0;
 	}
 #ifdef WIN32
 	if(Load(CurMode == MOD_DUNGEON?/*D_26D0*/"CAMP.DNG":/*D_26D9*/"CAMP.CON", sizeof(struct tCombat), &Combat) == -1)

@@ -65,7 +65,7 @@ C_02A3(bp04)
 long bp04;
 {
 	if(u_kbhit())
-		return;
+		return 0;
 	//bp04 *= (long)speed_info;
 	//while(-- bp04)
 		Sleep(1);
@@ -115,7 +115,7 @@ C_034D()
 		}
 	}
 	if(--D_00C2)
-		return;
+		return 0;
 	D_00C2 = (speed_info == 1)?1:(speed_info - 1);
 	Gra_animFlow(0x00);
 	Gra_animFlow(0x01);
@@ -134,7 +134,7 @@ C_041A()
 
 	if(D_00C6) {
 		D_00C6 --;
-		return;
+		return 0;
 	}
 	while(1) {
 		switch(D_36E2[++D_00C4] & 0xf0) {
@@ -160,7 +160,7 @@ C_041A()
 						D_3A24[19 * D_6976._npc._040[bp_02] + D_6976._npc._020[bp_02]] = D_6976._npc._000[bp_02];
 				}
 				D_00C6 = D_36E2[D_00C4] & 0xf;
-			return;
+			return 0;
 			case 0x90: case 0xa0: case 0xb0: case 0xc0: case 0xd0: case 0xe0: case 0xf0:
 				D_00C4 = -1;
 			break;

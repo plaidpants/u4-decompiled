@@ -81,7 +81,7 @@ static unsigned D_913E;/*# of drinks in pub*/
 		u4_puts(/*D_3D0F*/" is revived!\n");
 		add_npc_talk(VENDOR_HAWKKWIND, " is revived!\n");
 		add_npc_talk(VENDOR_INVALID, "");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_3D1D*/"\n\nWelcome, ");
 	add_npc_talk(VENDOR_HAWKKWIND, "Welcome, ");
@@ -251,7 +251,7 @@ Black Pearls.\n");
 				loc_D = AskInt(3);
 				if(loc_D <= 0) {
 					if(loc_D < 0)
-						sound(1);
+						sound(1,0);
 				} else {
 					if(loc_D < loc_A * D_4190[D_9142][loc_B]) {
 						loc_E = loc_A * D_4190[D_9142][loc_B] - loc_D;
@@ -374,7 +374,7 @@ int bp04;
 	if(D_46D2[bp06] * bp04 > Party._gold) {
 		u4_puts(/*D_4652*/"I fear you have not the funds, perhaps something else.\n");
 		add_npc_talk(VENDOR_WEAPON, "I fear you have not the funds, perhaps something else.");
-		return;
+		return 0;
 	}
 	Party._gold -= D_46D2[bp06] * bp04; dspl_Gold();
 	Party._weapons[bp06] += bp04;
@@ -424,7 +424,7 @@ C_CD80()
 					break;
 			}
 			if(loc_B == 4)
-				sound(1);
+				sound(1,0);
 		} while(loc_B == 4);
 		if(loc_C < 0)
 			break;
@@ -448,7 +448,7 @@ C_CD80()
 					add_npc_talk(VENDOR_WEAPON, "Too bad.");
 				}
 				else
-					sound(1);
+					sound(1,0);
 			} else {
 				C_CD1D(loc_C, loc_A);
 			}
@@ -501,7 +501,7 @@ C_CEBE()
 						add_npc_talk(VENDOR_WEAPON, "Too bad.");
 					}
 					else
-						sound(1);
+						sound(1,0);
 					break;
 				}
 				if (Party._weapons[loc_B] < loc_A) {
@@ -583,7 +583,7 @@ C_CEBE()
 			break;
 			default:
 				bp_02 = -1;
-				sound(1);
+				sound(1,0);
 		}
 	} while(bp_02 == -1);
 	if(bp_02) {
@@ -667,7 +667,7 @@ int bp04;
 	if(D_4BDC[bp06] * bp04 > Party._gold) {
 		u4_puts(/*D_4B63*/"You don't have enough gold.\nMaybe something cheaper?\n");
 		add_npc_talk(VENDOR_ARMOR, "You don't have enough gold.\nMaybe something cheaper?");
-		return;
+		return 0;
 	}
 	Party._gold -= D_4BDC[bp06] * bp04; dspl_Gold();
 	Party._armors[bp06] += bp04;
@@ -716,7 +716,7 @@ C_D1D0()
 					break;
 			}
 			if(loc_B == 4)
-				sound(1);
+				sound(1,0);
 		} while(loc_B == 4);
 		if(loc_C < 0)
 			break;
@@ -866,7 +866,7 @@ C_D2F8()
 			break;
 			default:
 				bp_02 = -1;
-				sound(1);
+				sound(1,0);
 		}
 	} while(bp_02 == -1);
 	if(bp_02) {
@@ -907,7 +907,7 @@ C_D2F8()
 		}
 		add_npc_talk(VENDOR_HORSE, "A shame, thou looks like thou could use a good horse!");
 		add_npc_talk(VENDOR_INVALID, "");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_4E57*/"\nFor only ");
 	add_npc_talk(VENDOR_HORSE, "For only ");
@@ -925,13 +925,13 @@ C_D2F8()
 			add_npc_talk(VENDOR_HORSE, "A shame, thou looks like thou could use a good horse!");
 		}
 		add_npc_talk(VENDOR_INVALID, "");
-		return;
+		return 0;
 	}
 	if(100 * Party.f_1d8 > Party._gold) {
 		u4_puts(/*D_4ECC*/"\nIt seems thou hast not gold enough to pay!\n");
 		add_npc_talk(VENDOR_HORSE, "It seems thou hast not gold enough to pay!");
 		add_npc_talk(VENDOR_INVALID, "");
-		return;
+		return 0;
 	}
 	Party._gold -= 100 * Party.f_1d8; dspl_Gold();
 	u4_puts(/*D_4EF9*/"\nHere, a better breed thou shalt not find ever!\n");
@@ -1025,7 +1025,7 @@ C-Magic Keys\n");
 			u4_puts(/*D_5135*/"\nWhat? Can't pay! Buzz off swine!\n");
 			add_npc_talk(VENDOR_GUILD, "What? Can't pay! Buzz off swine!");
 			add_npc_talk(VENDOR_INVALID, "");
-			return;
+			return 0;
 		}
 		switch(loc_A) {
 			case 0: loc_C = &(Party._torches); break;
@@ -1162,7 +1162,7 @@ unsigned char D_567A[] = {30,60,90, 0};
 		u4_puts(/*D_54E1*/"The Innkeeper says: Get that horse out of here!!!\n");
 		add_npc_talk(VENDOR_INN, "Get that horse out of here!!!");
 		add_npc_talk(VENDOR_INVALID, "");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_5514*/"The Innkeeper says: Welcome to ");
 	add_npc_talk(VENDOR_INN, "Welcome to ");
@@ -1190,7 +1190,7 @@ unsigned char D_567A[] = {30,60,90, 0};
 			if (bp_02 < 0)
 			{
 				add_npc_talk(VENDOR_INVALID, "");
-				return;
+				return 0;
 			}
 			D_913B = D_5672[bp_02];
 			D_913C = D_5676[bp_02];
@@ -1208,7 +1208,7 @@ unsigned char D_567A[] = {30,60,90, 0};
 					add_npc_talk(VENDOR_INN, "You won't find a better deal in this towne!");
 				}
 				add_npc_talk(VENDOR_INVALID, "");
-				return;
+				return 0;
 			}
 			D_913B = D_5494[D_9142];
 			D_913C = D_549C[D_9142];
@@ -1218,7 +1218,7 @@ unsigned char D_567A[] = {30,60,90, 0};
 			u4_puts(/*D_55AC*/"\nIf you can't pay, you can't stay! Good Bye.\n");
 			add_npc_talk(VENDOR_INN, "If you can't pay, you can't stay! Good Bye.");
 			add_npc_talk(VENDOR_INVALID, "");
-			return;
+			return 0;
 		}
 		Party._gold -= D_913A; dspl_Gold();
 		u4_puts(/*D_55DA*/"\n\nVery good.  Have a pleasant night.\n");
@@ -1326,11 +1326,11 @@ C_DAA2()
 
 	bp_02 = C_DA05();
 	if(bp_02 == -1)
-		return;
+		return 0;
 	if(Party.chara[bp_02]._stat != 'P') {
 		u4_puts(/*D_57ED*/"Thou suffers not from Poison!\n");
 		add_npc_talk(VENDOR_HEALER, "Thou suffers not from Poison!");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_580C*/"A curing will cost thee 100gp.\n");
 	add_npc_talk(VENDOR_HEALER, "A curing will cost thee 100 gold pieces.");
@@ -1347,7 +1347,7 @@ C_DAA2()
 	} else {
 		if (!C_DA3E(100))
 		{
-			return;
+			return 0;
 		}
 	}
 	Party.chara[bp_02]._stat = 'G';
@@ -1362,18 +1362,18 @@ C_DB29()
 
 	bp_02 = C_DA05();
 	if(bp_02 == -1)
-		return;
+		return 0;
 	if(Party.chara[bp_02]._HP[0] == Party.chara[bp_02]._HP[1]) {
 		u4_puts(/*D_58A6*/"Thou art already quite healthy!\n");
 		add_npc_talk(VENDOR_HEALER, "Thou art already quite healthy!");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_58C7*/"\nA healing will cost thee 200gp.\n");
 	add_npc_talk(VENDOR_HEALER, "A healing will cost thee 200 gold pieces.");
 	if(Party._gold < 200) {
 		u4_puts(/*D_58E9*/"\nI see by thy purse that thou hast not enough gold. I cannot aid thee.\n");
 		add_npc_talk(VENDOR_HEALER, "I see by thy purse that thou hast not enough gold. I cannot aid thee.");
-		return;
+		return 0;
 	}
 	if(C_DA3E(200)) {
 		Party.chara[bp_02]._HP[0] = Party.chara[bp_02]._HP[1];
@@ -1389,18 +1389,18 @@ C_DB93()
 
 	bp_02 = C_DA05();
 	if(bp_02 == -1)
-		return;
+		return 0;
 	if(Party.chara[bp_02]._stat != 'D') {
 		u4_puts(/*D_5931*/"Thou art not dead fool!\n");
 		add_npc_talk(VENDOR_HEALER, "Thou art not dead fool!");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_594A*/"Resurrection will cost thee 300gp.\n");
 	add_npc_talk(VENDOR_HEALER, "Resurrection will cost thee 300 gold pieces.");
 	if(Party._gold < 300) {
 		u4_puts(/*D_596E*/"\nI see by thy purse that thou hast not enough gold. I cannot aid thee.\n");
 		add_npc_talk(VENDOR_HEALER, "I see by thy purse that thou hast not enough gold. I cannot aid thee.");
-		return;
+		return 0;
 	}
 	if(C_DA3E(300)) {
 		Party.chara[bp_02]._stat = 'G';
@@ -1558,7 +1558,7 @@ C_DD24()
 	bp_02 = AskInt(2);
 	if(bp_02 <= 0) {
 		if(bp_02 < 0)
-			sound(1);
+			sound(1,0);
 		return 1;
 	}
 	bp_04 = 0;
@@ -1622,7 +1622,7 @@ C_DE35()
 	loc_A = AskInt(2);
 	if(loc_A <= 0) {
 		if(loc_A < 0)
-			sound(1);
+			sound(1,0);
 		return 1;
 	}
 	if(loc_A < 2) {
@@ -1658,7 +1658,7 @@ C_DE35()
 				loc_E = AskInt(2);
 				if(loc_E <= 0) {
 					if(loc_A < 0)
-						sound(1);
+						sound(1,0);
 					else
 						u4_puts(/*D_60C2*/"\nSorry, I could not hep ya mate!\n");
 					add_npc_talk(VENDOR_PUB, "Sorry, I could not hep ya mate!\n");
@@ -1721,10 +1721,10 @@ C_E004:
 			if(bp_02 == ' ' || bp_02 == 0x1b || bp_02 == '\r') {
 				Gra_CR();
 				add_npc_talk(VENDOR_INVALID, "");
-				return;
+				return 0;
 			}
 			if(bp_02 != 'F' && bp_02 != 'A') {
-				sound(1);
+				sound(1,0);
 				goto C_E004;
 			}
 		}
@@ -1795,7 +1795,7 @@ char *D_6390[] = {
 			add_npc_talk(VENDOR_FOOD, "Goodbye, Come again!");
 		}
 		add_npc_talk(VENDOR_INVALID, "");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_6283*/"We have the best adventure rations, 25 for only ");
 	add_npc_talk(VENDOR_FOOD, "We have the best adventure rations, 25 for only ");

@@ -78,7 +78,7 @@ C_A163()
 			u4_puts(/*D_2A6E*/"Yes or no!\n");
 	} while(bp_04[0] != 'N' && bp_04[0] != 'Y');
 	if(bp_04[0] == 0)
-		return;
+		return 0;
 	add_npc_talk(D_8CE6, "\n");
 	if(bp_04[0] == 'Y') {
 		if(D_95CE[1])
@@ -106,7 +106,7 @@ char *bp04;
 #endif
 {
 	if(!bp04)
-		return;
+		return 0;
 	u4_puts(bp04);
 	Gra_CR();
 }
@@ -187,7 +187,7 @@ char *D_2BB2[] = {
 		u4_puts(D_8CCE[1]);
 		u4_puts(/*D_2B17*/" says: I cannot join thee.\n");
 		add_npc_talk(D_8CE6, "I cannot join thee.\n");
-		return;
+		return 0;
 	}
 	if (*pKarmas[Party._loc - 0x05] < 40 && *pKarmas[Party._loc - 0x05] != 0) {
 		u4_puts(/*D_2B33*/"Thou art not ");
@@ -196,12 +196,12 @@ char *D_2BB2[] = {
 		add_npc_talk(D_8CE6, "Thou art not ");
 		add_npc_talk(D_8CE6, D_2BB2[Party._loc - 0x05]);
 		add_npc_talk(D_8CE6, " enough for me to join thee.\n");
-		return;
+		return 0;
 	}
 	if(100 * Party.f_1d8 + 100 > Party.chara[0]._HP[1]) {
 		u4_puts(/*D_2B5F*/"Thou art not experienced enough for me to join thee.\n");
 		add_npc_talk(D_8CE6, "Thou art not experienced enough for me to join thee.\n");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_2B95*/"I am honored to join thee!\n");
 	add_npc_talk(D_8CE6, "I am honored to join thee!\n");
@@ -229,7 +229,7 @@ char *D_2BB2[] = {
 		u4_puts(D_8CCE[1]);
 		u4_puts(/*D_2BC2*/" says: I do not need thy gold.  Keep it!\n");
 		add_npc_talk(D_8CE6, "I do not need thy gold.  Keep it!\n");
-		return;
+		return 0;
 	}
 	u4_puts(/*D_2BEC*/"How much?\x12\x12\x12\b\b");
 	add_npc_talk(D_8CE6, "How much?\n");
@@ -337,7 +337,7 @@ int bp04;
 				u4_puts(/*D_2C9E*/" turns away!\n\n");
 			}
 			add_npc_talk(VENDOR_INVALID, "");
-			return;
+			return 0;
 		}
 		for(si = 0; D_2A90[si]._00[0]; si++) {
 			if(strnicmp(D_2A90[si]._00, bp_12, 4) == 0) {
@@ -348,7 +348,7 @@ int bp04;
 					if (Party.f_1d8 != bp_04)
 					{
 						add_npc_talk(VENDOR_INVALID, "");
-						return;/*looks like he/she has joined*/
+						return 0;/*looks like he/she has joined*/
 					}
 				} else {
 					bp_02 = 1;
@@ -436,7 +436,7 @@ unsigned char bp04;
 		si = 9;/*patch! LB's hawkwind*/
 	if(si == -1) {
 		u4_puts(D_2A7A); // funny no response
-		return;
+		return 0;
 	}
 	(*(D_2D54[si]))();
 }
@@ -448,18 +448,18 @@ unsigned char bp04;
 	u4_puts(/*D_2D68*/"Talk\n");
 	if(Party.f_1dc != 0) {
 		w_DriftOnly();
-		return;
+		return 0;
 	}
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_2D6E*/"Dir: ", &loc_B, &loc_D);
 	if(!(loc_B | loc_D))
-		return;
+		return 0;
 	loc_E = Party._x + loc_B;
 	loc_A = Party._y + loc_D;
 	loc_C = C_0A8B(loc_E, loc_A);
 	if(loc_E > 31 || loc_A > 31 || Party._loc == 0) {
 		u4_puts(D_2A7A);
-		return;
+		return 0;
 	}
 	if(
 		D_8742._map.x32x32[loc_A][loc_E] >= TIL_60 &&
@@ -469,22 +469,22 @@ unsigned char bp04;
 		loc_A += loc_D;
 		if(loc_E > 31 || loc_A > 31) {
 			u4_puts(D_2A7A);
-			return;
+			return 0;
 		}
 		if((loc_C = C_0A8B(loc_E, loc_A)) == -1 || D_8742._npc._tile[loc_C] != TIL_52) {
 			u4_puts(D_2A7A);
-			return;
+			return 0;
 		}
 		C_A686(loc_A - loc_D);
-		return;
+		return 0;
 	}
 	if(loc_C == -1 || D_8742._npc._tlkidx[loc_C] == 0) {
 		u4_puts(D_2A7A);
-		return;
+		return 0;
 	}
 	if(D_8742._npc._tile[loc_C] == TIL_5E) {
 		C_E59B();
-		return;
+		return 0;
 	}
 	C_A4B4(loc_C);
 }

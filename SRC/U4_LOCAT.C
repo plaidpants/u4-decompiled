@@ -15,7 +15,7 @@ LOCATE
 	u4_puts(/*D_22EA*/"Locate position with ");
 	if(Party._sextants == 0) {
 		w_What();
-		return;
+		return 0;
 	}
 	u4_puts(/*D_2300*/"sextant\n");
 	add_char_to_text_buffer('\n');
@@ -69,7 +69,7 @@ int bp04;
 	Gra_CR();
 	u4_puts(D_1E98[37 + bp06]);
 	Gra_CR();
-	sound(1);
+	sound(1,0);
 }
 
 /*C_7631*/CMD_Ready()
@@ -84,7 +84,7 @@ int bp04;
 		u4_puts(/*D_235B*/"Ready a weapon\n");
 		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 		if((loc_A = AskChara(/*D_236B*/"for:\x12\x12\b")) < 0)
-			return;
+			return 0;
 	}
 	Gra_13();
 	C_4832();
@@ -97,16 +97,16 @@ int bp04;
 	if(CurMode >= MOD_COMBAT)
 		Gra_11(activeChara);
 	if(loc_B < 0)
-		return;
+		return 0;
 	loc_B -= 'A';
 	if(loc_B != 0 && Party._weapons[loc_B] == 0) {
 		w_NoneLeft();
-		return;
+		return 0;
 	}
 	if(loc_B != 0) {
 		if(((0x80 >> Party.chara[loc_A]._class) & D_2334[loc_B]) == 0) {
 			C_75DC(loc_A, loc_B, 1);
-			return;
+			return 0;
 		}
 	}
 	if((loc_C = Party.chara[loc_A]._weapon) != 0) {
@@ -128,7 +128,7 @@ int bp04;
 	u4_puts(/*D_237E*/"Wear Armour\n");
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((loc_A = AskChara(/*D_238B*/"for:\x12\x12\b")) < 0)
-		return;
+		return 0;
 	Gra_13();
 	C_48F8();
 	txt_Y = 23; txt_X = 24;
@@ -140,16 +140,16 @@ int bp04;
 	if(CurMode >= MOD_COMBAT)
 		Gra_11(activeChara);
 	if(loc_B < 0)
-		return;
+		return 0;
 	loc_B -= 'A';
 	if(loc_B != 0 && Party._armors[loc_B] == 0) {
 		w_NoneLeft();
-		return;
+		return 0;
 	}
 	if(loc_B != 0) {
 		if(((0x80 >> Party.chara[loc_A]._class) & D_2334[loc_B + 0x10]) == 0) {
 			C_75DC(loc_A, loc_B + 0x10, 0);
-			return;
+			return 0;
 		}
 	}
 	if((loc_C = Party.chara[loc_A]._armor) != 0) {

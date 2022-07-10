@@ -21,7 +21,7 @@ char *bp06;
 char *bp04;
 {
 	// always have either disk inserted
-	return;
+	return 0;
 	int bp_02;
 
 	if(!C_182F(bp04)) {
@@ -48,8 +48,8 @@ char *bp04;
 				}
 			}
 			if(C_1814() == bp_02 && C_182F(bp04))
-				return;
-			sound(1);
+				return 0;
+			sound(1,0);
 			set_input_mode(INPUT_MODE_DRIVE_LETTER);
 			while(!u_kbhit());
 		} while(1);
@@ -153,7 +153,7 @@ C_C51C()
 		txt_Y = 8;
 		txt_X = 12;
 		u4_puts(/*D_30F0*/"No party formed!");
-		sound(8);
+		sound(8,0);
 		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(3, 0);
 		u_kbflush();

@@ -826,7 +826,7 @@ char *bp06;
 char *bp04;
 {
 	// always have either disk inserted
-	return;
+	return 0;
 	int bp_02;
 
 	Gra_clrscr();
@@ -852,7 +852,7 @@ char *bp04;
 			}
 		}
 		if((C_3290() & 0xff) == bp_02 && C_32AB(bp04))
-			return;
+			return 0;
 		sound_1();
 		set_input_mode(INPUT_MODE_DRIVE_LETTER);
 		while(!u_kbhit());
@@ -891,7 +891,7 @@ C_3030()
 	if(player_name[0] == 0) {
 		_ffree(pAnim);
 		_ffree(pShapes);
-		return;
+		return 0;
 	}
 	Gra_2();
 	C_0B1E(17, 4, /*D_31A2*/"Art thou Male or Female? ");
@@ -904,7 +904,7 @@ C_3030()
 		if(M_or_F == 0x1b || M_or_F == KBD_ENTER || M_or_F == KBD_SPACE) {
 			_ffree(pAnim);
 			_ffree(pShapes);
-			return;
+			return 0;
 		}
 		u4_toupper(M_or_F);
 	}

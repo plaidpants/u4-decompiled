@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <io.h>
+//#include <io.h>
 #include <fcntl.h>
 
 #ifdef ENABLE_WINDOWS
@@ -787,7 +787,8 @@ int __cdecl dclose(int f)
 {
 	int ret;
 
-	ret = _close(f);
+	//ret = _close(f);
+	ret = close(f);
 
 	return ret;
 }
@@ -802,7 +803,8 @@ int __cdecl dlseek(int f, unsigned long ofs)
 {
 	int ret;
 
-	ret = _lseek(f, ofs, SEEK_SET);
+	//ret = _lseek(f, ofs, SEEK_SET);
+	ret = lseek(f, ofs, SEEK_SET);
 
 	return ret;
 }
@@ -814,7 +816,8 @@ int __cdecl dopen(char* fname, int mode)
 
 	strcpy(path, getDataPath());
 	strcat(path, fname);
-	ret = _open(path, _O_RDWR | _O_BINARY);
+	//ret = _open(path, _O_RDWR | _O_BINARY);
+	ret = open(path, O_RDWR);
 
 	return ret;
 }
@@ -836,7 +839,8 @@ int __cdecl dwrite(int f, void* b, int sz)
 {
 	int ret;
 
-	ret = _write(f, b, sz);
+	//ret = _write(f, b, sz);
+	ret = write(f, b, sz);
 
 	return ret;
 }
@@ -979,7 +983,7 @@ Gra_animFlow(unsigned tile)
 	FAKE_RET;
 }
 
-static char random() 
+static char Random1() 
 { 
 	return (char)(rand() & 0xff); 
 }

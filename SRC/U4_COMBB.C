@@ -26,7 +26,7 @@ int bp04;
 		) {
 			D_8742._npc._tile[di] = D_8742._npc._gtile[di] = 0;
 			t_callback();
-			sound(bp04);
+			sound(bp04,0);
 		}
 	}
 }
@@ -42,7 +42,7 @@ register int si;
 		C_36C7();
 		Party._x = 0x7f;
 		Party._y = 0x4e;
-		sound(11);
+		sound(11,0);
 		C_1584();
 		Party._tile = TIL_10;
 		hit_tile = 0;
@@ -57,7 +57,7 @@ register int si;
 {
 	if(Party._x == D_8742._npc._x[si] && Party._y == D_8742._npc._y[si]) {
 		t_callback();
-		sound(12);
+		sound(12,0);
 		C_1584();
 		C_1584();
 		C_1584();
@@ -72,7 +72,7 @@ C_7918()
 	register int si;
 
 	if(CurMode != MOD_OUTDOORS)
-		return;
+		return 0;
 
 	for(si = 3; si >= 0; si--) {
 		if(D_8742._npc._tile[si] == TIL_8C)
@@ -89,7 +89,7 @@ C_7918()
 /*C_794D*/w_SameExit()
 {
 	u4_puts(/*D_239E*/"All must use same exit!\n");
-	sound(1);
+	sound(1,0);
 }
 
 /*exit combat zone*/
@@ -97,7 +97,7 @@ C_7962()
 {
 	Combat._charaX[activeChara] = Combat._charaY[activeChara] = 0x80;
 	Fighters._chtile[activeChara] = 0;
-	sound(8);
+	sound(8,0);
 	if(CurMode == MOD_COMBAT && !C_0AFE(D_96F8) && Party.chara[activeChara]._HP[0] == Party.chara[activeChara]._HP[1]) {
 		karma_dec(&(Party._valor), 2);
 		karma_dec(&(Party._sacri), 2);
@@ -115,19 +115,19 @@ unsigned char bp04;
 		if(D_96EE != 0) {
 			if(bp06 != (unsigned char)D_96EE) {
 			w_SameExit();
-			return;
+			return 0;
 			}
 			C_7962();
-			return;
+			return 0;
 		}
 		/*someone already exited N/S*/
 		if(D_96F4 != 0) {
 			if(bp04 != (unsigned char)D_96F4) {
 			w_SameExit();
-			return;
+			return 0;
 			}
 			C_7962();
-			return;
+			return 0;
 		}
 		/*-- --*/
 		if(bp06 > 10)
@@ -176,24 +176,24 @@ unsigned char bp04;
 {
 	register unsigned char *di;
 
-	sound(0);
+	sound(0,0);
 	/*-- out of bounds=>exiting*/
 	if((unsigned)bp06 > 10 || (unsigned)bp04 > 10) {
 		C_79C9(bp06, bp04);
-		return;
+		return 0;
 	}
 	di = &(D_96F9[bp04*11 + bp06]);
 	if(!C_2999(*di)) {
 		w_Blocked();
-		return;
+		return 0;
 	}
 	if(C_29EF(*di)) {
 		w_SlowProgress();
-		return;
+		return 0;
 	}
 	Combat._charaX[si] = bp06;
 	Combat._charaY[si] = bp04;
-	sound(0);
+	sound(0,0);
 	if(CurMode == MOD_COM_ROOM)
 		C_7A15(bp06, bp04);
 }

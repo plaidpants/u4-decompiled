@@ -102,7 +102,7 @@ C_0311() {
 		if(CurMode == MOD_DUNGEON) {
 			if(tile_cur != 0xb0 || Party._loc != 0x18) {
 				u4_puts(D_00EE);
-				return;
+				return 0;
 			}
 			if(Party._z != 7)
 				u4_puts(/*D_01D6*/"\nAs thou doth approach, a voice rings out: What virtue dost stem from ");
@@ -115,7 +115,7 @@ C_0311() {
 C_03A1:
 				if(bp_10[0])
 					u4_puts(D_00EE);
-				return;
+				return 0;
 			}
 			u4_puts(/*D_0221*/"\nThe Voice says: Use thy Stone.\n\nColor:\n");
 			set_input_mode(INPUT_MODE_USE_STONE_COLOR_WORD);
@@ -130,15 +130,15 @@ C_03A1:
 				goto C_03A1;
 			if(!TST_MSK(Party.mStones, bp_02)) {
 				u4_puts(/*D_024A*/"\nYou have none!\n\n");
-				return;
+				return 0;
 			}
 			if(Party._z != bp_02) {
 				u4_puts(D_00EE);
-				return;
+				return 0;
 			}
 			if(Party._z == 7) {
 				C_31F4();/*last phase of game*/
-				return;
+				return 0;
 			}
 			D_8742._map.x8x8x8[Party._z][Party._y][Party._x] = 0x20; // changes to dungeon ladder down tile
 			u4_puts(/*D_025C*/"\nThe altar changes before thyne eyes!\n");
@@ -166,11 +166,11 @@ C_044C() {
 C_0487() {
 	if(!TST_MSK(Party.mItems, 4)) {
 		u4_puts(D_0100);
-		return;
+		return 0;
 	}
 	if(Party._loc != 0 || Party._x != 0xe9 || Party._y != 0xe9) {
 		u4_puts(D_00EE);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 12);
 	u4_puts("The Bell rings on and on!\n");
@@ -180,13 +180,13 @@ C_0487() {
 C_04C0() {
 	if(!TST_MSK(Party.mItems, 3)) {
 		u4_puts(D_0100);
-		return;
+		return 0;
 	}
 	if(Party._loc != 0 || Party._x != 0xe9 || Party._y != 0xe9 ||
 		!TST_MSK(Party.mItems, 12)
 	) {
 		u4_puts(D_00EE);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 11);
 	u4_puts("The words resonate with the ringing!\n");
@@ -196,17 +196,17 @@ C_04C0() {
 C_0501() {
 	if(!TST_MSK(Party.mItems, 2)) {
 		u4_puts(D_0100);
-		return;
+		return 0;
 	}
 	if(Party._loc != 0 || Party._x != 0xe9 || Party._y != 0xe9 ||
 		!TST_MSK(Party.mItems, 11)
 	) {
 		u4_puts(D_00EE);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 10);
 	u4_puts("As you light the Candle the Earth Trembles!\n");
-	sound(6);
+	sound(6,0);
 	shakefx();
 }
 
@@ -214,11 +214,11 @@ C_0501() {
 C_0553() {
 	if(!TST_MSK(Party.mItems, 8)) {
 		u4_puts(D_0100);
-		return;
+		return 0;
 	}
 	if(Party._loc != 0) {
 		u4_puts(D_00EE);
-		return;
+		return 0;
 	}
 	u4_puts("The Horn sounds an eerie tone!\n");
 	spell_sta = 1;
@@ -230,11 +230,11 @@ C_0553() {
 C_058C() {
 	if(!TST_MSK(Party.mItems, 9)) {
 		u4_puts(D_0100);
-		return;
+		return 0;
 	}
 	if(Party._loc != 0 || Party._tile > TIL_13 || Party._ship != 50) {
 		u4_puts(D_00EE);
-		return;
+		return 0;
 	}
 	u4_puts("Once mounted, the Wheel glows with a blue light!\n");
 	Party._ship = 99;
@@ -247,15 +247,15 @@ C_05CE() {
 
 	if(!TST_MSK(Party.mItems, 0)) {
 		u4_puts(D_0100);
-		return;
+		return 0;
 	}
 	if(Party._loc != 0 || Party._x != 0xe9 || Party._y != 0xe9) {
 		u4_puts("\nYou hold the evil Skull of Mondain the Wizard aloft....\n");
-		sound(6); shakefx();
+		sound(6,0); shakefx();
 		Gra_09();
-		sound(6); shakefx();
+		sound(6,0); shakefx();
 		Gra_09();
-		sound(6); shakefx();
+		sound(6,0); shakefx();
 		if(CurMode >= MOD_COMBAT) {
 			for(bp_02 = 31; bp_02 >= 0; bp_02 --) {
 				if(D_8742._npc._tile[bp_02] != TIL_5E)
@@ -293,11 +293,11 @@ C_05CE() {
 		karma_inc((char *)&(Party._honor), 10);
 		karma_inc((char *)&(Party._spiri), 10);
 		karma_inc((char *)&(Party._humil), 10);
-		sound(6); shakefx();
+		sound(6,0); shakefx();
 		Gra_09();
-		sound(6); shakefx();
+		sound(6,0); shakefx();
 		Gra_09();
-		sound(6); shakefx();
+		sound(6,0); shakefx();
 	}
 	RST_MSK(Party.mItems, 0);
 }
@@ -330,7 +330,7 @@ struct {
 	for(si = 0; D_0434[si]._00[0]; si++) {
 		if(strnicmp(D_0434[si]._00, bp_0e, 12) == 0) {
 			(*(D_0434[si]._02))();
-			return;
+			return 0;
 		}
 	}
 	u4_puts("Not a Usable item!\n");

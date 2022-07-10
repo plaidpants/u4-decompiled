@@ -595,7 +595,7 @@ C_837A()
 				karma_dec(&(Party._valor), 2);
 			}
 			C_8214();
-			return;
+			return 0;
 		}
 /*C_83E6:*/
 		u4_puts(/*D_25F4*/"Leave Room!\n");
@@ -624,7 +624,7 @@ C_837A()
 		u_kbflush();
 		Party._x = DNG_X_p(Party._x, Party._dir);
 		Party._y = DNG_Y_p(Party._y, Party._dir);
-		return;
+		return 0;
 	}
 /*C_849E:*/
 	u4_puts(/*D_260F*/"\nVictory!\n");

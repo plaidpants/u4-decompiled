@@ -94,7 +94,7 @@ C_E72C()
 C_E755:
 		CurMode = MOD_OUTDOORS;
 		Party._loc = 0;
-		return;
+		return 0;
 	}
 	if(Load(/*D_83BA*/"SHRINE.CON", 11 * 11, Combat._map) == -1)
 		exit(3);

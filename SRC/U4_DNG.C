@@ -28,7 +28,7 @@ extern int QUIT;
 		set_input_mode(INPUT_MODE_DUNGEON_INPUT);
 		if (QUIT)
 		{
-			return;
+			return 0;
 		}
 		C_9209();
 		u4_putc(0x10);
@@ -40,7 +40,7 @@ extern int QUIT;
 			if(u4_isupper((unsigned char)si))
 				si = (si & 0xff00) | u4_lower((unsigned char)si);
 			switch(si) {
-				case KBD_ESC: QUIT = 1;  return;
+				case KBD_ESC: QUIT = 1;  return 0;
 				case KBD_SPACE: w_Pass(); break;
 				case KBD_UP:
 				case 0x487e: C_891E(); break;
@@ -75,7 +75,7 @@ extern int QUIT;
 				case KBD_o:
 				case KBD_t:
 				case KBD_x:
-				case KBD_y: w_NotHere(); sound(2); break;
+				case KBD_y: w_NotHere(); sound(2,0); break;
 				case KBD_CTRL_S:
 					if(bp_04 == KBD_ALT_Z) {
 						C_1C21();
@@ -83,7 +83,7 @@ extern int QUIT;
 					}
 				default:
 					u4_puts(/*D_2626*/"Bad command\n");
-					sound(2);
+					sound(2,0);
 					D_07F8 = 0;
 			}
 			C_AE41();
@@ -145,7 +145,7 @@ C_87E2()
 		} else if(di->_stat == 'P') {
 			hitChara(si, 2);
 			Gra_11(si);
-			sound(6);
+			sound(6,0);
 			Gra_11(si);
 		}
 	}
@@ -157,7 +157,7 @@ C_87E2()
 		}
 		for(si = Party.f_1d8; --si >= 0; )
 			Gra_11(si);
-		sound(6);
+		sound(6,0);
 		for(si = Party.f_1d8; --si >= 0; )
 			Gra_11(si);
 	}
@@ -205,7 +205,7 @@ C_891E()
 	u4_puts(/*D_2654*/"Advance\n");
 	if(!C_88E8(tile_forward, 0)) {
 		w_Blocked();
-		return;
+		return 0;
 	}
 	Party._x = DNG_X_p(Party._x, Party._dir);
 	Party._y = DNG_Y_p(Party._y, Party._dir);
@@ -217,7 +217,7 @@ C_895F()
 	u4_puts(/*D_265D*/"Retreat\n");
 	if(!C_88E8(tile_back, 1)) {
 		w_Blocked();
-		return;
+		return 0;
 	}
 	Party._x = DNG_X_m(Party._x, Party._dir);
 	Party._y = DNG_Y_m(Party._y, Party._dir);

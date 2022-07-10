@@ -1,10 +1,14 @@
 #include "..\SRC-TITLE\TITLE.H"
 
+#ifdef ENABLE_WINDOWS
 #include <windows.h>
+#endif
 #include <stdio.h>
+#ifdef ENABLE_WINDOWS
 #include <io.h>
+#endif
 #include <fcntl.h>
-
+#include <stdlib.h>
 #include "common.h"
 
 unsigned D_31C0;
@@ -152,7 +156,9 @@ Gra_animFlow(unsigned tile) {
 
 	FAKE_RET;
 }
+#ifdef ENABLE_WINDOWS
 static char random() { return (char)(rand() & 0xff); }
+#endif
 
 Gra_animFlag() {
 
@@ -496,11 +502,14 @@ int Load(char *fname, unsigned size, void *buff) {
 	CONSOLE("Load:\"%s\"\n", fname);
 	strcpy(path, getDataPath());
 	strcat(path, fname);
-	fd = _open(path, _O_RDWR |_O_BINARY);
+	//fd = _open(path, _O_RDWR | _O_BINARY);
+	fd = open(path, O_RDWR);
 	if(fd <= 0)
 		return -1;
-	ret = _read(fd, buff, size);
-	_close(fd);
+	//ret = _read(fd, buff, size);
+	ret = read(fd, buff, size);
+	//_close(fd);
+	close(fd);
 
 	if(size == ret)
 		return 1;
@@ -515,11 +524,14 @@ Save(char *fname, unsigned size, void *buff) {
 	CONSOLE("Save:\"%s\"\n", fname);
 	strcpy(path, getDataPath());
 	strcat(path, fname);
-	fd = _open(path, _O_WRONLY|_O_BINARY);
+	//fd = _open(path, _O_WRONLY | _O_BINARY);
+	fd = open(path, O_WRONLY);
 	if(fd <= 0)
 		return -1;
-	ret = _write(fd, buff, size);
-	_close(fd);
+	//ret = _write(fd, buff, size);
+	ret = write(fd, buff, size);
+	//_close(fd);
+	close(fd);
 
 	if(size == ret)
 		return 1;

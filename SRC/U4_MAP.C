@@ -262,7 +262,7 @@ unsigned char bp04;
 /*C_29C3*/w_Blocked()
 {
 	u4_puts("Blocked!\n");
-	sound(1);
+	sound(1,0);
 	u_kbflush();
 }
 
@@ -343,7 +343,7 @@ C_2B19()
 		w_SlowProgress();
 		return 1;
 	}
-	sound(0);
+	sound(0,0);
 	if(CurMode == MOD_OUTDOORS) {
 		C_2839();
 		if(C_2A91(tile_north))
@@ -376,11 +376,11 @@ C_2B19()
 	} else if(Party._tile == TIL_18) {
 		w_DriftOnly();
 	} else {
-		sound(0);
+		sound(0,0);
 		u4_puts("North\n");
 		if(C_2B19() && D_95C6) {
 			t_callback();
-			sound(0);
+			sound(0,0);
 			C_2B19();
 		}
 	}
@@ -397,7 +397,7 @@ C_2C25()
 		w_SlowProgress();
 		return 1;
 	}
-	sound(0);
+	sound(0,0);
 	if(CurMode == MOD_OUTDOORS) {
 		C_2891();
 		if(C_2A91(tile_south))
@@ -430,11 +430,11 @@ C_2C25()
 			C_2891();
 		}
 	} else {
-		sound(0);
+		sound(0,0);
 		u4_puts("South\n");
 		if(C_2C25() && D_95C6) {
 			t_callback();
-			sound(0);
+			sound(0,0);
 			C_2C25();
 		}
 		/*spawn demons on verity island?*/
@@ -456,7 +456,7 @@ C_2D44()
 		w_SlowProgress();
 		return 1;
 	}
-	sound(0);
+	sound(0,0);
 	if(CurMode == MOD_OUTDOORS) {
 		C_28E9();
 		if(C_2A91(tile_west))
@@ -491,11 +491,11 @@ C_2D44()
 	} else {
 		if(Party._tile == TIL_15)
 			Party._tile = TIL_14;
-		sound(0);
+		sound(0,0);
 		u4_puts("West\n");
 		if(C_2D44() && D_95C6) {
 			t_callback();
-			sound(0);
+			sound(0,0);
 			C_2D44();
 		}
 	}
@@ -512,7 +512,7 @@ C_2E4F()
 		w_SlowProgress();
 		return 1;
 	}
-	sound(0);
+	sound(0,0);
 	if(CurMode == MOD_OUTDOORS) {
 		C_2941();
 		if(Party._y == 0xe0 && Party._x == 0xdd)
@@ -552,11 +552,11 @@ C_2E4F()
 	} else {
 		if(Party._tile == TIL_14)
 			Party._tile = TIL_15;
-		sound(0);
+		sound(0,0);
 		u4_puts("East\n");
 		if(C_2E4F() && D_95C6) {
 			t_callback();
-			sound(0);
+			sound(0,0);
 			C_2E4F();
 		}
 	}

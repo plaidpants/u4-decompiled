@@ -47,7 +47,7 @@ C_09D9(bp04)
 int bp04;
 {
 	Gra_11(bp04);
-	sound(7);
+	sound(7,0);
 	Gra_11(bp04);
 }
 
@@ -478,9 +478,9 @@ C_10FD()
 /*character bp06 takes bp04 hits
  -> 0 : alive
  -> 1 : died*/
-/*C_1135*/hitChara(bp06, bp04)
-unsigned bp04;
-int bp06;
+/*C_1135*/hitChara(unsigned bp06, int bp04)
+//unsigned bp04;
+//int bp06;
 {
 	register struct tChara *si = &(Party.chara[bp06]);
 	if(si->_HP[0] >= bp04) {
@@ -547,7 +547,7 @@ char bp04;
 	si = -1;
 	do {
 		if(si != -1)
-			sound(1);
+			sound(1,0);
 		u4_puts(bp08);
 		si = u_kbread();
 		if(si == KBD_ENTER || si == KBD_ESC || si == KBD_SPACE) {
@@ -626,7 +626,7 @@ register int *di;
 				if(bp_04 >= ' ' && bp_04 < 0x7f)
 					u4_putc(bp_04);
 				Gra_CR();
-				sound(1);
+				sound(1,0);
 				bp_02 = 0;
 		}
 	} while(!bp_02);
@@ -686,7 +686,7 @@ unsigned bp04;
 			case KBD_0e7f:
 			case KBD_LEFT:
 				if(loc_A == 0) {
-					sound(1);
+					sound(1,0);
 				} else {
 					u4_putc(8);
 					loc_A --;
@@ -696,7 +696,7 @@ unsigned bp04;
 			default:
 				loc_B &= 0xff;
 				if(bp04 - 1 == loc_A || loc_B < ' ' || loc_B >= 0x80) {
-					sound(1);
+					sound(1,0);
 				} else {
 					si[loc_A] = loc_B;
 					u4_putc(loc_B);
@@ -751,7 +751,7 @@ C_1584()
 
 	for(loc_B = Party.f_1d8 - 1; loc_B >= 0; loc_B --)
 		Gra_11(loc_B);
-	sound(6);
+	sound(6,0);
 	shakefx();
 	for(loc_B = Party.f_1d8 - 1; loc_B >= 0; loc_B --)
 		Gra_11(loc_B);
@@ -785,7 +785,7 @@ C_1584()
 	bp_02 = -1;
 	do {
 		if(bp_02 != -1)
-			sound(1);
+			sound(1,0);
 		bp_02 = u_kbread() & 0x7f;
 		u4_toupper(bp_02);
 	} while(

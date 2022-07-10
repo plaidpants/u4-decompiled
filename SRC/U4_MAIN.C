@@ -385,7 +385,7 @@ void add_npc_talk(char npc_index, char * ch)
 
 	npc_string_copy(&npc_text_buffer[current_npc_text_buffer_pointer][1], ch);
 
-	printf(&npc_text_buffer[current_npc_text_buffer_pointer][1]);
+	printf("%s", &npc_text_buffer[current_npc_text_buffer_pointer][1]);
 
 	current_npc_text_buffer_pointer++;
 	if (current_npc_text_buffer_pointer > MAX_NPC_TEXT - 1)
@@ -443,10 +443,10 @@ __declspec(dllexport) int cdecl  main_NPC_Text(unsigned char buffer[], int lengt
 	int ret = 0;
 
 	if (length < sizeof(npc_text_buffer))
-		return;
+		return 0;
 
 	if (buffer == 0)
-		return;
+		return 0;
 
 	ret = current_npc_text_buffer_size;
 
@@ -704,7 +704,7 @@ __declspec(dllexport) void cdecl  main_set_dir(int direction)
 int QUIT = 0;
 
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
-__declspec(dllexport) void cdecl /*C_191E*/ main()
+__declspec(dllexport) int cdecl /*C_191E*/ main()
 {
 	register unsigned si = 0;
 	int bp_04;
@@ -728,7 +728,7 @@ __declspec(dllexport) void cdecl /*C_191E*/ main()
 		set_input_mode(INPUT_MODE_MAIN_INPUT);
 		if (QUIT)
 		{
-			return;
+			return 0;
 		}
 	setjmp(D_9458);
 	t_callback();
@@ -741,7 +741,7 @@ __declspec(dllexport) void cdecl /*C_191E*/ main()
 		if (u4_isupper((unsigned char)si))
 			si = (si & 0xff00) | u4_lower((unsigned char)si);
 		switch (si) {
-		case KBD_ESC: QUIT = 1;  return;
+		case KBD_ESC: QUIT = 1;  return 0;
 		case KBD_SPACE: w_Pass(); break;
 		case 0x487e:
 		case KBD_UP: CMDDIR_Up(); break;
@@ -784,7 +784,7 @@ __declspec(dllexport) void cdecl /*C_191E*/ main()
 			}
 		default:
 			u4_puts("Bad command!\n");
-			sound(2);
+			sound(2,0);
 			D_07F8 = 0;
 			break;
 		}
@@ -917,7 +917,7 @@ C_1C53()
 			di->_stat = 'G';
 		} else if(di->_stat == 'P') {
 			hitChara(si, 2);
-			Gra_11(si); sound(6); Gra_11(si);
+			Gra_11(si); sound(6,0); Gra_11(si);
 		}
 	}
 	/*FOOD management*/
@@ -930,7 +930,7 @@ C_1C53()
 		si = Party.f_1d8;
 		while(--si >= 0)
 			Gra_11(si);
-		sound(6);
+		sound(6,0);
 		si = Party.f_1d8;
 		while(--si >= 0)
 			Gra_11(si);

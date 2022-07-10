@@ -1,4 +1,6 @@
+#ifdef ENABLE_WINDOWS
 #include <windows.h>
+#endif 
 
 #include "common.h"
 

@@ -253,7 +253,7 @@ C_C403()
 	u4_puts(/*D_3012*/"Peer at ");
 	if(Party._gems == 0) {
 		w_What();
-		return;
+		return 0;
 	}
 	u4_puts(/*D_301B*/"a Gem!\n");
 	Party._gems --;

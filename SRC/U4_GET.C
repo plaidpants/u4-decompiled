@@ -45,7 +45,7 @@ int bp04;
 		u4_puts(/*D_2270*/" Trap!\n");
 		if(bp04 == -1 || U4_RND3(100) <= Party.chara[bp04]._dex + 25) {
 			u4_puts(/*D_2278*/"Evaded!\n");
-			sound(8);
+			sound(8,0);
 		} else if(si == 0) {/*Acid*/
 			C_70CE(bp04);
 		} else if(si == 1) {/*Sleep*/
@@ -70,13 +70,13 @@ int bp04;
 	if(CurMode == MOD_DUNGEON) {
 		if(tile_cur != 0x40) {
 			w_NotHere();
-			return;
+			return 0;
 		}
 		D_8742._map.x8x8x8[Party._z][Party._y][Party._x] = 0;
 	} else {
 		if(tile_cur != TIL_3C) {
 			w_NotHere();
-			return;
+			return 0;
 		}
 		if(Party._loc != 0 && D_8742._map.x32x32[Party._y][Party._x] == TIL_3C) {
 			D_8742._map.x32x32[Party._y][Party._x] = TIL_3E;
@@ -105,15 +105,15 @@ int bp04;
 	if(Party.f_1dc != 0 && Party._tile == TIL_18) {
 		u4_puts(/*D_2281*/"Get chest\n");
 		w_DriftOnly();
-		return;
+		return 0;
 	}
 	u4_puts(/*D_228C*/"Get Chest!\n");
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((si = AskChara(/*D_2298*/"Who opens?\x12\x12\b")) < 0)
-		return;
+		return 0;
 	if(!isCharaConscious(si)) {
 		w_Disabled();
-		return;
+		return 0;
 	}
 	C_722F(si);
 }
@@ -122,7 +122,7 @@ C_7337()
 {
 	if(Combat_MAP(Combat._charaY[activeChara], Combat._charaX[activeChara]) != TIL_3C) {
 		w_NotHere();
-		return;
+		return 0;
 	}
 	Combat_MAP(Combat._charaY[activeChara], Combat._charaX[activeChara]) = TIL_16;
 	if(D_8742._map.x8x8x8[Party._z][Party._y][Party._x] == 0x40)
@@ -150,26 +150,26 @@ char D_22C8[] = "Broadsides Only!\n";
 	u4_puts(/*D_22B2*/"Fire ");
 	if(Party._tile < TIL_10 || Party._tile > TIL_13) {
 		w_What();
-		return;
+		return 0;
 	}
 	u4_puts(/*D_22B8*/"Cannon!\n");
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
 	AskDir(/*D_22C1*/"Dir: ", &loc_C, &loc_D);
 	if(!(loc_C|loc_D))
-		return;
+		return 0;
 	if(loc_C != 0) {
 		if(Party._tile != TIL_11 && Party._tile != TIL_13) {
 			u4_puts(D_22C8);
-			sound(2);
-			return;
+			sound(2,0);
+			return 0;
 		}
 	} else if(Party._tile != TIL_10 && Party._tile != TIL_12) {
 		u4_puts(D_22C8);
-		sound(2);
-		return;
+		sound(2,0);
+		return 0;
 	}
 	/*-- FIRING --*/
-	sound(3);
+	sound(3,0);
 	loc_F = Party._x + loc_C;
 	loc_B = Party._y + loc_D;
 	hit_x = loc_C + 5;
@@ -182,14 +182,14 @@ char D_22C8[] = "Broadsides Only!\n";
 		)) {
 			hit_tile = 0;
 			if(loc_A == -1)
-				return;
+				return 0;
 			/*-- HIT SOMETHING --*/
 			hit_tile = TIL_4F; C_36C7(); hit_tile = 0;
-			sound(6);
+			sound(6,0);
 			if(loc_A < 8 && U4_RND1(3))
-				return;
+				return 0;
 			if(D_8742._npc._tile[loc_A] == TIL_5E)
-				return;
+				return 0;
 			break;
 		}
 		C_36C7();
@@ -209,11 +209,11 @@ IGNITE
 	u4_puts(/*D_22DA*/"Ignite Torch!\n");
 	if(CurMode != MOD_DUNGEON) {
 		w_NotHere();
-		return;
+		return 0;
 	}
 	if(Party._torches == 0) {
 		w_NoneLeft();
-		return;
+		return 0;
 	}
 	Party._torches --;
 	Party.f_1dc += 100;

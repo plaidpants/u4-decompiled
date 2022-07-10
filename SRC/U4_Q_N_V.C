@@ -17,7 +17,7 @@
 	if(Party._loc) {
 		if(Party._loc < 0x11 || Party._loc > 0x18) {
 			u4_puts(/*D_21BA*/"Not Here!\n");
-			return;
+			return 0;
 		}
 	}
 	if(Save(/*D_21C5*/"PARTY.SAV", sizeof(struct tParty), &Party) == -1)
@@ -27,7 +27,7 @@
 			exit(3);
 	}
 	if(Party._loc < 0x11 || Party._loc > 0x18)
-		return;
+		return 0;
 	if(Save(/*D_21DC*/"MONSTERS.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
 		exit(3);
 	if(Save(/*D_21E9*/"DNGMAP.SAV", sizeof(tMap8x8x8), &(D_8742._map)) == -1)
@@ -56,25 +56,25 @@ struct tChara *bp04;
 	u4_puts(/*D_2206*/"New Order!\n");
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((loc_C = AskChara(/*D_2212*/"Exchange #\x12\x12\b")) < 0)
-		return;
+		return 0;
 	loc_A = &(Party.chara[loc_C]);
 	if(loc_A == &(Party.chara[0])) {
 		u4_puts(Party.chara[0]._name);
 		u4_puts(D_21F4);
-		return;
+		return 0;
 	}
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	if((loc_D = AskChara(/*D_2220*/"    with #\x12\x12\b")) < 0)
-		return;
+		return 0;
 	loc_B = &(Party.chara[loc_D]);
 	if(loc_B == &(Party.chara[0])) {
 		u4_puts(Party.chara[0]._name);
 		u4_puts(D_21F4);
-		return;
+		return 0;
 	}
 	if(loc_A == loc_B) {
 		w_What();
-		return;
+		return 0;
 	}
 	C_6FF9(loc_A, loc_B);
 	Gra_13();

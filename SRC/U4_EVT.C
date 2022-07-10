@@ -44,13 +44,13 @@ C_9209()
 		D_9140 = Party._y;
 		D_946C = TIL_17;
 		C_7DBC();
-		return;
+		return 0;
 	}
 	if(CurMode <= MOD_BUILDING && Party.f_1dc != 0)
-		return;
+		return 0;
 	if(CurMode >= MOD_COMBAT) {
 		if(Fighters._chtile[activeChara] == 0)
-			return;
+			return 0;
 		switch(Combat_MAP(Combat._charaY[activeChara], Combat._charaX[activeChara])) {
 			case TIL_03: case TIL_44:
 				if(Party.chara[activeChara]._stat == 'G') {
@@ -73,7 +73,7 @@ C_9209()
 				hitChara(activeChara, bp_02);
 			break;
 		}
-		return;
+		return 0;
 	}
 	if(CurMode == MOD_DUNGEON) {
 		if((tile_cur & 0xf0) == 0xa0) {
@@ -91,7 +91,7 @@ C_9209()
 				C_1584();
 			}
 		}
-		return;
+		return 0;
 	}
 	switch(tile_cur) {
 		case TIL_03: case TIL_44: C_91D1(); break;

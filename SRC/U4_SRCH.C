@@ -29,7 +29,7 @@ int bp04;
 	if(Party._reagents[bp04] > 99) {
 		Party._reagents[bp04] = 99;
 		u4_puts(/*D_27B5*/"Dropped some!\n");
-		sound(1);
+		sound(1,0);
 	}
 }
 
@@ -37,7 +37,7 @@ C_8DAA()
 {
 	if((Party._trammel | Party._felucca) || (Party._moves & 0xf0) == Party.f_1e8) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	C_8D4B();
 	u4_puts(/*D_27C4*/"Mandrake Root!\n");
@@ -48,7 +48,7 @@ C_8DE0()
 {
 	if((Party._trammel | Party._felucca) || (Party._moves & 0xf0) == Party.f_1e8) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	C_8D4B();
 	u4_puts(/*D_27D4*/"Nightshade!\n");
@@ -59,7 +59,7 @@ C_8E16()
 {
 	if(TST_MSK(Party.mItems, 4)) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 4);
 	C_8D4B();
@@ -71,7 +71,7 @@ C_8E46()
 {
 	if(TST_MSK(Party.mItems, 8)) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 8);
 	C_8D4B();
@@ -83,7 +83,7 @@ C_8E77()
 {
 	if(TST_MSK(Party.mItems, 9)) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 9);
 	C_8D4B();
@@ -99,7 +99,7 @@ C_8EA8()
 		TST_MSK(Party.mItems, 1)
 	) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 0);
 	C_8D4B();
@@ -114,7 +114,7 @@ C_8EE8()
 		(Party._trammel | Party._felucca)
 	) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mStones, 7);
 	C_8D4B();
@@ -126,7 +126,7 @@ C_8F21()
 {
 	if(TST_MSK(Party.mStones, 6)) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mStones, 6);
 	C_8D4B();
@@ -138,7 +138,7 @@ C_8F51()
 {
 	if(TST_MSK(Party.mItems, 3)) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 3);
 	C_8D4B();
@@ -150,7 +150,7 @@ C_8F81()
 {
 	if(TST_MSK(Party.mItems, 2)) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	SET_MSK(Party.mItems, 2);
 	C_8D4B();
@@ -166,7 +166,7 @@ C_8FB1()
 	u4_puts(/*D_2897*/"You see a knob on the Telescope marked A-P\n");
 	set_input_mode(INPUT_MODE_TELESCOPE);
 	if((bp_02 = AskLetter(/*D_28C3*/"You Select:\x12\x12\b", 'A', 'P')) < 0)
-		return;
+		return 0;
 	bp_02 -= 'A';
 	if(Load(D_0824[bp_02], sizeof(tMap32x32), &(D_8742._map)) == -1)
 		exit(3);
@@ -185,7 +185,7 @@ C_9027()
 		Party._spiri | Party._humil
 	) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	Party._armors[7] = 8;
 	C_8D4B();
@@ -203,7 +203,7 @@ C_9076()
 		Party._spiri | Party._humil
 	) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	Party._weapons[15] = 8;
 	C_8D4B();
@@ -231,7 +231,7 @@ C_90C5()
 			break;
 	if(D_2904[si][1] & Party.mRunes) {
 		u4_puts(D_27A6);
-		return;
+		return 0;
 	}
 	Party.mRunes |= D_2904[si][1];
 	C_8D4B();
@@ -281,7 +281,7 @@ struct t_05_local {
 	u4_puts(/*D_2914*/"Search...\n");
 	if(CurMode <= MOD_BUILDING && Party.f_1dc != 0) {
 		w_DriftOnly();
-		return;
+		return 0;
 	}
 	for(si = D_2920; si->_03; si ++) {
 		if(si->_00 == Party._loc && si->_01 == Party._x && si->_02 == Party._y)
