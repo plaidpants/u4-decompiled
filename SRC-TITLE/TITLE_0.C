@@ -8,6 +8,8 @@
 
 #include <malloc.h>
 
+//#include <android/log.h>
+//extern int __android_log_print(int prio, const char* tag, const char* fmt, ...);
 extern void* _fmalloc(int sz);
 
 #include <stdlib.h>
@@ -379,10 +381,10 @@ struct ScreenCopyFrame
 };
 
 #define MAX_SCREEN_COPY_FRAME 10
-struct ScreenCopyFrame screen_copy_frame[MAX_SCREEN_COPY_FRAME];
-int current_screen_copy_frame_pointer;
-int current_screen_copy_frame_size;
-int screen_copy_frame_simple_mutex = 0;
+static struct ScreenCopyFrame screen_copy_frame[MAX_SCREEN_COPY_FRAME];
+static int current_screen_copy_frame_pointer;
+static int current_screen_copy_frame_size;
+static int screen_copy_frame_simple_mutex = 0;
 
 void add_screen_copy_frame_to_buffer(int width_in_char/*bp04*/,
 	int height/*bp06*/,
@@ -503,10 +505,10 @@ __declspec(dllexport) int cdecl  main_screen_copy_frame(int buffer[], int length
 	return save_screen_copy_frame_size;
 }
 
-int current_dot_x; 
-int current_dot_y;
-int current_dot_col;
-int dot_simple_mutex = 0;
+static int current_dot_x;
+static int current_dot_y;
+static int current_dot_col;
+static int dot_simple_mutex = 0;
 
 void add_dot(int x, int y, int col)
 {
@@ -545,9 +547,9 @@ __declspec(dllexport) int cdecl  main_dot(int buffer[], int length)
 }
 
 #define MAX_TEXT 500
-char text_buffer[MAX_TEXT];
-int current_text_buffer_pointer;
-int current_text_buffer_size;
+static char text_buffer[MAX_TEXT];
+static int current_text_buffer_pointer;
+static int current_text_buffer_size;
 
 void add_char_to_text_buffer(char ch)
 {
@@ -774,7 +776,7 @@ extern const char* get_current_picture();
 extern void* current_picture_dest;
 extern void* get_screen_buffer();
 
-int picture_simple_mutex = 0;
+static int picture_simple_mutex = 0;
 
 void add_picture(void* dest, char* fname)
 {
@@ -979,4 +981,5 @@ __declspec(dllexport) cdecl /*C_0EAA*/main()
 	//} while (1);
 	} while (QUIT == 0);
 	set_input_mode(INPUT_MODE_LAUNCH_GAME);
+	//__android_log_print(ANDROID_LOG_INFO, "ANKH", "ANKH says hello 30\n");
 }

@@ -36,6 +36,8 @@ extern void* _fmalloc(int sz);
 extern void t_callback();
 
 
+//#include <android/log.h>
+//extern int __android_log_print(int prio, const char* tag, const char* fmt, ...);
 
 //----------------------------------------
 int u_kbhit() {
