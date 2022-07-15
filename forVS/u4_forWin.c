@@ -510,7 +510,7 @@ int __cdecl u_kbhit() {
 #ifdef ENABLE_WINDOWS
 	CMN_pumpmessages();
 #else
-	Sleep(1);
+	Sleep(1 * SLEEPFACTOR);
 #endif
 	Party.f_000 ++;
 
@@ -526,7 +526,7 @@ int __cdecl u_kbread() {
 #ifdef ENABLE_WINDOWS
 		CMN_pumpmessages();
 #else
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 #endif
 	}
 	ret = CMN_kbhit;
@@ -549,9 +549,9 @@ void __cdecl u_delay(int a, int b) {
 #ifdef ENABLE_WINDOWS
 		CMN_pumpmessages();
 #else
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 #endif
-		Sleep(2);
+		Sleep(2 * SLEEPFACTOR);
 		if(b && u_kbhit())
 			break;
 		//cursor
@@ -1070,7 +1070,7 @@ void __cdecl u_delay(int a, int b)
 		a--;
 		t_callback();
 		//CMN_pumpmessages();
-		Sleep(150); // 2
+		Sleep(150 * SLEEPFACTOR); // 2
 		if (b && u_kbhit())
 			break;
 		//cursor
@@ -1097,7 +1097,7 @@ int __cdecl u_kbread()
 	int ret;
 
 	while (u_kbhit() == 0)
-		Sleep(20);
+		Sleep(20 * SLEEPFACTOR);
 	ret = CMN_kbhit;
 	CMN_kbhit = 0;
 

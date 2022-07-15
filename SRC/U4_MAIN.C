@@ -583,7 +583,7 @@ void play_sound_effect(unsigned char sound, unsigned char length)
 	while (current_sound_effect != -1 && timeout > 0)
 	{
 		timeout--;
-		Sleep(20);
+		Sleep(20 * SLEEPFACTOR);
 	}
 #endif
 
@@ -703,11 +703,17 @@ __declspec(dllexport) void cdecl  main_set_dir(int direction)
 
 int QUIT = 0;
 
+
+#include <android/log.h>
+extern int __android_log_print(int prio, const char* tag, const char* fmt, ...);
+
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
 __declspec(dllexport) int cdecl /*C_191E*/ main()
 {
 	register unsigned si = 0;
 	int bp_04;
+
+	__android_log_print(ANDROID_LOG_INFO, "ANKH", "ANKH says hello 1\n");
 
 	low_init();
 	C_C51C();
@@ -799,6 +805,7 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	}
 		bp_04 = si;
 }
+	__android_log_print(ANDROID_LOG_INFO, "ANKH", "ANKH says hello 21\n");
 }
 
 #define VK_SPACE          0x20

@@ -141,11 +141,14 @@ struct tChara /*size:0x27*/ {
 };
 
 struct tParty /*size:0x1f6*/ {
-	/*+000*/unsigned long f_000;/*a counter*/
+//	/*+000*/unsigned long f_000;/*a counter*/
+	/*+000*/unsigned int f_000;/*a counter*/
 	/* */
-	/*+004*/unsigned long _moves;
+//	/*+004*/unsigned long _moves;
+	/*+004*/unsigned int _moves;
 	/*+008*/struct tChara chara[8];
-	/*+140*/long _food;
+//	/*+140*/long _food;
+	/*+140*/unsigned int _food;
 	/*+144*/U16 _gold;
 	/*karmas*/
 	/*+146*/U16 _hones;
@@ -184,6 +187,11 @@ struct tParty /*size:0x1f6*/ {
 	/*+1f2*/S16 _z;/*[dungeon]*/
 	/*+1f4*/U16 _loc;
 };
+
+
+_Static_assert(sizeof(U16) == 2);
+
+_Static_assert(sizeof(struct tParty) == 502);
 
 #define TST_MSK(mask, bit) ((mask) & (1 << (bit)))
 #define SET_MSK(mask, bit) (mask) |= (1 << (bit))

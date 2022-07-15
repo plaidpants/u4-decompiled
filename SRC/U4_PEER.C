@@ -169,7 +169,7 @@ unsigned bp04;
 			Gra_dot_XOR(MK_COORD(D_959C.y,2), MK_COORD(D_959C.x,loc_C&3), 3);
 			Gra_dot_XOR(MK_COORD(D_959C.y,3), MK_COORD(D_959C.x,loc_C&3), 3);
 		}
-		Sleep(20);
+		Sleep(20 * SLEEPFACTOR);
 	}
 	u_kbread();
 	CurMode = loc_B;

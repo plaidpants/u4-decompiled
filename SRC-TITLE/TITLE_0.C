@@ -70,7 +70,7 @@ long bp04;
 		return 0;
 	//bp04 *= (long)speed_info;
 	//while(-- bp04)
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 }
 
 /*handwriting?*/
@@ -422,7 +422,7 @@ void add_screen_copy_frame_to_buffer(int width_in_char/*bp04*/,
 
 	while (screen_copy_frame_simple_mutex == 1)
 	{
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 	}
 #endif
 }
@@ -522,7 +522,7 @@ void add_dot(int x, int y, int col)
 
 	while (dot_simple_mutex == 1)
 	{
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 	}
 #endif
 }
@@ -629,7 +629,7 @@ void play_sound_effect()
 	while (current_sound_effect != -1 && timeout > 0)
 	{
 		timeout--;
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 	}
 #endif
 
@@ -789,7 +789,7 @@ void add_picture(void* dest, char* fname)
 
 	while (picture_simple_mutex == 1)
 	{
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 	}
 #endif
 }

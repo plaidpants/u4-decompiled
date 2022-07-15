@@ -45,7 +45,7 @@ int u_kbhit() {
 #ifdef ENABLE_WINDOWS
 	CMN_pumpmessages();
 #else
-	Sleep(1);
+	Sleep(1 * SLEEPFACTOR);
 #endif
 	t_callback();
 
@@ -58,7 +58,7 @@ int u_kbread() {
 #ifdef ENABLE_WINDOWS
 		CMN_pumpmessages();
 #else
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 #endif
 	}
 	ret = CMN_kbhit;
@@ -82,7 +82,7 @@ __cdecl u_delay(unsigned a, unsigned b) {
 #ifdef ENABLE_WINDOWS
 		CMN_pumpmessages();
 #else
-		Sleep(20);
+		Sleep(20 * SLEEPFACTOR);
 #endif
 		t_callback();
 		if(b && CMN_kbhit != 0)
@@ -205,10 +205,10 @@ __cdecl Gra_0(
 
 	while (get_the_view_mutex())
 	{
-		Sleep(1);
+		Sleep(1 * SLEEPFACTOR);
 	}
 
-	Sleep(10);
+	Sleep(10 * SLEEPFACTOR);
 
 #ifdef ENABLE_WINDOWS
 	int i, j;
