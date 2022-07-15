@@ -148,7 +148,7 @@ struct tParty /*size:0x1f6*/ {
 	/*+004*/unsigned int _moves;
 	/*+008*/struct tChara chara[8];
 //	/*+140*/long _food;
-	/*+140*/unsigned int _food;
+	/*+140*/int _food;
 	/*+144*/U16 _gold;
 	/*karmas*/
 	/*+146*/U16 _hones;

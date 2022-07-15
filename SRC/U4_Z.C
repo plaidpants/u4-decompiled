@@ -320,7 +320,7 @@ int bp04;
 		(*D_19C0[bp04])(bp04);
 		set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 		while(!u_kbhit())
-			Sleep(20); // ADDED otherwise we will spin in too tight a loop for anything to happen and lock up the game engine
+			Sleep(20 * SLEEPFACTOR); // ADDED otherwise we will spin in too tight a loop for anything to happen and lock up the game engine
 		switch(si = u_kbread()) {
 			case KBD_1:
 			case KBD_2:
