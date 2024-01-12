@@ -741,8 +741,7 @@ __declspec(dllexport) void cdecl  main_sound_effect_done()
 	current_sound_effect = -1;
 }
 
-static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
-
+static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANKH-VR\\u4\\";
 const char* getDataPath()
 {
 	return &U4_ROOT[0];
