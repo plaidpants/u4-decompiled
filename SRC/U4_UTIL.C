@@ -384,10 +384,10 @@ C_0EB1()
 	u_delay(5, 0);
 	Gra_10();
 	CurMode = MOD_VISION;
-	u4_puts("\n\n\nAll is Dark...\n");
+	u4_puts(&AVATAR[0xF7B6]); //  "\n\n\nAll is Dark...\n"
 	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(5, 0);
-	u4_puts("\nBut wait...\n");
+	u4_puts(&AVATAR[0xF7C9]); // "\nBut wait...\n"
 	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(5, 0);
 	u4_puts("Where am I?...\n");

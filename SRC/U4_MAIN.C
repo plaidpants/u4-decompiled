@@ -651,7 +651,7 @@ __declspec(dllexport) int cdecl  main_D_1666()
 	return D_1666;
 }
 
-static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANHK-VR\\u4\\";
+static char U4_ROOT[256] = "C:\\Users\\Jim\\AppData\\LocalLow\\SwivelChairGames\\ANKH-VR\\u4\\";
 
 const char* getDataPath()
 {
@@ -703,17 +703,30 @@ __declspec(dllexport) void cdecl  main_set_dir(int direction)
 
 int QUIT = 0;
 
-
+#ifndef WIN32
 #include <android/log.h>
 extern int __android_log_print(int prio, const char* tag, const char* fmt, ...);
+#endif
+
+// load a complete copy of the original EXE here
+char AVATAR[98208];
 
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
 __declspec(dllexport) int cdecl /*C_191E*/ main()
 {
 	register unsigned si = 0;
 	int bp_04;
-
+#ifndef WIN32
 	__android_log_print(ANDROID_LOG_INFO, "ANKH", "ANKH says hello 1\n");
+#endif
+
+	// we will use this buffer to reference strings and other things originally in the EXE instead of embedding them in this code
+	// this will allow release of the binary of this library/application on other platforms like oculus quest as we don't
+	// need to dynamically load DLL at runtime which android does not allow anymore and this allows us to remove
+	// all copyright text or data that was contained in the original EXE leaving just the reverse engineered logic of the game engine
+	// in this executable code thus avoiding any copyright entanglements
+	if (Load("AVATAR.EXE", sizeof(AVATAR), &(AVATAR)) == -1)
+		exit(3);
 
 	low_init();
 	C_C51C();
@@ -789,13 +802,13 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 				break;
 			}
 		default:
-			u4_puts("Bad command!\n");
+			u4_puts(&AVATAR[0xF940]); // "Bad command!\n"
 			sound(2,0);
 			D_07F8 = 0;
 			break;
 		}
 		} else {
-		u4_puts("Zzzzz\n");
+		u4_puts(&AVATAR[0xF94E]); // "Zzzzz\n"
 	}
 	if (D_07F8 != 0) {
 		C_1C53();
@@ -805,7 +818,9 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	}
 		bp_04 = si;
 }
+#ifndef WIN32
 	__android_log_print(ANDROID_LOG_INFO, "ANKH", "ANKH says hello 21\n");
+#endif
 }
 
 #define VK_SPACE          0x20
@@ -929,7 +944,7 @@ C_1C53()
 	}
 	/*FOOD management*/
 	if(food_dec(Party.f_1d8)) {
-		u4_puts("\nStarving!!!\n");
+		u4_puts(&AVATAR[0xF955]); //"\nStarving!!!\n"
 		for(si = 0; si < Party.f_1d8; si ++) {
 			if(isCharaAlive(si))
 				hitChara(si, 2);

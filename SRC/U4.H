@@ -188,11 +188,11 @@ struct tParty /*size:0x1f6*/ {
 	/*+1f4*/U16 _loc;
 };
 
-
+#ifndef WIN32
 _Static_assert(sizeof(U16) == 2);
 
 _Static_assert(sizeof(struct tParty) == 502);
-
+#endif
 #define TST_MSK(mask, bit) ((mask) & (1 << (bit)))
 #define SET_MSK(mask, bit) (mask) |= (1 << (bit))
 #define RST_MSK(mask, bit) (mask) &= ~(1 << (bit))
@@ -497,6 +497,8 @@ extern int /*D_96F6*/File_TLK;
 extern unsigned char D_96F8;
 extern unsigned char D_96F9[11*11];
 extern unsigned char D_9772;
+
+extern char AVATAR[];
 
 #ifdef WIN32
 	#pragma pack()
