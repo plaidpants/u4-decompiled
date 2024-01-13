@@ -11,30 +11,30 @@
 
 /*C_6F29*/CMD_Quit()
 {
-	u4_puts(/*D_21A2*/"Quit & Save...\n");
+	u4_puts(/*D_21A2*/&AVATAR[0x11455] /* "Quit & Save...\n" */);
 	u4_putl(Party._moves, 1, '0');
-	u4_puts(/*D_21B2*/" moves\n");
+	u4_puts(/*D_21B2*/&AVATAR[0x11465] /* " moves\n" */);
 	if(Party._loc) {
 		if(Party._loc < 0x11 || Party._loc > 0x18) {
-			u4_puts(/*D_21BA*/"Not Here!\n");
+			u4_puts(/*D_21BA*/&AVATAR[0xF8C3] /* "Not Here!\n" */);
 			return 0;
 		}
 	}
-	if(Save(/*D_21C5*/"PARTY.SAV", sizeof(struct tParty), &Party) == -1)
+	if(Save(/*D_21C5*/&AVATAR[0x11478] /* "PARTY.SAV" */, sizeof(struct tParty), &Party) == -1)
 		exit(3);
 	if(Party._loc == 0) {
-		if(Save(/*D_21CF*/"MONSTERS.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
+		if(Save(/*D_21CF*/&AVATAR[0x11482] /* "MONSTERS.SAV" */, sizeof(struct tNPC), &(D_8742._npc)) == -1)
 			exit(3);
 	}
 	if(Party._loc < 0x11 || Party._loc > 0x18)
 		return 0;
-	if(Save(/*D_21DC*/"MONSTERS.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
+	if(Save(/*D_21DC*/&AVATAR[0x11482] /* "MONSTERS.SAV" */, sizeof(struct tNPC), &(D_8742._npc)) == -1)
 		exit(3);
-	if(Save(/*D_21E9*/"DNGMAP.SAV", sizeof(tMap8x8x8), &(D_8742._map)) == -1)
+	if(Save(/*D_21E9*/&AVATAR[0xF935] /* "DNGMAP.SAV" */, sizeof(tMap8x8x8), &(D_8742._map)) == -1)
 		exit(3);
 }
 
-char D_21F4[] = ", You must lead!\n";
+char * D_21F4 = &AVATAR[0x114A7] /* ", You must lead!\n" */;
 
 /*exchange two party members ?*/
 C_6FF9(bp06, bp04)
@@ -53,9 +53,9 @@ struct tChara *bp04;
 	struct tChara loc_E;/*not used*/
 	int loc_C, loc_D;
 
-	u4_puts(/*D_2206*/"New Order!\n");
+	u4_puts(/*D_2206*/&AVATAR[0x114B9] /* "New Order!\n" */);
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
-	if((loc_C = AskChara(/*D_2212*/"Exchange #\x12\x12\b")) < 0)
+	if((loc_C = AskChara(/*D_2212*/&AVATAR[0x114C5] /* "Exchange #\x12\x12\b" */)) < 0)
 		return 0;
 	loc_A = &(Party.chara[loc_C]);
 	if(loc_A == &(Party.chara[0])) {
@@ -64,7 +64,7 @@ struct tChara *bp04;
 		return 0;
 	}
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
-	if((loc_D = AskChara(/*D_2220*/"    with #\x12\x12\b")) < 0)
+	if((loc_D = AskChara(/*D_2220*/&AVATAR[0x114D3] /* "    with #\x12\x12\b" */)) < 0)
 		return 0;
 	loc_B = &(Party.chara[loc_D]);
 	if(loc_B == &(Party.chara[0])) {
@@ -83,6 +83,6 @@ struct tChara *bp04;
 
 /*C_70AD*/CMD_Volume()
 {
-	u4_puts(/*D_222E*/"Volume O");
-	u4_puts((SoundFlag ^= 1)?/*D_2237*/"n!\n":/*D_223B*/"ff!\n");
+	u4_puts(/*D_222E*/&AVATAR[0x114E1] /* "Volume O" */);
+	u4_puts((SoundFlag ^= 1)?/*D_2237*/&AVATAR[0xF57F] /* "n!\n" */:/*D_223B*/"ff!\n");
 }

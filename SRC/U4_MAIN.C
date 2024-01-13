@@ -344,7 +344,7 @@ void add_npc_talk_long(char npc_index, long number)
 	npc_text_buffer[current_npc_text_buffer_pointer][0] = npc_index;
 	npc_text_buffer[current_npc_text_buffer_pointer][1] = 0;
 
-	snprintf(&npc_text_buffer[current_npc_text_buffer_pointer][1], 10, "%l", number);
+	snprintf(&npc_text_buffer[current_npc_text_buffer_pointer][1], 10, &AVATAR[0x162BC] /* "%l" */, number);
 
 	current_npc_text_buffer_pointer++;
 	if (current_npc_text_buffer_pointer > MAX_NPC_TEXT - 1)
@@ -723,7 +723,7 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	// we will use this buffer to reference strings and other things originally in the EXE instead of embedding them in this code
 	// this will allow release of the binary of this library/application on other platforms like oculus quest as we don't
 	// need to dynamically load DLL at runtime which android does not allow anymore and this allows us to remove
-	// all copyright text or data that was contained in the original EXE leaving just the reverse engineered logic of the game engine
+	// all copyright text and data that was contained in the original EXE leaving just the reverse engineered logic of the game engine
 	// in this executable code thus avoiding any copyright entanglements
 	if (Load("AVATAR.EXE", sizeof(AVATAR), &(AVATAR)) == -1)
 		exit(3);
@@ -732,7 +732,7 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	C_C51C();
 	if (Party._loc >= 0x11 && Party._loc <= 0x18) {
 		CurMode = MOD_DUNGEON;
-		if (Load("DNGMAP.SAV", sizeof(tMap8x8x8), &(D_8742._map)) == -1)
+		if (Load(&AVATAR[0xF935] /* "DNGMAP.SAV" */, sizeof(tMap8x8x8), &(D_8742._map)) == -1)
 			exit(3);
 		//File_DNG = dopen(D_0894[Party._loc - 0x11], 0);
 		if (setjmp(D_9458) == 0)

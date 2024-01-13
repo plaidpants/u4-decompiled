@@ -11,12 +11,12 @@
 
 #include <stdlib.h>
 
-char D_27A6[] = "Nothing Here!\n";
+char * D_27A6 = &AVATAR[0x11A51] /* "Nothing Here!\n" */;
 
-/*"You find..." & karma+=5*/
+/* "You find..." & karma+=5*/
 C_8D4B()
 {
-	u4_puts(/*D_2798*/"You find...\n");
+	u4_puts(/*D_2798*/&AVATAR[0x11A43] /* "You find...\n" */);
 	karma_inc(&(Party._honor), 5);
 	Party.f_1e8 = Party._moves & 0xf0;
 }
@@ -28,7 +28,7 @@ int bp04;
 	Party._reagents[bp04] += U4_RND1(7) + 2;
 	if(Party._reagents[bp04] > 99) {
 		Party._reagents[bp04] = 99;
-		u4_puts(/*D_27B5*/"Dropped some!\n");
+		u4_puts(/*D_27B5*/&AVATAR[0x11A60] /* "Dropped some!\n" */);
 		sound(1,0);
 	}
 }
@@ -40,7 +40,7 @@ C_8DAA()
 		return 0;
 	}
 	C_8D4B();
-	u4_puts(/*D_27C4*/"Mandrake Root!\n");
+	u4_puts(/*D_27C4*/&AVATAR[0x11A6F] /* "Mandrake Root!\n" */);
 	C_8D6D(7);
 }
 
@@ -51,7 +51,7 @@ C_8DE0()
 		return 0;
 	}
 	C_8D4B();
-	u4_puts(/*D_27D4*/"Nightshade!\n");
+	u4_puts(/*D_27D4*/&AVATAR[0x11A7F] /* "Nightshade!\n" */);
 	C_8D6D(6);
 }
 
@@ -63,7 +63,7 @@ C_8E16()
 	}
 	SET_MSK(Party.mItems, 4);
 	C_8D4B();
-	u4_puts(/*D_27E1*/"The Bell of Courage!\n");
+	u4_puts(/*D_27E1*/&AVATAR[0x11A8C] /* "The Bell of Courage!\n" */);
 	XP_inc(0, 400);
 }
 
@@ -75,7 +75,7 @@ C_8E46()
 	}
 	SET_MSK(Party.mItems, 8);
 	C_8D4B();
-	u4_puts(/*D_27F7*/"A Silver Horn!\n");
+	u4_puts(/*D_27F7*/&AVATAR[0x11AA2] /* "A Silver Horn!\n" */);
 	XP_inc(0, 400);
 }
 
@@ -87,7 +87,7 @@ C_8E77()
 	}
 	SET_MSK(Party.mItems, 9);
 	C_8D4B();
-	u4_puts(/*D_2807*/"The Wheel from the H.M.S. Cape!\n");
+	u4_puts(/*D_2807*/&AVATAR[0x11AB2] /* "The Wheel from the H.M.S. Cape!\n" */);
 	XP_inc(0, 400);
 }
 
@@ -103,7 +103,7 @@ C_8EA8()
 	}
 	SET_MSK(Party.mItems, 0);
 	C_8D4B();
-	u4_puts(/*D_2828*/"The Skull of Mondain the Wizard!\n");
+	u4_puts(/*D_2828*/&AVATAR[0x11AD3] /* "The Skull of Mondain the Wizard!\n" */);
 	XP_inc(0, 400);
 }
 
@@ -118,7 +118,7 @@ C_8EE8()
 	}
 	SET_MSK(Party.mStones, 7);
 	C_8D4B();
-	u4_puts(/*D_284A*/"The Black Stone!\n");
+	u4_puts(/*D_284A*/&AVATAR[0x11AF5] /* "The Black Stone!\n" */);
 	XP_inc(0, 200);
 }
 
@@ -130,7 +130,7 @@ C_8F21()
 	}
 	SET_MSK(Party.mStones, 6);
 	C_8D4B();
-	u4_puts(/*D_285C*/"The White Stone!\n");
+	u4_puts(/*D_285C*/&AVATAR[0x11B07] /* "The White Stone!\n" */);
 	XP_inc(0, 200);
 }
 
@@ -142,7 +142,7 @@ C_8F51()
 	}
 	SET_MSK(Party.mItems, 3);
 	C_8D4B();
-	u4_puts(/*D_286E*/"The Book of Truth!\n");
+	u4_puts(/*D_286E*/&AVATAR[0x11B19] /* "The Book of Truth!\n" */);
 	XP_inc(0, 400);
 }
 
@@ -154,7 +154,7 @@ C_8F81()
 	}
 	SET_MSK(Party.mItems, 2);
 	C_8D4B();
-	u4_puts(/*D_2882*/"The Candle of Love!\n");
+	u4_puts(/*D_2882*/&AVATAR[0x11B2D] /* "The Candle of Love!\n" */);
 	XP_inc(0, 400);
 }
 
@@ -163,9 +163,9 @@ C_8FB1()
 {
 	int bp_02;
 
-	u4_puts(/*D_2897*/"You see a knob on the Telescope marked A-P\n");
+	u4_puts(/*D_2897*/&AVATAR[0x11B42] /* "You see a knob on the Telescope marked A-P\n" */);
 	set_input_mode(INPUT_MODE_TELESCOPE);
-	if((bp_02 = AskLetter(/*D_28C3*/"You Select:\x12\x12\b", 'A', 'P')) < 0)
+	if((bp_02 = AskLetter(/*D_28C3*/&AVATAR[0x11B6E] /* "You Select:\x12\x12\b" */, 'A', 'P')) < 0)
 		return 0;
 	bp_02 -= 'A';
 	if(Load(D_0824[bp_02], sizeof(tMap32x32), &(D_8742._map)) == -1)
@@ -189,7 +189,7 @@ C_9027()
 	}
 	Party._armors[7] = 8;
 	C_8D4B();
-	u4_puts(/*D_28D2*/"Mystic Armour!\n");
+	u4_puts(/*D_28D2*/&AVATAR[0x11B7D] /* "Mystic Armour!\n" */);
 	XP_inc(0, 400);
 }
 
@@ -207,19 +207,19 @@ C_9076()
 	}
 	Party._weapons[15] = 8;
 	C_8D4B();
-	u4_puts(/*D_28E2*/"Mystic Weapons!\n");
+	u4_puts(/*D_28E2*/&AVATAR[0x11B8D] /* "Mystic Weapons!\n" */);
 	XP_inc(0, 400);
 }
 
-unsigned char D_2904[][2] = {
-	{0x05,0x01},
-	{0x06,0x02},
-	{0x07,0x04},
-	{0x08,0x08},
-	{0x09,0x10},
-	{0x0A,0x20},
-	{0x01,0x40},
-	{0x0D,0x80}
+unsigned char * D_2904[]= { 
+	&AVATAR[0x11BAF] /*{0x05,0x01}*/,
+	&AVATAR[0x11BB1] /*{0x06,0x02}*/,
+	&AVATAR[0x11BB3] /*{0x07,0x04}*/,
+	&AVATAR[0x11BB5] /*{0x08,0x08}*/,
+	&AVATAR[0x11BB7] /*{0x09,0x10}*/,
+	&AVATAR[0x11BB9] /*{0x0A,0x20}*/,
+	&AVATAR[0x11BBB] /*{0x01,0x40}*/,
+	&AVATAR[0x11BBD] /*{0x0D,0x80}*/
 };
 
 C_90C5()
@@ -235,61 +235,90 @@ C_90C5()
 	}
 	Party.mRunes |= D_2904[si][1];
 	C_8D4B();
-	u4_puts(/*D_28F3*/"The rune of ");
+	u4_puts(/*D_28F3*/&AVATAR[0x11B9E] /* "The rune of " */);
 	u4_puts(D_1E98[151 + si]);
-	u4_puts(/*D_2900*/"!\n");
+	u4_puts(/*D_2900*/&AVATAR[0xF376] /* "!\n" */);
 	XP_inc(0, 100);
 }
 
-typedef s_handler();
+typedef s_handler(void);
 typedef s_handler *pS_handler;
 
-struct t_05_local {
+// This one has function pointers so I cannot directly copy this from the AVATAR.EXE at offset 0x11BCB
+// need to extract the data into this structure and then create another for the function pointers
+struct t_05_original {
 	unsigned char _00, _01, _02;
-	pS_handler _03;
-} D_2920[] = {
-	{0x00,0xB6,0x36,C_8DAA},/*Mandrake root*/
-	{0x00,0x64,0xA5,C_8DAA},/*Mandrake root*/
-	{0x00,0x2E,0x95,C_8DE0},/*Nightshade*/
-	{0x00,0xCD,0x2C,C_8DE0},/*Nightshade*/
-	{0x00,0xB0,0xD0,C_8E16},/*The Bell of Courage!*/
-	{0x00,0x2D,0xAD,C_8E46},/*'A Silver Horn!'*/
-	{0x00,0x60,0xD7,C_8E77},/*The Wheel from the H.M.S. Cape!*/
-	{0x00,0xC5,0xF5,C_8EA8},/*The Skull of Mondain the Wizard!*/
-	{0x00,0xE0,0x85,C_8EE8},/*The Black Stone!*/
-	{0x00,0x40,0x50,C_8F21},/*The White Stone!*/
-	{0x02,0x06,0x06,C_8F51},/*The Book of Truth!*/
-	{0x10,0x16,0x01,C_8F81},/*The Candle of Love!*/
-	{0x02,0x16,0x03,C_8FB1},/*use Telescope*/
-	{0x03,0x16,0x04,C_9027},/*Mystic Armour!*/
-	{0x04,0x08,0x0F,C_9076},/*Mystic Weapons!*/
-	{0x05,0x08,0x06,C_90C5},/*rune of Honesty*/
-	{0x06,0x19,0x01,C_90C5},/*rune of Compassion*/
-	{0x07,0x1E,0x1E,C_90C5},/*rune of Valor*/
-	{0x08,0x0D,0x06,C_90C5},/*rune of Justice*/
-	{0x09,0x1C,0x1E,C_90C5},/*rune of Sacrifice*/
-	{0x0A,0x02,0x1D,C_90C5},/*rune of Honor*/
-	{0x01,0x11,0x08,C_90C5},/*rune of Spirituality*/
-	{0x0D,0x1D,0x1D,C_90C5},/*rune of Humility*/
-	{0x00,0x00,0x00,0}
+	short _03;
+} * D_2920_original[] = {
+	&AVATAR[0x11BCB], // {0x00,0xB6,0x36,C_8DAA},/*Mandrake root*/
+	&AVATAR[0x11BD0], // {0x00,0x64,0xA5,C_8DAA},/*Mandrake root*/
+	&AVATAR[0x11BD5], // {0x00,0x2E,0x95,C_8DE0},/*Nightshade*/
+	&AVATAR[0x11BDA], // {0x00,0xCD,0x2C,C_8DE0},/*Nightshade*/
+	&AVATAR[0x11BDF], // {0x00,0xB0,0xD0,C_8E16},/*The Bell of Courage!*/
+	&AVATAR[0x11BE4], // {0x00,0x2D,0xAD,C_8E46},/*'A Silver Horn!'*/
+	&AVATAR[0x11BE9], // {0x00,0x60,0xD7,C_8E77},/*The Wheel from the H.M.S. Cape!*/
+	&AVATAR[0x11BEE], // {0x00,0xC5,0xF5,C_8EA8},/*The Skull of Mondain the Wizard!*/
+	&AVATAR[0x11BF3], // {0x00,0xE0,0x85,C_8EE8},/*The Black Stone!*/
+	&AVATAR[0x11BF8], // {0x00,0x40,0x50,C_8F21},/*The White Stone!*/
+	&AVATAR[0x11BFD], // {0x02,0x06,0x06,C_8F51},/*The Book of Truth!*/
+	&AVATAR[0x11C02], // {0x10,0x16,0x01,C_8F81},/*The Candle of Love!*/
+	&AVATAR[0x11C07], // {0x02,0x16,0x03,C_8FB1},/*use Telescope*/
+	&AVATAR[0x11C0C], // {0x03,0x16,0x04,C_9027},/*Mystic Armour!*/
+	&AVATAR[0x11C11], // {0x04,0x08,0x0F,C_9076},/*Mystic Weapons!*/
+	&AVATAR[0x11C16], // {0x05,0x08,0x06,C_90C5},/*rune of Honesty*/
+	&AVATAR[0x11C1B], // {0x06,0x19,0x01,C_90C5},/*rune of Compassion*/
+	&AVATAR[0x11C20], // {0x07,0x1E,0x1E,C_90C5},/*rune of Valor*/
+	&AVATAR[0x11C25], // {0x08,0x0D,0x06,C_90C5},/*rune of Justice*/
+	&AVATAR[0x11C2A], // {0x09,0x1C,0x1E,C_90C5},/*rune of Sacrifice*/
+	&AVATAR[0x11C2F], // {0x0A,0x02,0x1D,C_90C5},/*rune of Honor*/
+	&AVATAR[0x11C34], // {0x01,0x11,0x08,C_90C5},/*rune of Spirituality*/
+	&AVATAR[0x11C39], // {0x0D,0x1D,0x1D,C_90C5},/*rune of Humility*/
+	&AVATAR[0x11C3E]  // {0x00,0x00,0x00,0}
+};
+
+
+pS_handler D_2920_handler[] = {
+	C_8DAA,/*Mandrake root*/
+	C_8DE0,/*Nightshade*/
+	C_8DE0,/*Nightshade*/
+	C_8E16,/*The Bell of Courage!*/
+	C_8E46,/*'A Silver Horn!'*/
+	C_8E77,/*The Wheel from the H.M.S. Cape!*/
+	C_8EA8,/*The Skull of Mondain the Wizard!*/
+	C_8EE8,/*The Black Stone!*/
+	C_8F21,/*The White Stone!*/
+	C_8F51,/*The Book of Truth!*/
+	C_8F81,/*The Candle of Love!*/
+	C_8FB1,/*use Telescope*/
+	C_9027,/*Mystic Armour!*/
+	C_9076,/*Mystic Weapons!*/
+	C_90C5,/*rune of Honesty*/
+	C_90C5,/*rune of Compassion*/
+	C_90C5,/*rune of Valor*/
+	C_90C5,/*rune of Justice*/
+	C_90C5,/*rune of Sacrifice*/
+	C_90C5,/*rune of Honor*/
+	C_90C5,/*rune of Spirituality*/
+	C_90C5,/*rune of Humility*/
+	0
 };
 
 /*C_913A*/CMD_Search()
 {
-	register struct t_05_local *si;
+	int si;
 
-	u4_puts(/*D_2914*/"Search...\n");
+	u4_puts(/*D_2914*/&AVATAR[0x11BBF] /* "Search...\n" */);
 	if(CurMode <= MOD_BUILDING && Party.f_1dc != 0) {
 		w_DriftOnly();
 		return 0;
 	}
-	for(si = D_2920; si->_03; si ++) {
-		if(si->_00 == Party._loc && si->_01 == Party._x && si->_02 == Party._y)
+	for(si = 0; D_2920_original[si]->_03; si ++) {
+		if(D_2920_original[si]->_00 == Party._loc && D_2920_original[si]->_01 == Party._x && D_2920_original[si]->_02 == Party._y)
 			break;
 	}
-	if(si->_03 == 0) {
+	if(D_2920_original[si]->_03 == 0) {
 		u4_puts(D_27A6);
 	} else {
-		(*si->_03)();
+		(D_2920_handler[si])();
 	}
 }

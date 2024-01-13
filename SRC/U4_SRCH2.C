@@ -10,7 +10,7 @@
 MODULE SEARCH[dungeon]
 ----------------------------------------*/
 
-char *D_2E04[] = {/*D_2DF0*/"\nHmmm--No Effect!\n"};
+char *D_2E04[] = {/*D_2DF0*/&AVATAR[0x12098] /* "\nHmmm--No Effect!\n" */};
 
 C_B730(bp06, bp04)
 int bp06;
@@ -33,11 +33,11 @@ int bp04;
 	*bp06 = (*bp06 > 50)?50:*bp06;
 }
 
-int D_2E6E[] = {2,2,2,4,4,4,6,6};/*magical ball hits points*/
-int D_2E7E[][8] = {/*magical ball characteristic*/
-	{0,0,5,0,5,5,5,0},
-	{0,5,0,5,5,0,5,0},
-	{5,0,0,5,0,5,5,0}
+short * D_2E6E = &AVATAR[0x12115] /*{2,2,2,4,4,4,6,6}*/;/*magical ball hits points*/
+short * D_2E7E[] = {/*magical ball characteristic*/
+	&AVATAR[0x12125] /*{0,0,5,0,5,5,5,0}*/,
+	&AVATAR[0x12135] /*{0,5,0,5,5,0,5,0}*/,
+	&AVATAR[0x12145] /*{5,0,0,5,0,5,5,0}*/
 };
 
 /*magical ball*/
@@ -45,12 +45,12 @@ C_B795()
 {
 	int bp_02;
 
-	u4_puts(/*D_2E06*/"\nYou find a Magical Ball...\n");
+	u4_puts(/*D_2E06*/&AVATAR[0x120AE] /* "\nYou find a Magical Ball...\n" */);
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
-	if((bp_02 = AskChara(/*D_2E23*/"Who touches?\x12\x12\b")) < 0)
+	if((bp_02 = AskChara(/*D_2E23*/&AVATAR[0x120CB] /* "Who touches?\x12\x12\b" */)) < 0)
 		return 0;
 	if(!isCharaConscious(bp_02)) {
-		u4_puts(/*D_2E33*/"\nDisabled!\n");
+		u4_puts(/*D_2E33*/&AVATAR[0x120DB] /* "\nDisabled!\n" */);
 		return 0;
 	}
 	D_8742._map.x8x8x8[Party._z][Party._y][Party._x] = 0;
@@ -58,15 +58,15 @@ C_B795()
 	/*-- which characteristic(s) ? --*/
 	if(D_2E7E[0][Party._loc - 0x11]) {
 		C_B770(&(Party.chara[bp_02]._str), 5);
-		u4_puts(/*D_2E3F*/"Strength + 5\n");
+		u4_puts(/*D_2E3F*/&AVATAR[0x120E7] /* "Strength + 5\n" */);
 	}
 	if(D_2E7E[1][Party._loc - 0x11]) {
 		C_B770(&(Party.chara[bp_02]._dex), 5);
-		u4_puts(/*D_2E4D*/"Dexterity + 5\n");
+		u4_puts(/*D_2E4D*/&AVATAR[0x120F5] /* "Dexterity + 5\n" */);
 	}
 	if(D_2E7E[2][Party._loc - 0x11]) {
 		C_B770(&(Party.chara[bp_02]._int), 5);
-		u4_puts(/*D_2E5C*/"Intelligence + 5\n");
+		u4_puts(/*D_2E5C*/&AVATAR[0x12104] /* "Intelligence + 5\n" */);
 	}
 }
 
@@ -75,12 +75,12 @@ C_B863()
 {
 	int bp_02;
 
-	u4_puts(/*D_2EAE*/"You find a Fountain.\n");
+	u4_puts(/*D_2EAE*/&AVATAR[0x12156] /* "You find a Fountain.\n" */);
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
-	if((bp_02 = AskChara(/*D_2EC4*/"Who drinks?\x12\x12\b")) < 0)
+	if((bp_02 = AskChara(/*D_2EC4*/&AVATAR[0x1216C] /* "Who drinks?\x12\x12\b" */)) < 0)
 		return 0;
 	if(!isCharaConscious(bp_02)) {
-		u4_puts(/*D_2ED3*/"\nDisabled!\n");
+		u4_puts(/*D_2ED3*/&AVATAR[0x120DB] /* "\nDisabled!\n" */);
 		return 0;
 	}
 	switch(tile_cur & 0xf) {
@@ -89,12 +89,12 @@ C_B863()
 			if(Party.chara[bp_02]._HP[0] == Party.chara[bp_02]._HP[1]) {
 				u4_puts(D_2E04[0]);
 			} else {
-				u4_puts(/*D_2EDF*/"\nAhh-Refreshing!\n");
+				u4_puts(/*D_2EDF*/&AVATAR[0x12187] /* "\nAhh-Refreshing!\n" */);
 				Party.chara[bp_02]._HP[0] = Party.chara[bp_02]._HP[1];
 			}
 		break;
 		case 2:
-			u4_puts(/*D_2EF1*/"\nBleck--Nasty!\n");
+			u4_puts(/*D_2EF1*/&AVATAR[0x12199] /* "\nBleck--Nasty!\n" */);
 			C_B730(bp_02, 1);
 		return 0;
 		case 3:
@@ -102,7 +102,7 @@ C_B863()
 				u4_puts(D_2E04[0]);
 			} else {
 				Party.chara[bp_02]._stat = 'G';
-				u4_puts(/*D_2F01*/"\nHmm--Delicious!\n");
+				u4_puts(/*D_2F01*/&AVATAR[0x121A9] /* "\nHmm--Delicious!\n" */);
 			}
 		break;
 		case 4:
@@ -110,7 +110,7 @@ C_B863()
 				u4_puts(D_2E04[0]);
 			} else {
 				Party.chara[bp_02]._stat = 'P';
-				u4_puts(/*D_2F13*/"\nArgh-Choke-Gasp!\n");
+				u4_puts(/*D_2F13*/&AVATAR[0x121BB] /* "\nArgh-Choke-Gasp!\n" */);
 				C_B730(bp_02, 1);
 			};
 		break;
@@ -124,13 +124,13 @@ C_B93F()
 		Party._loc == 0x17 || Party._loc == 0x18 ||
 		TST_MSK(Party.mStones, Party._loc - 0x11)
 	) {
-		u4_puts(/*D_2F26*/"\nYou find Nothing!\n");
+		u4_puts(/*D_2F26*/&AVATAR[0x121CE] /* "\nYou find Nothing!\n" */);
 		return 0;
 	}
 	SET_MSK(Party.mStones, Party._loc - 0x11);
-	u4_puts(/*D_2F3A*/"\nYou find the ");
+	u4_puts(/*D_2F3A*/&AVATAR[0x121E2] /* "\nYou find the " */);
 	u4_puts(D_0884[Party._loc - 0x11]);
-	u4_puts(/*D_2F49*/" stone!\n");
+	u4_puts(/*D_2F49*/&AVATAR[0x121F1] /* " stone!\n" */);
 	karma_inc(&(Party._honor), 5);
 	XP_inc(0, 200);
 }
@@ -138,11 +138,11 @@ C_B93F()
 /*(S)earch [dungeon]*/
 C_B9B2()
 {
-	u4_puts(/*D_2F52*/"Search...\n");
+	u4_puts(/*D_2F52*/&AVATAR[0x11BBF] /* "Search...\n" */);
 	switch(tile_cur & 0xf0) {
 		case 0x70: C_B795(); break;
 		case 0x90: C_B863(); break;
 		case 0xB0: C_B93F(); break;
-		default: u4_puts(/*D_2F5D*/"\nYou find Nothing!\n");
+		default: u4_puts(/*D_2F5D*/&AVATAR[0x121CE] /* "\nYou find Nothing!\n" */);
 	}
 }

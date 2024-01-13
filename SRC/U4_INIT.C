@@ -31,10 +31,10 @@ char *bp04;
 		u4_puts(bp06);
 		txt_Y ++;
 		txt_X = 18;
-		u4_puts(/*D_3024*/"and");
+		u4_puts(/*D_3024*/&AVATAR[0xF339] /* "and" */);
 		txt_Y ++;
 		txt_X = 11;
-		u4_puts(/*D_3028*/"press drive letter");
+		u4_puts(/*D_3028*/&AVATAR[0x122A3] /* "press drive letter" */);
 		set_input_mode(INPUT_MODE_DRIVE_LETTER);
 		while(!u_kbhit());
 		do {
@@ -94,10 +94,10 @@ C_C51C()
 	pCharset = dalloc((D_943A == 1)?0x0800:0x1000);
 	if(pShapes == 0 || pCharset == 0)
 		exit(3);
-	if(Load((D_943A == 1)?/*D_303B*/"CHARSET.CGA":/*D_3047*/"CHARSET.EGA", (D_943A == 1)?0x0800:0x1000, pCharset) == -1)
+	if(Load((D_943A == 1)?/*D_303B*/&AVATAR[0x122B6] /* "CHARSET.CGA" */:/*D_3047*/&AVATAR[0x122C2] /* "CHARSET.EGA" */, (D_943A == 1)?0x0800:0x1000, pCharset) == -1)
 		exit(3);
 	if(D_943A == 1) {
-		if(Load(/*D_3053*/"SHAPES.CGA", 0x4000, pShapes) == -1)
+		if(Load(/*D_3053*/&AVATAR[0x122CE] /* "SHAPES.CGA" */, 0x4000, pShapes) == -1)
 			exit(3);
 	}
 	bp_02 = C_1814();
@@ -105,18 +105,18 @@ C_C51C()
 		case 1:
 			dfree(patch_tandy);
 			patch_tandy = 0;
-			C_20C1(/*D_305E*/"CGA.DRV");
+			C_20C1(/*D_305E*/&AVATAR[0x122D9] /* "CGA.DRV" */);
 		break;
 		case 2:
 			dfree(patch_tandy);
 			patch_tandy = 0;
-			C_20C1(/*D_3066*/"EGA.DRV");
+			C_20C1(/*D_3066*/&AVATAR[0x122E1] /* "EGA.DRV" */);
 		break;
 		case 3:
-			C_20C1(/*D_306E*/"TANDY.DRV");
+			C_20C1(/*D_306E*/&AVATAR[0x122E9] /* "TANDY.DRV" */);
 		break;
 		case -1:
-			//Console(/*D_3078*/"I can't find a color graphics card.\r\n");
+			//Console(/*D_3078*/&AVATAR[0x122F3] /* "I can't find a color graphics card.\r\n" */);
 			exit(2);
 		break;
 	}
@@ -130,19 +130,19 @@ C_C51C()
 	Gra_clrscr();
 	if(PARAM1 >= (char)'A' && PARAM1 <= (char)'P') {
 		if(C_1814() == (PARAM1 & 0x0f)) {
-			C_C454(/*D_30A8*/"Re-Insert PLAYER Disk", /*D_309E*/"WORLD.MAP");
+			C_C454(/*D_30A8*/&AVATAR[0x12323] /* "Re-Insert PLAYER Disk" */, /*D_309E*/&AVATAR[0x12319] /* "WORLD.MAP" */);
 		} else {
 			C_181D((unsigned char)PARAM1 & 0x0f);
 		}
 	}
-	C_C454(/*D_30C8*/"Insert PLAYER disk", /*D_30BE*/"WORLD.MAP");
+	C_C454(/*D_30C8*/&AVATAR[0x12343] /* "Insert PLAYER disk" */, /*D_30BE*/&AVATAR[0x12319] /* "WORLD.MAP" */);
 	if(D_943A != 1) {
-		if(Load(/*D_30DB*/"SHAPES.EGA", 0x8000, pShapes) == -1)
+		if(Load(/*D_30DB*/&AVATAR[0x12356] /* "SHAPES.EGA" */, 0x8000, pShapes) == -1)
 			exit(3);
 	}
 	if(D_943A == 2)
 		sizzleShapes();
-	if(Load(/*D_30E6*/"PARTY.SAV", sizeof(struct tParty), &Party) == -1)
+	if(Load(/*D_30E6*/&AVATAR[0x11478] /* "PARTY.SAV" */, sizeof(struct tParty), &Party) == -1)
 		exit(3);
 #if 0/*def WIN32*/
 	/*for debug*/
@@ -152,25 +152,25 @@ C_C51C()
 		Gra_clrscr();
 		txt_Y = 8;
 		txt_X = 12;
-		u4_puts(/*D_30F0*/"No party formed!");
+		u4_puts(/*D_30F0*/&AVATAR[0x1236B] /* "No party formed!" */);
 		sound(8,0);
 		set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 		u_delay(3, 0);
 		u_kbflush();
 		if(bp_02 == C_1814()) {
-			C_C454(/*D_310B*/"Re-Insert PROGRAM Disk", /*D_3010*/"TITLE.EXE");
+			C_C454(/*D_310B*/&AVATAR[0x12386] /* "Re-Insert PROGRAM Disk" */, /*D_3010*/&AVATAR[0x1237C] /* "TITLE.EXE" */);
 		} else {
 			C_181D(bp_02);
-			C_C454(/*D_312C*/"Insert PROGRAM disk", /*D_3122*/"TITLE.EXE");
+			C_C454(/*D_312C*/&AVATAR[0x123A7] /* "Insert PROGRAM disk" */, /*D_3122*/&AVATAR[0x1237C] /* "TITLE.EXE" */);
 		}
 		low_clean();
 		exit(4);
 	}
-	if(Load(/*D_3140*/"MONSTERS.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
+	if(Load(/*D_3140*/&AVATAR[0x11482] /* "MONSTERS.SAV" */, sizeof(struct tNPC), &(D_8742._npc)) == -1)
 		exit(3);
 #if 0 // we will open and close this as needed instead of leaving it open
-	if((File_MAP = dopen(/*D_314D*/"WORLD.MAP", 0)) == -1) {
-		//Console(/*D_3157*/"Can't open map file\r\n");
+	if((File_MAP = dopen(/*D_314D*/&AVATAR[0x12319] /* "WORLD.MAP" */, 0)) == -1) {
+		//Console(/*D_3157*/&AVATAR[0x123D2] /* "Can't open map file\r\n" */);
 		exit(3);
 	}
 #endif

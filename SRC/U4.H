@@ -409,20 +409,20 @@ extern char cdecl /*D_06A6*/SoundFlag;
 extern unsigned D_07F8;
 extern U16 /*D_07FA*/*pKarmas[];
 extern int /*D_080A*/activeCharaX;
-extern char D_080C[], D_0810[];
-extern unsigned char D_0814[], D_081C[];/*moongates positions*/
+extern char * D_080C, * D_0810;
+extern unsigned char * D_0814, * D_081C;/*moongates positions*/
 extern char *D_0824[];
-extern char D_0844[];
-extern char D_0864[];
+extern char * D_0844;
+extern char * D_0864;
 extern char *D_0884[];
 extern char *D_0894[];
 /*strings*/
 extern char *D_1E98[];
 
-extern unsigned char D_23D2[];
-extern unsigned char D_2450[];
-extern unsigned char D_2460[];
-extern unsigned char D_2468[];
+extern unsigned char * D_23D2;
+extern unsigned char * D_2450;
+extern unsigned char * D_2460;
+extern unsigned char * D_2468;
 
 /*====---- uninitialized ----====*/
 extern unsigned /*D_8728*/speed_info;

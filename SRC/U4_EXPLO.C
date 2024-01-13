@@ -10,31 +10,31 @@
 
 char *D_1738[] ={
 	/*Castles*/
-	/*D_1682*/"LCB.TLK",
-	/*D_168A*/"LYCAEUM.TLK",
-	/*D_1696*/"EMPATH.TLK",
-	/*D_16A1*/"SERPENT.TLK",
+	/*D_1682*/&AVATAR[0xF839] /* "LCB.TLK" */,
+	/*D_168A*/&AVATAR[0x10945] /* "LYCAEUM.TLK" */,
+	/*D_1696*/&AVATAR[0x10951] /* "EMPATH.TLK" */,
+	/*D_16A1*/&AVATAR[0x1095C] /* "SERPENT.TLK" */,
 	/*Townes*/
-	/*D_16AD*/"MOONGLOW.TLK",
-	/*D_16BA*/"BRITAIN.TLK",
-	/*D_16C6*/"JHELOM.TLK",
-	/*D_16D1*/"YEW.TLK",
-	/*D_16D9*/"MINOC.TLK",
-	/*D_16E3*/"TRINSIC.TLK",
-	/*D_16EF*/"SKARA.TLK",
-	/*D_16F9*/"MAGINCIA.TLK",
+	/*D_16AD*/&AVATAR[0x10968] /* "MOONGLOW.TLK" */,
+	/*D_16BA*/&AVATAR[0x10975] /* "BRITAIN.TLK" */,
+	/*D_16C6*/&AVATAR[0x10981] /* "JHELOM.TLK" */,
+	/*D_16D1*/&AVATAR[0x1098C] /* "YEW.TLK" */,
+	/*D_16D9*/&AVATAR[0x10994] /* "MINOC.TLK" */,
+	/*D_16E3*/&AVATAR[0x1099E] /* "TRINSIC.TLK" */,
+	/*D_16EF*/&AVATAR[0x109AA] /* "SKARA.TLK" */,
+	/*D_16F9*/&AVATAR[0x109B4] /* "MAGINCIA.TLK" */,
 	/*Villages*/
-	/*D_1706*/"PAWS.TLK",
-	/*D_170F*/"DEN.TLK",
-	/*D_1717*/"VESPER.TLK",
-	/*D_1722*/"COVE.TLK"
+	/*D_1706*/&AVATAR[0x109C1] /* "PAWS.TLK" */,
+	/*D_170F*/&AVATAR[0x109CA] /* "DEN.TLK" */,
+	/*D_1717*/&AVATAR[0x109D2] /* "VESPER.TLK" */,
+	/*D_1722*/&AVATAR[0x109DD] /* "COVE.TLK" */
 };
 
 /*load casle/towne/village files*/
 C_3E30(bp04)
 unsigned bp04;
 {
-	if(Save(/*D_172B*/"OUTMONST.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
+	if(Save(/*D_172B*/&AVATAR[0xF822] /* "OUTMONST.SAV" */, sizeof(struct tNPC), &(D_8742._npc)) == -1)
 		exit(3);
 	if(Load(D_0824[bp04 - 0x01], sizeof(struct t_500), &D_8742) == -1)
 		exit(3);
@@ -74,7 +74,7 @@ C_3F03()
 		return 0;
 	}
 	Party._x = Party._y = 1;
-	if(Save(/*D_1758*/"OUTMONST.SAV", sizeof(struct tNPC), &(D_8742._npc)) == -1)
+	if(Save(/*D_1758*/&AVATAR[0xF822] /* "OUTMONST.SAV" */, sizeof(struct tNPC), &(D_8742._npc)) == -1)
 		exit(3);
 	C_3EE4();
 }
@@ -123,7 +123,7 @@ C_3FB9()
 {
 	register int si;
 
-	u4_puts(/*D_1765*/"Enter ");
+	u4_puts(/*D_1765*/&AVATAR[0x10A20] /* "Enter " */);
 	if(Party._loc != 0 || Party._tile == TIL_18) {
 		w_What();
 		return 0;
@@ -147,16 +147,16 @@ C_3FB9()
 	Party.out_y = Party._y;
 	switch(D_8742._map.x32x32[D_959C.y][D_959C.x]) {
 		case TIL_09:
-			u4_puts(/*D_176C*/"dungeon!\n\n");
+			u4_puts(/*D_176C*/&AVATAR[0x10A27] /* "dungeon!\n\n" */);
 			u4_puts(D_1E98[127 + Party._loc - 1]);
 			C_3F03();
 		break;
 		case TIL_0A:
-			u4_puts(/*D_1777*/"towne!\n\n");
+			u4_puts(/*D_1777*/&AVATAR[0x10A32] /* "towne!\n\n" */);
 			C_3F4A();
 		break;
 		case TIL_0B: case TIL_0E:
-			u4_puts(/*D_1780*/"castle!\n\n");
+			u4_puts(/*D_1780*/&AVATAR[0x10A3B] /* "castle!\n\n" */);
 			u4_puts(D_1E98[127 + Party._loc - 1]);
 			Gra_CR();
 			Gra_CR();
@@ -166,11 +166,11 @@ C_3FB9()
 			C_3E30(Party._loc);
 		break;
 		case TIL_0C:
-			u4_puts(/*D_178A*/"village!\n\n");
+			u4_puts(/*D_178A*/&AVATAR[0x10A45] /* "village!\n\n" */);
 			C_3F4A();
 		break;
 		case TIL_1D:
-			u4_puts(/*D_1795*/"ruin!\n\n");
+			u4_puts(/*D_1795*/&AVATAR[0x10A50] /* "ruin!\n\n" */);
 			C_3F4A();
 		break;
 		case TIL_4C:
@@ -182,7 +182,7 @@ C_3FB9()
 			C_3FB9();
 		break;
 		case TIL_1E:
-			u4_puts(/*D_179D*/"the Shrine of\n");
+			u4_puts(/*D_179D*/&AVATAR[0x10A58] /* "the Shrine of\n" */);
 			u4_puts(D_1E98[151 + Party._loc - 0x19]);
 			Gra_CR();
 			C_E72C();
@@ -213,7 +213,7 @@ C_4164()
 
 /*C_41C0*/CMD_X_it()
 {
-	u4_puts(/*D_17AC*/"X-it ");
+	u4_puts(/*D_17AC*/&AVATAR[0x10A67] /* "X-it " */);
 	if(Party._tile < TIL_14) {
 		ship_x = Party._x;
 		ship_y = Party._y;
@@ -248,19 +248,19 @@ unsigned bp04;
 /*C_4253*/CMD_Board()
 {
 	if(Party._tile != TIL_1F) {
-		u4_puts(/*D_17B2*/"Board: ");
+		u4_puts(/*D_17B2*/&AVATAR[0x10A6D] /* "Board: " */);
 		w_Cant_t();
 		return 0;
 	}
 	if(tile_cur == TIL_14 || tile_cur == TIL_15) {
 		C_4206(TIL_14);
-		u4_puts(/*D_17BA*/"Mount Horse!\n");
+		u4_puts(/*D_17BA*/&AVATAR[0x10A75] /* "Mount Horse!\n" */);
 		return 0;
 	}
-	u4_puts(/*D_17C8*/"Board ");
+	u4_puts(/*D_17C8*/&AVATAR[0x10A83] /* "Board " */);
 	if(tile_cur == TIL_18) {
 		C_4206(TIL_18);
-		u4_puts(/*D_17CF*/"Balloon!\n");
+		u4_puts(/*D_17CF*/&AVATAR[0x10A8A] /* "Balloon!\n" */);
 		Party.f_1dc = 0;
 		return 0;
 	}
@@ -269,19 +269,19 @@ unsigned bp04;
 		return 0;
 	}
 	C_4206(TIL_10);
-	u4_puts(/*D_17D9*/"Frigate!\n");
+	u4_puts(/*D_17D9*/&AVATAR[0x10A94] /* "Frigate!\n" */);
 	if(ship_x != Party._x || ship_y != Party._y)
 		Party._ship = 50;
 }
 
 /*C_42E8*/CMD_Yell()
 {
-	u4_puts(/*D_17E3*/"Yell ");
+	u4_puts(/*D_17E3*/&AVATAR[0x10A9E] /* "Yell " */);
 	if(Party._tile == TIL_14 || Party._tile == TIL_15) {
 		if(D_95C6 ^= 1)
-			u4_puts(/*D_17E9*/"Giddyup!\n");
+			u4_puts(/*D_17E9*/&AVATAR[0x10AA4] /* "Giddyup!\n" */);
 		else
-			u4_puts(/*D_17F3*/"Whoa!\n");
+			u4_puts(/*D_17F3*/&AVATAR[0x10AAE] /* "Whoa!\n" */);
 	} else {
 		w_What();
 	}
@@ -309,12 +309,12 @@ C_431D()
 	while(D_17FE)
 		C_431D();
 	if(CurMode != MOD_BUILDING) {
-		u4_puts(/*D_1800*/"Open; ");
+		u4_puts(/*D_1800*/&AVATAR[0x10ABB] /* "Open; " */);
 		w_NotHere();
 		return 0;
 	}
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
-	AskDir(/*D_1807*/"Open: ", &bp_02, &bp_04);
+	AskDir(/*D_1807*/&AVATAR[0x10AC2] /* "Open: " */, &bp_02, &bp_04);
 	if(!(bp_02 | bp_04))
 		return 0;
 	if((bp_02 + Party._x) > 0x1f || bp_04) {
@@ -330,7 +330,7 @@ C_431D()
 			D_17FC = Party._y;
 			D_17FE = 5;
 			*si = TIL_3E;
-			u4_puts(/*D_180E*/"\nOpened!\n");
+			u4_puts(/*D_180E*/&AVATAR[0x10AC9] /* "\nOpened!\n" */);
 		} else {
 			w_NotHere();
 		}
@@ -341,9 +341,9 @@ C_431D()
 {
 	int bp_04, bp_02;
 
-	u4_puts(/*D_1818*/"Jimmy lock!\n");
+	u4_puts(/*D_1818*/&AVATAR[0x10AD3] /* "Jimmy lock!\n" */);
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
-	AskDir(/*D_1825*/"Dir: ", &bp_02, &bp_04);
+	AskDir(/*D_1825*/&AVATAR[0x10AE0] /* "Dir: " */, &bp_02, &bp_04);
 	if(!(bp_02 | bp_04))
 		return 0;
 	if(CurMode != MOD_BUILDING || (bp_02 + Party._x) > 0x1f || bp_04) {
@@ -357,7 +357,7 @@ C_431D()
 			return 0;
 		}
 		if(Party._keys == 0) {
-			u4_puts(/*D_182B*/"No keys left!\n");
+			u4_puts(/*D_182B*/&AVATAR[0x10AE6] /* "No keys left!\n" */);
 			return 0;
 		}
 		Party._keys --;
@@ -367,13 +367,13 @@ C_431D()
 
 /*C_4477*/CMD_Klimb()
 {
-	u4_puts(/*D_183A*/"Klimb ");
+	u4_puts(/*D_183A*/&AVATAR[0x10AF5] /* "Klimb " */);
 	if(Party._loc == 0) {
 		if(Party._tile != TIL_18) {
 			w_What();
 			return 0;
 		}
-		u4_puts(/*D_1841*/"altitude\n");
+		u4_puts(/*D_1841*/&AVATAR[0x10AFC] /* "altitude\n" */);
 		Party.f_1dc = 1;
 		D_9440 = 0;
 		return 0;
@@ -384,8 +384,8 @@ C_431D()
 			w_OnlyOnFoot();
 			return 0;
 		}
-		u4_puts(/*D_184B*/"to second floor!\n");
-		if(Load(/*D_185D*/"LCB_2.ULT", sizeof(struct t_500), &D_8742) == -1)
+		u4_puts(/*D_184B*/&AVATAR[0x10B06] /* "to second floor!\n" */);
+		if(Load(/*D_185D*/&AVATAR[0xF82F] /* "LCB_2.ULT" */, sizeof(struct t_500), &D_8742) == -1)
 			exit(3);
 	} else {
 		w_What();
@@ -395,14 +395,14 @@ C_431D()
 /*C_44EE*/CMD_Descend()
 {
 	if(Party._tile == TIL_18) {
-		u4_puts(/*D_1867*/"Land Balloon\n");
+		u4_puts(/*D_1867*/&AVATAR[0x10B22] /* "Land Balloon\n" */);
 		if(tile_cur != TIL_04) {
 			sound(1,0);
 			w_NotHere();
 			return 0;
 		}
 		if(Party.f_1dc == 0) {
-			u4_puts(/*D_1875*/"Already Landed!\n");
+			u4_puts(/*D_1875*/&AVATAR[0x10B30] /* "Already Landed!\n" */);
 			return 0;
 		}
 		Party.f_1dc = 0;
@@ -410,7 +410,7 @@ C_431D()
 		return 0;
 	}
 	if(Party._loc != 0x01) {
-		u4_puts(/*D_1886*/"Descend ");
+		u4_puts(/*D_1886*/&AVATAR[0x10B41] /* "Descend " */);
 		w_What();
 		return 0;
 	}
@@ -419,13 +419,13 @@ C_431D()
 		w_OnlyOnFoot();
 		return 0;
 	}
-	u4_puts(/*D_188F*/"Descend ");
+	u4_puts(/*D_188F*/&AVATAR[0x10B41] /* "Descend " */);
 	if(tile_cur != TIL_1C) {
 		w_What();
 		return 0;
 	}
 	if(Party._y == 2) {
-		u4_puts(/*D_1898*/"into the depths!\n");
+		u4_puts(/*D_1898*/&AVATAR[0x10B53] /* "into the depths!\n" */);
 		Party.out_x = 0xef;
 		Party.out_y = 0xf0;
 		Party._y = Party._x = 5;
@@ -433,7 +433,7 @@ C_431D()
 		C_3EE4();
 		return 0;
 	}
-	u4_puts(/*D_18AA*/"to first floor!\n");
-	if(Load(/*D_18BB*/"LCB_1.ULT", sizeof(struct t_500), &D_8742) == -1)
+	u4_puts(/*D_18AA*/&AVATAR[0x10B65] /* "to first floor!\n" */);
+	if(Load(/*D_18BB*/&AVATAR[0xF97F] /* "LCB_1.ULT" */, sizeof(struct t_500), &D_8742) == -1)
 		exit(3);
 }

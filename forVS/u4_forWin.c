@@ -49,7 +49,7 @@ C_213B() {
 	CONSOLE("C_213B \"draw game screen frame\"\n");
 
 	strcpy(path, getDataPath());
-	strcat(path, "START.PIC");
+	strcat(path, &AVATAR[0xFB61] /* "START.PIC" */);
 //	fd = _open(U4_ROOT"START.PIC", _O_RDONLY | _O_BINARY);
 	fd = _open(path, _O_RDONLY | _O_BINARY);
 	if(fd) {

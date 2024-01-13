@@ -38,7 +38,7 @@ C_9209()
 	unsigned bp_02;
 
 	if(CurMode == MOD_OUTDOORS && tile_cur == TIL_17 && U4_RND1(7) == 0) {
-		u4_puts(/*D_2998*/"\nBridge Trolls!\n");
+		u4_puts(/*D_2998*/&AVATAR[0x11C43] /* "\nBridge Trolls!\n" */);
 		D_96F8 = TIL_A4;
 		D_9772 = Party._x;
 		D_9140 = Party._y;
@@ -84,10 +84,10 @@ C_9209()
 			}
 		} else if((tile_cur & 0xf0) == 0x80) {
 			if(tile_cur == 0x80) {
-				u4_puts(/*D_29A9*/"\nWinds!\n");
+				u4_puts(/*D_29A9*/&AVATAR[0x11C54] /* "\nWinds!\n" */);
 				Party.f_1dc = 0;
 			} else {
-				u4_puts((tile_cur < 0x88)?/*D_29B2*/"\nFalling Rocks!\n":/*D_29C3*/"\nPit!\n");
+				u4_puts((tile_cur < 0x88)?/*D_29B2*/&AVATAR[0x11C5D] /* "\nFalling Rocks!\n" */:/*D_29C3*/ &AVATAR[0x11C6E] /* "\nPit!\n" */);
 				C_1584();
 			}
 		}
