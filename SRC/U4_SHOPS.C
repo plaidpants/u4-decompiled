@@ -105,8 +105,8 @@ static unsigned short D_913E;/*# of drinks in pub*/
 		u4_gets(bp_14, 15);
 		if (
 			bp_14[0] == 0 ||
-			strnicmp(bp_14, /*D_3DF3*/&AVATAR[0xF511 + 0x5] /* "none" */, 16) == 0 ||
-			strnicmp(bp_14, /*D_3DF8*/&AVATAR[0x11CE9 + 0x2017] /* "bye" */, 16) == 0
+			strnicmp(bp_14, /*D_3DF3*/&AVATAR[0x1306E + 0x2E2E] /* "none" */, 16) == 0 ||
+			strnicmp(bp_14, /*D_3DF8*/&AVATAR[0x13073 + 0x2E2E] /* "bye" */, 16) == 0
 		) break;
 		for(bp_04 = 7; bp_04 >= 0; bp_04 --) {
 			if(strnicmp(bp_14, D_1E98[151 + bp_04], 4) == 0)
@@ -231,8 +231,8 @@ Black Pearls.\n" */);
 			add_npc_talk(VENDOR_REAGENT, &AVATAR[0x132F5 + 0x2E2E] /* "\nVery well, we sell " */);
 			u4_puts(D_1E98[93 + loc_B]);
 			add_npc_talk(VENDOR_REAGENT, D_1E98[93 + loc_B]);
-			u4_puts(/*D_408F*/&AVATAR[0xF34D + 0x5] /* " for " */);
-			add_npc_talk(VENDOR_REAGENT, &AVATAR[0xF34D + 0x5] /* " for " */);
+			u4_puts(/*D_408F*/&AVATAR[0x1330A + 0x2E2E] /* " for " */);
+			add_npc_talk(VENDOR_REAGENT, &AVATAR[0x1330A + 0x2E2E] /* " for " */);
 			u4_putl(D_4190[D_9142][loc_B], 1, '0');
 			add_npc_talk_long(VENDOR_REAGENT, D_4190[D_9142][loc_B]);
 			// TODO need putl npc talk
@@ -438,7 +438,7 @@ C_CD80()
 			u4_puts(D_4702[loc_C-1]);
 			add_npc_talk(VENDOR_WEAPON, D_4702[loc_C-1]);
 			Gra_CR();
-			add_npc_talk(VENDOR_WEAPON, &AVATAR[0x21C] /* "\n" */);
+			add_npc_talk(VENDOR_WEAPON, "\n");
 			u4_puts(/*D_476F*/&AVATAR[0x13314 + 0x2E2E] /* "How many would you like?\x12\x12\x12\b\b" */);
 			add_npc_talk(VENDOR_WEAPON, &AVATAR[0x13314 + 0x2E2E] /* "How many would you like?" */);
 			set_input_mode(INPUT_MODE_NUMBER_INPUT_2_DIGITS);
@@ -524,8 +524,8 @@ C_CEBE()
 				}
 				else
 				{
-					u4_puts(/*D_4870*/&AVATAR[0xF7D0 + 0x5] /* "it." */);
-					add_npc_talk(VENDOR_WEAPON, &AVATAR[0xF7D0 + 0x5] /* "it." */);
+					u4_puts(/*D_4870*/&AVATAR[0x13AEB + 0x2E2E] /* "it." */);
+					add_npc_talk(VENDOR_WEAPON, &AVATAR[0x13AEB + 0x2E2E] /* "it." */);
 				}
 			} else {
 				loc_A = 1;
@@ -570,7 +570,7 @@ C_CEBE()
 	add_npc_talk(VENDOR_WEAPON, &AVATAR[0x1324E + 0x2E2E] /* "Welcome to " */);
 	u4_puts(D_46A2[D_9142]);
 	add_npc_talk(VENDOR_WEAPON, D_46A2[D_9142]);
-	u4_puts(/*D_48D7*/&AVATAR[0xF4DB + 0x5] /* "\n\n" */);
+	u4_puts(/*D_48D7*/&AVATAR[0x13B52 + 0x2E2E] /* "\n\n" */);
 	u4_puts(D_46AE[D_9142]);
 	u4_puts(/*D_48DA*/&AVATAR[0x13B55 + 0x2E2E] /* " says: Welcome friend! Art thou here to Buy or Sell? " */);
 	add_npc_talk(VENDOR_WEAPON, &AVATAR[0x13B5C + 0x2E2E] /* "Welcome friend! Art thou here to Buy or Sell?" */);
@@ -703,7 +703,7 @@ C_D1D0()
 				add_char_to_text_buffer(' ');
 				u4_puts(D_1E98[53 + D_4BC4[D_9142][loc_B]]);
 				add_npc_talk(VENDOR_ARMOR, D_1E98[53 + D_4BC4[D_9142][loc_B]]);
-				add_npc_talk(VENDOR_ARMOR, &AVATAR[0x8] /* " " */);
+				add_npc_talk(VENDOR_ARMOR, " ");
 				Gra_CR();
 			}
 		}
@@ -810,8 +810,8 @@ C_D2F8()
 				}
 				else
 				{
-					u4_puts(/*D_4D40*/&AVATAR[0xF7D0 + 0x5] /* "it." */);
-					add_npc_talk(VENDOR_ARMOR, &AVATAR[0xF7D0 + 0x5] /* "it." */);
+					u4_puts(/*D_4D40*/&AVATAR[0x13AEB + 0x2E2E] /* "it." */);
+					add_npc_talk(VENDOR_ARMOR, &AVATAR[0x13AEB + 0x2E2E] /* "it." */);
 				}
 			} else {
 				loc_A = 1;
@@ -855,7 +855,7 @@ C_D2F8()
 	add_npc_talk(VENDOR_ARMOR, &AVATAR[0x1324E + 0x2E2E] /* "Welcome to " */);
 	u4_puts(D_4BAE[D_9142]);
 	add_npc_talk(VENDOR_ARMOR, D_4BAE[D_9142]);
-	u4_puts(/*D_4DA9*/&AVATAR[0xF4DB + 0x5] /* "\n\n" */);
+	u4_puts(/*D_4DA9*/&AVATAR[0x14024 + 0x2E2E] /* "\n\n" */);
 	u4_puts(D_4BB8[D_9142]);
 	u4_puts(/*D_4DAC*/&AVATAR[0x14027 + 0x2E2E] /* " says: Welcome friend! Want to Buy or Sell? " */);
 	add_npc_talk(VENDOR_ARMOR, &AVATAR[0x1402D + 0x2E2E] /* " Welcome friend! Want to Buy or Sell? " */);
@@ -947,15 +947,15 @@ C_D2F8()
 /*----------------------------------------*/
 
 /*shops indexes*/
-unsigned char D_5196[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0};  // doesn't match exe, need to declare it here  61 74 69 65 21 0A A5 21 B2 00 0F 00 B0 01 02 00
+unsigned char * D_5196 = &AVATAR[0xF27B + 0x5196 + 0x2e2e] /* {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0} */;  // doesn't match exe, need to declare it here  61 74 69 65 21 0A A5 21 B2 00 0F 00 B0 01 02 00
 
 /*items prices*/
-short * D_51A6 = &AVATAR[0x14419 + 0x2E36] /* {50, 60, 60, 900} */;
+short * D_51A6 = &AVATAR[0xF273 + 0x51A6 + 0x2E36] /* {50, 60, 60, 900} */;
 /*items quantities*/
-short * D_51AE = &AVATAR[0x14421 + 0x2E36] /*{5,  5,  6,   1}*/;
+short * D_51AE = &AVATAR[0xF273 + 0x51ae + 0x2E36] /*{5,  5,  6,   1}*/;
 
 char *D_51B6[] = {
-	/*D_4F2A*/&AVATAR[0x141A5 + 0x2E2E] /* "Pirate's Guild" */,
+	/*D_4F2A*/&AVATAR[0xF27B + 0x4F2A + 0x2E2E] /* "Pirate's Guild" */,
 	/*D_4F39*/&AVATAR[0x141B4 + 0x2E2E] /* "The Guild Shop" */
 };
 char *D_51BA[] = {
@@ -985,7 +985,7 @@ char *D_51BE[] = {
 	u4_puts(D_51BA[D_9142]);
 	add_npc_talk(VENDOR_GUILD, D_51BA[D_9142]);
 	u4_puts(/*D_508A*/&AVATAR[0x14305 + 0x2E2E] /* "?\n\n\n" */);
-	add_npc_talk(VENDOR_GUILD, &AVATAR[0x38A] /* "?" */);
+	add_npc_talk(VENDOR_GUILD, "?");
 	u4_puts(D_51BA[D_9142]);
 	u4_puts(/*D_508F*/&AVATAR[0x13247 + 0x2E2E] /* " says: Welcome to " */); 
 	add_npc_talk(VENDOR_GUILD, &AVATAR[0x1324E + 0x2E2E] /* "Welcome to " */);
@@ -1279,7 +1279,7 @@ C_DA05()
 
 	Gra_CR();
 	u4_puts(D_57AC[D_9142]);
-	u4_puts(/*D_5764*/&AVATAR[0x1058C + 0x5] /* " asks:\n" */);
+	u4_puts(/*D_5764*/&AVATAR[0x149D7 + 0x2E36] /* " asks:\n" */);
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
 	si = AskChara(/*D_576C*/&AVATAR[0x149DF + 0x2E36] /* "Who is in need?\x12\x12\b" */);
 	add_npc_talk(VENDOR_HEALER, &AVATAR[0x149DF + 0x2E36] /* "Who is in need?" */);
@@ -1526,10 +1526,10 @@ short * D_5F28 = &AVATAR[0x1519B + 0x2E36] /*{4,2,3,2,4,2}*/;
 
 char *D_5F34[] = {
 	/*D_5BEC*/&AVATAR[0x14E5F + 0x2E36] /* "black stone" */,
-	/*D_5BF8*/&AVATAR[0x115B3 + 0x200F] /* "sextant" */,
+	/*D_5BF8*/&AVATAR[0x14E6B + 0x2E36] /* "sextant" */,
 	/*D_5C00*/&AVATAR[0x14E73 + 0x2E36] /* "white stone" */,
 	/*D_5C0C*/&AVATAR[0x14E7F + 0x2E36] /* "mandrake" */,
-	/*D_5C15*/&AVATAR[0xF6C4 + 0x5] /* "skull" */,
+	/*D_5C15*/&AVATAR[0x14E88 + 0x2E36] /* "skull" */,
 	/*D_5C1B*/&AVATAR[0x14E8E + 0x2E36] /* "nightshade" */,
 	/*D_5C26*/&AVATAR[0x14E99 + 0x2E36] /* "mandrake root" */
 };
@@ -1589,10 +1589,10 @@ C_DD24()
 			{
 				u4_putc('s');
 				add_char_to_text_buffer('s');
-				add_npc_talk(VENDOR_FOOD, &AVATAR[0x322] /* "s" */);
+				add_npc_talk(VENDOR_FOOD, "s");
 			}
 			u4_putc('.');
-			add_npc_talk(VENDOR_FOOD, &AVATAR[0xF4FC + 0x5] /* ".\n" */);
+			add_npc_talk(VENDOR_FOOD, ".\n");
 			add_char_to_text_buffer('.');
 			Gra_CR();
 			add_char_to_text_buffer('\n');
@@ -1681,7 +1681,7 @@ C_DE35()
 			if(D_5EF8[loc_C] <= loc_A) {
 				Gra_CR();
 				u4_puts(D_5F10[D_9142]);
-				u4_puts(/*D_6122*/&AVATAR[0xF4E8 + 0x5] /* " says: " */);
+				u4_puts(/*D_6122*/&AVATAR[0x15395 + 0x2E36] /* " says: " */);
 				u4_puts(D_5F42[loc_C]);
 				add_npc_talk(VENDOR_PUB, D_5F42[loc_C]);
 				Gra_CR();
@@ -1787,7 +1787,7 @@ char *D_6390[] = {
 	add_npc_talk(VENDOR_FOOD, &AVATAR[0x1324E + 0x2E2E] /* "Welcome to " */);
 	u4_puts(D_6386[D_9142]);
 	add_npc_talk(VENDOR_FOOD, D_6386[D_9142]);
-	u4_puts(/*D_621D*/&AVATAR[0xF4DB + 0x5] /* "\n\n" */);
+	u4_puts(/*D_621D*/&AVATAR[0x15490 + 0x2E2E] /* "\n\n" */);
 	u4_puts(D_6390[D_9142]);
 	u4_puts(/*D_6220*/&AVATAR[0x15493 + 0x2E36] /* " says: Good day, and Welcome friend.\n\nMay I interest you in some rations?\x12\x12\b" */);
 	add_npc_talk(VENDOR_FOOD, &AVATAR[0x15493 + 0x2E36] /* "Good day, and Welcome friend. May I interest you in some rations?" */);
