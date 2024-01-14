@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <fcntl.h>
 __declspec(dllexport) int cdecl main_tile_cur()
 {
 	return tile_cur;
@@ -344,7 +345,7 @@ void add_npc_talk_long(char npc_index, long number)
 	npc_text_buffer[current_npc_text_buffer_pointer][0] = npc_index;
 	npc_text_buffer[current_npc_text_buffer_pointer][1] = 0;
 
-	snprintf(&npc_text_buffer[current_npc_text_buffer_pointer][1], 10, &AVATAR[0x162BC] /* "%l" */, number);
+	snprintf(&npc_text_buffer[current_npc_text_buffer_pointer][1], 10, &AVATAR[0x162BC + 0x3837] /* "%l" */, number);
 
 	current_npc_text_buffer_pointer++;
 	if (current_npc_text_buffer_pointer > MAX_NPC_TEXT - 1)
@@ -709,9 +710,9 @@ extern int __android_log_print(int prio, const char* tag, const char* fmt, ...);
 #endif
 
 // load a complete copy of the original EXE here
-unsigned char AVATAR[98208];
+unsigned char AVATAR_original[98208];
 // exapanded
-unsigned char AVATAR_expanded[98208*2];
+unsigned char AVATAR[98208*2];
 
 
 // Define the offsets
@@ -752,7 +753,7 @@ char* getAVATARaddress(size_t originalAddress)
 			break;
 		}
 	}
-	return &AVATAR_expanded[adjustedAddress];
+	return &AVATAR[adjustedAddress];
 }
 
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
@@ -769,7 +770,7 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	// need to dynamically load DLL at runtime which android does not allow anymore and this allows us to remove
 	// all copyright text and data that was contained in the original EXE leaving just the reverse engineered logic of the game engine
 	// in this executable code thus avoiding any copyright entanglements
-	if (Load("AVATAR.EXE", sizeof(AVATAR), &(AVATAR)) == -1)
+	if (Load("AVATAR.EXE", sizeof(AVATAR_original), &(AVATAR_original)) == -1)
 		exit(3);
 
 	// The compiler for the AVATAR.EXE uses simple compression of any block of zeros more than 8 bytes, it is not very effiecent,
@@ -782,12 +783,12 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 		// we found a marker
 		if ((index < 98208 - 7) && // only check up to the end where a marker would fit
 			// First 2 bytes are some kind of checksum I think, just ignore for now although we could expand something that is not meant to be expanded with zeros
-			(AVATAR[index + 2] == (unsigned char)0xB2) && // marker 0xB2 start
-			(AVATAR[index + 5] == (unsigned char)0x00) && // marker 0x00 ??? this one may be a high byte of the length but for our purposes we can assume it is always zero
-			(AVATAR[index + 6] == (unsigned char)0xB0))   // marker 0xB0 end
+			(AVATAR_original[index + 2] == (unsigned char)0xB2) && // marker 0xB2 start
+			(AVATAR_original[index + 5] == (unsigned char)0x00) && // marker 0x00 ??? this one may be a high byte of the length but for our purposes we can assume it is always zero
+			(AVATAR_original[index + 6] == (unsigned char)0xB0))   // marker 0xB0 end
 		{
 			// get the length of the zero section
-			int length = AVATAR[index + 3] * 0x100 + AVATAR[index + 4];
+			int length = AVATAR_original[index + 3] * 0x100 + AVATAR_original[index + 4];
 
 			// gather some data
 			offset_accumulated += length - 7;
@@ -796,7 +797,7 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 			// fill with zeros
 			for (int j = 0; j < length; j++)
 			{
-				AVATAR_expanded[expanded_index++] = 0x00;
+				AVATAR[expanded_index++] = 0x00;
 			}
 
 			// skip over marker
@@ -807,14 +808,18 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 		}
 
 		// copy normally
-		AVATAR_expanded[expanded_index++] = AVATAR[index++];
+		AVATAR[expanded_index++] = AVATAR_original[index++];
 	}
-	
+
+	int f = _open("S:\\u4-decompiled\\AVATAR.EXE.expanded", _O_RDWR | _O_BINARY | _O_CREAT);
+	_write(f, &AVATAR[0], 98208*2);
+	_close(f);
+
 	low_init();
 	C_C51C();
 	if (Party._loc >= 0x11 && Party._loc <= 0x18) {
 		CurMode = MOD_DUNGEON;
-		if (Load(&AVATAR[0xF935] /* "DNGMAP.SAV" */, sizeof(tMap8x8x8), &(D_8742._map)) == -1)
+		if (Load(&AVATAR[0xF935 + 0x5] /* "DNGMAP.SAV" */, sizeof(tMap8x8x8), &(D_8742._map)) == -1)
 			exit(3);
 		//File_DNG = dopen(D_0894[Party._loc - 0x11], 0);
 		if (setjmp(D_9458) == 0)
@@ -884,13 +889,13 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 				break;
 			}
 		default:
-			u4_puts(&AVATAR[0xF940]); // "Bad command!\n"
+			u4_puts(&AVATAR[0xF940 + 0x5]); // "Bad command!\n"
 			sound(2,0);
 			D_07F8 = 0;
 			break;
 		}
 		} else {
-		u4_puts(&AVATAR[0xF94E]); // "Zzzzz\n"
+		u4_puts(&AVATAR[0xF94E + 0x5]); // "Zzzzz\n"
 	}
 	if (D_07F8 != 0) {
 		C_1C53();
@@ -1026,7 +1031,7 @@ C_1C53()
 	}
 	/*FOOD management*/
 	if(food_dec(Party.f_1d8)) {
-		u4_puts(&AVATAR[0xF955]); //"\nStarving!!!\n"
+		u4_puts(&AVATAR[0xF955 + 0x5]); //"\nStarving!!!\n"
 		for(si = 0; si < Party.f_1d8; si ++) {
 			if(isCharaAlive(si))
 				hitChara(si, 2);
