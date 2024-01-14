@@ -10,7 +10,7 @@ char *D_1E98[] = {
 	/*D_19F2*/"",
 /*1 - sea creatures D_1E9A*/
 	/*D_19F3*/&AVATAR[0x10CA6] /* "Pirate" */,
-	/*D_19FA*/&AVATAR[0x10CA6] /* "Pirate" */,
+	/*D_19FA*/&AVATAR[0x10CAD] /* "Pirate" */,
 	/*D_1901*/&AVATAR[0x10CB4] /* "Nixie" */,
 	/*D_1907*/&AVATAR[0x10CBA] /* "Squid" */,
 	/*D_1A0D*/&AVATAR[0x10CC0] /* "Serpent" */,

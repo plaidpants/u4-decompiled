@@ -709,7 +709,51 @@ extern int __android_log_print(int prio, const char* tag, const char* fmt, ...);
 #endif
 
 // load a complete copy of the original EXE here
-char AVATAR[98208];
+unsigned char AVATAR[98208];
+// exapanded
+unsigned char AVATAR_expanded[98208*2];
+
+
+// Define the offsets
+struct Offset {
+	size_t address;
+	size_t offset;
+};
+
+struct Offset offsets[] = {
+	{0x0000f2be, 0x0005},
+	{0x00010920, 0x0007},
+	{0x00010b81, 0x200f},
+	{0x0001182a, 0x2017},
+	{0x00011fd6, 0x201a},
+	{0x0001223a, 0x2623},
+	{0x00012251, 0x2925},
+	{0x0001225f, 0x2e2e},
+	{0x0001440f, 0x2e36},
+	{0x000160c1, 0x3837},
+	{0x00017806, 0x3838},
+	{0x0001780f, 0x387d},
+	{0x00017824, 0x388e},
+	{0x00017830, 0x38b6},
+	{0, 0} // Sentinel value to mark end of array
+};
+
+char* getAVATARaddress(size_t originalAddress) 
+{
+	size_t adjustedAddress = originalAddress;
+	for (int i = 0; offsets[i].address != 0; i++) 
+	{
+		if (originalAddress >= offsets[i].address)
+		{
+			adjustedAddress += offsets[i].offset;
+		}
+		else 
+		{
+			break;
+		}
+	}
+	return &AVATAR_expanded[adjustedAddress];
+}
 
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
 __declspec(dllexport) int cdecl /*C_191E*/ main()
@@ -728,6 +772,44 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	if (Load("AVATAR.EXE", sizeof(AVATAR), &(AVATAR)) == -1)
 		exit(3);
 
+	// The compiler for the AVATAR.EXE uses simple compression of any block of zeros more than 8 bytes, it is not very effiecent,
+	// need to expand these zero sections and copy data into a new buffer so strings aren't missing zero delimiters
+	// and data blocks that have zeros are properly initialized
+	int expanded_index = 0;
+	int offset_accumulated = 0;
+	for (int index = 0; index < 98208;)
+	{
+		// we found a marker
+		if ((index < 98208 - 7) && // only check up to the end where a marker would fit
+			// First 2 bytes are some kind of checksum I think, just ignore for now although we could expand something that is not meant to be expanded with zeros
+			(AVATAR[index + 2] == (unsigned char)0xB2) && // marker 0xB2 start
+			(AVATAR[index + 5] == (unsigned char)0x00) && // marker 0x00 ??? this one may be a high byte of the length but for our purposes we can assume it is always zero
+			(AVATAR[index + 6] == (unsigned char)0xB0))   // marker 0xB0 end
+		{
+			// get the length of the zero section
+			int length = AVATAR[index + 3] * 0x100 + AVATAR[index + 4];
+
+			// gather some data
+			offset_accumulated += length - 7;
+			printf("%08x: %04x \n", index, offset_accumulated);
+
+			// fill with zeros
+			for (int j = 0; j < length; j++)
+			{
+				AVATAR_expanded[expanded_index++] = 0x00;
+			}
+
+			// skip over marker
+			index += 7;
+
+			// continue on
+			continue;
+		}
+
+		// copy normally
+		AVATAR_expanded[expanded_index++] = AVATAR[index++];
+	}
+	
 	low_init();
 	C_C51C();
 	if (Party._loc >= 0x11 && Party._loc <= 0x18) {

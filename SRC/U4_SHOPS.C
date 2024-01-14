@@ -61,7 +61,7 @@ char *D_3F0C[][8] = {
 
 static unsigned char D_913A;
 static unsigned char D_913B, D_913C;
-static unsigned D_913E;/*# of drinks in pub*/
+static unsigned short D_913E;/*# of drinks in pub*/
 
 /*SHOP #10 - The Seer*/
 /*C_C922*/SHP_hawkwind()
@@ -80,7 +80,7 @@ static unsigned D_913E;/*# of drinks in pub*/
 		add_npc_talk(VENDOR_HAWKKWIND, Party.chara[0]._name);
 		u4_puts(/*D_3D0F*/&AVATAR[0x12F8A] /* " is revived!\n" */);
 		add_npc_talk(VENDOR_HAWKKWIND, &AVATAR[0x12F8A] /* " is revived!\n" */);
-		add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+		add_npc_talk(VENDOR_INVALID, "");
 		return 0;
 	}
 	u4_puts(/*D_3D1D*/&AVATAR[0x12F98] /* "\n\nWelcome, " */);
@@ -152,13 +152,13 @@ static unsigned D_913E;/*# of drinks in pub*/
 		karma_inc(&(Party._spiri), 3);
 		Party.f_1ea = Party._moves / 100;
 	}
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
 
 /*shops indexes*/
-unsigned char D_4170[16] = {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 3, 4, 0, 0};
+unsigned char * D_4170 = &AVATAR[0x133EB] /*{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 3, 4, 0, 0} */;
 
 char *D_4180[] = {
 	/*D_3F5C*/&AVATAR[0x131D7] /* "Magical Herbs" */,
@@ -469,7 +469,7 @@ C_CD80()
 C_CEBE()
 {
 	int loc_A, loc_B;
-	char loc_C;
+	char loc_C = 0;
 
 	u4_puts(/*D_47AB*/&AVATAR[0x13A26] /* "\nExcellent! Which wouldst\n" */);
 	add_npc_talk(VENDOR_WEAPON, &AVATAR[0x13A27] /* "Excellent! Which wouldst" */);
@@ -603,7 +603,7 @@ C_CEBE()
 	u4_puts(D_46AE[D_9142]);
 	u4_puts(/*D_4910*/&AVATAR[0x13B8B] /* " says: Fare thee well!\n" */);
 	add_npc_talk(VENDOR_WEAPON, &AVATAR[0x13B92] /* "Fare thee well!" */);
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -888,7 +888,7 @@ C_D2F8()
 	u4_puts(D_4BB8[D_9142]);
 	u4_puts(/*D_4DD9*/&AVATAR[0x14054] /* " says: Good Bye.\n\0" */);/*TODO:0 is for padding*/
 	add_npc_talk(VENDOR_ARMOR, &AVATAR[0x1405B] /* "Good Bye." */);
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -910,7 +910,7 @@ C_D2F8()
 			u4_puts(/*D_4E1F*/&AVATAR[0x1409A] /* "\nA shame, thou looks like thou could use a good horse!\n" */);
 		}
 		add_npc_talk(VENDOR_HORSE, &AVATAR[0x1409B] /* "A shame, thou looks like thou could use a good horse!" */);
-		add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+		add_npc_talk(VENDOR_INVALID, "");
 		return 0;
 	}
 	u4_puts(/*D_4E57*/&AVATAR[0x140D2] /* "\nFor only " */);
@@ -947,7 +947,7 @@ C_D2F8()
 /*----------------------------------------*/
 
 /*shops indexes*/
-unsigned char D_5196[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0};  // doesn't match exe 61 74 69 65 21 0A A5 21 B2 00 0F 00 B0 01 02 00
+unsigned char D_5196[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0};  // doesn't match exe, need to declare it here  61 74 69 65 21 0A A5 21 B2 00 0F 00 B0 01 02 00
 
 /*items prices*/
 short * D_51A6 = &AVATAR[0x14419] /* {50, 60, 60, 900} */;
@@ -1028,7 +1028,7 @@ C-Magic Keys\n"*/);
 			dspl_Stats();
 			u4_puts(/*D_5135*/&AVATAR[0x143B0] /* "\nWhat? Can't pay! Buzz off swine!\n" */);
 			add_npc_talk(VENDOR_GUILD, &AVATAR[0x143B1] /* "What? Can't pay! Buzz off swine!" */);
-			add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+			add_npc_talk(VENDOR_INVALID, "");
 			return 0;
 		}
 		switch(loc_A) {
@@ -1058,7 +1058,7 @@ C-Magic Keys\n"*/);
 	u4_puts(D_51BA[D_9142]);
 	u4_puts(/*D_517E*/&AVATAR[0x143F9] /* " says:  See ya matie!\n" */);
 	add_npc_talk(VENDOR_GUILD, &AVATAR[0x14401] /* "See ya matie!" */);
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1165,7 +1165,7 @@ unsigned char * D_567A = &AVATAR[0x148ED] /*{30,60,90, 0}*/;
 	if(Party._tile != TIL_1F) {
 		u4_puts(/*D_54E1*/&AVATAR[0x14754] /* "The Innkeeper says: Get that horse out of here!!!\n" */);
 		add_npc_talk(VENDOR_INN, &AVATAR[0x14768] /* "Get that horse out of here!!!" */);
-		add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+		add_npc_talk(VENDOR_INVALID, "");
 		return 0;
 	}
 	u4_puts(/*D_5514*/&AVATAR[0x14787] /* "The Innkeeper says: Welcome to " */);
@@ -1193,7 +1193,7 @@ unsigned char * D_567A = &AVATAR[0x148ED] /*{30,60,90, 0}*/;
 			bp_02 -= '1';
 			if (bp_02 < 0)
 			{
-				add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+				add_npc_talk(VENDOR_INVALID, "");
 				return 0;
 			}
 			D_913B = D_5672[bp_02];
@@ -1211,7 +1211,7 @@ unsigned char * D_567A = &AVATAR[0x148ED] /*{30,60,90, 0}*/;
 					u4_puts(/*D_557E*/&AVATAR[0x147F1] /* "\nYou won't find a better deal in this towne!\n" */);
 					add_npc_talk(VENDOR_INN, &AVATAR[0x147F2] /* "You won't find a better deal in this towne!" */);
 				}
-				add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+				add_npc_talk(VENDOR_INVALID, "");
 				return 0;
 			}
 			D_913B = D_5494[D_9142];
@@ -1221,7 +1221,7 @@ unsigned char * D_567A = &AVATAR[0x148ED] /*{30,60,90, 0}*/;
 		if (D_913A > Party._gold) {
 			u4_puts(/*D_55AC*/&AVATAR[0x1481F] /* "\nIf you can't pay, you can't stay! Good Bye.\n" */);
 			add_npc_talk(VENDOR_INN, &AVATAR[0x14820] /* "If you can't pay, you can't stay! Good Bye." */);
-			add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+			add_npc_talk(VENDOR_INVALID, "");
 			return 0;
 		}
 		Party._gold -= D_913A; dspl_Gold();
@@ -1239,7 +1239,7 @@ unsigned char * D_567A = &AVATAR[0x148ED] /*{30,60,90, 0}*/;
 		u4_puts(/*D_5639*/&AVATAR[0x148AC] /* " says: Then you have come to the wrong place! Good Day.\n" */);
 		add_npc_talk(VENDOR_INN, &AVATAR[0x148B3] /* "Then you have come to the wrong place! Good Day." */);
 	}
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1485,7 +1485,7 @@ C-Resurrection\n" */);
 	u4_puts(D_57AC[D_9142]);
 	u4_puts(/*D_5ADF*/&AVATAR[0x14D52] /* " says: May thy life be guarded by the powers of good.\n" */);
 	add_npc_talk(VENDOR_HEALER, &AVATAR[0x14D59] /* "May thy life be guarded by the powers of good." */);
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1725,7 +1725,7 @@ C_E004:
 			u4_toupper(bp_02);
 			if(bp_02 == ' ' || bp_02 == 0x1b || bp_02 == '\r') {
 				Gra_CR();
-				add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+				add_npc_talk(VENDOR_INVALID, "");
 				return 0;
 			}
 			if(bp_02 != 'F' && bp_02 != 'A') {
@@ -1750,7 +1750,7 @@ C_E004:
 	} while(bp_02 == 'Y');
 	u4_puts(/*D_6196*/&AVATAR[0x15409] /* "See ya mate!\n" */);
 	add_npc_talk(VENDOR_PUB, &AVATAR[0x15409] /* "See ya mate!" */);
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
 
 /*----------------------------------------*/
@@ -1799,7 +1799,7 @@ char *D_6390[] = {
 			u4_puts(/*D_626D*/&AVATAR[0x154E0] /* "Goodbye, Come again!\n" */);
 			add_npc_talk(VENDOR_FOOD, &AVATAR[0x154E0] /* "Goodbye, Come again!" */);
 		}
-		add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+		add_npc_talk(VENDOR_INVALID, "");
 		return 0;
 	}
 	u4_puts(/*D_6283*/&AVATAR[0x154F6] /* "We have the best adventure rations, 25 for only " */);
@@ -1846,5 +1846,5 @@ char *D_6390[] = {
 	} while(bp_04 == 'Y');
 	u4_puts(/*D_6355*/&AVATAR[0x155C8] /* "\nGoodbye. Come again!\n" */);
 	add_npc_talk(VENDOR_FOOD, &AVATAR[0x155C9] /* "Goodbye. Come again" */);
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }

@@ -377,5 +377,5 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 	}
 	u4_puts(/*D_7B5F*/&AVATAR[0xF376] /* "!\n" */);
 	add_npc_talk(LORD_BRITISH, &AVATAR[0xF376] /* "!\n" */);
-	add_npc_talk(VENDOR_INVALID, &AVATAR[0x0] /* "" */);
+	add_npc_talk(VENDOR_INVALID, "");
 }
