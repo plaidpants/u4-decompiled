@@ -9,33 +9,33 @@
 #include <string.h>
 
 char *D_6FF0[28] = {
-	/*D_639A*/&AVATAR[0x11CE9 + 0x2017] /* "bye" */,
-	/*D_639E*/&AVATAR[0x11F66 + 0x2017] /* "help" */,
-	/*D_63A3*/&AVATAR[0x11CFB + 0x2017] /* "health" */,
-	/*D_63AA*/&AVATAR[0x11CED + 0x2017] /* "name" */,
-	/*D_63AF*/&AVATAR[0x11CF2 + 0x2017] /* "look" */,
-	/*D_63B4*/&AVATAR[0x11CF7 + 0x2017] /* "job" */,
-	/*D_63B8*/&AVATAR[0x103D7 + 0x5] /* "truth" */,
-	/*D_63BE*/&AVATAR[0x103DD + 0x5] /* "love" */,
-	/*D_63C3*/&AVATAR[0x103E2 + 0x5] /* "courage" */,
-	/*D_63CB*/&AVATAR[0x103EA + 0x5] /* "honesty" */,
-	/*D_63D3*/&AVATAR[0x11D80 + 0x2017] /* "compassion" */,
-	/*D_63DE*/&AVATAR[0x103FB + 0x5] /* "valor" */,
-	/*D_63E4*/&AVATAR[0x10401 + 0x5] /* "justice" */,
-	/*D_63EC*/&AVATAR[0x1298D + 0x2E2E] /* "sacrifice" */,
-	/*D_63F6*/&AVATAR[0x10412 + 0x5] /* "honor" */,
+	/*D_639A*/&AVATAR[0x1560D + 0x2E36] /* "bye" */,
+	/*D_639E*/&AVATAR[0x15611 + 0x2E36] /* "help" */,
+	/*D_63A3*/&AVATAR[0x15616 + 0x2E36] /* "health" */,
+	/*D_63AA*/&AVATAR[0x1561D + 0x2E36] /* "name" */,
+	/*D_63AF*/&AVATAR[0x15622 + 0x2E36] /* "look" */,
+	/*D_63B4*/&AVATAR[0x15627 + 0x2E36] /* "job" */,
+	/*D_63B8*/&AVATAR[0x1562B + 0x2E36] /* "truth" */,
+	/*D_63BE*/&AVATAR[0x15631 + 0x2E36] /* "love" */,
+	/*D_63C3*/&AVATAR[0x15636 + 0x2E36] /* "courage" */,
+	/*D_63CB*/&AVATAR[0x1563E + 0x2E36] /* "honesty" */,
+	/*D_63D3*/&AVATAR[0x15646 + 0x2E36] /* "compassion" */,
+	/*D_63DE*/&AVATAR[0x15651 + 0x2E36] /* "valor" */,
+	/*D_63E4*/&AVATAR[0x15657 + 0x2E36] /* "justice" */,
+	/*D_63EC*/&AVATAR[0x1298D + 0x2E36] /* "sacrifice" */,
+	/*D_63F6*/&AVATAR[0x15669 + 0x2E36] /* "honor" */,
 	/*D_63FC*/&AVATAR[0x1566F + 0x2E36] /* "spirituality" */,
-	/*D_6409*/&AVATAR[0x1041F + 0x5] /* "humility" */,
+	/*D_6409*/&AVATAR[0x1567C + 0x2E36] /* "humility" */,
 	/*D_6412*/&AVATAR[0x15685 + 0x2E36] /* "pride" */,
 	/*D_6418*/&AVATAR[0x1568B + 0x2E36] /* "avatar" */,
-	/*D_641F*/&AVATAR[0xFF94 + 0x5] /* "quest" */,
+	/*D_641F*/&AVATAR[0x15692 + 0x2E36] /* "quest" */,
 	/*D_6425*/&AVATAR[0x15698 + 0x2E36] /* "britannia" */,
 	/*D_642F*/&AVATAR[0x156A2 + 0x2E36] /* "ankh" */,
 	/*D_6434*/&AVATAR[0x156A7 + 0x2E36] /* "abyss" */,
 	/*D_643A*/&AVATAR[0x156AD + 0x2E36] /* "mondain" */,
 	/*D_6442*/&AVATAR[0x156B5 + 0x2E36] /* "minax" */,
 	/*D_6448*/&AVATAR[0x156BB + 0x2E36] /* "exodus" */,
-	/*D_644F*/&AVATAR[0xF4C3 + 0x5] /* "virtue" */,
+	/*D_644F*/&AVATAR[0x156C2 + 0x2E36] /* "virtue" */,
 	/*D_6456*/ ""
 };
 
@@ -59,7 +59,7 @@ char *D_7028[24] = {
 	/*D_6B2B*/&AVATAR[0x15D9E + 0x2E36] /* "\n\n\nLord British\nsays:\nThe Quest of\nthe Avatar is\nto know and\nbecome the\nembodiment of\nthe Eight\nVirtues of\nGoodness!\nIt is known that\nall who take on\nthis Quest must\nprove themselves\nby conquering\nthe Abyss and\nViewing the\nCodex of\nUltimate Wisdom!\n" */,
 	/*D_6C25*/&AVATAR[0x15E98 + 0x2E36] /* "\n\n\n\n\n\n\nHe says:\nEven though the\nGreat Evil Lords\nhave been routed\nevil yet remains\nin Britannia.\n\n\n\n\n\nIf but one soul\ncould complete\nthe Quest of the\nAvatar, our\npeople would\nhave a new hope,\na new goal for\nlife.\n\nThere would be a\nshining example\nthat there is\nmore to life\nthan the endless\nstruggle for\npossessions\nand gold!\n" */,
 	/*D_6D6C*/&AVATAR[0x15FDF + 0x2E36] /* "He says:\nThe Ankh is the\nsymbol of one\nwho strives for\nVirtue.  Keep it\nwith thee at all\ntimes for by\nthis mark thou\nshalt be known!\n" */,
-	/*D_6DF2*/&AVATAR[0x16065 + 0x2E36] /* "\n\n\n\n\n\nHe says:\nThe Great\nStygian Abyss\nis the darkest\npocket of evil\nremaining in\nBritannia!\n\n\n\n\n\n\n\nIt is said that\nin the deepest\nrecesses of the\nAbyss is the\nChamber of the\nCodex!\n\n\nIt is also said\nthat only one of\nhighest Virtue\nmay enter this\nChamber, one\nsuch as an\nAvatar!!!\n" */,
+	/*D_6DF2*/&AVATAR[0x16065 + 0x2E36] /* "\n\n\n\n\n\nHe says:\nThe Great\nStygian Abyss\nis the darkest\npocket of evil\nremaining in\nBritannia!\n\n\n\n\n\n\n\nIt is said that\nin the deepest\nrecesses of the\nAbyss is the\nChamber of the\nCodex!\n\n\nIt is also said\nthat only one of\nhighest Virtue\nmay enter this\nChamber, one\nsuch as an\nAvatar!!!\n" */, // The AVATAR.EXE has a block of zeros after this string
 	/*D_6F0C*/&AVATAR[0x1617E + 0x3837] /* "\n\n\n\n\n\nHe says:\nMondain is dead!\n" */,
 	/*D_6F2D*/&AVATAR[0x1619F + 0x3837] /* "\n\n\n\n\n\nHe says:\nMinax is dead!\n" */,
 	/*D_6F4C*/&AVATAR[0x161BE + 0x3837] /* "\n\n\n\n\n\nHe says:\nExodus is dead!\n" */,
@@ -106,7 +106,7 @@ C_E1FC() {
 
 /*when asked 'help'*/
 C_E21E() {
-	u4_puts(/*D_7058*/&AVATAR[0x13078 + 0x2E2E] /* "He says: " */);
+	u4_puts(/*D_7058*/&AVATAR[0x162CA + 0x3837] /* "He says: " */);
 	if(Party._moves < 1000) {
 		add_npc_talk(LORD_BRITISH, &AVATAR[0x162D4 + 0x3837] /* "To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n" */);
 		u4_puts(/*D_7062*/&AVATAR[0x162D4 + 0x3837] /* "To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n" */); C_E1FC();
@@ -276,7 +276,7 @@ C_E4C3() {
 			u4_putl(loc_C / 100, 1, '0');
 			add_npc_talk_long(LORD_BRITISH, loc_C / 100);
 			Gra_CR();
-			add_npc_talk(LORD_BRITISH, &AVATAR[0x21C] /* "\n" */);
+			add_npc_talk(LORD_BRITISH, "\n");
 			Gra_09(); sound(9, 0xc0); Gra_09();
 			dspl_Stats();
 		}
@@ -300,7 +300,7 @@ C_E59B()
 		add_npc_talk(LORD_BRITISH, Party.chara[0]._name);
 		u4_putc(',');
 		add_char_to_text_buffer(',');
-		add_npc_talk(LORD_BRITISH, &AVATAR[0x261] /* "," */);
+		add_npc_talk(LORD_BRITISH, ",");
 		u4_puts(/*D_7929*/&AVATAR[0x16B9B + 0x3837] /* " thou hast come!  We have waited such a long, long time...\n\n" */);
 		add_npc_talk(LORD_BRITISH, &AVATAR[0x16B9B + 0x3837] /* " thou hast come!  We have waited such a long, long time...\n" */);
 		C_E1FC();
@@ -326,7 +326,7 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 			dspl_Stats();
 		}
 		u4_puts(/*D_7AAC*/&AVATAR[0x16D1E + 0x3837] /* "\n\n\nLord British says:  Welcome " */);
-		add_npc_talk(LORD_BRITISH, &AVATAR[0x1324E + 0x2E2E] /* "Welcome " */);
+		add_npc_talk(LORD_BRITISH, &AVATAR[0x16D35 + 0x3837] /* "Welcome " */);
 		u4_puts(Party.chara[0]._name);
 		add_npc_talk(LORD_BRITISH, Party.chara[0]._name);
 		if(Party.f_1d8 >= 3) {
@@ -337,11 +337,11 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 			add_npc_talk(LORD_BRITISH, &AVATAR[0x16D5C + 0x3837] /* " and thee also " */);
 			u4_puts(Party.chara[1]._name);
 			add_npc_talk(LORD_BRITISH, Party.chara[1]._name);
-			u4_puts(/*D_7AFA*/&AVATAR[0xF376 + 0x5] /* "!\n" */);
-			add_npc_talk(LORD_BRITISH, &AVATAR[0x21C] /* "\n" */);
+			u4_puts(/*D_7AFA*/&AVATAR[0x16D6C + 0x3837] /* "!\n" */);
+			add_npc_talk(LORD_BRITISH, "\n");
 		} else {
 			Gra_CR();
-			add_npc_talk(LORD_BRITISH, &AVATAR[0x21C] /* "\n" */);
+			add_npc_talk(LORD_BRITISH, "\n");
 		}
 		C_E4C3();
 	}
@@ -364,7 +364,7 @@ A champion of virtue is called for. Thou may be this champion, but only time sha
 				C_E3D2(D_7028[bp_02-3]);
 		}
 		u4_puts(/*D_7B26*/&AVATAR[0x16D98 + 0x3837] /* "\nWhat else?\n" */);
-		add_npc_talk(LORD_BRITISH, &AVATAR[0x13B36 + 0x2E2E] /* "What else?\n" */);
+		add_npc_talk(LORD_BRITISH, &AVATAR[0x16D98 + 0x3837] /* "What else?\n" */);
 	}
 
 	u4_puts(/*D_7B33*/&AVATAR[0x16DA5 + 0x3837] /* "Lord British says: Fare thee well my friend" */);

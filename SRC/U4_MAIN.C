@@ -382,6 +382,15 @@ void set_zstats_character(int character)
 
 void add_npc_talk(char npc_index, char * ch)
 {
+	const char* pattern = "says:";
+
+	char* found = strstr(ch, pattern);
+
+	if (found) 
+	{
+		ch = found + strlen(pattern) + 1;
+	}
+
 	npc_text_buffer[current_npc_text_buffer_pointer][0] = npc_index;
 
 	npc_string_copy(&npc_text_buffer[current_npc_text_buffer_pointer][1], ch);
@@ -711,10 +720,10 @@ extern int __android_log_print(int prio, const char* tag, const char* fmt, ...);
 
 // load a complete copy of the original EXE here
 unsigned char AVATAR_original[98208];
-// exapanded
+// expand into this buffer
 unsigned char AVATAR[98208*2];
 
-
+#if 0
 // Define the offsets
 struct Offset {
 	size_t address;
@@ -755,6 +764,7 @@ char* getAVATARaddress(size_t originalAddress)
 	}
 	return &AVATAR[adjustedAddress];
 }
+#endif
 
 //__declspec(dllexport) void cdecl /*C_191E*/main_start()
 __declspec(dllexport) int cdecl /*C_191E*/ main()
@@ -792,7 +802,7 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 
 			// gather some data
 			offset_accumulated += length - 7;
-			printf("%08x: %04x \n", index, offset_accumulated);
+			//printf("%08x: %04x \n", index, offset_accumulated);
 
 			// fill with zeros
 			for (int j = 0; j < length; j++)
@@ -811,9 +821,11 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 		AVATAR[expanded_index++] = AVATAR_original[index++];
 	}
 
+#if 0
 	int f = _open("S:\\u4-decompiled\\AVATAR.EXE.expanded", _O_RDWR | _O_BINARY | _O_CREAT);
 	_write(f, &AVATAR[0], 98208*2);
 	_close(f);
+#endif
 
 	low_init();
 	C_C51C();
@@ -829,82 +841,91 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	}
 	u_kbflush();
 	bp_04 = 0;
-	for(;;) {
+	for(;;) 
+	{
 		// need to set this here as we pend on the keyboard before we get to the one below
 		set_input_mode(INPUT_MODE_MAIN_INPUT);
 		if (QUIT)
 		{
 			return 0;
 		}
-	setjmp(D_9458);
-	t_callback();
-	C_9209();
-	if (C_10FD()) {
-		u4_putc(0x10);
-		set_input_mode(INPUT_MODE_MAIN_INPUT);
-		u_delay(25, 1);
-		si = u_kbhit() ? u_kbread() : KBD_SPACE;
-		if (u4_isupper((unsigned char)si))
-			si = (si & 0xff00) | u4_lower((unsigned char)si);
-		switch (si) {
-		case KBD_ESC: QUIT = 1;  return 0;
-		case KBD_SPACE: w_Pass(); break;
-		case 0x487e:
-		case KBD_UP: CMDDIR_Up(); break;
-		case 0x4b7c:
-		case KBD_LEFT: CMDDIR_Left(); break;
-		case 0x5060:
-		case KBD_DOWN: CMDDIR_Down(); break;
-		case 0xf400:
-		case KBD_RIGHT: CMDDIR_Right(); break;
-		case KBD_a: CMD_Attack(); break;
-		case KBD_b: CMD_Board(); break;
-		case KBD_c: CMD_Cast(); break;
-		case KBD_d: CMD_Descend();  break;
-		case KBD_e: CMD_Enter(); break;
-		case KBD_f: CMD_Fire(); break;
-		case KBD_g: CMD_Get(); break;
-		case KBD_h: CMD_HoleUp(); break;
-		case KBD_i: CMD_Ignite(); break;
-		case KBD_j: CMD_Jimmy(); break;
-		case KBD_k: CMD_Klimb(); break;
-		case KBD_l: CMD_Locate(); break;
-		case KBD_m: CMD_Mix(); break;
-		case KBD_n: CMD_NewOrder(); break;
-		case KBD_o: CMD_Open(); break;
-		case KBD_p: CMD_Peer(); break;
-		case KBD_q: CMD_Quit(); break;
-		case KBD_r: CMD_Ready(); break;
-		case KBD_s: CMD_Search(); break;
-		case KBD_t: CMD_Talk(); break;
-		case KBD_u: CMD_Use(); break;
-		case KBD_v: CMD_Volume(); break;
-		case KBD_w: CMD_Wear(); break;
-		case KBD_x: CMD_X_it(); break;
-		case KBD_y: CMD_Yell(); break;
-		case KBD_z: CMD_Ztats(); break;
-		case KBD_CTRL_S:
-					if(bp_04 == KBD_ALT_Z) {
-				C_1C21();
-				break;
-			}
-		default:
-			u4_puts(&AVATAR[0xF940 + 0x5]); // "Bad command!\n"
-			sound(2,0);
-			D_07F8 = 0;
-			break;
-		}
-		} else {
-		u4_puts(&AVATAR[0xF94E + 0x5]); // "Zzzzz\n"
-	}
-	if (D_07F8 != 0) {
-		C_1C53();
-		} else {
+		setjmp(D_9458);
 		t_callback();
-		D_07F8 = 1;
-	}
+		C_9209();
+		if (C_10FD()) 
+		{
+			u4_putc(0x10);
+			set_input_mode(INPUT_MODE_MAIN_INPUT);
+			u_delay(25, 1);
+			si = u_kbhit() ? u_kbread() : KBD_SPACE;
+			if (u4_isupper((unsigned char)si))
+				si = (si & 0xff00) | u4_lower((unsigned char)si);
+			switch (si) 
+			{
+				case KBD_ESC: QUIT = 1;  return 0;
+				case KBD_SPACE: w_Pass(); break;
+				case 0x487e:
+				case KBD_UP: CMDDIR_Up(); break;
+				case 0x4b7c:
+				case KBD_LEFT: CMDDIR_Left(); break;
+				case 0x5060:
+				case KBD_DOWN: CMDDIR_Down(); break;
+				case 0xf400:
+				case KBD_RIGHT: CMDDIR_Right(); break;
+				case KBD_a: CMD_Attack(); break;
+				case KBD_b: CMD_Board(); break;
+				case KBD_c: CMD_Cast(); break;
+				case KBD_d: CMD_Descend();  break;
+				case KBD_e: CMD_Enter(); break;
+				case KBD_f: CMD_Fire(); break;
+				case KBD_g: CMD_Get(); break;
+				case KBD_h: CMD_HoleUp(); break;
+				case KBD_i: CMD_Ignite(); break;
+				case KBD_j: CMD_Jimmy(); break;
+				case KBD_k: CMD_Klimb(); break;
+				case KBD_l: CMD_Locate(); break;
+				case KBD_m: CMD_Mix(); break;
+				case KBD_n: CMD_NewOrder(); break;
+				case KBD_o: CMD_Open(); break;
+				case KBD_p: CMD_Peer(); break;
+				case KBD_q: CMD_Quit(); break;
+				case KBD_r: CMD_Ready(); break;
+				case KBD_s: CMD_Search(); break;
+				case KBD_t: CMD_Talk(); break;
+				case KBD_u: CMD_Use(); break;
+				case KBD_v: CMD_Volume(); break;
+				case KBD_w: CMD_Wear(); break;
+				case KBD_x: CMD_X_it(); break;
+				case KBD_y: CMD_Yell(); break;
+				case KBD_z: CMD_Ztats(); break;
+				case KBD_CTRL_S:
+					if(bp_04 == KBD_ALT_Z)
+					{
+						C_1C21();
+						break;
+					}
+				default:
+					u4_puts(&AVATAR[0xF940 + 0x5]); // "Bad command!\n"
+					sound(2,0);
+					D_07F8 = 0;
+					break;
+			}
+		} 
+		else 
+		{
+			u4_puts(&AVATAR[0xF94E + 0x5]); // "Zzzzz\n"
+		}
+		if (D_07F8 != 0) 
+		{
+			C_1C53();
+		} 
+		else 
+		{
+			t_callback();
+			D_07F8 = 1;
+		}
 		bp_04 = si;
-}
+	}
 #ifndef WIN32
 	__android_log_print(ANDROID_LOG_INFO, "ANKH", "ANKH says hello 21\n");
 #endif

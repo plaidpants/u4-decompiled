@@ -38,8 +38,8 @@ char *bp04;
 	txt_X = 7;
 	u4_puts(bp04);
 	switch(bp06) {
-		case DIR_N: u4_puts(&AVATAR[0xFC01 + 0x5] /* " North" */); break;
-		case DIR_S: u4_puts(&AVATAR[0xFC22 + 0x5] /* " South" */); break;
+		case DIR_N: u4_puts(&AVATAR[0x108EF + 0x5] /* " North" */); break;
+		case DIR_S: u4_puts(&AVATAR[0x108F6 + 0x5] /* " South" */); break;
 		case DIR_E: u4_puts(&AVATAR[0x108FD + 0x5] /* "  East" */); break;
 		case DIR_W: u4_puts(&AVATAR[0x10904 + 0x5] /* "  West" */); break;
 	}

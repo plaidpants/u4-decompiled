@@ -64,7 +64,7 @@ C_A163()
 	set_input_mode(INPUT_MODE_GENERAL_CONTINUE);
 	u_kbread();
 	u4_puts(D_8CCE[7]);
-	u4_puts(&AVATAR[0x21C] /* "\n" */);
+	u4_puts("\n");
 	add_npc_talk(D_8CE6, D_8CCE[7]);
 	u4_puts(/*D_2A62*/&AVATAR[0x11D0D + 0x2017] /* "\n\nYou say: " */);
 	do {
@@ -79,7 +79,7 @@ C_A163()
 	} while(bp_04[0] != 'N' && bp_04[0] != 'Y');
 	if(bp_04[0] == 0)
 		return 0;
-	add_npc_talk(D_8CE6, &AVATAR[0x21C] /* "\n" */);
+	add_npc_talk(D_8CE6, "\n");
 	if(bp_04[0] == 'Y') {
 		if(D_95CE[1])
 			karma_dec(&(Party._humil), 5);
@@ -93,7 +93,7 @@ C_A163()
 	}
 	Party.f_1ec = (Party._moves >> 4);
 	Gra_CR();
-	add_npc_talk(D_8CE6, &AVATAR[0x21C] /* "\n" */);
+	add_npc_talk(D_8CE6, "\n");
 }
 
 #ifdef WIN32
@@ -116,7 +116,7 @@ char *bp04;
 #ifdef WIN32
 	C_A22D(6, D_8CCE[5]);
 	add_npc_talk(D_8CE6, D_8CCE[5]);
-	add_npc_talk(D_8CE6, &AVATAR[0x21C] /* "\n" */);
+	add_npc_talk(D_8CE6, "\n");
 #else
 	C_A22D(D_8CCE[5]);
 #endif
@@ -127,7 +127,7 @@ char *bp04;
 #ifdef WIN32
 	C_A22D(7, D_8CCE[6]);
 	add_npc_talk(D_8CE6, D_8CCE[6]);
-	add_npc_talk(D_8CE6, &AVATAR[0x21C] /* "\n" */);
+	add_npc_talk(D_8CE6, "\n");
 #else
 	C_A22D(D_8CCE[6]);
 #endif
@@ -141,12 +141,12 @@ char *bp04;
 	Gra_CR();
 	add_npc_talk(D_8CE6, &AVATAR[0x11D6A + 0x2017] /* "I am " */);
 	add_npc_talk(D_8CE6, D_8CCE[0]);
-	add_npc_talk(D_8CE6, &AVATAR[0x21C] /* "\n" */);
+	add_npc_talk(D_8CE6, "\n");
 }
 
 /*C_A280*/TLK_look()
 {
-	u4_puts(/*D_2AC5*/&AVATAR[0x11B42 + 0x2017] /* "You see " */);
+	u4_puts(/*D_2AC5*/&AVATAR[0x11D70 + 0x2017] /* "You see " */);
 	C_A22D(3, D_8CCE[2]);
 }
 
@@ -154,21 +154,21 @@ char *bp04;
 {
 	C_A22D(4, D_8CCE[3]);	
 	add_npc_talk(D_8CE6, D_8CCE[3]);
-	add_npc_talk(D_8CE6, &AVATAR[0x21C] /* "\n" */);
+	add_npc_talk(D_8CE6, "\n");
 }
 
 /*C_A2AB*/TLK_health()
 {
 	C_A22D(5, D_8CCE[4]);
 	add_npc_talk(D_8CE6, D_8CCE[4]);
-	add_npc_talk(D_8CE6, &AVATAR[0x21C] /* "\n" */);
+	add_npc_talk(D_8CE6, "\n");
 }
 
 char *D_2BB2[] = {
-	/*D_2ACE*/&AVATAR[0x103EA + 0x5] /* "honest" */,
+	/*D_2ACE*/&AVATAR[0x11D79 + 0x2017] /* "honest" */,
 	/*D_2AD5*/&AVATAR[0x11D80 + 0x2017] /* "compassionate" */,
 	/*D_2AE3*/&AVATAR[0x11D8E + 0x2017] /* "valiant" */,
-	/*D_2AEB*/&AVATAR[0x10401 + 0x5] /* "just" */,
+	/*D_2AEB*/&AVATAR[0x11D96 + 0x2017] /* "just" */,
 	/*D_2AF0*/&AVATAR[0x11D9B + 0x2017] /* "sacrificial" */,
 	/*D_2AFC*/&AVATAR[0x11DA7 + 0x2017] /* "honorable" */,
 	/*D_2B06*/&AVATAR[0x11DB1 + 0x2017] /* "spiritual" */,
@@ -190,11 +190,11 @@ char *D_2BB2[] = {
 		return 0;
 	}
 	if (*pKarmas[Party._loc - 0x05] < 40 && *pKarmas[Party._loc - 0x05] != 0) {
-		u4_puts(/*D_2B33*/&AVATAR[0x10556 + 0x5] /* "Thou art not " */);
+		u4_puts(/*D_2B33*/&AVATAR[0x11DDE + 0x2017] /* "Thou art not " */);
+		add_npc_talk(D_8CE6, &AVATAR[0x11DDE + 0x2017] /* "Thou art not " */);
 		u4_puts(D_2BB2[Party._loc - 0x05]);
-		u4_puts(/*D_2B41*/&AVATAR[0x11DEC + 0x2017] /* " enough for me to join thee.\n" */);
-		add_npc_talk(D_8CE6, &AVATAR[0x10556 + 0x5] /* "Thou art not " */);
 		add_npc_talk(D_8CE6, D_2BB2[Party._loc - 0x05]);
+		u4_puts(/*D_2B41*/&AVATAR[0x11DEC + 0x2017] /* " enough for me to join thee.\n" */);
 		add_npc_talk(D_8CE6, &AVATAR[0x11DEC + 0x2017] /* " enough for me to join thee.\n" */);
 		return 0;
 	}
@@ -308,7 +308,7 @@ int bp04;
 		Gra_CR();
 		add_npc_talk(bp04, &AVATAR[0x11D6A + 0x2017] /* "I am " */);
 		add_npc_talk(bp04, D_8CCE[0]);
-		add_npc_talk(bp04, &AVATAR[0x21C] /* "\n" */);
+		add_npc_talk(bp04, "\n");
 	}
 	bp_02 = 0;
 	do {
@@ -325,7 +325,7 @@ int bp04;
 		if((si = u_rand_a()) < D_95CE[2]) {
 			if (D_95CE[2] - si >= 0x40) {
 				/*he/she gets upset*/
-				if (strnicmp(D_8CCE[0], /*D_2C7E*/&AVATAR[0xF4AB + 0x5] /* "a " */, 2) && strnicmp(D_8CCE[0], /*D_2C81*/&AVATAR[0xF395 + 0x5] /* "the " */, 4))
+				if (strnicmp(D_8CCE[0], /*D_2C7E*/&AVATAR[0x11F29 + 0x2017] /* "a " */, 2) && strnicmp(D_8CCE[0], /*D_2C81*/&AVATAR[0x11F2C + 0x2017] /* "the " */, 4))
 					u4_puts(D_8CCE[0]);
 				else
 					u4_puts(D_8CCE[1]);
@@ -451,7 +451,7 @@ unsigned char bp04;
 		return 0;
 	}
 	set_input_mode(INPUT_MODE_GENERAL_DIRECTION);
-	AskDir(/*D_2D6E*/&AVATAR[0x10AE0 + 0x7] /* "Dir: " */, &loc_B, &loc_D);
+	AskDir(/*D_2D6E*/&AVATAR[0x12016 + 0x201A] /* "Dir: " */, &loc_B, &loc_D);
 	if(!(loc_B | loc_D))
 		return 0;
 	loc_E = Party._x + loc_B;

@@ -82,13 +82,13 @@ extern int QUIT;
 						break;
 					}
 				default:
-					u4_puts(/*D_2626*/&AVATAR[0x112A0 + 0x200F] /* "Bad command\n" */);
+					u4_puts(/*D_2626*/&AVATAR[0x118D1 + 0x2017] /* "Bad command\n" */);
 					sound(2,0);
 					D_07F8 = 0;
 			}
 			C_AE41();
 		} else {
-			u4_puts(/*D_2633*/&AVATAR[0xF94E + 0x5] /* "Zzzzz\n" */);
+			u4_puts(/*D_2633*/&AVATAR[0x118DE + 0x2017] /* "Zzzzz\n" */);
 		}
 		if(D_07F8 != 0 && Party._z >= 0)
 			C_87E2();
@@ -150,7 +150,7 @@ C_87E2()
 		}
 	}
 	if(food_dec(Party.f_1d8)) {
-		u4_puts(/*D_263A*/&AVATAR[0xF955 + 0x5] /* "\nStarving!!!\n" */);
+		u4_puts(/*D_263A*/&AVATAR[0x118E5 + 0x2017] /* "\nStarving!!!\n" */); 
 		for(si = 0; si < Party.f_1d8; si++) {
 			if(isCharaAlive(si))
 				hitChara(si, 2);
@@ -242,12 +242,12 @@ C_89BD()
 /*(K)limb [dungeon]*/
 C_89DB()
 {
-	u4_puts(/*D_267D*/&AVATAR[0x10AF5 + 0x7] /* "Klimb " */);
+	u4_puts(/*D_267D*/&AVATAR[0x11928 + 0x2017] /* "Klimb " */);
 	if(
 		(tile_cur & 0xf0) == 0x10 ||
 		(tile_cur & 0xf0) == 0x30
 	) {
-		u4_puts(/*D_2684*/&AVATAR[0x10AA9 + 0x7] /* "up!\n" */);
+		u4_puts(/*D_2684*/&AVATAR[0x1192F + 0x2017] /* "up!\n" */);
 		if(--Party._z >= 0) {
 			u4_puts(/*D_2689*/&AVATAR[0x11934 + 0x2017] /* "To level " */);
 			u4_putc(Party._z + '1');
@@ -263,7 +263,7 @@ C_89DB()
 /*(D)escend [dungeon]*/
 C_8A1F()
 {
-	u4_puts(/*D_2693*/&AVATAR[0x10B41 + 0x7] /* "Descend " */);
+	u4_puts(/*D_2693*/&AVATAR[0x1193E + 0x2017] /* "Descend " */);
 	if(
 		(tile_cur & 0xf0) == 0x20 ||
 		(tile_cur & 0xf0) == 0x30

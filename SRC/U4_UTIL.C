@@ -402,6 +402,7 @@ C_0EB1()
 	u4_puts(&AVATAR[0xF805 + 0x5] /* "You hear:\n" */);
 	txt_X = (12 - (unsigned)strlen(Party.chara[0]._name)) / 2 + 25;
 	u4_puts(Party.chara[0]._name);
+	add_npc_talk(LORD_BRITISH, Party.chara[0]._name);
 	Gra_CR();
 	set_input_mode(INPUT_MODE_DELAY_NO_CONTINUE);
 	u_delay(5, 0);
@@ -441,6 +442,7 @@ C_0EB1()
 	t_callback();
 	C_3A80();
 	u4_puts(&AVATAR[0xF841 + 0x5] /* "\n\nLord British says: I have pulled thy spirit and some possessions from the void.  Be more careful in the future!\n" */);
+	add_npc_talk(LORD_BRITISH, &AVATAR[0xF841 + 0x5] /* "I have pulled thy spirit and some possessions from the void.  Be more careful in the future!\n" */);
 	for(bp_02 = Party.f_1d8 - 1; bp_02 >= 0; bp_02 --) {
 		Party.chara[bp_02]._stat = 'G';
 		Party.chara[bp_02]._HP[0] = Party.chara[bp_02]._HP[1];

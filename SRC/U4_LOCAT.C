@@ -26,7 +26,7 @@ LOCATE
 	add_char_to_text_buffer('\'');
 	u4_putc((Party._y & 0xf) + 'A');
 	add_char_to_text_buffer((Party._y & 0xf) + 'A');
-	u4_puts(/*D_2314*/&AVATAR[0x2A1] /* "\"" */);
+	u4_puts("\"");
 	add_char_to_text_buffer('\n');
 	u4_puts(/*D_2314*/&AVATAR[0x115C8 + 0x200F] /* "\nLongitude: " */);
 	u4_putc((Party._x >> 4) + 'A');

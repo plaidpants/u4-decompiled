@@ -1281,8 +1281,8 @@ C_DA05()
 	u4_puts(D_57AC[D_9142]);
 	u4_puts(/*D_5764*/&AVATAR[0x149D7 + 0x2E36] /* " asks:\n" */);
 	set_input_mode(INPUT_MODE_GENERAL_ASK_CHARACTER_NUMBER);
-	si = AskChara(/*D_576C*/&AVATAR[0x149DF + 0x2E36] /* "Who is in need?\x12\x12\b" */);
 	add_npc_talk(VENDOR_HEALER, &AVATAR[0x149DF + 0x2E36] /* "Who is in need?" */);
+	si = AskChara(/*D_576C*/&AVATAR[0x149DF + 0x2E36] /* "Who is in need?\x12\x12\b" */);
 	if (si < 0)
 	{
 		u4_puts(/*D_577F*/&AVATAR[0x149F2 + 0x2E36] /* "No one?\n" */);
