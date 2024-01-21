@@ -18,7 +18,7 @@ extern int QUIT;
 
 /*C_84D2*/DNG_main()
 {
-	register unsigned si;
+	register unsigned si = 0;
 	int bp_04;
 
 	D_9446 = 1;

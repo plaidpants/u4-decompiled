@@ -501,7 +501,7 @@ C_B418()
 /*left & right walls*/
 C_B47A()
 {
-	int bp_02, bp_04;
+	int bp_02 = 0, bp_04 = 0;
 
 	C_AF36(&bp_04, &bp_02, -1);
 	switch(D_8742._map.x8x8x8[Party._z][bp_02][bp_04] >> 4) {

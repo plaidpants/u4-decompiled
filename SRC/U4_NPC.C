@@ -234,7 +234,7 @@ unsigned char bp04;
 C_5443(si/*bp04*/)
 register int si;
 {
-	int loc_A, loc_B, loc_C, loc_D;
+	int loc_A = 0, loc_B = 0, loc_C = 0, loc_D = 0;
 
 	if(C_535B(si, &loc_A, &loc_B, &loc_C, &loc_D) > 5 || U4_RND1(3) == 0) {
 		if(u4_abs(loc_C) < u4_abs(loc_D)) {
@@ -371,7 +371,7 @@ int bp04;
 /*move NPCs[MOD_OUTDOORS]*/
 C_5712()
 {
-	int loc_A, loc_B, loc_C, loc_D;
+	int loc_A = 0, loc_B = 0, loc_C = 0, loc_D = 0;
 	register int loc_F;
 
 	loc_F = 7; do {

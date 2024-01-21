@@ -8,7 +8,7 @@
 
 #include <string.h>
 
-typedef tHandler_tlk();
+typedef tHandler_tlk(void);
 typedef tHandler_tlk *pHandler_tlk;
 
 TLK_name();

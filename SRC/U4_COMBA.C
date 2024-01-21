@@ -322,7 +322,7 @@ int _dir_x;
 int _dir_y;
 {
 	register struct tChara *loc_A;
-	int loc_D, loc_B, loc_C;
+	int loc_D = 0, loc_B = 0, loc_C = 0;
 
 	loc_D = 11;
 	loc_C = 0;

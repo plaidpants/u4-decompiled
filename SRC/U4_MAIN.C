@@ -293,7 +293,7 @@ void Text_Dump()
 	// empty the text buffer
 	current_text_buffer_size = 0;
 	current_text_buffer_pointer = 0;
-	printf("text buffer cleared\n");
+	//printf("text buffer cleared\n");
 }
 
 #define MAX_TEXT 500

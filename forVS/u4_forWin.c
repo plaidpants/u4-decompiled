@@ -52,11 +52,11 @@ C_213B() {
 	strcat(path, &AVATAR[0xFB61 + 0x5] /* "START.PIC" */); // TODO: this is lower case in the AVATAR.EXE but upper case in the file system, will cause trouble when moving to android
 //	fd = _open(U4_ROOT"START.PIC", _O_RDONLY | _O_BINARY);
 	fd = _open(path, _O_RDONLY | _O_BINARY);
-	if(fd) {
+	if (fd) {
 #pragma pack(1)
 		struct tHeader {//size 0x11
 			/*+00*/unsigned short magic;//0x1234
-			/*+02*/unsigned short xsize,ysize;//320,200
+			/*+02*/unsigned short xsize, ysize;//320,200
 			/*+06*/char __06[4];
 			/*+0a*/unsigned char bitsinf;//2
 			/*+0b*/unsigned char emark;//0xff
@@ -72,7 +72,7 @@ C_213B() {
 			/*+05*/unsigned char MBYTE;
 		};
 #pragma pack()
-		struct tHeader header;
+		struct tHeader header = { 0,0,{0},0,0,0,0,0,0};
 		char edata[2];
 		static char work[0x800];
 		static char dest[0x3e80];
@@ -295,6 +295,7 @@ char current_vision[256] = "";
 __cdecl Gra_16(char* filename, int unknown1, int* unknown2)
 {
 	strncpy(current_vision, filename, 255);
+	current_vision[255] = 0;
 	printf(current_vision);
 	// loads a pic
 	//TODO

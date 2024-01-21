@@ -44,8 +44,11 @@ C_8A5A()
 	if(Load(CurMode == MOD_DUNGEON?/*D_26D0*/&AVATAR[0x1197B + 0x2017] /* "CAMP.DNG" */:/*D_26D9*/&AVATAR[0x117BB + 0x200F] /* "CAMP.CON" */, (char *)&Fighters - (char *)&Combat, &Combat) == -1)
 #endif
 		exit(3);
-	for(si = 31; si >= 0; si--)
+	for (si = 15; si >= 0; si--)  // TODO, this originally cleared 32 which is an overrun
+	{
 		Fighters._tile[si] = 0;
+		Fighters._gtile[si] = 0;
+	}
 	for(si = Party.f_1d8; --si >= 0; ) {
 		D_944A[si] = Fighters._chtile[si] = isCharaAlive(si)?TIL_38:0;
 	}

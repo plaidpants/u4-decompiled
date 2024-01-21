@@ -756,8 +756,8 @@ C_D1D0()
 /*sell item[armor]*/
 C_D2F8()
 {
-	int loc_A, loc_B;
-	char loc_C;
+	int loc_A = 0, loc_B = 0;
+	char loc_C = 0;
 
 	u4_puts(/*D_4C99*/&AVATAR[0x13F14 + 0x2E2E] /* "\nWhat will\n" */);
 	add_npc_talk(VENDOR_ARMOR, &AVATAR[0x13F15 + 0x2E2E] /* "What will" */);
@@ -973,9 +973,9 @@ char *D_51BE[] = {
 /*SHOP #8 - guild*/
 /*C_D61E*/SHP_guild()
 {
-	int loc_A;
-	char loc_B;
-	U16 *loc_C;
+	int loc_A = 0;
+	char loc_B = 0;
+	U16 *loc_C = 0;
 
 	D_9142 = D_5196[Party._loc - 1] - 1;
 	Gra_13();
@@ -1036,6 +1036,7 @@ C-Magic Keys\n"*/);
 			case 1: loc_C = &(Party._gems); break;
 			case 2: loc_C = &(Party._keys); break;
 			case 3: loc_C = &(Party._sextants); break;
+			default:loc_C = &(Party._torches); break;
 		}
 		*loc_C += D_51AE[loc_A];
 		if(*loc_C > 99)

@@ -24,10 +24,7 @@ char *bp04;
 	}
 }
 
-/*C_0855*/Load(bp0a, bp08, bp04)
-char *bp0a;
-unsigned bp08;
-void far *bp04;
+/*C_0855*/Load(char* bp0a, unsigned bp08, void far* bp04)
 {
 	int bp_02, bp_04;
 
@@ -54,10 +51,7 @@ void far *bp04;
 	return 0;
 }
 
-/*C_08D1*/Save(bp0a, bp08, bp04)
-char *bp0a;
-unsigned bp08;
-void far *bp04;
+/*C_08D1*/Save(char* bp0a, unsigned bp08, void far* bp04)
 {
 	int bp_02, bp_04;
 

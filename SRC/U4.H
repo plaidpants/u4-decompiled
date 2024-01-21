@@ -498,7 +498,7 @@ extern unsigned char D_96F8;
 extern unsigned char D_96F9[11*11];
 extern unsigned char D_9772;
 
-extern char AVATAR[];
+extern unsigned char AVATAR[];
 
 #ifdef WIN32
 	#pragma pack()

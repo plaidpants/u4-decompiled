@@ -169,8 +169,8 @@ int bp04;
 
 /*C_65AA*/SPL_Blink()
 {
-	int loc_A, loc_B;
-	unsigned char loc_C, loc_D;
+	int loc_A = 0, loc_B = 0;
+	unsigned char loc_C = 0, loc_D = 0;
 
 	if(Party._tile >= TIL_14 && Party._tile != TIL_18) {
 		if(!C_6409())
@@ -619,7 +619,7 @@ the original bytecode*/
 	Party._y = loc_C;
 }
 
-typedef spell_handler();
+typedef spell_handler(void);
 typedef spell_handler *pSpell_handler;
 
 pSpell_handler D_216E[] = {
