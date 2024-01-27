@@ -783,7 +783,7 @@ __declspec(dllexport) int cdecl /*C_191E*/ main()
 	if (Load("AVATAR.EXE", sizeof(AVATAR_original), &(AVATAR_original)) == -1)
 		exit(3);
 
-	// The compiler for the AVATAR.EXE uses simple compression of any block of zeros more than 8 bytes, it is not very effiecent,
+	// The compiler for the AVATAR.EXE uses simple compression of any block of zeros more than 8 bytes, it is not very efficient,
 	// need to expand these zero sections and copy data into a new buffer so strings aren't missing zero delimiters
 	// and data blocks that have zeros are properly initialized
 	int expanded_index = 0;

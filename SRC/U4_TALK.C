@@ -291,6 +291,27 @@ int bp04;
 	bp_04 = Party.f_1d8;
 	D_9452 = D_8742._npc._tile[bp04];
 	C_A443(D_95CE+3);
+	
+// There is a bug in the original citizen talk files
+// Calabrini in Moonglow if you ask Job he asks "Dost thou seek an inn or healing?"
+// and you respond "Yes" he asks "Which?" The two keywords are INN and HEALING but this conflicts
+// with the standard keywork HEALTH as only the 1st 4 characters are checked, also the keyword is HEALER not HEALING 
+// so it would never have worked. We will on the fly patch the data here when we detect the issue.
+// Replace the question with "DOST THOU SEEK\nAN INN OR ART\nTHOU INJURED?" and replace the keyword with "INJURED"
+// Also the keyword INN has a space after the word so need to be careful when comparing strings 
+// in the unity part of the code as some keywords are only one character
+// The issue also exists with Michelle
+	if ((strncmp(D_8CCE[11], "HEAL", 4) == 0) && (strncmp(D_8CCE[0], "Calabrini", 4) == 0))
+	{
+		D_8CCE[7] = "Dost thou seek\nan inn or art\nthou injured ?";
+		D_8CCE[11] = "INJU";
+	}
+
+	if ((strncmp(D_8CCE[11], "HEAL", 4) == 0) && (strncmp(D_8CCE[0], "Michelle", 4) == 0))
+	{
+		D_8CCE[11] = "VISI";
+	}
+
 	/*personnal question 1 & 2*/
 	D_2A90[5]._00 = D_8CCE[10];
 	D_2A90[6]._00 = D_8CCE[11];
